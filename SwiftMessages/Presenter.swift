@@ -123,7 +123,7 @@ class Presenter<V: UIView>: Presentable {
         switch configuration.presentationStyle {
         case .Top, .Bottom:
             UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
-                self.translationConstraint.constant = self.showTranslationOffset
+                self.translationConstraint.constant = self.showTranslationOffset - 5.0 // compensate for bounce overshoot
                 self.view.superview?.layoutIfNeeded()
             }, completion: { completed in
                 completion(completed: completed)
