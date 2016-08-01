@@ -122,7 +122,7 @@ class Presenter<V: UIView>: Presentable {
     func showAnimation(completion completion: (completed: Bool) -> Void) {
         switch configuration.presentationStyle {
         case .Top, .Bottom:
-            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
+            UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
                 self.translationConstraint.constant = self.showTranslationOffset
                 self.view.superview?.layoutIfNeeded()
             }, completion: { completed in
