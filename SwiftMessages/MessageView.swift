@@ -21,12 +21,21 @@ public class MessageView: UIView, Identifiable {
     @IBOutlet public var button: UIButton?
 
     /*
+     MARK: - Setting content
+     */
+    
+    func setIcon(icon: Icon?) {
+        iconImage?.image = icon?.image
+        iconLabel?.text = icon?.text
+    }
+    
+    /*
      MARK: - Style configurations
      */
 
     public static func errorConfiguration() -> Configuration<MessageView>.ViewConfiguration {
         return { view in
-            view.iconImage?.image = Icon.Error.image
+            view.setIcon(Icon.Error)
             view.iconImage?.tintColor = UIColor.whiteColor()
             view.backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
             view.iconLabel?.textColor = UIColor.whiteColor()
@@ -56,13 +65,8 @@ public class MessageView: UIView, Identifiable {
         return { view in
             view.titleLabel?.text = title
             view.bodyLabel?.text = body
-            if let image = icon?.image, let iconImage = view.iconImage {
-                iconImage.image = image
-                view.iconLabel?.text = nil
-            }
-            if let text = icon?.text, let iconLabel = view.iconLabel {
-                iconLabel.text = text
-                view.iconImage?.image = nil
+            if let icon = icon {
+                view.setIcon(icon)
             }
             if let buttonIcon = buttonIcon {
                 view.button?.setImage(buttonIcon.image, forState: .Normal)
