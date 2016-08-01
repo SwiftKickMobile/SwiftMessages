@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		867E21531D4D01D500594A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21521D4D01D500594A41 /* AppDelegate.swift */; };
-		867E21551D4D01D500594A41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21541D4D01D500594A41 /* ViewController.swift */; };
+		867E21551D4D01D500594A41 /* GalleryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21541D4D01D500594A41 /* GalleryTableViewController.swift */; };
 		867E21581D4D01D500594A41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 867E21561D4D01D500594A41 /* Main.storyboard */; };
 		867E215A1D4D01D500594A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 867E21591D4D01D500594A41 /* Assets.xcassets */; };
 		867E215D1D4D01D500594A41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 867E215B1D4D01D500594A41 /* LaunchScreen.storyboard */; };
 		867E21681D4D01D500594A41 /* SwiftMessagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21671D4D01D500594A41 /* SwiftMessagesTests.swift */; };
 		867E21731D4D01D500594A41 /* SwiftMessagesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21721D4D01D500594A41 /* SwiftMessagesUITests.swift */; };
+		867E21831D4D025200594A41 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21821D4D025200594A41 /* MessageView.swift */; };
+		867E21851D4D044F00594A41 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21841D4D044F00594A41 /* Configuration.swift */; };
+		867E21871D4D04C600594A41 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867E21861D4D04C600594A41 /* MessageView.xib */; };
+		867E21891D4D06D900594A41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 867E21881D4D06D900594A41 /* Images.xcassets */; };
+		867E21901D4D3E5E00594A41 /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E218F1D4D3E5E00594A41 /* UIView+Message.swift */; };
+		867E21941D4D50BB00594A41 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21931D4D50BB00594A41 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,7 @@
 /* Begin PBXFileReference section */
 		867E214F1D4D01D500594A41 /* SwiftMessages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMessages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		867E21521D4D01D500594A41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		867E21541D4D01D500594A41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		867E21541D4D01D500594A41 /* GalleryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryTableViewController.swift; sourceTree = "<group>"; };
 		867E21571D4D01D500594A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		867E21591D4D01D500594A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		867E215C1D4D01D500594A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +53,12 @@
 		867E216E1D4D01D500594A41 /* SwiftMessagesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftMessagesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		867E21721D4D01D500594A41 /* SwiftMessagesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesUITests.swift; sourceTree = "<group>"; };
 		867E21741D4D01D500594A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		867E21821D4D025200594A41 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		867E21841D4D044F00594A41 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		867E21861D4D04C600594A41 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
+		867E21881D4D06D900594A41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		867E218F1D4D3E5E00594A41 /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
+		867E21931D4D50BB00594A41 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +109,10 @@
 		867E21511D4D01D500594A41 /* SwiftMessages */ = {
 			isa = PBXGroup;
 			children = (
-				867E21521D4D01D500594A41 /* AppDelegate.swift */,
-				867E21541D4D01D500594A41 /* ViewController.swift */,
-				867E21561D4D01D500594A41 /* Main.storyboard */,
-				867E21591D4D01D500594A41 /* Assets.xcassets */,
-				867E215B1D4D01D500594A41 /* LaunchScreen.storyboard */,
-				867E215E1D4D01D500594A41 /* Info.plist */,
+				867E21841D4D044F00594A41 /* Configuration.swift */,
+				867E218A1D4D3CCC00594A41 /* Message Views */,
+				867E218E1D4D3DFD00594A41 /* Internal */,
+				867E21811D4D021A00594A41 /* Demo */,
 			);
 			path = SwiftMessages;
 			sourceTree = "<group>";
@@ -123,6 +133,46 @@
 				867E21741D4D01D500594A41 /* Info.plist */,
 			);
 			path = SwiftMessagesUITests;
+			sourceTree = "<group>";
+		};
+		867E21811D4D021A00594A41 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				867E21521D4D01D500594A41 /* AppDelegate.swift */,
+				867E21541D4D01D500594A41 /* GalleryTableViewController.swift */,
+				867E21561D4D01D500594A41 /* Main.storyboard */,
+				867E21591D4D01D500594A41 /* Assets.xcassets */,
+				867E215B1D4D01D500594A41 /* LaunchScreen.storyboard */,
+				867E215E1D4D01D500594A41 /* Info.plist */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+		867E218A1D4D3CCC00594A41 /* Message Views */ = {
+			isa = PBXGroup;
+			children = (
+				867E21881D4D06D900594A41 /* Images.xcassets */,
+				867E218B1D4D3CD700594A41 /* Default */,
+			);
+			name = "Message Views";
+			sourceTree = "<group>";
+		};
+		867E218B1D4D3CD700594A41 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				867E21821D4D025200594A41 /* MessageView.swift */,
+				867E21861D4D04C600594A41 /* MessageView.xib */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		867E218E1D4D3DFD00594A41 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				867E21931D4D50BB00594A41 /* Presenter.swift */,
+				867E218F1D4D3E5E00594A41 /* UIView+Message.swift */,
+			);
+			name = Internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +279,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				867E21871D4D04C600594A41 /* MessageView.xib in Resources */,
+				867E21891D4D06D900594A41 /* Images.xcassets in Resources */,
 				867E215D1D4D01D500594A41 /* LaunchScreen.storyboard in Resources */,
 				867E215A1D4D01D500594A41 /* Assets.xcassets in Resources */,
 				867E21581D4D01D500594A41 /* Main.storyboard in Resources */,
@@ -256,8 +308,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				867E21551D4D01D500594A41 /* ViewController.swift in Sources */,
+				867E21831D4D025200594A41 /* MessageView.swift in Sources */,
+				867E21551D4D01D500594A41 /* GalleryTableViewController.swift in Sources */,
+				867E21851D4D044F00594A41 /* Configuration.swift in Sources */,
+				867E21941D4D50BB00594A41 /* Presenter.swift in Sources */,
 				867E21531D4D01D500594A41 /* AppDelegate.swift in Sources */,
+				867E21901D4D3E5E00594A41 /* UIView+Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -388,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
