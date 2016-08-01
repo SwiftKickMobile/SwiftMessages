@@ -73,6 +73,7 @@ class Presenter<V: UIView>: Presentable {
             return .View(view: Weak(value: window))
         case .OverWindow(let level):
             let viewController = OverWindowViewController(windowLevel: level)
+            viewController.statusBarStyle = configuration.preferredStatusBarStyle
             return .OverWindow(viewController: viewController)
         case .InViewController(let viewController):
             return .ViewController(viewController: Weak(value: viewController))

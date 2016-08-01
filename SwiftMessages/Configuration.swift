@@ -125,6 +125,9 @@ public struct Configuration<V: UIView> {
     public var presentationStyle = PresentationStyle.Top
     
     public var presentationContext = PresentationContext.InKeyWindow
+
+    /// Works with .OverWindow presentation context
+    public var preferredStatusBarStyle = UIStatusBarStyle.Default
     
     public static func hide() {
         globalManager.hide()

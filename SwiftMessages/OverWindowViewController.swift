@@ -12,6 +12,8 @@ class OverWindowViewController: UIViewController
 {
     private var window: UIWindow?
     
+    var statusBarStyle = UIStatusBarStyle.Default
+    
     init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
     {
         let window = PassthroughWindow(frame: UIScreen.mainScreen().bounds)
@@ -34,6 +36,10 @@ class OverWindowViewController: UIViewController
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return statusBarStyle
     }
 }
 
