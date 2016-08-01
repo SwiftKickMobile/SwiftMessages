@@ -52,12 +52,16 @@ class Manager {
                         guard let strongSelf = self else { return }
                         strongSelf.hide(presenter: current)
                     })
-                } else {
-                    strongSelf.hide(presenter: current)
                 }
             }
         } catch {
             self.current = nil
+        }
+    }
+    
+    func hide() {
+        if let current = current {
+            hide(presenter: current)
         }
     }
     

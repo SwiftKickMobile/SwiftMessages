@@ -14,9 +14,10 @@ class OverWindowViewController: UIViewController
     
     init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
     {
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let window = PassthroughWindow(frame: UIScreen.mainScreen().bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)
+        self.view = PassthroughView()
         window.rootViewController = self
         window.windowLevel = windowLevel
     }
@@ -33,5 +34,19 @@ class OverWindowViewController: UIViewController
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class PassthroughWindow: UIWindow {
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, withEvent: event)
+        return view == self ? nil : view
+    }
+}
+
+class PassthroughView: UIView {
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, withEvent: event)
+        return view == self ? nil : view
     }
 }

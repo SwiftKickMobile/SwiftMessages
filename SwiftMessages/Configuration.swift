@@ -125,4 +125,8 @@ public struct Configuration<V: UIView> {
     public var presentationStyle = PresentationStyle.Top
     
     public var presentationContext = PresentationContext.InKeyWindow
+    
+    public static func hide() {
+        globalManager.hide()
+    }
 }
