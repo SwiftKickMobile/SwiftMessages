@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MessageView: UIView {
+public class MessageView: UIView, Identifiable {
     
     /*
      MARK: - IB outlets
@@ -85,5 +85,13 @@ public class MessageView: UIView {
         self.iconLabel?.text = nil
         self.button?.setImage(nil, forState: .Normal)
         self.button?.setTitle(nil, forState: .Normal)
+    }
+    
+    /*
+     MARK: - Identifiable
+     */
+    
+    public var identity: String {
+        return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
     }
 }

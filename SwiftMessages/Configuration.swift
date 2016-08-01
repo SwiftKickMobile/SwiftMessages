@@ -21,6 +21,12 @@ public enum PresentationStyle {
     case Bottom
 }
 
+public enum Duration {
+    case Automatic
+    case Forever
+    case Seconds(seconds: NSTimeInterval)
+}
+
 //public enum AnimationStyle {
 //    
 //    public static var defaultAnimationStyle = AnimationStyle.Default(showDuration: 0.5, hideDuration: 0.5)
@@ -98,14 +104,25 @@ public struct Configuration<V: UIView> {
     }
 
     public func show() throws {
-       try Presenter(configuration: self).show()
+        let view: V
+        if let nibName = nibName {
+            view = try V.viewFromNib(named: nibName)
+        } else {
+            view = try V.viewFromNib()
+        }
+        show(view: view)
+    }
+    
+    public func show(view view: V) {
+        let presenter = Presenter(configuration: self, view: view)
+        globalManager.enqueue(presenter: presenter)
     }
 
+    public var duration = Duration.Automatic
+    
     public var nibName: String?
     
     public var presentationStyle = PresentationStyle.Top
-    
-//    public var animationStyle = AnimationStyle.defaultAnimationStyle
     
     public var presentationContext = PresentationContext.InKeyWindow
 }
