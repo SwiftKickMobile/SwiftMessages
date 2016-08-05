@@ -10,23 +10,8 @@ import UIKit
 
 class Weak<T: AnyObject> {
     weak var value : T?
-    init() {
-        
-    }
-//    init (value: T) {
-//        self.value = value
-//    }
+    init() {}
 }
-
-//class TypeErasing {
-//    var value: Any
-//    init (
-//}
-
-//enum Container {
-//    case ViewController(viewController: Weak<UIViewController>)
-//    case Window(viewController: WindowViewController)
-//}
 
 class Presenter<V: UIView>: Presentable {
 
@@ -71,7 +56,9 @@ class Presenter<V: UIView>: Presentable {
         
         func newWindowViewController(windowLevel: UIWindowLevel) -> UIViewController {
             let viewController = WindowViewController(windowLevel: windowLevel)
-            viewController.statusBarStyle = configuration.preferredStatusBarStyle
+            if windowLevel == UIWindowLevelNormal {
+                viewController.statusBarStyle = configuration.preferredStatusBarStyle
+            }
             return viewController
         }
         
@@ -83,9 +70,7 @@ class Presenter<V: UIView>: Presentable {
                 throw Error.NoRootViewController
             }
         case .Window(let level):
-            let viewController = WindowViewController(windowLevel: level)
-            viewController.statusBarStyle = configuration.preferredStatusBarStyle
-            return viewController
+            return newWindowViewController(level)
         case .ViewController(let viewController):
             return viewController.selectPresentationContextBottomUp(configuration.presentationStyle)
         }
@@ -124,6 +109,20 @@ class Presenter<V: UIView>: Presentable {
                 translationConstraint = NSLayoutConstraint(item: maskingView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.00, constant: 0.0)
             }
             maskingView.addConstraints([leading, trailing, translationConstraint])
+            if let adjustable = view as? MarginAdjustable {
+                var top: CGFloat = 0.0
+                var bottom: CGFloat = 0.0
+                switch configuration.presentationStyle {
+                case .Top:
+                    top += adjustable.bounceAnimationOffset
+                case .Bottom:
+                    bottom += adjustable.bounceAnimationOffset
+                }
+                if let vc = presentationContext as? WindowViewController where vc.windowLevel == UIWindowLevelNormal && !UIApplication.sharedApplication().statusBarHidden {
+                    top += adjustable.statusBarOffset
+                }
+                view.layoutMargins = UIEdgeInsets(top: top, left: 0.0, bottom: bottom, right: 0.0)
+            }
             let size = view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
             translationConstraint.constant -= size.height
         }
@@ -148,7 +147,11 @@ class Presenter<V: UIView>: Presentable {
         switch configuration.presentationStyle {
         case .Top, .Bottom:
             UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
-                self.translationConstraint.constant = -5.0 // compensate for bounce overshoot
+                var bounceOffset: CGFloat = 5.0
+                if let adjustable = self.view as? MarginAdjustable {
+                    bounceOffset = adjustable.bounceAnimationOffset
+                }
+                self.translationConstraint.constant = -bounceOffset
                 self.view.superview?.layoutIfNeeded()
             }, completion: { completed in
                 completion(completed: completed)

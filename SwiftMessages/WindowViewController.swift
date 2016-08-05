@@ -12,10 +12,12 @@ class WindowViewController: UIViewController
 {
     private var window: UIWindow?
     
+    let windowLevel: UIWindowLevel
     var statusBarStyle = UIStatusBarStyle.Default
     
     init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
     {
+        self.windowLevel = windowLevel
         let window = PassthroughWindow(frame: UIScreen.mainScreen().bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)

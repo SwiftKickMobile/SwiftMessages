@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MessageView: UIView, Identifiable {
+public class MessageView: UIView, Identifiable, MarginAdjustable {
     
     /*
      MARK: - IB outlets
@@ -89,6 +89,7 @@ public class MessageView: UIView, Identifiable {
         self.iconLabel?.text = nil
         self.button?.setImage(nil, forState: .Normal)
         self.button?.setTitle(nil, forState: .Normal)
+        self.layoutMargins = UIEdgeInsetsZero
     }
     
     /*
@@ -98,4 +99,12 @@ public class MessageView: UIView, Identifiable {
     public var identity: String {
         return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
     }
+    
+    /*
+     MARK: - MarginAdjustable
+     */
+    
+    @IBInspectable public var bounceAnimationOffset: CGFloat = 5.0
+    
+    @IBInspectable public var statusBarOffset: CGFloat = 20.0
 }
