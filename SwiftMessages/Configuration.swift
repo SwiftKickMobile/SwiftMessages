@@ -9,11 +9,9 @@
 import UIKit
 
 public enum PresentationContext {
-    case InKeyWindow
-    case InWindow(_: UIWindow)
-    case OverWindow(windowLevel: UIWindowLevel)
-    case InViewController(_: UIViewController)
-    case InTopViewController(_: UIWindow)
+    case Automatic
+    case Window(windowLevel: UIWindowLevel)
+    case ViewController(_: UIViewController)
 }
 
 public enum PresentationStyle {
@@ -82,7 +80,7 @@ public enum Icon {
 
 enum Error: ErrorType {
     case CannotLoadViewFromNib(nibName: String)
-    case CannotFindContainer
+    case NoRootViewController
 }
 
 public struct Configuration<V: UIView> {
@@ -124,7 +122,7 @@ public struct Configuration<V: UIView> {
     
     public var presentationStyle = PresentationStyle.Top
     
-    public var presentationContext = PresentationContext.InKeyWindow
+    public var presentationContext = PresentationContext.Automatic
 
     /// Works with .OverWindow presentation context
     public var preferredStatusBarStyle = UIStatusBarStyle.Default

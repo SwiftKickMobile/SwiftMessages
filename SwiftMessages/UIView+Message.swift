@@ -1,5 +1,5 @@
 //
-//  UIView+Message.swift
+//  UIView+Utils.swift
 //  SwiftMessages
 //
 //  Created by Tim Moose on 7/30/16.

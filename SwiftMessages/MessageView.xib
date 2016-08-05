@@ -12,25 +12,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="imageIcon">
-                    <rect key="frame" x="20" y="21" width="32" height="38.5"/>
+                    <rect key="frame" x="20" y="21" width="32" height="39"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="iconLabel">
-                    <rect key="frame" x="20" y="21" width="32" height="38.5"/>
+                    <rect key="frame" x="20" y="21" width="32" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90y-Jf-WFn" userLabel="Text container">
-                    <rect key="frame" x="62" y="20.5" width="518" height="39"/>
+                    <rect key="frame" x="72" y="21" width="508" height="39"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-4T-ytS">
-                            <rect key="frame" x="0.0" y="0.0" width="518" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-4T-ytS">
+                            <rect key="frame" x="0.0" y="0.0" width="518" height="20"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Body" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-4Z-N2a">
-                            <rect key="frame" x="0.0" y="19" width="518" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Message Body" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-4Z-N2a">
+                            <rect key="frame" x="0.0" y="19" width="518" height="20"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                 <constraint firstAttribute="trailing" secondItem="90y-Jf-WFn" secondAttribute="trailing" constant="20" id="UI8-aO-lPt"/>
                 <constraint firstItem="1Bu-DY-qZo" firstAttribute="height" secondItem="PbA-QP-XpA" secondAttribute="height" id="WsQ-Iu-9nL"/>
                 <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerX" secondItem="PbA-QP-XpA" secondAttribute="centerX" id="oLA-XN-Hma"/>
-                <constraint firstItem="90y-Jf-WFn" firstAttribute="leading" secondItem="PbA-QP-XpA" secondAttribute="trailing" constant="10" id="rea-TG-jfC"/>
+                <constraint firstItem="90y-Jf-WFn" firstAttribute="leading" secondItem="PbA-QP-XpA" secondAttribute="trailing" constant="20" id="rea-TG-jfC"/>
                 <constraint firstItem="PbA-QP-XpA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ujI-Pi-Ewy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

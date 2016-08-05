@@ -1,5 +1,5 @@
 //
-//  OverWindowViewController.swift
+//  WindowViewController.swift
 //  SwiftMessages
 //
 //  Created by Tim Moose on 8/1/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OverWindowViewController: UIViewController
+class WindowViewController: UIViewController
 {
     private var window: UIWindow?
     
@@ -40,19 +40,5 @@ class OverWindowViewController: UIViewController
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return statusBarStyle
-    }
-}
-
-class PassthroughWindow: UIWindow {
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, withEvent: event)
-        return view == self ? nil : view
-    }
-}
-
-class PassthroughView: UIView {
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, withEvent: event)
-        return view == self ? nil : view
     }
 }

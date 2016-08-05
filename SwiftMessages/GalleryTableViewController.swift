@@ -14,7 +14,9 @@ class GalleryTableViewController: UITableViewController {
         let style = MessageView.errorConfiguration()
         let content = MessageView.contentConfiguration(title: "My Title", body: "This is my body message.")
         var config = Configuration<MessageView>(viewConfigurations: [style, content])
-        config.presentationContext = .OverWindow(windowLevel: UIWindowLevelStatusBar)
+//        config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+        config.presentationContext = .Automatic
+        config.presentationStyle = .Top
         try! config.show()
     }
 }
