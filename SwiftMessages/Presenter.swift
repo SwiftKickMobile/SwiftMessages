@@ -13,15 +13,15 @@ class Weak<T: AnyObject> {
     init() {}
 }
 
-class Presenter<V: UIView>: Presentable {
+class Presenter: Presentable {
 
-    let configuration: Configuration<V>
-    let view: V
+    let configuration: Configuration
+    let view: UIView
     let maskingView = PassthroughView()
     let presentationContext = Weak<UIViewController>()
     var translationConstraint: NSLayoutConstraint! = nil
     
-    init(configuration: Configuration<V>, view: V) {
+    init(configuration: Configuration, view: UIView) {
         self.configuration = configuration
         self.view = view
         maskingView.clipsToBounds = true
@@ -47,7 +47,6 @@ class Presenter<V: UIView>: Presentable {
     
     func show(completion completion: (completed: Bool) -> Void) throws {
         try presentationContext.value = getPresentationContext()
-        configuration.viewConfigurations.forEach { $0(view: view) }
         install()
         showAnimation(completion: completion)
     }

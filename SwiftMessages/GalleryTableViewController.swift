@@ -11,15 +11,16 @@ import UIKit
 class GalleryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let style = MessageView.errorConfiguration()
-        let content = MessageView.contentConfiguration(title: "My Title", body: "This is my body message.")
-        var config = Configuration<MessageView>(viewConfigurations: [style, content])
+        let view = MessageView.instantiate(layout: .MessageView)
+        view.configureErrorTheme()
+        view.configureContent(title: "My Title", body: "This is my message body.")
+        var config = Configuration()
         config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
         config.preferredStatusBarStyle = .LightContent
 //        config.presentationContext = .Automatic
         config.presentationStyle = .Top
         config.nibName = "StatusLine"
-        try! config.show()
+        config.show(view)
     }
 }
 

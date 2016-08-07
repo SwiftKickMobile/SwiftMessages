@@ -30,52 +30,60 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     }
     
     /*
+     MARK: - Creating message views
+     */
+    
+    public enum Layout: String {
+        case MessageView = "MessageView"
+        case StatusLine = "StatusLine"
+    }
+    
+    public static func instantiate(layout layout: Layout) -> MessageView {
+        return try! MessageView.viewFromNib(named: layout.rawValue)
+    }
+    
+    /*
      MARK: - Style configurations
      */
 
-    public static func errorConfiguration() -> Configuration<MessageView>.ViewConfiguration {
-        return { view in
-            view.setIcon(Icon.Error)
-            view.iconImage?.tintColor = UIColor.whiteColor()
-            view.backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
-            view.iconLabel?.textColor = UIColor.whiteColor()
-            view.titleLabel?.textColor = UIColor.whiteColor()
-            view.bodyLabel?.textColor = UIColor.whiteColor()
-            // TODO button style
-        }
+    public func configureErrorTheme() {
+        setIcon(Icon.Error)
+        iconImage?.tintColor = UIColor.whiteColor()
+        backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+        iconLabel?.textColor = UIColor.whiteColor()
+        titleLabel?.textColor = UIColor.whiteColor()
+        bodyLabel?.textColor = UIColor.whiteColor()
     }
 
     /*
      MARK: - Content configurations
      */
+
+    public func configureContent(body body: String) {
+        configureContent(title: nil, body: body, icon: nil, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
+    }
     
-    public static func contentConfiguration(body body: String) -> Configuration<MessageView>.ViewConfiguration {
-        return contentConfiguration(title: nil, body: body, icon: nil, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
+    public func configureContent(title title: String, body: String) {
+        configureContent(title: title, body: body, icon: nil, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
     }
-
-    public static func contentConfiguration(title title: String, body: String) -> Configuration<MessageView>.ViewConfiguration {
-        return contentConfiguration(title: title, body: body, icon: nil, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
+    
+    public func configureContent(title title: String, body: String, icon: Icon) {
+        configureContent(title: title, body: body, icon: icon, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
     }
-
-    public static func contentConfiguration(title title: String, body: String, icon: Icon) -> Configuration<MessageView>.ViewConfiguration {
-        return contentConfiguration(title: title, body: body, icon: icon, buttonIcon: nil, buttonTitle: nil, buttonHandler: nil)
-    }
-
-    public static func contentConfiguration(title title: String?, body: String?, icon: Icon?, buttonIcon: Icon?, buttonTitle: String?, buttonHandler: (() -> Void)?) -> Configuration<MessageView>.ViewConfiguration {
-        return { view in
-            view.titleLabel?.text = title
-            view.bodyLabel?.text = body
-            if let icon = icon {
-                view.setIcon(icon)
-            }
-            if let buttonIcon = buttonIcon {
-                view.button?.setImage(buttonIcon.image, forState: .Normal)
-            }
-            if let buttonTitle = buttonTitle {
-                view.button?.setTitle(buttonTitle, forState: .Normal)
-            }
-            // TODO set button tap handler
+    
+    public func configureContent(title title: String?, body: String?, icon: Icon?, buttonIcon: Icon?, buttonTitle: String?, buttonHandler: (() -> Void)?) {
+        titleLabel?.text = title
+        bodyLabel?.text = body
+        if let icon = icon {
+            setIcon(icon)
         }
+        if let buttonIcon = buttonIcon {
+            button?.setImage(buttonIcon.image, forState: .Normal)
+        }
+        if let buttonTitle = buttonTitle {
+            button?.setTitle(buttonTitle, forState: .Normal)
+        }
+        // TODO set button tap handler
     }
     
     /*

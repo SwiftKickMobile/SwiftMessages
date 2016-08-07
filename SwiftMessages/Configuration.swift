@@ -25,18 +25,6 @@ public enum Duration {
     case Seconds(seconds: NSTimeInterval)
 }
 
-//public enum AnimationStyle {
-//    
-//    public static var defaultAnimationStyle = AnimationStyle.Default(showDuration: 0.5, hideDuration: 0.5)
-//    public static var springAnimationStyle = AnimationStyle.Spring(showDuration: 0.5, hideDuration: 0.5)
-//    
-//    case Default(showDuration: NSTimeInterval, hideDuration: NSTimeInterval)
-//    case Spring(showDuration: NSTimeInterval, hideDuration: NSTimeInterval)
-//    
-//    public typealias Animator = (animationBlockCallback: () -> Void) -> Void
-//    case Custom(showAnimator: Animator, hideAnimator: Animator)
-//}
-
 public enum Icon {
     
     case Error
@@ -83,35 +71,9 @@ enum Error: ErrorType {
     case NoRootViewController
 }
 
-public struct Configuration<V: UIView> {
-    
-    public typealias ViewConfiguration = (view: V) -> Void
-    
-    public var viewConfigurations: [ViewConfiguration] = []
+public struct Configuration {
 
-    public init() {
-        self.viewConfigurations = []
-    }
-
-    public init(viewConfiguration: ViewConfiguration) {
-        self.viewConfigurations = [viewConfiguration]
-    }
-
-    public init(viewConfigurations: [ViewConfiguration]) {
-        self.viewConfigurations = viewConfigurations
-    }
-
-    public func show() throws {
-        let view: V
-        if let nibName = nibName {
-            view = try V.viewFromNib(named: nibName)
-        } else {
-            view = try V.viewFromNib()
-        }
-        show(view: view)
-    }
-    
-    public func show(view view: V) {
+    public func show(_ view: UIView) {
         let presenter = Presenter(configuration: self, view: view)
         globalManager.enqueue(presenter: presenter)
     }
