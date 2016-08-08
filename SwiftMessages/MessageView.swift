@@ -31,10 +31,29 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         case StatusLine = "StatusLine"
     }
     
-    public static func viewFromNib(layout layout: Layout, bundle: NSBundle? = nil) -> MessageView {
+    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle? = nil) -> T {
         return try! MessageView.viewFromNib(named: layout.rawValue, bundle: bundle)
     }
     
+    public class func viewFromNib<T: MessageView>(bundle bundle: NSBundle? = nil) throws -> T {
+        let name = description().componentsSeparatedByString(".").last
+        assert(name != nil)
+        let view: T = try viewFromNib(named: name!, bundle: bundle)
+        return view
+    }
+    
+    public class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle? = nil) throws -> T {
+        let resolvedBundle: NSBundle
+        if let bundle = bundle {
+            resolvedBundle = bundle
+        } else {
+            resolvedBundle = NSBundle.frameworkBundle()
+        }
+        guard let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: self, options: nil) else { throw Error.CannotLoadNib(nibName: name) }
+        guard let view = arrayOfViews.first as? T else { throw Error.CannotLoadViewFromNib(nibName: name) }
+        return view
+    }
+
     /*
      MARK: - Configuring the theme
      */
