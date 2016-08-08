@@ -13,7 +13,7 @@ class WindowViewController: UIViewController
     private var window: UIWindow?
     
     let windowLevel: UIWindowLevel
-    var statusBarStyle = UIStatusBarStyle.Default
+    var statusBarStyle: UIStatusBarStyle?
     
     init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
     {
@@ -41,6 +41,6 @@ class WindowViewController: UIViewController
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return statusBarStyle
+        return statusBarStyle ?? UIApplication.sharedApplication().statusBarStyle
     }
 }
