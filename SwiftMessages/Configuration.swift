@@ -73,11 +73,6 @@ enum Error: ErrorType {
 
 public struct Configuration {
 
-    public func show(_ view: UIView) {
-        let presenter = Presenter(configuration: self, view: view)
-        globalManager.enqueue(presenter: presenter)
-    }
-
     public var duration = Duration.Automatic
     
     public var nibName: String?
@@ -88,8 +83,4 @@ public struct Configuration {
 
     /// Works with .OverWindow presentation context
     public var preferredStatusBarStyle = UIStatusBarStyle.Default
-    
-    public static func hide() {
-        globalManager.hide()
-    }
 }

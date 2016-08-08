@@ -13,7 +13,7 @@ class Weak<T: AnyObject> {
     init() {}
 }
 
-class Presenter: Presentable {
+class Presenter {
 
     let configuration: Configuration
     let view: UIView
@@ -27,9 +27,9 @@ class Presenter: Presentable {
         maskingView.clipsToBounds = true
     }
     
-    var identity: String? {
+    var id: String? {
         let identifiable = view as? Identifiable
-        return identifiable?.identity
+        return identifiable?.id
     }
     
     var pauseDuration: NSTimeInterval? {

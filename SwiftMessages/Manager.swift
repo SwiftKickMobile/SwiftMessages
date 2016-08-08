@@ -8,16 +8,64 @@
 
 import UIKit
 
-let globalManager = Manager()
+private let globalManager = Manager()
 
-class Manager {
+public class Manager {
     
-    var queue: [Presentable] = []
-    var current: Presentable? = nil {
+    public static var sharedManager: Manager {
+        return globalManager
+    }
+
+    public typealias ViewProvider = () -> UIView
+    
+    public func add(configuration configuration: Configuration, viewProvider: ViewProvider) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            guard let strongSelf = self else { return }
+            let view = viewProvider()
+            strongSelf.add(configuration: configuration, view: view)
+        }
+    }
+
+    public func add(configuration configuration: Configuration, view: UIView) {
+        dispatch_async(syncQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            let presenter = Presenter(configuration: configuration, view: view)
+            strongSelf.enqueue(presenter: presenter)
+        }
+    }
+    
+    public func remove() {
+        dispatch_async(syncQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.removeCurrent()
+        }
+    }
+
+    public func removeAll() {
+        dispatch_async(syncQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.queue.removeAll()
+            strongSelf.removeCurrent()
+        }
+    }
+
+    public func remove(id: String) {
+        dispatch_async(syncQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            if id == strongSelf.current?.id {
+                strongSelf.removeCurrent()
+            }
+            strongSelf.queue = strongSelf.queue.filter { $0.id != id }
+        }
+    }
+    
+    let syncQueue = dispatch_queue_create("it.swiftkick.SwiftMessage.Manager", DISPATCH_QUEUE_SERIAL)
+    var queue: [Presenter] = []
+    var current: Presenter? = nil {
         didSet {
             if oldValue != nil {
                 let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue(), { [weak self] in
+                dispatch_after(delayTime, syncQueue, { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.dequeueNext()
                 })
@@ -25,10 +73,10 @@ class Manager {
         }
     }
     
-    func enqueue(presenter presenter: Presentable) {
-        if let identity = presenter.identity {
-            if current?.identity == identity { return }
-            if queue.filter({ $0.identity == identity }).count > 0 { return }
+    func enqueue(presenter presenter: Presenter) {
+        if let id = presenter.id {
+            if current?.id == id { return }
+            if queue.filter({ $0.id == id }).count > 0 { return }
         }
         queue.append(presenter)
         dequeueNext()
@@ -39,39 +87,43 @@ class Manager {
         guard queue.count > 0 else { return }
         let current = queue.removeFirst()
         self.current = current
-        do {
-            try current.show { [weak self] completed in
-                guard let strongSelf = self else { return }
-                guard completed else {
-                    strongSelf.hide(presenter: current)
-                    return
-                }
-                if let pauseDuration = current.pauseDuration {
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
-                    dispatch_after(delayTime, dispatch_get_main_queue(), {
-                        guard let strongSelf = self else { return }
-                        strongSelf.hide(presenter: current)
-                    })
-                }
-            }
-        } catch {
-            self.current = nil
-        }
-    }
-    
-    func hide() {
-        if let current = current {
-            hide(presenter: current)
-        }
-    }
-    
-    func hide(presenter presenter: Presentable) {
-        guard let current = current else { return }
-        if presenter !== current { return }
-        current.hide { [weak self] (completed) in
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
             guard let strongSelf = self else { return }
-            guard completed else { return }
-            strongSelf.current = nil
+            do {
+                try current.show { completed in
+                    guard let strongSelf = self else { return }
+                    guard completed else {
+                        dispatch_async(strongSelf.syncQueue, {
+                            guard let strongSelf = self else { return }
+                            strongSelf.removeCurrent()
+                        })
+                        return
+                    }
+                    if let pauseDuration = current.pauseDuration {
+                        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
+                        dispatch_after(delayTime, strongSelf.syncQueue, {
+                            guard let strongSelf = self else { return }
+                            strongSelf.removeCurrent()
+                        })
+                    }
+                }
+            } catch {
+                strongSelf.current = nil
+            }
+        }
+    }
+    
+    func removeCurrent() {
+        guard let current = current else { return }
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            current.hide { (completed) in
+                guard completed else { return }
+                guard let strongSelf = self else { return }
+                dispatch_async(strongSelf.syncQueue, {
+                    guard let strongSelf = self else { return }
+                    strongSelf.current = nil
+                })
+            }
         }
     }
 }

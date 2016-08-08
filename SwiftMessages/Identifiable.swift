@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol Identifiable {
-    var identity: String { get }
+    var id: String { get }
 }

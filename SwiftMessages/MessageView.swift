@@ -104,7 +104,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
      MARK: - Identifiable
      */
     
-    public var identity: String {
+    public var id: String {
         return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
     }
     

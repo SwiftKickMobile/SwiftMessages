@@ -20,7 +20,7 @@ class GalleryTableViewController: UITableViewController {
 //        config.presentationContext = .Automatic
         config.presentationStyle = .Top
         config.nibName = "StatusLine"
-        config.show(view)
+        Manager.sharedManager.add(configuration: config, view: view)
     }
 }
 
