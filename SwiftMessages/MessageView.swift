@@ -118,7 +118,6 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
      */
     
     public override func awakeFromNib() {
-        backgroundColor = UIColor.clearColor()
         layoutMargins = UIEdgeInsetsZero
     }
     
