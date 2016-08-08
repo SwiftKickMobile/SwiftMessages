@@ -14,7 +14,7 @@ public enum Icon: String {
     case Warning = "warningIcon"
     case Info = "infoIcon"
     
-    public var image: UIImage {
-        return UIImage(named: rawValue)!
+    public var image: UIImage {        
+        return UIImage(named: rawValue, inBundle: NSBundle.frameworkBundle(), compatibleWithTraitCollection: nil)!
     }
 }

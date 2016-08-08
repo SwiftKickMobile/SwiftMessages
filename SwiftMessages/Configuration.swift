@@ -27,6 +27,8 @@ public enum Duration {
 
 public struct Configuration {
 
+    public init() {}
+    
     public var duration = Duration.Automatic
     
     public var presentationStyle = PresentationStyle.Top

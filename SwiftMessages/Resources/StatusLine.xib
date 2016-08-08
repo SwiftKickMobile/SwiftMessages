@@ -12,13 +12,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message Body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtv-Px-mvN" userLabel="Body Label">
-                    <rect key="frame" x="257.5" y="8" width="86" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtv-Px-mvN" userLabel="Body Label">
+                    <rect key="frame" x="252" y="8" width="96" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="999" constant="20" id="iWH-Cw-QQQ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

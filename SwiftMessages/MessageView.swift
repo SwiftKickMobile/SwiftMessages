@@ -20,6 +20,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     @IBOutlet public var iconLabel: UILabel?
     @IBOutlet public var button: UIButton?
     @IBOutlet public var contentView: UIView?
+    @IBOutlet public var backgroundView: UIView?
     
     /*
      MARK: - Creating message views
@@ -30,8 +31,8 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         case StatusLine = "StatusLine"
     }
     
-    public static func viewFromNib(layout layout: Layout) -> MessageView {
-        return try! MessageView.viewFromNib(named: layout.rawValue)
+    public static func viewFromNib(layout layout: Layout, bundle: NSBundle? = nil) -> MessageView {
+        return try! MessageView.viewFromNib(named: layout.rawValue, bundle: bundle)
     }
     
     /*
@@ -39,15 +40,14 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
      */
 
     public func configureErrorTheme() {
-        if iconImageView?.image == nil && iconLabel?.text?.isEmpty ?? true {
-            iconImageView?.image = Icon.Error.image
-        }
+        iconImageView?.image = Icon.Error.image
+        iconLabel?.text = nil
         iconImageView?.tintColor = UIColor.whiteColor()
-        contentView?.backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+        let backgroundView = self.backgroundView ?? self
+        backgroundView.backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
         iconLabel?.textColor = UIColor.whiteColor()
         titleLabel?.textColor = UIColor.whiteColor()
         bodyLabel?.textColor = UIColor.whiteColor()
-        backgroundColor = UIColor.clearColor()
     }
     
 //    public func configureWarningTheme() {
@@ -99,12 +99,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
      */
     
     public override func awakeFromNib() {
-        titleLabel?.text = nil
-        bodyLabel?.text = nil
-        iconImageView?.image = nil
-        iconLabel?.text = nil
-        button?.setImage(nil, forState: .Normal)
-        button?.setTitle(nil, forState: .Normal)
+        backgroundColor = UIColor.clearColor()
         layoutMargins = UIEdgeInsetsZero
     }
     

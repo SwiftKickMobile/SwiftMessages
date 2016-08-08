@@ -117,10 +117,21 @@ class Presenter {
                 case .Bottom:
                     bottom += adjustable.bounceAnimationOffset
                 }
-                if let vc = presentationContext as? WindowViewController where vc.windowLevel == UIWindowLevelNormal && !UIApplication.sharedApplication().statusBarHidden {
-                    top += adjustable.statusBarOffset
+                if !UIApplication.sharedApplication().statusBarHidden {
+                    if let vc = presentationContext as? WindowViewController {
+                        if vc.windowLevel == UIWindowLevelNormal {
+                            top += adjustable.statusBarOffset
+                        }
+                    } else if let vc = presentationContext as? UINavigationController {
+                        if vc.isVisible(view: vc.navigationBar) {
+                            top += adjustable.statusBarOffset
+                        }
+                    } else {
+                        top += adjustable.statusBarOffset
+                    }
                 }
                 view.layoutMargins = UIEdgeInsets(top: top, left: 0.0, bottom: bottom, right: 0.0)
+                print("view.layoutMargins=\(view.layoutMargins)")
             }
             let size = view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
             translationConstraint.constant -= size.height

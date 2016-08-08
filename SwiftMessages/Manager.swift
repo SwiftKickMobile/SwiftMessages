@@ -26,7 +26,13 @@ public class Manager {
      A block that returns an arbitrary view.
      */
     public typealias ViewProvider = () -> UIView
-    
+
+    /**
+     */
+    public func add(viewProvider viewProvider: ViewProvider) {
+        add(configuration: Configuration(), viewProvider: viewProvider)
+    }
+
     /**
      Add the given configuration and view, as provided by the `viewProvider` block,
      to the message display queue.
@@ -45,6 +51,12 @@ public class Manager {
             let view = viewProvider()
             strongSelf.add(configuration: configuration, view: view)
         }
+    }
+
+    /**
+     */
+    public func add(view view: UIView) {
+        add(configuration: Configuration(), view: view)
     }
 
     /**
