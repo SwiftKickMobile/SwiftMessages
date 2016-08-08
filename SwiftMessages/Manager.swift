@@ -59,12 +59,14 @@ public class Manager {
         }
     }
     
+    public var pauseBetweenMessages: NSTimeInterval = 0.5
+    
     let syncQueue = dispatch_queue_create("it.swiftkick.SwiftMessage.Manager", DISPATCH_QUEUE_SERIAL)
     var queue: [Presenter] = []
     var current: Presenter? = nil {
         didSet {
             if oldValue != nil {
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseBetweenMessages * Double(NSEC_PER_SEC)))
                 dispatch_after(delayTime, syncQueue, { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.dequeueNext()

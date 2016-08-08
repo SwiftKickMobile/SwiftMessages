@@ -19,7 +19,6 @@ class GalleryTableViewController: UITableViewController {
         config.preferredStatusBarStyle = .LightContent
 //        config.presentationContext = .Automatic
         config.presentationStyle = .Top
-        config.nibName = "StatusLine"
         Manager.sharedManager.add(configuration: config, view: view)
     }
 }

@@ -67,6 +67,7 @@ public enum Icon {
 }
 
 enum Error: ErrorType {
+    case CannotLoadNib(nibName: String)
     case CannotLoadViewFromNib(nibName: String)
     case NoRootViewController
 }
@@ -74,8 +75,6 @@ enum Error: ErrorType {
 public struct Configuration {
 
     public var duration = Duration.Automatic
-    
-    public var nibName: String?
     
     public var presentationStyle = PresentationStyle.Top
     

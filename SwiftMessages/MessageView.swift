@@ -19,15 +19,6 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     @IBOutlet public var iconImage: UIImageView?
     @IBOutlet public var iconLabel: UILabel?
     @IBOutlet public var button: UIButton?
-
-    /*
-     MARK: - Setting content
-     */
-    
-    func setIcon(icon: Icon?) {
-        iconImage?.image = icon?.image
-        iconLabel?.text = icon?.text
-    }
     
     /*
      MARK: - Creating message views
@@ -43,7 +34,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     }
     
     /*
-     MARK: - Style configurations
+     MARK: - Configuring the theme
      */
 
     public func configureErrorTheme() {
@@ -56,7 +47,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     }
 
     /*
-     MARK: - Content configurations
+     MARK: - Configuring the content
      */
 
     public func configureContent(body body: String) {
@@ -84,8 +75,13 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
             button?.setTitle(buttonTitle, forState: .Normal)
         }
         // TODO set button tap handler
-    }
+    }    
     
+    func setIcon(icon: Icon?) {
+        iconImage?.image = icon?.image
+        iconLabel?.text = icon?.text
+    }
+
     /*
      MARK: - Initialization
      */

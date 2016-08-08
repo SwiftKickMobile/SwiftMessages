@@ -21,7 +21,7 @@
 		867E21851D4D044F00594A41 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21841D4D044F00594A41 /* Configuration.swift */; };
 		867E21871D4D04C600594A41 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867E21861D4D04C600594A41 /* MessageView.xib */; };
 		867E21891D4D06D900594A41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 867E21881D4D06D900594A41 /* Images.xcassets */; };
-		867E21901D4D3E5E00594A41 /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E218F1D4D3E5E00594A41 /* UIView+Message.swift */; };
+		867E21901D4D3E5E00594A41 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E218F1D4D3E5E00594A41 /* UIView+Utils.swift */; };
 		867E21941D4D50BB00594A41 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21931D4D50BB00594A41 /* Presenter.swift */; };
 		86AAF8181D54F0650031EE32 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8171D54F0650031EE32 /* PassthroughView.swift */; };
 		86AAF81A1D54F0850031EE32 /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */; };
@@ -68,7 +68,7 @@
 		867E21841D4D044F00594A41 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		867E21861D4D04C600594A41 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		867E21881D4D06D900594A41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		867E218F1D4D3E5E00594A41 /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
+		867E218F1D4D3E5E00594A41 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		867E21931D4D50BB00594A41 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		86AAF8171D54F0650031EE32 /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
@@ -107,6 +107,7 @@
 			children = (
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
+				867E218F1D4D3E5E00594A41 /* UIView+Utils.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -193,7 +194,6 @@
 				86AAF8171D54F0650031EE32 /* PassthroughView.swift */,
 				86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */,
 				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
-				867E218F1D4D3E5E00594A41 /* UIView+Message.swift */,
 				86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */,
 			);
 			name = Internal;
@@ -343,7 +343,7 @@
 				867E21941D4D50BB00594A41 /* Presenter.swift in Sources */,
 				8644955D1D4FAF7C0056EB2A /* WindowViewController.swift in Sources */,
 				867E21531D4D01D500594A41 /* AppDelegate.swift in Sources */,
-				867E21901D4D3E5E00594A41 /* UIView+Message.swift in Sources */,
+				867E21901D4D3E5E00594A41 /* UIView+Utils.swift in Sources */,
 				86AAF81E1D5549680031EE32 /* MarginAdjustable.swift in Sources */,
 				86AAF81C1D551FE70031EE32 /* UIViewController+Utils.swift in Sources */,
 			);
