@@ -13,18 +13,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRd-Nk-eVT" userLabel="Container">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRd-Nk-eVT" userLabel="Content view">
                     <rect key="frame" x="8" y="8" width="584" height="87"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="imageIcon">
-                            <rect key="frame" x="20" y="34.5" width="32" height="18"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="iconLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
                             <rect key="frame" x="20" y="24.5" width="32" height="38.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
+                            <rect key="frame" x="20" y="35" width="32" height="18"/>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90y-Jf-WFn" userLabel="Text container">
                             <rect key="frame" x="72" y="24" width="492" height="39.5"/>
                             <subviews>
@@ -87,7 +87,8 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="bodyLabel" destination="dFP-4Z-N2a" id="ixI-dD-l0j"/>
-                <outlet property="iconImage" destination="PbA-QP-XpA" id="c4A-7m-RqR"/>
+                <outlet property="contentView" destination="FRd-Nk-eVT" id="bXg-tW-2gm"/>
+                <outlet property="iconImageView" destination="PbA-QP-XpA" id="Lmd-t6-FiQ"/>
                 <outlet property="iconLabel" destination="1Bu-DY-qZo" id="hiy-dW-5Gr"/>
                 <outlet property="titleLabel" destination="8T6-4T-ytS" id="kis-2r-nMy"/>
             </connections>

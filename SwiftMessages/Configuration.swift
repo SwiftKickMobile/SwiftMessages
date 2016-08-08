@@ -25,53 +25,6 @@ public enum Duration {
     case Seconds(seconds: NSTimeInterval)
 }
 
-public enum Icon {
-    
-    case Error
-    case Warning
-    case Info
-    case GrinningFace
-    case GrimacingFace
-    case ThinkingFace
-    case ImageName(name: String)
-    case Text(text: String)
-    
-    public var image: UIImage? {
-        let name: String?
-        switch self {
-        case .Error:
-            name = "errorIcon"
-        case .ImageName(let foundName):
-            name = foundName
-        default:
-            name = nil
-        }
-        guard let foundName = name else { return nil }
-        return UIImage(named: foundName)
-    }
-    
-    public var text: String? {
-        switch self {
-        case .GrinningFace:
-            return "😀"
-        case .GrimacingFace:
-            return "😬"
-        case .ThinkingFace:
-            return "🤔"
-        case .Text(let text):
-            return text
-        default:
-            return nil
-        }
-    }
-}
-
-enum Error: ErrorType {
-    case CannotLoadNib(nibName: String)
-    case CannotLoadViewFromNib(nibName: String)
-    case NoRootViewController
-}
-
 public struct Configuration {
 
     public var duration = Duration.Automatic
@@ -80,6 +33,11 @@ public struct Configuration {
     
     public var presentationContext = PresentationContext.Automatic
 
-    /// Works with .OverWindow presentation context
-    public var preferredStatusBarStyle = UIStatusBarStyle.Default
+    /**
+     Specifies the preferred status bar style when the view is displayed
+     directly behind the status bar, such as when using `.Window`
+     presentation context with a `UIWindowLevelNormal` window level
+     and `.Top` presentation style.
+    */
+    public var preferredStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.Default
 }

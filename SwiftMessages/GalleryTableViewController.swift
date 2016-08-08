@@ -11,7 +11,7 @@ import UIKit
 class GalleryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let view = MessageView.instantiate(layout: .MessageView)
+        let view = MessageView.viewFromNib(layout: .MessageView)
         view.configureErrorTheme()
         view.configureContent(title: "My Title", body: "This is my message body.")
         var config = Configuration()
@@ -20,6 +20,11 @@ class GalleryTableViewController: UITableViewController {
 //        config.presentationContext = .Automatic
         config.presentationStyle = .Top
         Manager.sharedManager.add(configuration: config, view: view)
+        
+//        let view2 = MessageView.instantiate(layout: .StatusLine)
+//        view2.configureInfoTheme()
+//        view2.configureContent(body: "This is a status line message.")
+//        Manager.sharedManager.add(configuration: config, view: view2)
     }
 }
 
