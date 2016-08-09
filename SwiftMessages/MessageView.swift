@@ -65,24 +65,37 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
      */
 
     public func configureErrorTheme() {
-        iconImageView?.image = Icon.Error.image
-        iconLabel?.text = nil
-        iconImageView?.tintColor = UIColor.whiteColor()
-        let backgroundView = self.backgroundView ?? self
-        backgroundView.backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
-        iconLabel?.textColor = UIColor.whiteColor()
-        titleLabel?.textColor = UIColor.whiteColor()
-        bodyLabel?.textColor = UIColor.whiteColor()
+        let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+        let foregroundColor = UIColor.whiteColor()
+        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Error.image)
     }
-    
-//    public func configureWarningTheme() {
-//        
-//    }
-//    
-//    public func configureInfoTheme() {
-//        backgroundColor = UIColor.lightGrayColor()
-//        bodyLabel?.textColor = UIColor.darkTextColor()
-//    }
+
+    public func configureWarningTheme() {
+        let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        let foregroundColor = UIColor.whiteColor()
+        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Warning.image)
+    }
+
+    public func configureInfoTheme() {
+        let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+        let foregroundColor = UIColor.darkTextColor()
+        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
+    }
+
+    public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage) {
+        iconImageView?.image = iconImage
+        iconLabel?.text = nil
+        iconImageView?.tintColor = foregroundColor
+        let backgroundView = self.backgroundView ?? self
+        backgroundView.backgroundColor = backgroundColor
+        iconLabel?.textColor = foregroundColor
+        titleLabel?.textColor = foregroundColor
+        bodyLabel?.textColor = foregroundColor
+        button?.backgroundColor = foregroundColor
+        button?.tintColor = backgroundColor
+        button?.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        button?.layer.cornerRadius = 5.0
+    }
 
     /*
      MARK: - Configuring the content

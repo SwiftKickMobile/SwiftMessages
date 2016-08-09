@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "867E214E1D4D01D500594A41"
-               BuildableName = "SwiftMessages.app"
+               BlueprintIdentifier = "86B48AEB1D5A41C900063E2B"
+               BuildableName = "SwiftMessages.framework"
                BlueprintName = "SwiftMessages"
                ReferencedContainer = "container:SwiftMessages.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "867E21621D4D01D500594A41"
+               BlueprintIdentifier = "86B48AF41D5A41C900063E2B"
                BuildableName = "SwiftMessagesTests.xctest"
                BlueprintName = "SwiftMessagesTests"
                ReferencedContainer = "container:SwiftMessages.xcodeproj">
@@ -52,8 +52,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "867E214E1D4D01D500594A41"
-            BuildableName = "SwiftMessages.app"
+            BlueprintIdentifier = "86B48AEB1D5A41C900063E2B"
+            BuildableName = "SwiftMessages.framework"
             BlueprintName = "SwiftMessages"
             ReferencedContainer = "container:SwiftMessages.xcodeproj">
          </BuildableReference>
@@ -75,8 +75,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "867E214E1D4D01D500594A41"
-            BuildableName = "SwiftMessages.app"
+            BlueprintIdentifier = "86B48AEB1D5A41C900063E2B"
+            BuildableName = "SwiftMessages.framework"
             BlueprintName = "SwiftMessages"
             ReferencedContainer = "container:SwiftMessages.xcodeproj">
          </BuildableReference>
@@ -94,8 +94,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "867E214E1D4D01D500594A41"
-            BuildableName = "SwiftMessages.app"
+            BlueprintIdentifier = "86B48AEB1D5A41C900063E2B"
+            BuildableName = "SwiftMessages.framework"
             BlueprintName = "SwiftMessages"
             ReferencedContainer = "container:SwiftMessages.xcodeproj">
          </BuildableReference>

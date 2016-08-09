@@ -2,8 +2,8 @@
 //  SwiftMessagesTests.swift
 //  SwiftMessagesTests
 //
-//  Created by Timothy Moose on 7/30/16.
-//  Copyright © 2016 SwiftKick Mobile LLC. All rights reserved.
+//  Created by Tim Moose on 8/9/16.
+//  Copyright © 2016 SwiftKick Mobile. All rights reserved.
 //
 
 import XCTest
