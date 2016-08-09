@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
+        <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -13,68 +12,66 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRd-Nk-eVT" userLabel="Content view">
-                    <rect key="frame" x="8" y="8" width="584" height="87"/>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Nx9-Zd-fca">
+                    <rect key="frame" x="28" y="8" width="544" height="87"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
-                            <rect key="frame" x="20" y="24" width="32" height="39"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
-                            <rect key="frame" x="20" y="35" width="32" height="18"/>
-                        </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90y-Jf-WFn" userLabel="Text container">
-                            <rect key="frame" x="72" y="24" width="492" height="40"/>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-VM-06d" userLabel="Icon container">
+                            <rect key="frame" x="0.0" y="24" width="32" height="39"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
+                                    <rect key="frame" x="0.0" y="0.0" width="32" height="39"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
+                                    <rect key="frame" x="0.0" y="11" width="32" height="18"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerY" secondItem="GEX-VM-06d" secondAttribute="centerY" id="FpL-58-cOH"/>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerX" secondItem="GEX-VM-06d" secondAttribute="centerX" id="KCt-Pv-IPP"/>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GEX-VM-06d" secondAttribute="top" id="SUz-Ub-ysR"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="centerX" secondItem="GEX-VM-06d" secondAttribute="centerX" id="XCT-dF-Zib"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GEX-VM-06d" secondAttribute="top" id="gZQ-xs-BNf"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="centerY" secondItem="GEX-VM-06d" secondAttribute="centerY" id="l3T-cn-sW4"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="rEZ-gx-erl"/>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="urP-V1-oX7"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MKC-Mf-yZN">
+                            <rect key="frame" x="52" y="21" width="415" height="45"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Title]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-4T-ytS">
-                                    <rect key="frame" x="0.0" y="0.0" width="492" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="20"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-4Z-N2a">
-                                    <rect key="frame" x="0.0" y="20" width="492" height="20"/>
+                                    <rect key="frame" x="0.0" y="25" width="415" height="20"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="dFP-4Z-N2a" firstAttribute="leading" secondItem="90y-Jf-WFn" secondAttribute="leading" id="6jt-SY-dxJ"/>
-                                <constraint firstAttribute="trailing" secondItem="8T6-4T-ytS" secondAttribute="trailing" id="9Yl-uR-LtH"/>
-                                <constraint firstItem="8T6-4T-ytS" firstAttribute="top" secondItem="90y-Jf-WFn" secondAttribute="top" id="ffB-Ua-jSj"/>
-                                <constraint firstAttribute="trailing" secondItem="dFP-4Z-N2a" secondAttribute="trailing" id="gAw-js-SaN"/>
-                                <constraint firstItem="dFP-4Z-N2a" firstAttribute="top" secondItem="8T6-4T-ytS" secondAttribute="bottom" id="gKY-kH-CMA"/>
-                                <constraint firstAttribute="bottom" secondItem="dFP-4Z-N2a" secondAttribute="bottom" id="rww-g1-SH3"/>
-                                <constraint firstItem="8T6-4T-ytS" firstAttribute="leading" secondItem="90y-Jf-WFn" secondAttribute="leading" id="ypQ-6p-Wus"/>
-                            </constraints>
-                        </view>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCW-IQ-FfQ">
+                            <rect key="frame" x="487" y="29" width="57" height="30"/>
+                            <state key="normal" title="[Button]"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="90y-Jf-WFn" secondAttribute="trailing" constant="20" id="7Ne-l9-H5F"/>
-                        <constraint firstItem="1Bu-DY-qZo" firstAttribute="leading" secondItem="FRd-Nk-eVT" secondAttribute="leading" constant="20" id="BDi-O3-J8K"/>
-                        <constraint firstItem="90y-Jf-WFn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FRd-Nk-eVT" secondAttribute="top" constant="20" id="J2N-sf-z4p"/>
-                        <constraint firstItem="90y-Jf-WFn" firstAttribute="centerY" secondItem="FRd-Nk-eVT" secondAttribute="centerYWithinMargins" id="JsW-xH-y9M"/>
-                        <constraint firstItem="PbA-QP-XpA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FRd-Nk-eVT" secondAttribute="top" constant="20" id="Xfo-hE-Qlz"/>
-                        <constraint firstItem="PbA-QP-XpA" firstAttribute="centerY" secondItem="FRd-Nk-eVT" secondAttribute="centerYWithinMargins" id="aVF-AK-JLI"/>
-                        <constraint firstItem="1Bu-DY-qZo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FRd-Nk-eVT" secondAttribute="top" constant="20" id="aVr-8D-CoE"/>
-                        <constraint firstItem="90y-Jf-WFn" firstAttribute="leading" secondItem="1Bu-DY-qZo" secondAttribute="trailing" constant="20" id="h5O-7j-cl7"/>
-                        <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerY" secondItem="FRd-Nk-eVT" secondAttribute="centerYWithinMargins" id="i4c-fN-6x2"/>
-                        <constraint firstItem="PbA-QP-XpA" firstAttribute="leading" secondItem="FRd-Nk-eVT" secondAttribute="leading" constant="20" id="nVS-8Q-AUb"/>
-                        <constraint firstItem="90y-Jf-WFn" firstAttribute="leading" secondItem="PbA-QP-XpA" secondAttribute="trailing" constant="20" id="odz-Ah-f27"/>
-                    </constraints>
-                </view>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottomMargin" secondItem="FRd-Nk-eVT" secondAttribute="bottom" id="2A8-CG-Ai9"/>
-                <constraint firstAttribute="trailingMargin" secondItem="FRd-Nk-eVT" secondAttribute="trailing" id="9Ph-3b-gI9"/>
-                <constraint firstItem="FRd-Nk-eVT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="VKO-GB-Fgv"/>
-                <constraint firstItem="FRd-Nk-eVT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="yTo-ES-5GZ"/>
+                <constraint firstAttribute="bottomMargin" secondItem="Nx9-Zd-fca" secondAttribute="bottom" id="SPZ-ev-Lj3"/>
+                <constraint firstItem="Nx9-Zd-fca" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="UDP-8w-ZKv"/>
+                <constraint firstItem="Nx9-Zd-fca" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="20" id="jKx-hQ-JzW"/>
+                <constraint firstAttribute="trailingMargin" secondItem="Nx9-Zd-fca" secondAttribute="trailing" constant="20" id="pcN-dq-ceM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
@@ -86,11 +83,12 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="bodyLabel" destination="dFP-4Z-N2a" id="ixI-dD-l0j"/>
-                <outlet property="contentView" destination="FRd-Nk-eVT" id="bXg-tW-2gm"/>
-                <outlet property="iconImageView" destination="PbA-QP-XpA" id="Lmd-t6-FiQ"/>
-                <outlet property="iconLabel" destination="1Bu-DY-qZo" id="hiy-dW-5Gr"/>
-                <outlet property="titleLabel" destination="8T6-4T-ytS" id="kis-2r-nMy"/>
+                <outlet property="bodyLabel" destination="dFP-4Z-N2a" id="xf2-M7-BfM"/>
+                <outlet property="button" destination="VCW-IQ-FfQ" id="dmh-w7-uW0"/>
+                <outlet property="contentView" destination="Nx9-Zd-fca" id="7Ni-ph-BgD"/>
+                <outlet property="iconImageView" destination="PbA-QP-XpA" id="6qO-kh-gGV"/>
+                <outlet property="iconLabel" destination="1Bu-DY-qZo" id="PWN-yD-bZu"/>
+                <outlet property="titleLabel" destination="8T6-4T-ytS" id="ZfL-Z3-Gk0"/>
             </connections>
             <point key="canvasLocation" x="360" y="352.5"/>
         </view>

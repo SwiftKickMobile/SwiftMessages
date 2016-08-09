@@ -29,20 +29,26 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     public enum Layout: String {
         case MessageView = "MessageView"
         case StatusLine = "StatusLine"
+        case MessageViewIOS8 = "MessageViewIOS8"
     }
     
     public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle? = nil) -> T {
         return try! MessageView.viewFromNib(named: layout.rawValue, bundle: bundle)
     }
     
-    public class func viewFromNib<T: MessageView>(bundle bundle: NSBundle? = nil) throws -> T {
+    public class func viewFromNib<T: MessageView>(bundle bundle: NSBundle = NSBundle.mainBundle()) throws -> T {
         let name = description().componentsSeparatedByString(".").last
         assert(name != nil)
         let view: T = try viewFromNib(named: name!, bundle: bundle)
         return view
     }
     
-    public class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle? = nil) throws -> T {
+    public class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle = NSBundle.mainBundle()) throws -> T {
+        let view: T = try viewFromNib(named: name, bundle: bundle)
+        return view
+    }
+
+    private class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle? = nil) throws -> T {
         let resolvedBundle: NSBundle
         if let bundle = bundle {
             resolvedBundle = bundle

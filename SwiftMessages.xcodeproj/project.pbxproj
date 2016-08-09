@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		862C0C6B1D58E93300D06168 /* SwiftMessages.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */; };
-		862C0CAF1D590A0000D06168 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CAE1D590A0000D06168 /* Resources */; };
 		862C0CB11D5911C100D06168 /* NSBundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */; };
+		862C0CDC1D5A397F00D06168 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CD91D5A397F00D06168 /* Images.xcassets */; };
+		862C0CDD1D5A397F00D06168 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDA1D5A397F00D06168 /* MessageView.xib */; };
+		862C0CDE1D5A397F00D06168 /* StatusLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDB1D5A397F00D06168 /* StatusLine.xib */; };
+		862C0CE31D5A3A0D00D06168 /* MessageViewIOS8.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */; };
 		864495561D4F7C390056EB2A /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495551D4F7C390056EB2A /* Identifiable.swift */; };
 		864495591D4FA0AD0056EB2A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495581D4FA0AD0056EB2A /* Manager.swift */; };
 		8644955D1D4FAF7C0056EB2A /* WindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */; };
@@ -50,8 +53,11 @@
 
 /* Begin PBXFileReference section */
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = "<group>"; };
-		862C0CAE1D590A0000D06168 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Utils.swift"; sourceTree = "<group>"; };
+		862C0CD91D5A397F00D06168 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
+		862C0CDA1D5A397F00D06168 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageView.xib; path = Resources/MessageView.xib; sourceTree = "<group>"; };
+		862C0CDB1D5A397F00D06168 /* StatusLine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusLine.xib; path = Resources/StatusLine.xib; sourceTree = "<group>"; };
+		862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewIOS8.xib; sourceTree = "<group>"; };
 		864495551D4F7C390056EB2A /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		864495581D4FA0AD0056EB2A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +123,25 @@
 			name = SwiftMessagesDemo;
 			sourceTree = "<group>";
 		};
+		862C0CD81D5A396900D06168 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				862C0CD91D5A397F00D06168 /* Images.xcassets */,
+				862C0CDA1D5A397F00D06168 /* MessageView.xib */,
+				862C0CDB1D5A397F00D06168 /* StatusLine.xib */,
+				862C0CDF1D5A398900D06168 /* iOS8 */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		862C0CDF1D5A398900D06168 /* iOS8 */ = {
+			isa = PBXGroup;
+			children = (
+				862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */,
+			);
+			name = iOS8;
+			sourceTree = "<group>";
+		};
 		864495571D4F7C490056EB2A /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +181,7 @@
 				864495581D4FA0AD0056EB2A /* Manager.swift */,
 				867E21841D4D044F00594A41 /* Configuration.swift */,
 				867E21821D4D025200594A41 /* MessageView.swift */,
-				862C0CAE1D590A0000D06168 /* Resources */,
+				862C0CD81D5A396900D06168 /* Resources */,
 				864495571D4F7C490056EB2A /* Base */,
 				867E218E1D4D3DFD00594A41 /* Internal */,
 			);
@@ -298,11 +323,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				862C0CDD1D5A397F00D06168 /* MessageView.xib in Resources */,
 				862C0C6B1D58E93300D06168 /* SwiftMessages.podspec in Resources */,
+				862C0CDC1D5A397F00D06168 /* Images.xcassets in Resources */,
 				867E215D1D4D01D500594A41 /* LaunchScreen.storyboard in Resources */,
+				862C0CDE1D5A397F00D06168 /* StatusLine.xib in Resources */,
 				867E215A1D4D01D500594A41 /* Assets.xcassets in Resources */,
 				867E21581D4D01D500594A41 /* Main.storyboard in Resources */,
-				862C0CAF1D590A0000D06168 /* Resources in Resources */,
+				862C0CE31D5A3A0D00D06168 /* MessageViewIOS8.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
