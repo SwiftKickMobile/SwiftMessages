@@ -10,6 +10,20 @@
 		86B48AEF1D5A41C900063E2B /* SwiftMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B48AEE1D5A41C900063E2B /* SwiftMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86B48AF61D5A41C900063E2B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B48AEC1D5A41C900063E2B /* SwiftMessages.framework */; };
 		86B48AFB1D5A41C900063E2B /* SwiftMessagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B48AFA1D5A41C900063E2B /* SwiftMessagesTests.swift */; };
+		86BBA8F91D5E01FC00FE8F16 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BBA8F81D5E01FC00FE8F16 /* CardView.xib */; };
+		86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21821D4D025200594A41 /* MessageView.swift */; };
+		86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495581D4FA0AD0056EB2A /* SwiftMessages.swift */; };
+		86BBA8FE1D5E03F800FE8F16 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21841D4D044F00594A41 /* Configuration.swift */; };
+		86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21931D4D50BB00594A41 /* Presenter.swift */; };
+		86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8171D54F0650031EE32 /* PassthroughView.swift */; };
+		86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */; };
+		86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */; };
+		86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */; };
+		86BBA9041D5E040600FE8F16 /* NSBundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */; };
+		86BBA9051D5E040C00FE8F16 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF82C1D580F410031EE32 /* Icon.swift */; };
+		86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495551D4F7C390056EB2A /* Identifiable.swift */; };
+		86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */; };
+		86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF82A1D580DD70031EE32 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +44,7 @@
 		862C0CDB1D5A397F00D06168 /* StatusLine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusLine.xib; path = Resources/StatusLine.xib; sourceTree = "<group>"; };
 		862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewIOS8.xib; path = Resources/MessageViewIOS8.xib; sourceTree = "<group>"; };
 		864495551D4F7C390056EB2A /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
-		864495581D4FA0AD0056EB2A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		864495581D4FA0AD0056EB2A /* SwiftMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessages.swift; sourceTree = "<group>"; };
 		8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
 		867E21821D4D025200594A41 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		867E21841D4D044F00594A41 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -47,6 +61,7 @@
 		86B48AF51D5A41C900063E2B /* SwiftMessagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftMessagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B48AFA1D5A41C900063E2B /* SwiftMessagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesTests.swift; sourceTree = "<group>"; };
 		86B48AFC1D5A41C900063E2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86BBA8F81D5E01FC00FE8F16 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardView.xib; path = Resources/CardView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +88,7 @@
 			children = (
 				862C0CD91D5A397F00D06168 /* Images.xcassets */,
 				862C0CDA1D5A397F00D06168 /* MessageView.xib */,
+				86BBA8F81D5E01FC00FE8F16 /* CardView.xib */,
 				862C0CDB1D5A397F00D06168 /* StatusLine.xib */,
 				862C0CDF1D5A398900D06168 /* iOS8 */,
 			);
@@ -132,7 +148,7 @@
 		86B48AED1D5A41C900063E2B /* SwiftMessages */ = {
 			isa = PBXGroup;
 			children = (
-				864495581D4FA0AD0056EB2A /* Manager.swift */,
+				864495581D4FA0AD0056EB2A /* SwiftMessages.swift */,
 				867E21841D4D044F00594A41 /* Configuration.swift */,
 				867E21821D4D025200594A41 /* MessageView.swift */,
 				862C0CD81D5A396900D06168 /* Resources */,
@@ -254,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86BBA8F91D5E01FC00FE8F16 /* CardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +288,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
+				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
+				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
+				86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */,
+				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
+				86BBA9041D5E040600FE8F16 /* NSBundle+Utils.swift in Sources */,
+				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
+				86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */,
+				86BBA8FE1D5E03F800FE8F16 /* Configuration.swift in Sources */,
+				86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */,
+				86BBA9051D5E040C00FE8F16 /* Icon.swift in Sources */,
+				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
+				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +409,7 @@
 		86B48AFE1D5A41C900063E2B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -391,6 +422,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.SwiftMessages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -400,6 +432,7 @@
 		86B48AFF1D5A41C900063E2B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -459,6 +492,7 @@
 				86B48AFF1D5A41C900063E2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		86B48B001D5A41C900063E2B /* Build configuration list for PBXNativeTarget "SwiftMessagesTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +501,7 @@
 				86B48B021D5A41C900063E2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

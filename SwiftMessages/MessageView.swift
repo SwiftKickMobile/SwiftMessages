@@ -20,7 +20,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     @IBOutlet public var iconLabel: UILabel?
     @IBOutlet public var button: UIButton?
     @IBOutlet public var contentView: UIView?
-    @IBOutlet public var backgroundView: UIView?
+    @IBOutlet public var backgroundView: UIView!
     
     /*
      MARK: - Creating message views
@@ -28,6 +28,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     
     public enum Layout: String {
         case MessageView = "MessageView"
+        case CardView = "CardView"
         case StatusLine = "StatusLine"
         case MessageViewIOS8 = "MessageViewIOS8"
     }
@@ -81,7 +82,19 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         let foregroundColor = UIColor.darkTextColor()
         configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
     }
-
+    
+    public func configureDropShadow() {
+        let view = backgroundView ?? self
+        let layer = view.layer
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        layer.shadowRadius = 6.0
+        layer.shadowOpacity = 0.4
+        layer.masksToBounds = false
+        updateShadowPath()
+        dropShadowConfigured = true
+    }
+    
     public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage) {
         iconImageView?.image = iconImage
         iconLabel?.text = nil
@@ -93,8 +106,14 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         bodyLabel?.textColor = foregroundColor
         button?.backgroundColor = foregroundColor
         button?.tintColor = backgroundColor
-        button?.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        button?.contentEdgeInsets = UIEdgeInsetsMake(7.0, 7.0, 7.0, 7.0)
         button?.layer.cornerRadius = 5.0
+    }
+    
+    private var dropShadowConfigured = false
+    
+    private func updateShadowPath() {
+        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).CGPath
     }
 
     /*
@@ -133,8 +152,31 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     }    
 
     /*
+     MARK: - View lifecycle
+     */
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let view = backgroundView ?? self
+        let layer = view.layer
+        if dropShadowConfigured && layer.shadowPath != nil {
+            updateShadowPath()
+        }
+    }
+    
+    /*
      MARK: - Initialization
      */
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        backgroundView = self
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundView = self
+    }
     
     public override func awakeFromNib() {
         layoutMargins = UIEdgeInsetsZero

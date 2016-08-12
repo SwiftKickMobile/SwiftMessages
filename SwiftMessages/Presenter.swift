@@ -123,7 +123,7 @@ class Presenter {
                             top += adjustable.statusBarOffset
                         }
                     } else if let vc = presentationContext as? UINavigationController {
-                        if vc.isVisible(view: vc.navigationBar) {
+                        if !vc.isVisible(view: vc.navigationBar) {
                             top += adjustable.statusBarOffset
                         }
                     } else {
@@ -131,7 +131,7 @@ class Presenter {
                     }
                 }
                 view.layoutMargins = UIEdgeInsets(top: top, left: 0.0, bottom: bottom, right: 0.0)
-                print("view.layoutMargins=\(view.layoutMargins)")
+                //print("view.layoutMargins=\(view.layoutMargins)")
             }
             let size = view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
             translationConstraint.constant -= size.height

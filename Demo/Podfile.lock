@@ -1,0 +1,16 @@
+PODS:
+  - SwiftMessages (0.0.1)
+
+DEPENDENCIES:
+  - SwiftMessages (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftMessages:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SwiftMessages: 7a34dc56ce9d8e7d624195d5295281f092471254
+
+PODFILE CHECKSUM: 6431c980c9207084d738b6ba87b2101dd9eb5097
+
+COCOAPODS: 1.0.0

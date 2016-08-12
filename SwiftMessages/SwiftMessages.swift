@@ -1,5 +1,5 @@
 //
-//  Manager.swift
+//  SwiftMessages.swift
 //  SwiftMessages
 //
 //  Created by Tim Moose on 8/1/16.
@@ -8,19 +8,12 @@
 
 import UIKit
 
-private let globalManager = Manager()
+private let globalInstance = SwiftMessages()
 
 /**
  
  */
-public class Manager {
-    
-    /**
-     A default instance of `Manager`.
-     */
-    public static var sharedManager: Manager {
-        return globalManager
-    }
+public class SwiftMessages {
 
     /**
      A block that returns an arbitrary view.
@@ -29,12 +22,12 @@ public class Manager {
 
     /**
      */
-    public func add(viewProvider viewProvider: ViewProvider) {
-        add(configuration: Configuration(), viewProvider: viewProvider)
+    public func show(viewProvider viewProvider: ViewProvider) {
+        show(configuration: Configuration(), viewProvider: viewProvider)
     }
 
     /**
-     Add the given configuration and view, as provided by the `viewProvider` block,
+     Show the given configuration and view, as provided by the `viewProvider` block,
      to the message display queue.
      
      The `viewProvider` block is guaranteed to be called on the main queue where
@@ -45,26 +38,26 @@ public class Manager {
      - parameter configuration: Configuration options for showing the message view.
      - parameter viewProvider: A block that returns an arbitrary view to be displayed as a message.
      */
-    public func add(configuration configuration: Configuration, viewProvider: ViewProvider) {
+    public func show(configuration configuration: Configuration, viewProvider: ViewProvider) {
         dispatch_async(dispatch_get_main_queue()) { [weak self] in
             guard let strongSelf = self else { return }
             let view = viewProvider()
-            strongSelf.add(configuration: configuration, view: view)
+            strongSelf.show(configuration: configuration, view: view)
         }
     }
 
     /**
      */
-    public func add(view view: UIView) {
-        add(configuration: Configuration(), view: view)
+    public func show(view view: UIView) {
+        show(configuration: Configuration(), view: view)
     }
 
     /**
-     Add the given configuration and view to the message display queue.
+     Show the given configuration and view to the message display queue.
      - parameter configuration: Configuration options for showing the message view.
      - parameter view: An arbitrary view to be displayed as a message.
      */
-    public func add(configuration configuration: Configuration, view: UIView) {
+    public func show(configuration configuration: Configuration, view: UIView) {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
             let presenter = Presenter(configuration: configuration, view: view)
@@ -73,38 +66,38 @@ public class Manager {
     }
     
     /**
-     Remove the current message being displayed by animating it away.
+     Hide the current message being displayed by animating it away.
      */
-    public func remove() {
+    public func hide() {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.removeCurrent()
+            strongSelf.hideCurrent()
         }
     }
 
     /**
-     Remove all messages. If a message is currently being displayed,
+     Hide current and queued messages. If a message is currently being displayed,
      it will be animated away.
      */
-    public func removeAll() {
+    public func hideAll() {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.queue.removeAll()
-            strongSelf.removeCurrent()
+            strongSelf.hideCurrent()
         }
     }
 
     /**
-     Remove a message with the given `id`. If the specified message is
+     Hide a message with the given `id`. If the specified message is
      currently being displayed, it will be animated away. Works with message
      views, such as `MessageView`, that implement the `Identifiable` protocol.
      - parameter id: The identifier of the message to remove.
      */
-    public func remove(id: String) {
+    public func hide(id id: String) {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
             if id == strongSelf.current?.id {
-                strongSelf.removeCurrent()
+                strongSelf.hideCurrent()
             }
             strongSelf.queue = strongSelf.queue.filter { $0.id != id }
         }
@@ -116,7 +109,7 @@ public class Manager {
      */
     public var pauseBetweenMessages: NSTimeInterval = 0.5
     
-    let syncQueue = dispatch_queue_create("it.swiftkick.SwiftMessage.Manager", DISPATCH_QUEUE_SERIAL)
+    let syncQueue = dispatch_queue_create("it.swiftkick.SwiftMessages", DISPATCH_QUEUE_SERIAL)
     var queue: [Presenter] = []
     var current: Presenter? = nil {
         didSet {
@@ -152,7 +145,7 @@ public class Manager {
                     guard completed else {
                         dispatch_async(strongSelf.syncQueue, {
                             guard let strongSelf = self else { return }
-                            strongSelf.removeCurrent()
+                            strongSelf.hideCurrent()
                         })
                         return
                     }
@@ -160,7 +153,7 @@ public class Manager {
                         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
                         dispatch_after(delayTime, strongSelf.syncQueue, {
                             guard let strongSelf = self else { return }
-                            strongSelf.removeCurrent()
+                            strongSelf.hideCurrent()
                         })
                     }
                 }
@@ -170,7 +163,7 @@ public class Manager {
         }
     }
     
-    func removeCurrent() {
+    func hideCurrent() {
         guard let current = current else { return }
         dispatch_async(dispatch_get_main_queue()) { [weak self] in
             current.hide { (completed) in
@@ -181,6 +174,57 @@ public class Manager {
                     strongSelf.current = nil
                 })
             }
+        }
+    }
+}
+
+/*
+ MARK: - Shared instance
+ */
+
+extension SwiftMessages {
+    
+    /**
+     A default instance of `SwiftMessages`.
+     */
+    public static var sharedInstance: SwiftMessages {
+        return globalInstance
+    }
+    
+    public static func show(viewProvider viewProvider: ViewProvider) {
+        globalInstance.show(viewProvider: viewProvider)
+    }
+    
+    public static func show(configuration configuration: Configuration, viewProvider: ViewProvider) {
+        globalInstance.show(configuration: configuration, viewProvider: viewProvider)
+    }
+    
+    public static func show(view view: UIView) {
+        globalInstance.show(view: view)
+    }
+
+    public static func show(configuration configuration: Configuration, view: UIView) {
+        globalInstance.show(configuration: configuration, view: view)
+    }
+
+    public static func hide() {
+        globalInstance.hide()
+    }
+    
+    public static func hideAll() {
+        globalInstance.hideAll()
+    }
+    
+    public static func hide(id id: String) {
+        globalInstance.hide(id: id)
+    }
+    
+    public static var pauseBetweenMessages: NSTimeInterval {
+        get {
+            return globalInstance.pauseBetweenMessages
+        }
+        set {
+            globalInstance.pauseBetweenMessages = newValue
         }
     }
 }
