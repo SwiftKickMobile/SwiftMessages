@@ -13,7 +13,7 @@ private let globalInstance = SwiftMessages()
 /**
  
  */
-public class SwiftMessages {
+public class SwiftMessages: PresenterDelegate {
     
     public enum PresentationContext {
         case Automatic
@@ -32,6 +32,12 @@ public class SwiftMessages {
         case Seconds(seconds: NSTimeInterval)
     }
     
+    public enum DimMode {
+        case None
+        case Automatic(interactive: Bool)
+        case Color(color: UIColor, interactive: Bool)
+    }
+    
     public struct Config {
         
         public init() {}
@@ -39,6 +45,8 @@ public class SwiftMessages {
         public var duration = Duration.Automatic
         
         public var presentationStyle = PresentationStyle.Top
+        
+        public var dimMode = DimMode.None
         
         public var presentationContext = PresentationContext.Automatic
         
@@ -96,7 +104,7 @@ public class SwiftMessages {
     public func show(config config: Config, view: UIView) {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
-            let presenter = Presenter(config: config, view: view)
+            let presenter = Presenter(config: config, view: view, delegate: strongSelf)
             strongSelf.enqueue(presenter: presenter)
         }
     }
@@ -181,7 +189,7 @@ public class SwiftMessages {
                     guard completed else {
                         dispatch_async(strongSelf.syncQueue, {
                             guard let strongSelf = self else { return }
-                            strongSelf.hideCurrent()
+                            strongSelf.hide(presenter: current)
                         })
                         return
                     }
@@ -189,7 +197,7 @@ public class SwiftMessages {
                         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
                         dispatch_after(delayTime, strongSelf.syncQueue, {
                             guard let strongSelf = self else { return }
-                            strongSelf.hideCurrent()
+                            strongSelf.hide(presenter: current)
                         })
                     }
                 }
@@ -210,6 +218,20 @@ public class SwiftMessages {
                     strongSelf.current = nil
                 })
             }
+        }
+    }
+    
+    /*
+     MARK: - PresenterDelegate
+     */
+    
+    func hide(presenter presenter: Presenter) {
+        dispatch_async(syncQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            if let current = strongSelf.current where presenter === current {
+                strongSelf.hideCurrent()
+            }
+            strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
         }
     }
 }

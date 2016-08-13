@@ -203,12 +203,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nng-9a-v3B">
-                                                    <rect key="frame" x="18" y="29" width="287" height="29"/>
+                                                    <rect key="frame" x="18" y="29" width="288" height="29"/>
                                                     <segments>
                                                         <segment title="Automatic"/>
                                                         <segment title="Forever"/>
                                                         <segment title="1 Second"/>
-                                                        <segment title="2 Seconds"/>
+                                                        <segment title="5 Seconds"/>
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>

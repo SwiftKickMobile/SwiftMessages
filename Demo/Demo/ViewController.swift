@@ -14,7 +14,7 @@ class ViewController: UITableViewController {
     var items: [Item] = [
         .TitleBody(title: "MESSAGE VIEW", body: "SwiftMessages provides a standard message view along with a number of layouts, themes and presentation options.", function: ViewController.demoBasics),
         .TitleBody(title: "ANY VIEW", body: "Any view, no matter how cute, can be displayed as a message.", function: ViewController.demoAnyView),
-        .TitleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order a taco.", function: ViewController.demoCustomNib),
+        .TitleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .Explore,
     ]
 
@@ -122,6 +122,7 @@ class ViewController: UITableViewController {
         config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
         config.duration = .Forever
         config.presentationStyle = .Bottom
+        config.dimMode = .Automatic(interactive: true)
         SwiftMessages.show(config: config, view: view)
     }
 

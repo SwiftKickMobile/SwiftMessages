@@ -76,7 +76,9 @@
                                     <rect key="frame" x="-2" y="142" width="516" height="31"/>
                                     <color key="minimumTrackTintColor" red="0.94509803921568625" green="0.57647058823529407" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <action selector="tacoSliderSlided:" destination="JI3-gM-XBO" eventType="valueChanged" id="ABc-u9-Vpu"/>
+                                        <action selector="tacoSliderFinished:" destination="JI3-gM-XBO" eventType="touchUpInside" id="ekV-4L-MLR"/>
+                                        <action selector="tacoSliderFinished:" destination="JI3-gM-XBO" eventType="touchUpOutside" id="x7e-Y6-N1o"/>
+                                        <action selector="tacoSliderSlid:" destination="JI3-gM-XBO" eventType="valueChanged" id="mwN-f7-zaf"/>
                                     </connections>
                                 </slider>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="x8I-RG-nBX">

@@ -13,17 +13,23 @@ class Weak<T: AnyObject> {
     init() {}
 }
 
+protocol PresenterDelegate: class {
+    func hide(presenter presenter: Presenter)
+}
+
 class Presenter {
 
     let config: SwiftMessages.Config
     let view: UIView
+    weak var delgate: PresenterDelegate?
     let maskingView = PassthroughView()
     let presentationContext = Weak<UIViewController>()
     var translationConstraint: NSLayoutConstraint! = nil
     
-    init(config: SwiftMessages.Config, view: UIView) {
+    init(config: SwiftMessages.Config, view: UIView, delegate: PresenterDelegate) {
         self.config = config
         self.view = view
+        self.delgate = delegate
         maskingView.clipsToBounds = true
     }
     
@@ -154,6 +160,7 @@ class Presenter {
     }
 
     func showAnimation(completion completion: (completed: Bool) -> Void) {
+
         switch config.presentationStyle {
         case .Top, .Bottom:
             UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
@@ -166,6 +173,31 @@ class Presenter {
             }, completion: { completed in
                 completion(completed: completed)
             })
+        }
+        
+        func dim(color: UIColor) {
+            self.maskingView.backgroundColor = UIColor.clearColor()
+            UIView.animateWithDuration(0.2, animations: {
+                self.maskingView.backgroundColor = color
+            })
+        }
+        
+        func setupInteractive() {
+            maskingView.tappedHander = { [weak self] in
+                guard let strongSelf = self else { return }
+                self?.delgate?.hide(presenter: strongSelf)
+            }
+        }
+        
+        switch config.dimMode {
+        case .None:
+            break
+        case .Automatic(let interactive):
+            dim(UIColor(white: 0, alpha: 0.3))
+            if interactive { setupInteractive() }
+        case .Color(let color, let interactive):
+            dim(color)
+            if interactive { setupInteractive() }
         }
     }
     
@@ -183,6 +215,21 @@ class Presenter {
                 self.maskingView.removeFromSuperview()
                 completion(completed: completed)
             })
+        }
+        
+        func undim() {
+            UIView.animateWithDuration(0.2, animations: {
+                self.maskingView.backgroundColor = UIColor.clearColor()
+            })
+        }
+        
+        switch config.dimMode {
+        case .None:
+            break
+        case .Automatic:
+            undim()
+        case .Color:
+            undim()
         }
     }
 }

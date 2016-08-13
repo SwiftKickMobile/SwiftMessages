@@ -25,7 +25,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             view = try! MessageView.viewFromNib()
         }
         
-        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonHandler: { SwiftMessages.hide() })
+        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
 
         switch theme.selectedSegmentIndex {
         case 0:
@@ -82,13 +82,22 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             break
         }
         
-        switch duration {
+        switch duration.selectedSegmentIndex {
         case 1:
             config.duration = .Forever
         case 2:
             config.duration = .Seconds(seconds: 1)
         case 3:
-            config.duration = .Seconds(seconds: 2)
+            config.duration = .Seconds(seconds: 5)
+        default:
+            break
+        }
+        
+        switch dimMode.selectedSegmentIndex {
+        case 1:
+            config.dimMode = .Automatic(interactive: false)
+        case 2:
+            config.dimMode = .Automatic(interactive: true)
         default:
             break
         }

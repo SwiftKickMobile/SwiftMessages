@@ -38,7 +38,11 @@ class TacoDialogView: MessageView {
     
     @IBOutlet weak var tacoSlider: UISlider!
     
-    @IBAction func tacoSliderSlided(slider: UISlider) {
+    @IBAction func tacoSliderSlid(slider: UISlider) {
         count = Int(slider.value)
+    }
+    
+    @IBAction func tacoSliderFinished(slider: UISlider) {
+        slider.setValue(Float(count), animated: true)
     }
 }
