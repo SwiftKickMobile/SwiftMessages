@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -24,17 +25,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SwiftMessages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEm-gV-LFh">
-                                <rect key="frame" x="242" y="250" width="116" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="238" y="250" width="123" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2016 SWIFTKICK MOBILE LLC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-Dk-SSO">
+                                <rect key="frame" x="50" y="576" width="500" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.47391887630000001" green="0.47391887630000001" blue="0.47391887630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="sBz-Dk-SSO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="30" id="Dkq-dl-gDt"/>
                             <constraint firstItem="hTc-9T-AJk" firstAttribute="top" secondItem="iEm-gV-LFh" secondAttribute="bottom" constant="10" id="FUA-Cy-JNO"/>
                             <constraint firstItem="iEm-gV-LFh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KU7-0z-XwE"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="sBz-Dk-SSO" secondAttribute="bottom" constant="8" symbolic="YES" id="UrJ-mr-8Jj"/>
                             <constraint firstItem="hTc-9T-AJk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dHc-Lg-8u0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sBz-Dk-SSO" secondAttribute="trailing" constant="30" id="ezd-98-VGo"/>
                             <constraint firstItem="hTc-9T-AJk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="suo-tr-ZDY"/>
                         </constraints>
                     </view>

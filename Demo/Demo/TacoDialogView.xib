@@ -157,7 +157,7 @@
                 <outlet property="tacoSlider" destination="MKs-Kv-aPL" id="Iky-UQ-58E"/>
                 <outlet property="titleLabel" destination="YAk-Zs-x2f" id="ufT-ii-FoC"/>
             </connections>
-            <point key="canvasLocation" x="360" y="627.5"/>
+            <point key="canvasLocation" x="304" y="614.5"/>
         </view>
     </objects>
 </document>

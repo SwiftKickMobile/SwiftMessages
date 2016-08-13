@@ -64,9 +64,9 @@ public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
         configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
     }
     
-    public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage) {
+    public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
         iconImageView?.image = iconImage
-        iconLabel?.text = nil
+        iconLabel?.text = iconText
         iconImageView?.tintColor = foregroundColor
         let backgroundView = self.backgroundView ?? self
         backgroundView.backgroundColor = backgroundColor
