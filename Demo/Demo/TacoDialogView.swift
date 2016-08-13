@@ -12,9 +12,10 @@ import SwiftMessages
 class TacoDialogView: MessageView {
 
     private static var tacoTitles = [
-        1 : "One, Please",
+        1 : "Just one, Please",
         2 : "Make it two!",
         3 : "Three!!!",
+        4 : "Cuatro!!!!",
     ]
 
     var getTacosAction: ((count: Int) -> Void)?
@@ -23,7 +24,7 @@ class TacoDialogView: MessageView {
     private var count = 1 {
         didSet {
             iconLabel?.text = String(count: count, repeatedValue: "🌮" as Character)
-            titleLabel?.text = TacoDialogView.tacoTitles[count]
+            titleLabel?.text = TacoDialogView.tacoTitles[count] ?? "\(count)" + String(count: count, repeatedValue: "!" as Character)
         }
     }
     
