@@ -12,7 +12,7 @@ private let fullScreenStyles: [UIModalPresentationStyle] = [.FullScreen, .OverFu
 
 extension UIViewController {
     
-    func selectPresentationContextTopDown(presentationStyle: PresentationStyle) -> UIViewController {
+    func selectPresentationContextTopDown(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
         if let presented = presentedFullScreenViewController() {
             return presented.selectPresentationContextTopDown(presentationStyle)
         } else if case .Top = presentationStyle, let navigationController = selectNavigationControllerTopDown() {
@@ -58,7 +58,7 @@ extension UIViewController {
         return nil
     }
 
-    func selectPresentationContextBottomUp(presentationStyle: PresentationStyle) -> UIViewController {
+    func selectPresentationContextBottomUp(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
         if let parent = parentViewController {
             if let navigationController = parent as? UINavigationController {
                 if case .Top = presentationStyle where navigationController.isVisible(view: navigationController.navigationBar) {

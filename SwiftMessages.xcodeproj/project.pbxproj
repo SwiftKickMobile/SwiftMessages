@@ -13,7 +13,6 @@
 		86BBA8F91D5E01FC00FE8F16 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BBA8F81D5E01FC00FE8F16 /* CardView.xib */; };
 		86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21821D4D025200594A41 /* MessageView.swift */; };
 		86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495581D4FA0AD0056EB2A /* SwiftMessages.swift */; };
-		86BBA8FE1D5E03F800FE8F16 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21841D4D044F00594A41 /* Configuration.swift */; };
 		86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867E21931D4D50BB00594A41 /* Presenter.swift */; };
 		86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8171D54F0650031EE32 /* PassthroughView.swift */; };
 		86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */; };
@@ -24,6 +23,8 @@
 		86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495551D4F7C390056EB2A /* Identifiable.swift */; };
 		86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */; };
 		86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF82A1D580DD70031EE32 /* Error.swift */; };
+		86BBA90F1D5E428000FE8F16 /* DropShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BBA90E1D5E428000FE8F16 /* DropShadowView.swift */; };
+		86D9B3561D5E79D100EFF424 /* UIView+SwiftMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9B3551D5E79D100EFF424 /* UIView+SwiftMessages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,6 @@
 		864495581D4FA0AD0056EB2A /* SwiftMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessages.swift; sourceTree = "<group>"; };
 		8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
 		867E21821D4D025200594A41 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		867E21841D4D044F00594A41 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		867E21931D4D50BB00594A41 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		86AAF8171D54F0650031EE32 /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
@@ -62,6 +62,8 @@
 		86B48AFA1D5A41C900063E2B /* SwiftMessagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesTests.swift; sourceTree = "<group>"; };
 		86B48AFC1D5A41C900063E2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86BBA8F81D5E01FC00FE8F16 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardView.xib; path = Resources/CardView.xib; sourceTree = "<group>"; };
+		86BBA90E1D5E428000FE8F16 /* DropShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowView.swift; sourceTree = "<group>"; };
+		86D9B3551D5E79D100EFF424 /* UIView+SwiftMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftMessages.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,8 @@
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
+				86BBA90E1D5E428000FE8F16 /* DropShadowView.swift */,
+				86D9B3551D5E79D100EFF424 /* UIView+SwiftMessages.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -149,12 +153,11 @@
 			isa = PBXGroup;
 			children = (
 				864495581D4FA0AD0056EB2A /* SwiftMessages.swift */,
-				867E21841D4D044F00594A41 /* Configuration.swift */,
 				867E21821D4D025200594A41 /* MessageView.swift */,
 				862C0CD81D5A396900D06168 /* Resources */,
 				864495571D4F7C490056EB2A /* Base */,
-				86B48B031D5A41E500063E2B /* Support */,
 				867E218E1D4D3DFD00594A41 /* Internal */,
+				86B48B031D5A41E500063E2B /* Support */,
 			);
 			path = SwiftMessages;
 			sourceTree = "<group>";
@@ -296,8 +299,9 @@
 				86BBA9041D5E040600FE8F16 /* NSBundle+Utils.swift in Sources */,
 				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
 				86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */,
-				86BBA8FE1D5E03F800FE8F16 /* Configuration.swift in Sources */,
+				86D9B3561D5E79D100EFF424 /* UIView+SwiftMessages.swift in Sources */,
 				86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */,
+				86BBA90F1D5E428000FE8F16 /* DropShadowView.swift in Sources */,
 				86BBA9051D5E040C00FE8F16 /* Icon.swift in Sources */,
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,

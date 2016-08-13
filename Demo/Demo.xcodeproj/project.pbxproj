@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		49BBBE829403C46C88EE748E /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A4CD596AFE2FDC36B2833 /* Pods_Demo.framework */; };
+		8642F4361D5F7F540061BDCD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642F4351D5F7F540061BDCD /* ExploreViewController.swift */; };
 		86AEDCE61D5D1DB70030232E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE51D5D1DB70030232E /* AppDelegate.swift */; };
 		86AEDCE81D5D1DB70030232E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE71D5D1DB70030232E /* ViewController.swift */; };
 		86AEDCEB1D5D1DB70030232E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCE91D5D1DB70030232E /* Main.storyboard */; };
 		86AEDCED1D5D1DB70030232E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCEC1D5D1DB70030232E /* Assets.xcassets */; };
 		86AEDCF01D5D1DB70030232E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCEE1D5D1DB70030232E /* LaunchScreen.storyboard */; };
+		86C0ABA01D5E814600F76BD6 /* TacoDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */; };
+		86C0ABA21D5E816600F76BD6 /* TacoDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		094A4CD596AFE2FDC36B2833 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		160AC8A3EE68E1D705664BF8 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		16131DA1E3BA049C9E4C0308 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		8642F4351D5F7F540061BDCD /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		86AEDCE21D5D1DB70030232E /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86AEDCE51D5D1DB70030232E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86AEDCE71D5D1DB70030232E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		86AEDCEC1D5D1DB70030232E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86AEDCEF1D5D1DB70030232E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86AEDCF11D5D1DB70030232E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TacoDialogView.xib; sourceTree = "<group>"; };
+		86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TacoDialogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,10 +86,13 @@
 			children = (
 				86AEDCE51D5D1DB70030232E /* AppDelegate.swift */,
 				86AEDCE71D5D1DB70030232E /* ViewController.swift */,
+				8642F4351D5F7F540061BDCD /* ExploreViewController.swift */,
 				86AEDCE91D5D1DB70030232E /* Main.storyboard */,
 				86AEDCEC1D5D1DB70030232E /* Assets.xcassets */,
 				86AEDCEE1D5D1DB70030232E /* LaunchScreen.storyboard */,
 				86AEDCF11D5D1DB70030232E /* Info.plist */,
+				86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */,
+				86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -151,6 +160,7 @@
 			files = (
 				86AEDCF01D5D1DB70030232E /* LaunchScreen.storyboard in Resources */,
 				86AEDCED1D5D1DB70030232E /* Assets.xcassets in Resources */,
+				86C0ABA01D5E814600F76BD6 /* TacoDialogView.xib in Resources */,
 				86AEDCEB1D5D1DB70030232E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,8 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8642F4361D5F7F540061BDCD /* ExploreViewController.swift in Sources */,
 				86AEDCE81D5D1DB70030232E /* ViewController.swift in Sources */,
 				86AEDCE61D5D1DB70030232E /* AppDelegate.swift in Sources */,
+				86C0ABA21D5E816600F76BD6 /* TacoDialogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

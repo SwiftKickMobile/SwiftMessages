@@ -13,6 +13,12 @@ public enum Icon: String {
     case Error = "errorIcon"
     case Warning = "warningIcon"
     case Info = "infoIcon"
+    case ErrorLight = "errorIconLight"
+    case WarningLight = "warningIconLight"
+    case InfoLight = "infoIconLight"
+    case ErrorSubtle = "errorIconSubtle"
+    case WarningSubtle = "warningIconSubtle"
+    case InfoSubtle = "infoIconSubtle"
     
     public var image: UIImage {        
         return UIImage(named: rawValue, inBundle: NSBundle.frameworkBundle(), compatibleWithTraitCollection: nil)!

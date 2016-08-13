@@ -13,9 +13,9 @@ class ViewController: UITableViewController {
 
     var items: [Item] = [
         .TitleBody(title: "MESSAGE VIEW", body: "SwiftMessages provides a standard message view along with a number of layouts, themes and presentation options.", function: ViewController.demoBasics),
-        .TitleBody(title: "ANY VIEW", body: "Any arbitrary view can be displayed as a message bar.", function: ViewController.demoAnyView),
-        .TitleBody(title: "CUSTOMIZE NIBS", body: "blah blah blah.", function: ViewController.demoAnyView),
-        .TitleBody(title: "BLAH", body: "blah blah blah.", function: ViewController.demoAnyView),
+        .TitleBody(title: "ANY VIEW", body: "Any view, no matter how cute, can be displayed as a message.", function: ViewController.demoAnyView),
+        .TitleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order a taco.", function: ViewController.demoCustomNib),
+        .Explore,
     ]
 
     /*
@@ -57,35 +57,45 @@ class ViewController: UITableViewController {
 
         let error = MessageView.viewFromNib(layout: .MessageView)
         error.configureErrorTheme()
-        error.configureContent(title: "Error", body: "Something is horribly wrong!.")
-        error.button?.setTitle("STOP!", forState: .Normal)
-
+        error.configureContent(title: "Error", body: "Something is horribly wrong!")
+        error.button?.setTitle("Stop", forState: .Normal)
+        error.iconContainer?.hidden = true
+        
         let warning = MessageView.viewFromNib(layout: .CardView)
         warning.configureWarningTheme()
         warning.configureDropShadow()
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
         warning.button?.hidden = true
-        var warningConfig = Configuration()
+        var warningConfig = SwiftMessages.Config()
         warningConfig.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
         
         let info = MessageView.viewFromNib(layout: .MessageView)
         info.configureInfoTheme()
         info.button?.hidden = true
-        info.configureContent(title: "Info", body: "This is a very lengthy and informative info message that wraps across multiple lines.")
-        var infoConfig = Configuration()
+        info.configureContent(title: "Info", body: "This is a very lengthy and informative info message that wraps across multiple lines and grows in height as needed.")
+        var infoConfig = SwiftMessages.Config()
         infoConfig.presentationStyle = .Bottom
 
-        let info2 = MessageView.viewFromNib(layout: .StatusLine)
-        info2.backgroundView.backgroundColor = UIColor.purpleColor()
-        info2.bodyLabel?.textColor = UIColor.whiteColor()
-        info2.configureContent(body: "A tiny line of text covering the status bar.")
-        var info2Config = Configuration()
-        info2Config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
-        
+        let status = MessageView.viewFromNib(layout: .StatusLine)
+        status.backgroundView.backgroundColor = UIColor.purpleColor()
+        status.bodyLabel?.textColor = UIColor.whiteColor()
+        status.configureContent(body: "A tiny line of text covering the status bar.")
+        var statusConfig = SwiftMessages.Config()
+        statusConfig.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+
+        let status2 = MessageView.viewFromNib(layout: .StatusLine)
+        status2.backgroundView.backgroundColor = UIColor.orangeColor()
+        status2.bodyLabel?.textColor = UIColor.whiteColor()
+        status2.configureContent(body: "Switched to light status bar!")
+        var status2Config = SwiftMessages.Config()
+        status2Config.presentationContext = .Window(windowLevel: UIWindowLevelNormal)
+        status2Config.preferredStatusBarStyle = .LightContent
+
         SwiftMessages.show(view: error)
-        SwiftMessages.show(configuration: warningConfig, view: warning)
-        SwiftMessages.show(configuration: infoConfig, view: info)
-        SwiftMessages.show(configuration: info2Config, view: info2)
+        SwiftMessages.show(config: warningConfig, view: warning)
+        SwiftMessages.show(config: infoConfig, view: info)
+        SwiftMessages.show(config: statusConfig, view: status)
+        SwiftMessages.show(config: status2Config, view: status2)
     }
     
     static func demoAnyView() -> Void {
@@ -93,15 +103,29 @@ class ViewController: UITableViewController {
         imageView.image = UIImage(named: "puppies")
         imageView.contentMode = .ScaleAspectFill
         imageView.clipsToBounds = true
-        imageView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[imageView(120)]", options: [], metrics: nil, views: ["imageView" : imageView]))
-        SwiftMessages.show(view: imageView)
+        let shadowView = DropShadowView()
+        shadowView.installView(imageView)
+        shadowView.configureDropShadow()
+        shadowView.constrainHeight(120.0)
+        shadowView.backgroundColor = UIColor.redColor()
+        var config = SwiftMessages.Config()
+        config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+        SwiftMessages.show(config: config, view: shadowView)
     }
 
-    static func demo2() {
-        
+    static func demoCustomNib() {
+        let view: TacoDialogView = try! TacoDialogView.viewFromNib()
+        view.configureDropShadow()
+        view.getTacosAction = { _ in SwiftMessages.hide() }
+        view.cancelAction = { SwiftMessages.hide() }
+        var config = SwiftMessages.Config()
+        config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .Forever
+        config.presentationStyle = .Bottom
+        SwiftMessages.show(config: config, view: view)
     }
 
-    static func demo3() {
+    static func demoExplore() {
         
     }
 }
@@ -111,15 +135,19 @@ typealias Function = () -> Void
 enum Item {
     
     case TitleBody(title: String, body: String, function: Function)
+    case Explore
     
     func dequeueCell(tableView tableView: UITableView) -> UITableViewCell {
         switch self {
         case .TitleBody(let data):
             let cell = tableView.dequeueReusableCellWithIdentifier("TitleBody") as! TitleBodyCell
             cell.titleLabel.text = data.title
-            let bodyStyle = NSMutableParagraphStyle()
-            bodyStyle.lineSpacing = 5.0
-            cell.bodyLabel.attributedText = NSAttributedString(string: data.body, attributes: [NSParagraphStyleAttributeName : bodyStyle])
+            cell.bodyLabel.text = data.body
+            cell.configureBodyTextStyle()
+            return cell
+        case .Explore:
+            let cell = tableView.dequeueReusableCellWithIdentifier("Explore") as! TitleBodyCell
+            cell.configureBodyTextStyle()
             return cell
         }
     }
@@ -128,6 +156,8 @@ enum Item {
         switch self {
         case .TitleBody(let data):
             data.function()
+        default:
+            break
         }
     }
 }
@@ -135,5 +165,11 @@ enum Item {
 class TitleBodyCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!
+    
+    func configureBodyTextStyle() {
+        let bodyStyle = NSMutableParagraphStyle()
+        bodyStyle.lineSpacing = 5.0
+        bodyLabel.attributedText = NSAttributedString(string: bodyLabel.text ?? "", attributes: [NSParagraphStyleAttributeName : bodyStyle])
+    }
 }
 

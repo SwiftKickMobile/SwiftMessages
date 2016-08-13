@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MessageView: UIView, Identifiable, MarginAdjustable {
+public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
 
     /*
      MARK: - IB outlets
@@ -16,6 +16,7 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
     
     @IBOutlet public var titleLabel: UILabel?
     @IBOutlet public var bodyLabel: UILabel?
+    @IBOutlet public var iconContainer: UIView?
     @IBOutlet public var iconImageView: UIImageView?
     @IBOutlet public var iconLabel: UILabel?
     @IBOutlet public var button: UIButton?
@@ -32,33 +33,13 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         case StatusLine = "StatusLine"
         case MessageViewIOS8 = "MessageViewIOS8"
     }
-    
-    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle? = nil) -> T {
-        return try! MessageView.viewFromNib(named: layout.rawValue, bundle: bundle)
-    }
-    
-    public class func viewFromNib<T: MessageView>(bundle bundle: NSBundle = NSBundle.mainBundle()) throws -> T {
-        let name = description().componentsSeparatedByString(".").last
-        assert(name != nil)
-        let view: T = try viewFromNib(named: name!, bundle: bundle)
-        return view
-    }
-    
-    public class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle = NSBundle.mainBundle()) throws -> T {
-        let view: T = try viewFromNib(named: name, bundle: bundle)
-        return view
+
+    public static func viewFromNib<T: MessageView>(layout layout: Layout) -> T {
+        return try! UIView.viewFromNib(named: layout.rawValue)
     }
 
-    private class func viewFromNib<T: MessageView>(named name: String, bundle: NSBundle? = nil) throws -> T {
-        let resolvedBundle: NSBundle
-        if let bundle = bundle {
-            resolvedBundle = bundle
-        } else {
-            resolvedBundle = NSBundle.frameworkBundle()
-        }
-        guard let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: self, options: nil) else { throw Error.CannotLoadNib(nibName: name) }
-        guard let view = arrayOfViews.first as? T else { throw Error.CannotLoadViewFromNib(nibName: name) }
-        return view
+    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle) -> T {
+        return try! UIView.viewFromNib(named: layout.rawValue, bundle: bundle)
     }
 
     /*
@@ -83,18 +64,6 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
     }
     
-    public func configureDropShadow() {
-        let view = backgroundView ?? self
-        let layer = view.layer
-        layer.shadowColor = UIColor.blackColor().CGColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        layer.shadowRadius = 6.0
-        layer.shadowOpacity = 0.4
-        layer.masksToBounds = false
-        updateShadowPath()
-        dropShadowConfigured = true
-    }
-    
     public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage) {
         iconImageView?.image = iconImage
         iconLabel?.text = nil
@@ -109,13 +78,11 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         button?.contentEdgeInsets = UIEdgeInsetsMake(7.0, 7.0, 7.0, 7.0)
         button?.layer.cornerRadius = 5.0
     }
-    
-    private var dropShadowConfigured = false
-    
-    private func updateShadowPath() {
-        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).CGPath
-    }
 
+    public override func configureDropShadow() {
+        configureDropShadow(backgroundView ?? self)
+    }
+    
     /*
      MARK: - Configuring the content
      */
@@ -150,19 +117,6 @@ public class MessageView: UIView, Identifiable, MarginAdjustable {
         button?.setTitle(buttonTitle, forState: .Normal)
         // TODO set button tap handler
     }    
-
-    /*
-     MARK: - View lifecycle
-     */
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        let view = backgroundView ?? self
-        let layer = view.layer
-        if dropShadowConfigured && layer.shadowPath != nil {
-            updateShadowPath()
-        }
-    }
     
     /*
      MARK: - Initialization

@@ -9,7 +9,6 @@
 import Foundation
 
 enum Error: ErrorType {
-    case CannotLoadNib(nibName: String)
     case CannotLoadViewFromNib(nibName: String)
     case NoRootViewController
 }

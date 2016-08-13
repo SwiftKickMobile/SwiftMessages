@@ -15,14 +15,14 @@ class Weak<T: AnyObject> {
 
 class Presenter {
 
-    let configuration: Configuration
+    let config: SwiftMessages.Config
     let view: UIView
     let maskingView = PassthroughView()
     let presentationContext = Weak<UIViewController>()
     var translationConstraint: NSLayoutConstraint! = nil
     
-    init(configuration: Configuration, view: UIView) {
-        self.configuration = configuration
+    init(config: SwiftMessages.Config, view: UIView) {
+        self.config = config
         self.view = view
         maskingView.clipsToBounds = true
     }
@@ -34,7 +34,7 @@ class Presenter {
     
     var pauseDuration: NSTimeInterval? {
         let duration: NSTimeInterval?
-        switch self.configuration.duration {
+        switch self.config.duration {
         case .Automatic:
             duration = 2.0
         case .Seconds(let seconds):
@@ -56,22 +56,22 @@ class Presenter {
         func newWindowViewController(windowLevel: UIWindowLevel) -> UIViewController {
             let viewController = WindowViewController(windowLevel: windowLevel)
             if windowLevel == UIWindowLevelNormal {
-                viewController.statusBarStyle = configuration.preferredStatusBarStyle
+                viewController.statusBarStyle = config.preferredStatusBarStyle
             }
             return viewController
         }
         
-        switch configuration.presentationContext {
+        switch config.presentationContext {
         case .Automatic:
             if let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-                return rootViewController.selectPresentationContextTopDown(configuration.presentationStyle)
+                return rootViewController.selectPresentationContextTopDown(config.presentationStyle)
             } else {
                 throw Error.NoRootViewController
             }
         case .Window(let level):
             return newWindowViewController(level)
         case .ViewController(let viewController):
-            return viewController.selectPresentationContextBottomUp(configuration.presentationStyle)
+            return viewController.selectPresentationContextBottomUp(config.presentationStyle)
         }
     }
     
@@ -101,7 +101,7 @@ class Presenter {
             maskingView.addSubview(view)
             let leading = NSLayoutConstraint(item: view, attribute: .Leading, relatedBy: .Equal, toItem: maskingView, attribute: .Leading, multiplier: 1.00, constant: 0.0)
             let trailing = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: maskingView, attribute: .Trailing, multiplier: 1.00, constant: 0.0)
-            switch configuration.presentationStyle {
+            switch config.presentationStyle {
             case .Top:
                 translationConstraint = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: maskingView, attribute: .Top, multiplier: 1.00, constant: 0.0)
             case .Bottom:
@@ -111,7 +111,7 @@ class Presenter {
             if let adjustable = view as? MarginAdjustable {
                 var top: CGFloat = 0.0
                 var bottom: CGFloat = 0.0
-                switch configuration.presentationStyle {
+                switch config.presentationStyle {
                 case .Top:
                     top += adjustable.bounceAnimationOffset
                 case .Bottom:
@@ -140,21 +140,21 @@ class Presenter {
     }
     
     func topLayoutConstraint(view view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
-        if case .Top = configuration.presentationStyle, let nav = presentationContext as? UINavigationController where nav.isVisible(view: nav.navigationBar) {
+        if case .Top = config.presentationStyle, let nav = presentationContext as? UINavigationController where nav.isVisible(view: nav.navigationBar) {
             return NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: nav.navigationBar, attribute: .Bottom, multiplier: 1.00, constant: 0.0)
         }
         return NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: presentationContext.view, attribute: .Top, multiplier: 1.00, constant: 0.0)
     }
 
     func bottomLayoutConstraint(view view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
-        if case .Bottom = configuration.presentationStyle, let tab = presentationContext as? UITabBarController where tab.isVisible(view: tab.tabBar) {
+        if case .Bottom = config.presentationStyle, let tab = presentationContext as? UITabBarController where tab.isVisible(view: tab.tabBar) {
             return NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: tab.tabBar, attribute: .Top, multiplier: 1.00, constant: 0.0)
         }
         return NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: presentationContext.view, attribute: .Bottom, multiplier: 1.00, constant: 0.0)
     }
 
     func showAnimation(completion completion: (completed: Bool) -> Void) {
-        switch configuration.presentationStyle {
+        switch config.presentationStyle {
         case .Top, .Bottom:
             UIView.animateWithDuration(0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.BeginFromCurrentState, .CurveLinear, .AllowUserInteraction], animations: {
                 var bounceOffset: CGFloat = 5.0
@@ -170,9 +170,9 @@ class Presenter {
     }
     
     func hide(completion completion: (completed: Bool) -> Void) {
-        switch configuration.presentationStyle {
+        switch config.presentationStyle {
         case .Top, .Bottom:
-            UIView.animateWithDuration(0.25, delay: 0, options: [.BeginFromCurrentState, .CurveEaseIn], animations: {
+            UIView.animateWithDuration(0.2, delay: 0, options: [.BeginFromCurrentState, .CurveEaseIn], animations: {
                 let size = self.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
                 self.translationConstraint.constant -= size.height
                 self.view.superview?.layoutIfNeeded()

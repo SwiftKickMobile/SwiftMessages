@@ -14,7 +14,43 @@ private let globalInstance = SwiftMessages()
  
  */
 public class SwiftMessages {
-
+    
+    public enum PresentationContext {
+        case Automatic
+        case Window(windowLevel: UIWindowLevel)
+        case ViewController(_: UIViewController)
+    }
+    
+    public enum PresentationStyle {
+        case Top
+        case Bottom
+    }
+    
+    public enum Duration {
+        case Automatic
+        case Forever
+        case Seconds(seconds: NSTimeInterval)
+    }
+    
+    public struct Config {
+        
+        public init() {}
+        
+        public var duration = Duration.Automatic
+        
+        public var presentationStyle = PresentationStyle.Top
+        
+        public var presentationContext = PresentationContext.Automatic
+        
+        /**
+         Specifies the preferred status bar style when the view is displayed
+         directly behind the status bar, such as when using `.Window`
+         presentation context with a `UIWindowLevelNormal` window level
+         and `.Top` presentation style.
+         */
+        public var preferredStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.Default
+    }
+    
     /**
      A block that returns an arbitrary view.
      */
@@ -23,11 +59,11 @@ public class SwiftMessages {
     /**
      */
     public func show(viewProvider viewProvider: ViewProvider) {
-        show(configuration: Configuration(), viewProvider: viewProvider)
+        show(config: Config(), viewProvider: viewProvider)
     }
 
     /**
-     Show the given configuration and view, as provided by the `viewProvider` block,
+     Show the given config and view, as provided by the `viewProvider` block,
      to the message display queue.
      
      The `viewProvider` block is guaranteed to be called on the main queue where
@@ -35,32 +71,32 @@ public class SwiftMessages {
      recommended when the message might be added from a background queue given that
      there is no need toexplicitly dispatch back to the main queue.
      
-     - parameter configuration: Configuration options for showing the message view.
+     - parameter config: Configuration options for showing the message view.
      - parameter viewProvider: A block that returns an arbitrary view to be displayed as a message.
      */
-    public func show(configuration configuration: Configuration, viewProvider: ViewProvider) {
+    public func show(config config: Config, viewProvider: ViewProvider) {
         dispatch_async(dispatch_get_main_queue()) { [weak self] in
             guard let strongSelf = self else { return }
             let view = viewProvider()
-            strongSelf.show(configuration: configuration, view: view)
+            strongSelf.show(config: config, view: view)
         }
     }
 
     /**
      */
     public func show(view view: UIView) {
-        show(configuration: Configuration(), view: view)
+        show(config: Config(), view: view)
     }
 
     /**
-     Show the given configuration and view to the message display queue.
-     - parameter configuration: Configuration options for showing the message view.
+     Show the given config and view to the message display queue.
+     - parameter config: Configuration options for showing the message view.
      - parameter view: An arbitrary view to be displayed as a message.
      */
-    public func show(configuration configuration: Configuration, view: UIView) {
+    public func show(config config: Config, view: UIView) {
         dispatch_async(syncQueue) { [weak self] in
             guard let strongSelf = self else { return }
-            let presenter = Presenter(configuration: configuration, view: view)
+            let presenter = Presenter(config: config, view: view)
             strongSelf.enqueue(presenter: presenter)
         }
     }
@@ -179,7 +215,7 @@ public class SwiftMessages {
 }
 
 /*
- MARK: - Shared instance
+ MARK: - Static APIs
  */
 
 extension SwiftMessages {
@@ -195,16 +231,16 @@ extension SwiftMessages {
         globalInstance.show(viewProvider: viewProvider)
     }
     
-    public static func show(configuration configuration: Configuration, viewProvider: ViewProvider) {
-        globalInstance.show(configuration: configuration, viewProvider: viewProvider)
+    public static func show(config config: Config, viewProvider: ViewProvider) {
+        globalInstance.show(config: config, viewProvider: viewProvider)
     }
     
     public static func show(view view: UIView) {
         globalInstance.show(view: view)
     }
 
-    public static func show(configuration configuration: Configuration, view: UIView) {
-        globalInstance.show(configuration: configuration, view: view)
+    public static func show(config config: Config, view: UIView) {
+        globalInstance.show(config: config, view: view)
     }
 
     public static func hide() {

@@ -12,45 +12,45 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Nx9-Zd-fca">
-                    <rect key="frame" x="28" y="28" width="544" height="47"/>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Nx9-Zd-fca">
+                    <rect key="frame" x="28" y="28" width="552" height="47"/>
                     <subviews>
-                        <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-VM-06d" userLabel="Icon container">
-                            <rect key="frame" x="0.0" y="4" width="32" height="39"/>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-VM-06d" userLabel="Icon container">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="47"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
-                                    <rect key="frame" x="0.0" y="0.0" width="32" height="39"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
-                                    <rect key="frame" x="0.0" y="6" width="32" height="28"/>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
+                                    <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerY" secondItem="GEX-VM-06d" secondAttribute="centerY" id="FpL-58-cOH"/>
-                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="centerX" secondItem="GEX-VM-06d" secondAttribute="centerX" id="KCt-Pv-IPP"/>
-                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GEX-VM-06d" secondAttribute="top" id="SUz-Ub-ysR"/>
-                                <constraint firstItem="PbA-QP-XpA" firstAttribute="centerX" secondItem="GEX-VM-06d" secondAttribute="centerX" id="XCT-dF-Zib"/>
-                                <constraint firstItem="PbA-QP-XpA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GEX-VM-06d" secondAttribute="top" id="gZQ-xs-BNf"/>
-                                <constraint firstItem="PbA-QP-XpA" firstAttribute="centerY" secondItem="GEX-VM-06d" secondAttribute="centerY" id="l3T-cn-sW4"/>
-                                <constraint firstItem="PbA-QP-XpA" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="rEZ-gx-erl"/>
-                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="urP-V1-oX7"/>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="Diq-Y2-3Th"/>
+                                <constraint firstAttribute="bottom" secondItem="PbA-QP-XpA" secondAttribute="bottom" id="Mp8-Xf-jwK"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="top" secondItem="GEX-VM-06d" secondAttribute="top" id="WXU-MS-tdT"/>
+                                <constraint firstItem="PbA-QP-XpA" firstAttribute="leading" secondItem="GEX-VM-06d" secondAttribute="leading" id="aiF-hi-xkA"/>
+                                <constraint firstAttribute="bottom" secondItem="1Bu-DY-qZo" secondAttribute="bottom" id="hZx-Ut-9vZ"/>
+                                <constraint firstItem="1Bu-DY-qZo" firstAttribute="top" secondItem="GEX-VM-06d" secondAttribute="top" id="kh8-dC-ywe"/>
+                                <constraint firstAttribute="trailing" secondItem="PbA-QP-XpA" secondAttribute="trailing" id="yFk-Io-nJB"/>
+                                <constraint firstAttribute="trailing" secondItem="1Bu-DY-qZo" secondAttribute="trailing" id="yWi-Hk-wQ5"/>
                             </constraints>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MKC-Mf-yZN">
-                            <rect key="frame" x="52" y="3" width="415" height="42"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MKC-Mf-yZN">
+                            <rect key="frame" x="60" y="3" width="428" height="42"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Title]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-4T-ytS">
-                                    <rect key="frame" x="0.0" y="0.0" width="415" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="[Title]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-4T-ytS">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="20"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-4Z-N2a">
-                                    <rect key="frame" x="0.0" y="25" width="415" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="[Message Body]" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-4Z-N2a">
+                                    <rect key="frame" x="0.0" y="25" width="428" height="17"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -59,7 +59,8 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCW-IQ-FfQ">
-                            <rect key="frame" x="487" y="9" width="57" height="30"/>
+                            <rect key="frame" x="498" y="9" width="54" height="29"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="[Button]"/>
                         </button>
                     </subviews>
@@ -68,10 +69,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Nx9-Zd-fca" secondAttribute="trailing" constant="20" id="4sW-g4-sKy"/>
                 <constraint firstAttribute="bottomMargin" secondItem="Nx9-Zd-fca" secondAttribute="bottom" constant="20" id="SPZ-ev-Lj3"/>
                 <constraint firstItem="Nx9-Zd-fca" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="20" id="UDP-8w-ZKv"/>
                 <constraint firstItem="Nx9-Zd-fca" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="20" id="jKx-hQ-JzW"/>
-                <constraint firstAttribute="trailingMargin" secondItem="Nx9-Zd-fca" secondAttribute="trailing" constant="20" id="pcN-dq-ceM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
@@ -86,6 +87,7 @@
                 <outlet property="bodyLabel" destination="dFP-4Z-N2a" id="xf2-M7-BfM"/>
                 <outlet property="button" destination="VCW-IQ-FfQ" id="dmh-w7-uW0"/>
                 <outlet property="contentView" destination="Nx9-Zd-fca" id="7Ni-ph-BgD"/>
+                <outlet property="iconContainer" destination="GEX-VM-06d" id="YOR-zR-hhu"/>
                 <outlet property="iconImageView" destination="PbA-QP-XpA" id="6qO-kh-gGV"/>
                 <outlet property="iconLabel" destination="1Bu-DY-qZo" id="PWN-yD-bZu"/>
                 <outlet property="titleLabel" destination="8T6-4T-ytS" id="ZfL-Z3-Gk0"/>
@@ -94,6 +96,6 @@
         </view>
     </objects>
     <resources>
-        <image name="errorIcon" width="28" height="28"/>
+        <image name="errorIcon" width="33" height="34"/>
     </resources>
 </document>
