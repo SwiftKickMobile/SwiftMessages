@@ -12,71 +12,71 @@ private let fullScreenStyles: [UIModalPresentationStyle] = [.FullScreen, .OverFu
 
 extension UIViewController {
     
-    func selectPresentationContextTopDown(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
-        if let presented = presentedFullScreenViewController() {
-            return presented.selectPresentationContextTopDown(presentationStyle)
-        } else if case .Top = presentationStyle, let navigationController = selectNavigationControllerTopDown() {
+    func sm_selectPresentationContextTopDown(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
+        if let presented = sm_presentedFullScreenViewController() {
+            return presented.sm_selectPresentationContextTopDown(presentationStyle)
+        } else if case .Top = presentationStyle, let navigationController = sm_selectNavigationControllerTopDown() {
             return navigationController
-        } else if case .Bottom = presentationStyle, let tabBarController = selectTabBarControllerTopDown() {
+        } else if case .Bottom = presentationStyle, let tabBarController = sm_selectTabBarControllerTopDown() {
             return tabBarController
         }
         return WindowViewController(windowLevel: self.view.window?.windowLevel ?? UIWindowLevelNormal)
     }
     
-    private func selectNavigationControllerTopDown() -> UINavigationController? {
-        if let presented = presentedFullScreenViewController() {
-            return presented.selectNavigationControllerTopDown()
+    private func sm_selectNavigationControllerTopDown() -> UINavigationController? {
+        if let presented = sm_presentedFullScreenViewController() {
+            return presented.sm_selectNavigationControllerTopDown()
         } else if let navigationController = self as? UINavigationController {
-            if navigationController.isVisible(view: navigationController.navigationBar) {
+            if navigationController.sm_isVisible(view: navigationController.navigationBar) {
                 return navigationController
             }
-            return navigationController.topViewController?.selectNavigationControllerTopDown()
+            return navigationController.topViewController?.sm_selectNavigationControllerTopDown()
         } else if let tabBarController = self as? UITabBarController {
-            return tabBarController.selectedViewController?.selectNavigationControllerTopDown()
+            return tabBarController.selectedViewController?.sm_selectNavigationControllerTopDown()
         }
         return nil
     }
 
-    private func selectTabBarControllerTopDown() -> UITabBarController? {
-        if let presented = presentedFullScreenViewController() {
-            return presented.selectTabBarControllerTopDown()
+    private func sm_selectTabBarControllerTopDown() -> UITabBarController? {
+        if let presented = sm_presentedFullScreenViewController() {
+            return presented.sm_selectTabBarControllerTopDown()
         } else if let navigationController = self as? UINavigationController {
-            return navigationController.topViewController?.selectTabBarControllerTopDown()
+            return navigationController.topViewController?.sm_selectTabBarControllerTopDown()
         } else if let tabBarController = self as? UITabBarController {
-            if tabBarController.isVisible(view: tabBarController.tabBar) {
+            if tabBarController.sm_isVisible(view: tabBarController.tabBar) {
                 return tabBarController
             }
-            return tabBarController.selectedViewController?.selectTabBarControllerTopDown()
+            return tabBarController.selectedViewController?.sm_selectTabBarControllerTopDown()
         }
         return nil
     }
     
-    private func presentedFullScreenViewController() -> UIViewController? {
+    private func sm_presentedFullScreenViewController() -> UIViewController? {
         if let presented = self.presentedViewController where fullScreenStyles.contains(presented.modalPresentationStyle) {
             return presented
         }
         return nil
     }
 
-    func selectPresentationContextBottomUp(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
+    func sm_selectPresentationContextBottomUp(presentationStyle: SwiftMessages.PresentationStyle) -> UIViewController {
         if let parent = parentViewController {
             if let navigationController = parent as? UINavigationController {
-                if case .Top = presentationStyle where navigationController.isVisible(view: navigationController.navigationBar) {
+                if case .Top = presentationStyle where navigationController.sm_isVisible(view: navigationController.navigationBar) {
                     return navigationController
                 }
-                return navigationController.selectPresentationContextBottomUp(presentationStyle)
+                return navigationController.sm_selectPresentationContextBottomUp(presentationStyle)
             } else if let tabBarController = parent as? UITabBarController {
-                if case .Bottom = presentationStyle where tabBarController.isVisible(view: tabBarController.tabBar) {
+                if case .Bottom = presentationStyle where tabBarController.sm_isVisible(view: tabBarController.tabBar) {
                     return tabBarController
                 }
-                return tabBarController.selectPresentationContextBottomUp(presentationStyle)
+                return tabBarController.sm_selectPresentationContextBottomUp(presentationStyle)
             }
         }
         if self.view is UITableView {
             // Never select scroll view as presentation context
             // because, you know, it scrolls.
             if let parent = self.parentViewController {
-                return parent.selectPresentationContextBottomUp(presentationStyle)
+                return parent.sm_selectPresentationContextBottomUp(presentationStyle)
             } else {
                 return WindowViewController(windowLevel: self.view.window?.windowLevel ?? UIWindowLevelNormal)
             }
@@ -84,7 +84,7 @@ extension UIViewController {
         return self
     }
     
-    func isVisible(view view: UIView) -> Bool {
+    func sm_isVisible(view view: UIView) -> Bool {
         if view.hidden { return false }
         if view.alpha == 0.0 { return false }
         let frame = self.view.convertRect(view.bounds, fromView: view)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
+public class MessageView: DropShadowView, BackgroundViewable, Identifiable, MarginAdjustable {
     
     /*
      MARK: - Creating message views

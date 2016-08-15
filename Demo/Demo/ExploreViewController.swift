@@ -102,6 +102,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             break
         }
         
+        config.interactiveHide = interactiveHide.on
+        
         // Set status bar style unless using card view (since it doesn't
         // go behind the status bar).
         if layout.selectedSegmentIndex != 1 {
@@ -125,6 +127,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var presentationContext: UISegmentedControl!
     @IBOutlet weak var duration: UISegmentedControl!
     @IBOutlet weak var dimMode: UISegmentedControl!
+    @IBOutlet weak var interactiveHide: UISwitch!
     @IBOutlet weak var layout: UISegmentedControl!
     @IBOutlet weak var theme: UISegmentedControl!
     @IBOutlet weak var dropShadow: UISwitch!

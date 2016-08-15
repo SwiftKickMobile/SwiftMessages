@@ -21,6 +21,6 @@ public enum Icon: String {
     case InfoSubtle = "infoIconSubtle"
     
     public var image: UIImage {        
-        return UIImage(named: rawValue, inBundle: NSBundle.frameworkBundle(), compatibleWithTraitCollection: nil)!
+        return UIImage(named: rawValue, inBundle: NSBundle.sm_frameworkBundle(), compatibleWithTraitCollection: nil)!
     }
 }

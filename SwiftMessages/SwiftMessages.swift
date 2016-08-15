@@ -50,6 +50,8 @@ public class SwiftMessages: PresenterDelegate {
         
         public var presentationContext = PresentationContext.Automatic
         
+        public var interactiveHide = true
+        
         /**
          Specifies the preferred status bar style when the view is displayed
          directly behind the status bar, such as when using `.Window`
@@ -193,13 +195,7 @@ public class SwiftMessages: PresenterDelegate {
                         })
                         return
                     }
-                    if let pauseDuration = current.pauseDuration {
-                        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
-                        dispatch_after(delayTime, strongSelf.syncQueue, {
-                            guard let strongSelf = self else { return }
-                            strongSelf.hide(presenter: current)
-                        })
-                    }
+                    strongSelf.queueAutoHide()
                 }
             } catch {
                 strongSelf.current = nil
@@ -221,6 +217,22 @@ public class SwiftMessages: PresenterDelegate {
         }
     }
     
+    private var autohideToken: AnyObject?
+    
+    private func queueAutoHide() {
+        guard let current = current else { return }
+        autohideToken = current
+        if let pauseDuration = current.pauseDuration {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, syncQueue, { [weak self] in
+                guard let strongSelf = self else { return }
+                // Make sure we've still got a green light to auto-hide.
+                if strongSelf.autohideToken !== current { return }
+                strongSelf.hide(presenter: current)
+            })
+        }
+    }
+    
     /*
      MARK: - PresenterDelegate
      */
@@ -233,6 +245,14 @@ public class SwiftMessages: PresenterDelegate {
             }
             strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
         }
+    }
+    
+    func panStarted(presenter presenter: Presenter) {
+        autohideToken = nil
+    }
+    
+    func panEnded(presenter presenter: Presenter) {
+        queueAutoHide()
     }
 }
 
@@ -267,7 +287,7 @@ extension SwiftMessages {
             if NSBundle.mainBundle().pathForResource(name, ofType: "nib") != nil {
                 resolvedBundle = NSBundle.mainBundle()
             } else {
-                resolvedBundle = NSBundle.frameworkBundle()
+                resolvedBundle = NSBundle.sm_frameworkBundle()
             }
         }
         let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil)
