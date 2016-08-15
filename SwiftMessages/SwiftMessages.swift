@@ -265,21 +265,21 @@ extension SwiftMessages {
     public class func viewFromNib<T: UIView>(filesOwner: AnyObject = NSNull.init()) throws -> T {
         let name = T.description().componentsSeparatedByString(".").last
         assert(name != nil)
-        let view: T = try viewFromNib(named: name!, bundle: nil, filesOwner: filesOwner)
+        let view: T = try internalViewFromNib(named: name!, bundle: nil, filesOwner: filesOwner)
         return view
     }
     
     public class func viewFromNib<T: UIView>(named name: String, filesOwner: AnyObject = NSNull.init()) throws -> T {
-        let view: T = try viewFromNib(named: name, bundle: nil, filesOwner: filesOwner)
+        let view: T = try internalViewFromNib(named: name, bundle: nil, filesOwner: filesOwner)
         return view
     }
     
-    public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
-        let view: T = try viewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
+     public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let view: T = try internalViewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
         return view
     }
     
-    private class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle? = nil, filesOwner: AnyObject = NSNull.init()) throws -> T {
+    private class func internalViewFromNib<T: UIView>(named name: String, bundle: NSBundle? = nil, filesOwner: AnyObject = NSNull.init()) throws -> T {
         let resolvedBundle: NSBundle
         if let bundle = bundle {
             resolvedBundle = bundle
