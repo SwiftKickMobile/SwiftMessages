@@ -18,13 +18,13 @@
                         <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-VM-06d" userLabel="Icon container">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="47"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" misplaced="YES" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bu-DY-qZo" userLabel="Icon label">
                                     <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" misplaced="YES" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PbA-QP-XpA" userLabel="Icon image view">
                                     <rect key="frame" x="0.0" y="0.0" width="38" height="46"/>
                                 </imageView>
                             </subviews>

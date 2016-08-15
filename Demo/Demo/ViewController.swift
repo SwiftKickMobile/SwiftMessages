@@ -114,7 +114,7 @@ class ViewController: UITableViewController {
     }
 
     static func demoCustomNib() {
-        let view: TacoDialogView = try! TacoDialogView.viewFromNib()
+        let view: TacoDialogView = try! SwiftMessages.viewFromNib()
         view.configureDropShadow()
         view.getTacosAction = { _ in SwiftMessages.hide() }
         view.cancelAction = { SwiftMessages.hide() }

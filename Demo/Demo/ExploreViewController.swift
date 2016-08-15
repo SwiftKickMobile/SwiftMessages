@@ -22,7 +22,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         case 2:
             view = MessageView.viewFromNib(layout: .StatusLine)
         default:
-            view = try! MessageView.viewFromNib()
+            view = try! SwiftMessages.viewFromNib()
         }
         
         view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })

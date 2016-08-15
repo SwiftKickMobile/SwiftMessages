@@ -3,33 +3,59 @@
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 7/30/16.
-//  Copyright © 2016 SwiftKick Mobile LLC. All rights reserved.
+//  Copyright © 2016 SwiftKick Mobile LLC.LLC. All rights reserved.
 //
 
 import UIKit
 
 public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
-
+    
     /*
-     MARK: - IB outlets
+     MARK: - Creating message views
      */
     
-    @IBOutlet public var titleLabel: UILabel?
-    @IBOutlet public var bodyLabel: UILabel?
-    @IBOutlet public var iconContainer: UIView?
-    @IBOutlet public var iconImageView: UIImageView?
-    @IBOutlet public var iconLabel: UILabel?
-    @IBOutlet public var contentView: UIView?
-    @IBOutlet public var backgroundView: UIView!
+    public enum Layout: String {
+        case MessageView = "MessageView"
+        case CardView = "CardView"
+        case StatusLine = "StatusLine"
+        case MessageViewIOS8 = "MessageViewIOS8"
+    }
     
-    @IBOutlet public var button: UIButton? {
+    public static func viewFromNib<T: MessageView>(layout layout: Layout, filesOwner: AnyObject = NSNull.init()) -> T {
+        return try! SwiftMessages.viewFromNib(named: layout.rawValue)
+    }
+    
+    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) -> T {
+        return try! SwiftMessages.viewFromNib(named: layout.rawValue, bundle: bundle, filesOwner: filesOwner)
+    }
+    
+    /*
+     MARK: - Tap handler
+     */
+    
+    public var tapHandler: ((view: MessageView) -> Void)? {
         didSet {
-            if let old = oldValue {
-                old.removeTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
-            }
-            if let button = button {
-                button.addTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
-            }
+            installTapRecognizer()
+        }
+    }
+    
+    private lazy var tapRecognizer: UITapGestureRecognizer = {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageView.tapped))
+        return tapRecognizer
+    }()
+    
+    func tapped() {
+        tapHandler?(view: self)
+    }
+
+    private func installTapRecognizer() {
+        guard let contentView = contentView else { return }
+        contentView.removeGestureRecognizer(tapRecognizer)
+        if tapHandler != nil {
+            // Only install the tap recognizer if there is a tap handler,
+            // which makes it slightly nicer if one wants to install
+            // a custom gesture recognizer.
+            contentView.addGestureRecognizer(tapRecognizer)
         }
     }
     
@@ -44,22 +70,35 @@ public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
     }
     
     /*
-     MARK: - Creating message views
+     MARK: - IB outlets
      */
     
-    public enum Layout: String {
-        case MessageView = "MessageView"
-        case CardView = "CardView"
-        case StatusLine = "StatusLine"
-        case MessageViewIOS8 = "MessageViewIOS8"
+    @IBOutlet public var titleLabel: UILabel?
+    @IBOutlet public var bodyLabel: UILabel?
+    @IBOutlet public var iconContainer: UIView?
+    @IBOutlet public var iconImageView: UIImageView?
+    @IBOutlet public var iconLabel: UILabel?
+    
+    @IBOutlet public var contentView: UIView! {
+        didSet {
+            if let old = oldValue {
+                old.removeGestureRecognizer(tapRecognizer)
+            }
+            installTapRecognizer()
+        }
     }
-
-    public static func viewFromNib<T: MessageView>(layout layout: Layout) -> T {
-        return try! UIView.viewFromNib(named: layout.rawValue)
-    }
-
-    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle) -> T {
-        return try! UIView.viewFromNib(named: layout.rawValue, bundle: bundle)
+    
+    @IBOutlet public var backgroundView: UIView!
+    
+    @IBOutlet public var button: UIButton? {
+        didSet {
+            if let old = oldValue {
+                old.removeTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
+            }
+            if let button = button {
+                button.addTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
+            }
+        }
     }
     
     /*
@@ -98,7 +137,7 @@ public class MessageView: DropShadowView, Identifiable, MarginAdjustable {
 }
 
 /*
- MARK: - Configuring the theme
+ MARK: - Theming the view
  */
 
 extension MessageView {

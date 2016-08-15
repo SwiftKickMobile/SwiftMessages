@@ -2,8 +2,8 @@
 //  SwiftMessages.swift
 //  SwiftMessages
 //
-//  Created by Tim Moose on 8/1/16.
-//  Copyright © 2016 SwiftKick Mobile. All rights reserved.
+//  Created by Timothy Moose on 8/1/16.
+//  Copyright © 2016 SwiftKick Mobile LLC. All rights reserved.
 //
 
 import UIKit
@@ -233,6 +233,46 @@ public class SwiftMessages: PresenterDelegate {
             }
             strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
         }
+    }
+}
+
+/*
+ MARK: - Creating views
+ */
+
+extension SwiftMessages {
+    
+    public class func viewFromNib<T: UIView>(filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let name = T.description().componentsSeparatedByString(".").last
+        assert(name != nil)
+        let view: T = try viewFromNib(named: name!, bundle: nil, filesOwner: filesOwner)
+        return view
+    }
+    
+    public class func viewFromNib<T: UIView>(named name: String, filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let view: T = try viewFromNib(named: name, bundle: nil, filesOwner: filesOwner)
+        return view
+    }
+    
+    public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let view: T = try viewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
+        return view
+    }
+    
+    private class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle? = nil, filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let resolvedBundle: NSBundle
+        if let bundle = bundle {
+            resolvedBundle = bundle
+        } else {
+            if NSBundle.mainBundle().pathForResource(name, ofType: "nib") != nil {
+                resolvedBundle = NSBundle.mainBundle()
+            } else {
+                resolvedBundle = NSBundle.frameworkBundle()
+            }
+        }
+        let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil)
+        guard let view = arrayOfViews.flatMap( { $0 as? T} ).first else { throw Error.CannotLoadViewFromNib(nibName: name) }
+        return view
     }
 }
 
