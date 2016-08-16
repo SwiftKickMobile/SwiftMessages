@@ -168,7 +168,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
             switch config.dimMode {
             case .None:
                 break
-            case .Automatic(let interactive):
+            case .Default(let interactive):
                 if interactive { setupInteractive() }
             case .Color(_, let interactive):
                 if interactive { setupInteractive() }
@@ -208,9 +208,9 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.dimMode {
         case .None:
             break
-        case .Automatic(let interactive):
+        case .Default:
             dim(UIColor(white: 0, alpha: 0.3))
-        case .Color(let color, let interactive):
+        case .Color(let color, _):
             dim(color)
         }
     }
@@ -260,7 +260,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.dimMode {
         case .None:
             break
-        case .Automatic:
+        case .Default:
             undim()
         case .Color:
             undim()

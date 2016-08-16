@@ -34,7 +34,7 @@ public class SwiftMessages: PresenterDelegate {
     
     public enum DimMode {
         case None
-        case Automatic(interactive: Bool)
+        case Default(interactive: Bool)
         case Color(color: UIColor, interactive: Bool)
     }
     
@@ -42,13 +42,13 @@ public class SwiftMessages: PresenterDelegate {
         
         public init() {}
         
+        public var presentationStyle = PresentationStyle.Top
+
+        public var presentationContext = PresentationContext.Automatic
+
         public var duration = Duration.Automatic
         
-        public var presentationStyle = PresentationStyle.Top
-        
         public var dimMode = DimMode.None
-        
-        public var presentationContext = PresentationContext.Automatic
         
         public var interactiveHide = true
         
@@ -274,7 +274,7 @@ extension SwiftMessages {
         return view
     }
     
-     public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
+    public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
         let view: T = try internalViewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
         return view
     }
