@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ The `Error` enum contains the errors thrown by SwiftMessages.
+ */
 enum Error: ErrorType {
     case CannotLoadViewFromNib(nibName: String)
     case NoRootViewController

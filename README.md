@@ -132,7 +132,7 @@ let view: MessageView = try! SwiftMessages.viewFromNib(named: "MyCustomNib")
 let view: MyCustomView = try! SwiftMessages.viewFromNib()
 ````
 
-`MessageView` provides optional block-based tap handler for the button and another for the view itself:
+`MessageView` provides an optional block-based tap handler for the button and another for the view itself:
 
 ````swift
 // Hide when button tapped

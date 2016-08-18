@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// The Icon enum provides type-safe access to the included icons.
 public enum Icon: String {
     
     case Error = "errorIcon"
@@ -23,6 +24,7 @@ public enum Icon: String {
     case SuccessSubtle = "successIconSubtle"
     case InfoSubtle = "infoIconSubtle"
     
+    /// Returns the associated image.
     public var image: UIImage {        
         return UIImage(named: rawValue, inBundle: NSBundle.sm_frameworkBundle(), compatibleWithTraitCollection: nil)!
     }
