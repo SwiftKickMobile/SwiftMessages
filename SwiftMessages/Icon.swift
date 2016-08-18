@@ -12,12 +12,15 @@ public enum Icon: String {
     
     case Error = "errorIcon"
     case Warning = "warningIcon"
+    case Success = "successIcon"
     case Info = "infoIcon"
     case ErrorLight = "errorIconLight"
     case WarningLight = "warningIconLight"
+    case SuccessLight = "successIconLight"
     case InfoLight = "infoIconLight"
     case ErrorSubtle = "errorIconSubtle"
     case WarningSubtle = "warningIconSubtle"
+    case SuccessSubtle = "successIconSubtle"
     case InfoSubtle = "infoIconSubtle"
     
     public var image: UIImage {        

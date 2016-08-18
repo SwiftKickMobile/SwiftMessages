@@ -29,11 +29,13 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
 
         switch theme.selectedSegmentIndex {
         case 0:
-            view.configureInfoTheme()
+            view.configureTheme(.Info)
         case 1:
-            view.configureWarningTheme()
+            view.configureTheme(.Success)
         case 2:
-            view.configureErrorTheme()
+            view.configureTheme(.Warning)
+        case 3:
+            view.configureTheme(.Error)
         default:
             view.configureTheme(backgroundColor: UIColor.purpleColor(), foregroundColor: UIColor.whiteColor(), iconImage: nil, iconText: "🐸")
             view.button?.setImage(Icon.ErrorSubtle.image, forState: .Normal)
@@ -95,9 +97,9 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch dimMode.selectedSegmentIndex {
         case 1:
-            config.dimMode = .Automatic(interactive: false)
+            config.dimMode = .Gray(interactive: false)
         case 2:
-            config.dimMode = .Automatic(interactive: true)
+            config.dimMode = .Gray(interactive: true)
         default:
             break
         }
@@ -106,9 +108,9 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         // Set status bar style unless using card view (since it doesn't
         // go behind the status bar).
-        if layout.selectedSegmentIndex != 1 {
+        if case .Top = config.presentationStyle where layout.selectedSegmentIndex != 1 {
             switch theme.selectedSegmentIndex {
-            case 1...3:
+            case 1...4:
                 config.preferredStatusBarStyle = .LightContent
             default:
                 break

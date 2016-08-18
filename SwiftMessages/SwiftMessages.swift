@@ -34,7 +34,7 @@ public class SwiftMessages: PresenterDelegate {
     
     public enum DimMode {
         case None
-        case Default(interactive: Bool)
+        case Gray(interactive: Bool)
         case Color(color: UIColor, interactive: Bool)
     }
     

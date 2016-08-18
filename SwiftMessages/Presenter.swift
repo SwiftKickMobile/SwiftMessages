@@ -131,21 +131,21 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 switch config.presentationStyle {
                 case .Top:
                     top += adjustable.bounceAnimationOffset
+                    if !UIApplication.sharedApplication().statusBarHidden {
+                        if let vc = presentationContext as? WindowViewController {
+                            if vc.windowLevel == UIWindowLevelNormal {
+                                top += adjustable.statusBarOffset
+                            }
+                        } else if let vc = presentationContext as? UINavigationController {
+                            if !vc.sm_isVisible(view: vc.navigationBar) {
+                                top += adjustable.statusBarOffset
+                            }
+                        } else {
+                            top += adjustable.statusBarOffset
+                        }
+                    }
                 case .Bottom:
                     bottom += adjustable.bounceAnimationOffset
-                }
-                if !UIApplication.sharedApplication().statusBarHidden {
-                    if let vc = presentationContext as? WindowViewController {
-                        if vc.windowLevel == UIWindowLevelNormal {
-                            top += adjustable.statusBarOffset
-                        }
-                    } else if let vc = presentationContext as? UINavigationController {
-                        if !vc.sm_isVisible(view: vc.navigationBar) {
-                            top += adjustable.statusBarOffset
-                        }
-                    } else {
-                        top += adjustable.statusBarOffset
-                    }
                 }
                 view.layoutMargins = UIEdgeInsets(top: top, left: 0.0, bottom: bottom, right: 0.0)
             }
@@ -158,20 +158,26 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         }
         do {
             
-            func setupInteractive() {
-                maskingView.tappedHander = { [weak self] in
-                    guard let strongSelf = self else { return }
-                    self?.delegate?.hide(presenter: strongSelf)
+            func setupInteractive(interactive: Bool) {
+                if interactive {
+                    maskingView.tappedHander = { [weak self] in
+                        guard let strongSelf = self else { return }
+                        self?.delegate?.hide(presenter: strongSelf)
+                    }
+                } else {
+                    // There's no action to take, but the presence of
+                    // a tap handler prevents interaction with underlying views.
+                    maskingView.tappedHander = { }
                 }
             }
             
             switch config.dimMode {
             case .None:
                 break
-            case .Default(let interactive):
-                if interactive { setupInteractive() }
+            case .Gray(let interactive):
+                setupInteractive(interactive)
             case .Color(_, let interactive):
-                if interactive { setupInteractive() }
+                setupInteractive(interactive)
             }
         }
     }
@@ -208,7 +214,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.dimMode {
         case .None:
             break
-        case .Default:
+        case .Gray:
             dim(UIColor(white: 0, alpha: 0.3))
         case .Color(let color, _):
             dim(color)
@@ -235,20 +241,34 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func hide(completion completion: (completed: Bool) -> Void) {
         switch config.presentationStyle {
         case .Top, .Bottom:
-            let size = self.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-            // Travel a bit further to account for possible drop shadow
-            let translationDistance = size.height + 10.0 - panTranslationY
-            let initialSpringVelocity = size.height == 0.0 ? 0.0 : closeSpeed / translationDistance
-            UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: initialSpringVelocity, options: [.BeginFromCurrentState, .CurveLinear], animations: {
-                self.translationConstraint.constant -= translationDistance
+            UIView.animateWithDuration(0.2, delay: 0, options: [.BeginFromCurrentState, .CurveEaseIn], animations: {
+                let size = self.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+                self.translationConstraint.constant -= size.height
                 self.view.superview?.layoutIfNeeded()
-            }, completion: { (completed) in
-                if let viewController = self.presentationContext.value as? WindowViewController {
-                    viewController.uninstall()
-                }
-                self.maskingView.removeFromSuperview()
-                completion(completed: completed)
+                }, completion: { completed in
+                    if let viewController = self.presentationContext.value as? WindowViewController {
+                        viewController.uninstall()
+                    }
+                    self.maskingView.removeFromSuperview()
+                    completion(completed: completed)
             })
+// TODO the spring animation makes the interactive hide transition smoother, but
+// TODO the added delay due to damping makes status bar style transitions look bad.
+// TODO need to find an animation technique that accommodates both concerns.
+//            let size = self.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+//            // Travel a bit further to account for possible drop shadow
+//            let translationDistance = size.height - panTranslationY
+//            let initialSpringVelocity = size.height == 0.0 ? 0.0 : closeSpeed / translationDistance
+//            UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: initialSpringVelocity, options: [.BeginFromCurrentState, .CurveLinear], animations: {
+//                self.translationConstraint.constant -= translationDistance
+//                self.view.superview?.layoutIfNeeded()
+//            }, completion: { (completed) in
+//                if let viewController = self.presentationContext.value as? WindowViewController {
+//                    viewController.uninstall()
+//                }
+//                self.maskingView.removeFromSuperview()
+//                completion(completed: completed)
+//            })
         }
         
         func undim() {
@@ -260,7 +280,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.dimMode {
         case .None:
             break
-        case .Default:
+        case .Gray:
             undim()
         case .Color:
             undim()

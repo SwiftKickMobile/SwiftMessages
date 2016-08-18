@@ -56,25 +56,35 @@ class ViewController: UITableViewController {
     static func demoBasics() -> Void {
 
         let error = MessageView.viewFromNib(layout: .MessageView)
-        error.configureErrorTheme()
+        error.configureTheme(.Error)
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
         error.button?.setTitle("Stop", forState: .Normal)
         error.iconContainer?.hidden = true
         
         let warning = MessageView.viewFromNib(layout: .CardView)
-        warning.configureWarningTheme()
+        warning.configureTheme(.Warning)
         warning.configureDropShadow()
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
         warning.button?.hidden = true
         var warningConfig = SwiftMessages.Config()
         warningConfig.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
-        
+
+        let success = MessageView.viewFromNib(layout: .CardView)
+        success.configureTheme(.Success)
+        success.configureDropShadow()
+        success.configureContent(title: "Success", body: "Something good happened!")
+        success.button?.hidden = true
+        var successConfig = SwiftMessages.Config()
+        successConfig.presentationStyle = .Bottom
+        successConfig.presentationContext = .Window(windowLevel: UIWindowLevelNormal)
+
         let info = MessageView.viewFromNib(layout: .MessageView)
-        info.configureInfoTheme()
+        info.configureTheme(.Info)
         info.button?.hidden = true
         info.configureContent(title: "Info", body: "This is a very lengthy and informative info message that wraps across multiple lines and grows in height as needed.")
         var infoConfig = SwiftMessages.Config()
         infoConfig.presentationStyle = .Bottom
+        infoConfig.duration = .Seconds(seconds: 0.25)
 
         let status = MessageView.viewFromNib(layout: .StatusLine)
         status.backgroundView.backgroundColor = UIColor.purpleColor()
@@ -93,6 +103,7 @@ class ViewController: UITableViewController {
 
         SwiftMessages.show(view: error)
         SwiftMessages.show(config: warningConfig, view: warning)
+        SwiftMessages.show(config: successConfig, view: success)
         SwiftMessages.show(config: infoConfig, view: info)
         SwiftMessages.show(config: statusConfig, view: status)
         SwiftMessages.show(config: status2Config, view: status2)
@@ -103,14 +114,14 @@ class ViewController: UITableViewController {
         imageView.image = UIImage(named: "puppies")
         imageView.contentMode = .ScaleAspectFill
         imageView.clipsToBounds = true
-        let shadowView = DropShadowView()
-        shadowView.installView(imageView)
-        shadowView.configureDropShadow()
-        shadowView.constrainHeight(120.0)
-        shadowView.backgroundColor = UIColor.redColor()
+        let f = CGRectMake(100, 100, 100, 100)
+        let messageView = BaseView(frame: f)
+        messageView.installContentView(imageView)
+        messageView.preferredHeight = 120.0
+        messageView.configureDropShadow()
         var config = SwiftMessages.Config()
         config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
-        SwiftMessages.show(config: config, view: shadowView)
+        SwiftMessages.show(config: config, view: messageView)
     }
 
     static func demoCustomNib() {
@@ -122,7 +133,7 @@ class ViewController: UITableViewController {
         config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
         config.duration = .Forever
         config.presentationStyle = .Bottom
-        config.dimMode = .Automatic(interactive: true)
+        config.dimMode = .Gray(interactive: true)
         SwiftMessages.show(config: config, view: view)
     }
 

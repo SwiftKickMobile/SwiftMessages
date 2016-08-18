@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MessageView: DropShadowView, BackgroundViewable, Identifiable, MarginAdjustable {
+public class MessageView: BaseView, Identifiable {
     
     /*
      MARK: - Creating message views
@@ -27,36 +27,6 @@ public class MessageView: DropShadowView, BackgroundViewable, Identifiable, Marg
     
     public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) -> T {
         return try! SwiftMessages.viewFromNib(named: layout.rawValue, bundle: bundle, filesOwner: filesOwner)
-    }
-    
-    /*
-     MARK: - Tap handler
-     */
-    
-    public var tapHandler: ((view: MessageView) -> Void)? {
-        didSet {
-            installTapRecognizer()
-        }
-    }
-    
-    private lazy var tapRecognizer: UITapGestureRecognizer = {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageView.tapped))
-        return tapRecognizer
-    }()
-    
-    func tapped() {
-        tapHandler?(view: self)
-    }
-
-    private func installTapRecognizer() {
-        guard let contentView = contentView else { return }
-        contentView.removeGestureRecognizer(tapRecognizer)
-        if tapHandler != nil {
-            // Only install the tap recognizer if there is a tap handler,
-            // which makes it slightly nicer if one wants to install
-            // a custom gesture recognizer.
-            contentView.addGestureRecognizer(tapRecognizer)
-        }
     }
     
     /*
@@ -79,17 +49,6 @@ public class MessageView: DropShadowView, BackgroundViewable, Identifiable, Marg
     @IBOutlet public var iconImageView: UIImageView?
     @IBOutlet public var iconLabel: UILabel?
     
-    @IBOutlet public var contentView: UIView! {
-        didSet {
-            if let old = oldValue {
-                old.removeGestureRecognizer(tapRecognizer)
-            }
-            installTapRecognizer()
-        }
-    }
-    
-    @IBOutlet public var backgroundView: UIView!
-    
     @IBOutlet public var button: UIButton? {
         didSet {
             if let old = oldValue {
@@ -102,62 +61,46 @@ public class MessageView: DropShadowView, BackgroundViewable, Identifiable, Marg
     }
     
     /*
-     MARK: - Initialization
-     */
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundView = self
-    }
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundView = self
-    }
-    
-    public override func awakeFromNib() {
-        layoutMargins = UIEdgeInsetsZero
-    }
-    
-    /*
      MARK: - Identifiable
      */
     
     public var id: String {
         return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
     }
-    
-    /*
-     MARK: - MarginAdjustable
-     */
-    
-    @IBInspectable public var bounceAnimationOffset: CGFloat = 5.0
-    
-    @IBInspectable public var statusBarOffset: CGFloat = 20.0
 }
 
 /*
- MARK: - Theming the view
+ MARK: - Theming
  */
 
 extension MessageView {
     
-    public func configureErrorTheme() {
-        let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
-        let foregroundColor = UIColor.whiteColor()
-        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Error.image)
+    public enum Theme {
+        case Info
+        case Success
+        case Warning
+        case Error
     }
-    
-    public func configureWarningTheme() {
-        let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-        let foregroundColor = UIColor.whiteColor()
-        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Warning.image)
-    }
-    
-    public func configureInfoTheme() {
-        let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
-        let foregroundColor = UIColor.darkTextColor()
-        configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
+
+    public func configureTheme(theme: Theme) {
+        switch theme {
+        case .Info:
+            let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+            let foregroundColor = UIColor.darkTextColor()
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
+        case .Success:
+            let backgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
+            let foregroundColor = UIColor.whiteColor()
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Success.image)
+        case .Warning:
+            let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+            let foregroundColor = UIColor.whiteColor()
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Warning.image)
+        case .Error:
+            let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
+            let foregroundColor = UIColor.whiteColor()
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Error.image)
+        }
     }
     
     public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
@@ -173,10 +116,6 @@ extension MessageView {
         button?.tintColor = backgroundColor
         button?.contentEdgeInsets = UIEdgeInsetsMake(7.0, 7.0, 7.0, 7.0)
         button?.layer.cornerRadius = 5.0
-    }
-    
-    public override func configureDropShadow() {
-        configureDropShadow(backgroundView ?? self)
     }
 }
 
