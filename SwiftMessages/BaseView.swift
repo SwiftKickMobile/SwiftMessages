@@ -77,10 +77,13 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
        Default is zero inset.
      */
     public func installContentView(contentView: UIView, insets: UIEdgeInsets = UIEdgeInsetsZero) {
-        contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        contentView.translatesAutoresizingMaskIntoConstraints = true
-        contentView.frame = UIEdgeInsetsInsetRect(self.bounds, insets)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(contentView)
+        let top = NSLayoutConstraint(item: contentView, attribute: .Top, relatedBy: .Equal, toItem: backgroundView, attribute: .TopMargin, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: contentView, attribute: .Left, relatedBy: .Equal, toItem: backgroundView, attribute: .LeftMargin, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: backgroundView, attribute: .BottomMargin, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: contentView, attribute: .Right, relatedBy: .Equal, toItem: backgroundView, attribute: .RightMargin, multiplier: 1.0, constant: -insets.right)
+        backgroundView.addConstraints([top, left, bottom, right])
         self.contentView = contentView
     }
     

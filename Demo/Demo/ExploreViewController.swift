@@ -63,7 +63,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         }
         
         if !showIcon.on {
-            view.iconContainer?.hidden = true
+            view.iconImageView?.hidden = true
+            view.iconLabel?.hidden = true
         }
         
         if !showTitle.on {

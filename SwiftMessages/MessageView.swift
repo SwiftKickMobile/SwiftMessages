@@ -45,7 +45,6 @@ public class MessageView: BaseView, Identifiable {
     
     @IBOutlet public var titleLabel: UILabel?
     @IBOutlet public var bodyLabel: UILabel?
-    @IBOutlet public var iconContainer: UIView?
     @IBOutlet public var iconImageView: UIImageView?
     @IBOutlet public var iconLabel: UILabel?
     
@@ -110,6 +109,8 @@ extension MessageView {
         button?.tintColor = backgroundColor
         button?.contentEdgeInsets = UIEdgeInsetsMake(7.0, 7.0, 7.0, 7.0)
         button?.layer.cornerRadius = 5.0
+        iconImageView?.hidden = iconImageView?.image == nil
+        iconLabel?.hidden = iconLabel?.text == nil
     }
 }
 
@@ -131,13 +132,17 @@ extension MessageView {
     public func configureContent(title title: String, body: String, iconImage: UIImage) {
         configureContent(title: title, body: body)
         iconImageView?.image = iconImage
+        iconImageView?.hidden = false
         iconLabel?.text = nil
+        iconLabel?.hidden = true
     }
     
     public func configureContent(title title: String, body: String, iconText: String) {
         configureContent(title: title, body: body)
-        iconImageView?.image = nil
         iconLabel?.text = iconText
+        iconLabel?.hidden = false
+        iconImageView?.hidden = true
+        iconImageView?.image = nil
     }
     
     public func configureContent(title title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((button: UIButton) -> Void)?) {

@@ -108,16 +108,22 @@ SwiftMessages.show(config: config, view: view)
 
 ### Customization
 
-`MessageView` provides the following UI elements:
+`MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
 
 * __Title__ (`UILabel`)
 * __Message body__ (`UILabel`)
-* __Icon__ (both `UIImageView` and `UILabel` variants)
+* __Image Icon__ (`UIImageView`)
+* __Text Icon__ (`UILabel`)
 * __Button__ (`UIButton`)
 
-All of these are defined as optional `@IBOutlets`, so you can freely omit the ones you don't need. The easiest way to customize `MessageView` is to drag-and-drop one of the provide nib files into your project and make changes. When using one of the `UIStackView`-based layouts as a starting point, you can simply delete elements from the nib file or hide them — no need to adjust the Auto Layout constraints.
+Because they are optional, you can freely omit the ones you don't need.
 
-`MessageView` provides some convenience methods for creating the included layouts while `SwiftMessages` provides additional, more generic nib loading methods:
+**The easiest way to customize `MessageView` is to drag-and-drop one of the pre-defined nib files into your project and make changes.** SwiftMessages always searches the main bundle for nib files first, so it is not necessary to rename the file or make a different API call. However, there are some OS-specific considerations to be aware of:
+
+* **iOS 9+** When using one of the `UIStackView` layouts, MessageView.nib or CardView.nib, as a starting point, you can simply delete elements from the nib file or hide them — no need to adjust the Auto Layout constraints.
+* **iOS 8** When using MessageViewIOS8.nib, you'll delete the unwanted elements and fix up the Auto Layout constraints. Or just create your own nib from scratch, which is much like creating a custom `UITableViewCell` or `UICollectionViewCell` — set the base view's class to `MessageView` or whatever subclass or view class you're using and wire up the outlets.
+
+To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the pre-defined nibs. In addition, the `SwiftMessages` class provides some generic loading methods:
 
 ````swift
 // Instantiate MessageView from one of the provided nibs in a type-safe way.

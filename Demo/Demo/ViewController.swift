@@ -59,7 +59,6 @@ class ViewController: UITableViewController {
         error.configureTheme(.Error)
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
         error.button?.setTitle("Stop", forState: .Normal)
-        error.iconContainer?.hidden = true
         
         let warning = MessageView.viewFromNib(layout: .CardView)
         warning.configureTheme(.Warning)

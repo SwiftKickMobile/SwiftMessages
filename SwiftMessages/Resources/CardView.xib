@@ -18,33 +18,17 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RJH-Fp-YDa" userLabel="Content view">
                             <rect key="frame" x="20" y="20" width="532" height="93"/>
                             <subviews>
-                                <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="cFe-Hg-5FF" userLabel="Icon container">
-                                    <rect key="frame" x="0.0" y="22" width="50" height="50"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-Py-lZQ" userLabel="Icon label">
-                                            <rect key="frame" x="0.0" y="0.0" width="38" height="45.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="eGt-Nj-7Fu" userLabel="Icon image view">
-                                            <rect key="frame" x="0.0" y="0.0" width="38" height="45.5"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="eGt-Nj-7Fu" firstAttribute="top" secondItem="cFe-Hg-5FF" secondAttribute="top" id="4oY-HE-Qmy"/>
-                                        <constraint firstAttribute="trailing" secondItem="pFx-Py-lZQ" secondAttribute="trailing" id="Kqe-Zy-nft"/>
-                                        <constraint firstItem="pFx-Py-lZQ" firstAttribute="top" secondItem="cFe-Hg-5FF" secondAttribute="top" id="Mxd-2w-2eb"/>
-                                        <constraint firstAttribute="bottom" secondItem="eGt-Nj-7Fu" secondAttribute="bottom" id="XKp-Rn-McQ"/>
-                                        <constraint firstAttribute="bottom" secondItem="pFx-Py-lZQ" secondAttribute="bottom" id="cdl-57-WWl"/>
-                                        <constraint firstItem="pFx-Py-lZQ" firstAttribute="leading" secondItem="cFe-Hg-5FF" secondAttribute="leading" id="kXo-k0-3Nw"/>
-                                        <constraint firstAttribute="trailing" secondItem="eGt-Nj-7Fu" secondAttribute="trailing" id="rgg-3H-nhZ"/>
-                                        <constraint firstItem="eGt-Nj-7Fu" firstAttribute="leading" secondItem="cFe-Hg-5FF" secondAttribute="leading" id="vfR-tQ-fEp"/>
-                                    </constraints>
-                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-Py-lZQ" userLabel="Icon label">
+                                    <rect key="frame" x="0.0" y="24" width="38" height="46"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="eGt-Nj-7Fu" userLabel="Icon image view">
+                                    <rect key="frame" x="48" y="30" width="33" height="34"/>
+                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cJi-r8-oeb">
-                                    <rect key="frame" x="60" y="29" width="408" height="37"/>
+                                    <rect key="frame" x="91" y="28" width="377" height="37"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="[Title]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWB-BS-FgD">
                                             <rect key="frame" x="0.0" y="0.0" width="46" height="20"/>
@@ -105,7 +89,6 @@
                 <outlet property="bodyLabel" destination="gMT-Vh-S3z" id="BkZ-P0-0dh"/>
                 <outlet property="button" destination="VUM-rq-TVm" id="7RH-Cf-FAH"/>
                 <outlet property="contentView" destination="RJH-Fp-YDa" id="2Eb-fy-uEf"/>
-                <outlet property="iconContainer" destination="cFe-Hg-5FF" id="cGw-VP-Ben"/>
                 <outlet property="iconImageView" destination="eGt-Nj-7Fu" id="N4v-CG-mEM"/>
                 <outlet property="iconLabel" destination="pFx-Py-lZQ" id="xKK-gA-Otu"/>
                 <outlet property="titleLabel" destination="IWB-BS-FgD" id="ZFQ-sh-fDL"/>
