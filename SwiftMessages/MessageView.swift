@@ -75,31 +75,25 @@ public class MessageView: BaseView, Identifiable {
 
 extension MessageView {
     
-    public enum Theme {
-        case Info
-        case Success
-        case Warning
-        case Error
-    }
-
-    public func configureTheme(theme: Theme) {
+    public func configureTheme(theme: Theme, iconStyle: IconStyle = .Default) {
+        let iconImage = iconStyle.image(theme: theme)
         switch theme {
         case .Info:
             let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
             let foregroundColor = UIColor.darkTextColor()
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Info.image)
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         case .Success:
             let backgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
             let foregroundColor = UIColor.whiteColor()
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Success.image)
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         case .Warning:
             let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
             let foregroundColor = UIColor.whiteColor()
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Warning.image)
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         case .Error:
             let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
             let foregroundColor = UIColor.whiteColor()
-            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: Icon.Error.image)
+            configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         }
     }
     

@@ -27,15 +27,25 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
 
+        let iconStyle: IconStyle
+        switch self.iconStyle.selectedSegmentIndex {
+        case 1:
+            iconStyle = .Light
+        case 2:
+            iconStyle = .Subtle
+        default:
+            iconStyle = .Default
+        }
+        
         switch theme.selectedSegmentIndex {
         case 0:
-            view.configureTheme(.Info)
+            view.configureTheme(.Info, iconStyle: iconStyle)
         case 1:
-            view.configureTheme(.Success)
+            view.configureTheme(.Success, iconStyle: iconStyle)
         case 2:
-            view.configureTheme(.Warning)
+            view.configureTheme(.Warning, iconStyle: iconStyle)
         case 3:
-            view.configureTheme(.Error)
+            view.configureTheme(.Error, iconStyle: iconStyle)
         default:
             view.configureTheme(backgroundColor: UIColor.purpleColor(), foregroundColor: UIColor.whiteColor(), iconImage: nil, iconText: "🐸")
             view.button?.setImage(Icon.ErrorSubtle.image, forState: .Normal)
@@ -132,6 +142,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var interactiveHide: UISwitch!
     @IBOutlet weak var layout: UISegmentedControl!
     @IBOutlet weak var theme: UISegmentedControl!
+    @IBOutlet weak var iconStyle: UISegmentedControl!
     @IBOutlet weak var dropShadow: UISwitch!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var bodyText: UITextField!
