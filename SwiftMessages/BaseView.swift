@@ -32,18 +32,13 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         }
     }
     
-    /**
-     The view containing the message view content and the target of the
-     `installContentView` convenience method. Defaults to `self`.
-     
-     This view has no specific functionality in SwiftMessages, but is provided
-     as a reference to the content as a convenience. It is a distinctly separate
-     property from `backgroundView`, though they may point to the same view (and
-     they both point to `self` by default) to accommodate `UIStackViews` as
-     content views, which do not render a background
-     (see MessageView.nib and CardView.nib).
-    */
-    @IBOutlet public var contentView: UIView!
+    // The `contentView` property was removed because it no longer had any functionality
+    // in the framework. This is a minor backwards incompatible change. If you've copied
+    // one of the included nib files from a previous release, you may get a key-value
+    // coding runtime error related to contentView, in which case you can subclass the 
+    // view and add a `contentView` property or you can remove the outlet connection in
+    // Interface Builder.
+    // @IBOutlet public var contentView: UIView!
 
     /*
      MARK: - Initialization
@@ -84,7 +79,6 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         let bottom = NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: backgroundView, attribute: .BottomMargin, multiplier: 1.0, constant: -insets.bottom)
         let right = NSLayoutConstraint(item: contentView, attribute: .Right, relatedBy: .Equal, toItem: backgroundView, attribute: .RightMargin, multiplier: 1.0, constant: -insets.right)
         backgroundView.addConstraints([top, left, bottom, right])
-        self.contentView = contentView
     }
     
     /*

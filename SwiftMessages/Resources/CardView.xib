@@ -88,7 +88,6 @@
                 <outlet property="backgroundView" destination="dp3-Ae-zep" id="ZiK-GN-SXH"/>
                 <outlet property="bodyLabel" destination="gMT-Vh-S3z" id="BkZ-P0-0dh"/>
                 <outlet property="button" destination="VUM-rq-TVm" id="7RH-Cf-FAH"/>
-                <outlet property="contentView" destination="RJH-Fp-YDa" id="2Eb-fy-uEf"/>
                 <outlet property="iconImageView" destination="eGt-Nj-7Fu" id="N4v-CG-mEM"/>
                 <outlet property="iconLabel" destination="pFx-Py-lZQ" id="xKK-gA-Otu"/>
                 <outlet property="titleLabel" destination="IWB-BS-FgD" id="ZFQ-sh-fDL"/>

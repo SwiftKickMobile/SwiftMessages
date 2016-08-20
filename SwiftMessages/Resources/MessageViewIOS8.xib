@@ -86,7 +86,6 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="bodyLabel" destination="OV1-yz-3U3" id="mc8-61-Icn"/>
-                <outlet property="contentView" destination="4g0-UX-cgn" id="iSd-BI-YGM"/>
                 <outlet property="iconImageView" destination="q3r-OQ-1bR" id="R3P-Gs-Mqa"/>
                 <outlet property="iconLabel" destination="hN0-co-Tho" id="Pkn-8u-E8X"/>
                 <outlet property="titleLabel" destination="ahp-gB-92W" id="nkU-6v-kIf"/>

@@ -70,7 +70,6 @@
             <connections>
                 <outlet property="bodyLabel" destination="dFP-4Z-N2a" id="xf2-M7-BfM"/>
                 <outlet property="button" destination="VCW-IQ-FfQ" id="dmh-w7-uW0"/>
-                <outlet property="contentView" destination="Nx9-Zd-fca" id="7Ni-ph-BgD"/>
                 <outlet property="iconImageView" destination="PbA-QP-XpA" id="6qO-kh-gGV"/>
                 <outlet property="iconLabel" destination="1Bu-DY-qZo" id="PWN-yD-bZu"/>
                 <outlet property="titleLabel" destination="8T6-4T-ytS" id="ZfL-Z3-Gk0"/>

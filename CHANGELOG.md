@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.0)
+
+### Improvements
+
+### API Changes
+
+* The `BaseView.contentView` property of was removed because it no longer had any functionality in the framework.
+
+    This is a minor backwards incompatible change. If you've copied one of the included nib files from a previous release, you may get a key-value coding runtime error related to contentView, in which case you can subclass the view and add a `contentView` property or you can remove the outlet connection in Interface Builder.
+
 ## [1.0.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.0.2)
 
 ### Improvements

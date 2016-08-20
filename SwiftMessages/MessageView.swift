@@ -3,7 +3,7 @@
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 7/30/16.
-//  Copyright © 2016 SwiftKick Mobile LLC.LLC. All rights reserved.
+//  Copyright © 2016 SwiftKick Mobile LLC. All rights reserved.
 //
 
 import UIKit
@@ -14,6 +14,9 @@ public class MessageView: BaseView, Identifiable {
      MARK: - Creating message views
      */
     
+    /**
+     
+    */
     public enum Layout: String {
         case MessageView = "MessageView"
         case CardView = "CardView"
