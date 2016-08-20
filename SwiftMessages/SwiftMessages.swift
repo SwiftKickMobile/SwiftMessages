@@ -386,7 +386,7 @@ public class SwiftMessages: PresenterDelegate {
 /**
  MARK: - Creating views from nibs
  
- This extension provides several convenience methods for instantiating views from nib files.
+ This extension provides several convenience functions for instantiating views from nib files.
  SwiftMessages provides several default nib files in the Resources folder that can be
  drag-and-dropped into a project as a starting point and modified.
  */

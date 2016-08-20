@@ -10,7 +10,7 @@ import UIKit
 
 /*
  The `BaseView` class is a reusable message view base class that implements some
- of the optional SwiftMessages protocols and provides some convenience methods
+ of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
  */
 public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
@@ -63,7 +63,7 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      */
     
     /**
-     A convenience method for installing a content view as a subview of `backgroundView`
+     A convenience function for installing a content view as a subview of `backgroundView`
      and pinning the edges to `backgroundView` with the specified `insets`.
      
      - Parameter contentView: The view to be installed into the background view
@@ -157,7 +157,7 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
 extension BaseView {
     
-    /// A convenience method to configure a default drop shadow effect.
+    /// A convenience function to configure a default drop shadow effect.
     public func configureDropShadow() {
         let layer = backgroundView.layer
         layer.shadowColor = UIColor.blackColor().CGColor
