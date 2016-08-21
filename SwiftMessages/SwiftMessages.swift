@@ -460,7 +460,7 @@ extension SwiftMessages {
                 resolvedBundle = NSBundle.sm_frameworkBundle()
             }
         }
-        let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil)
+        let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil) ?? []
         guard let view = arrayOfViews.flatMap( { $0 as? T} ).first else { throw Error.CannotLoadViewFromNib(nibName: name) }
         return view
     }
