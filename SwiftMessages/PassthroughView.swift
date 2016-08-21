@@ -27,8 +27,8 @@ class PassthroughView: UIView {
         tappedHander?()
     }
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, withEvent: event)
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, with: event)
         return view == self && tappedHander == nil ? nil : view
     }
 }

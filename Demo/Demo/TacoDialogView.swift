@@ -11,25 +11,25 @@ import SwiftMessages
 
 class TacoDialogView: MessageView {
 
-    private static var tacoTitles = [
+    fileprivate static var tacoTitles = [
         1 : "Just one, Please",
         2 : "Make it two!",
         3 : "Three!!!",
         4 : "Cuatro!!!!",
     ]
 
-    var getTacosAction: ((count: Int) -> Void)?
+    var getTacosAction: ((_ count: Int) -> Void)?
     var cancelAction: (() -> Void)?
     
-    private var count = 1 {
+    fileprivate var count = 1 {
         didSet {
-            iconLabel?.text = String(count: count, repeatedValue: "🌮" as Character)
-            titleLabel?.text = TacoDialogView.tacoTitles[count] ?? "\(count)" + String(count: count, repeatedValue: "!" as Character)
+            iconLabel?.text = String(repeating: "🌮", count: count)//String(count: count, repeatedValue: )
+            titleLabel?.text = TacoDialogView.tacoTitles[count] ?? "\(count)" + String(repeating: "!", count: count)
         }
     }
     
     @IBAction func getTacos() {
-        getTacosAction?(count: Int(tacoSlider.value))
+        getTacosAction?(Int(tacoSlider.value))
     }
 
     @IBAction func cancel() {
@@ -38,11 +38,11 @@ class TacoDialogView: MessageView {
     
     @IBOutlet weak var tacoSlider: UISlider!
     
-    @IBAction func tacoSliderSlid(slider: UISlider) {
+    @IBAction func tacoSliderSlid(_ slider: UISlider) {
         count = Int(slider.value)
     }
     
-    @IBAction func tacoSliderFinished(slider: UISlider) {
+    @IBAction func tacoSliderFinished(_ slider: UISlider) {
         slider.setValue(Float(count), animated: true)
     }
 }
