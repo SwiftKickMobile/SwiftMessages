@@ -88,10 +88,15 @@ extension MessageView {
         case MessageView = "MessageView"
         
         /**
-         A card-style view with transparent margins.
+         A floating card-style view with rounded corners.
          */
         case CardView = "CardView"
-        
+
+        /**
+         Like `CardView` with one end attached to the super view.
+         */
+        case TabView = "TabView"
+
         /**
          A 20pt tall view that can be used to overlay the status bar.
          Note that this layout will automatically grow taller if displayed

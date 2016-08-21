@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.1)
+
+### Features
+
+* New layout `Layout.TabView` — like `Layout.CardView` with one end attached to the super view.
+
+### Bug Fixes
+
+* Fix spacing between title and body text in `Layout.CardView` when body text wraps.
+
 ## [1.1.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.0)
 
 ### Improvements
@@ -23,7 +33,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.0.2)
 
-### Feature
+### Features
 
 * Add support for specifying an `IconStyle` in the `MessageView.configureTheme()` convenience function.
 

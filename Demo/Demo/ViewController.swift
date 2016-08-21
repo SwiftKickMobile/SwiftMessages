@@ -55,7 +55,7 @@ class ViewController: UITableViewController {
 
     static func demoBasics() -> Void {
 
-        let error = MessageView.viewFromNib(layout: .MessageView)
+        let error = MessageView.viewFromNib(layout: .TabView)
         error.configureTheme(.Error)
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
         error.button?.setTitle("Stop", forState: .Normal)

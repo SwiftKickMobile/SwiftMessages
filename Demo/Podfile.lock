@@ -1,5 +1,5 @@
 PODS:
-  - SwiftMessages (1.0.3)
+  - SwiftMessages (1.1.0)
 
 DEPENDENCIES:
   - SwiftMessages (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  SwiftMessages: d72c13ea289cfc74688334fd924c67ced9fefb99
+  SwiftMessages: 35fdaefd092dc5e6063c16849e0697f6f66de9be
 
 PODFILE CHECKSUM: 6431c980c9207084d738b6ba87b2101dd9eb5097
 

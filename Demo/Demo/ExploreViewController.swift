@@ -20,6 +20,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         case 1:
             view = MessageView.viewFromNib(layout: .CardView)
         case 2:
+            view = MessageView.viewFromNib(layout: .TabView)
+        case 3:
             view = MessageView.viewFromNib(layout: .StatusLine)
         default:
             view = try! SwiftMessages.viewFromNib()

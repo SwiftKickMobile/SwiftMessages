@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86589D471D64B6E40041676C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86589D461D64B6E40041676C /* BaseView.swift */; };
+		86589D911D692B1C0041676C /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86589D901D692B1B0041676C /* TabView.xib */; };
 		867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867BED201D622793005212E3 /* BackgroundViewable.swift */; };
 		86B48AEF1D5A41C900063E2B /* SwiftMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B48AEE1D5A41C900063E2B /* SwiftMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86B48AF61D5A41C900063E2B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B48AEC1D5A41C900063E2B /* SwiftMessages.framework */; };
@@ -48,6 +49,7 @@
 		864495581D4FA0AD0056EB2A /* SwiftMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessages.swift; sourceTree = "<group>"; };
 		8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
 		86589D461D64B6E40041676C /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		86589D901D692B1B0041676C /* TabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TabView.xib; path = Resources/TabView.xib; sourceTree = "<group>"; };
 		867BED201D622793005212E3 /* BackgroundViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundViewable.swift; sourceTree = "<group>"; };
 		867E21821D4D025200594A41 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		867E21931D4D50BB00594A41 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				862C0CD91D5A397F00D06168 /* Images.xcassets */,
 				862C0CDA1D5A397F00D06168 /* MessageView.xib */,
 				86BBA8F81D5E01FC00FE8F16 /* CardView.xib */,
+				86589D901D692B1B0041676C /* TabView.xib */,
 				862C0CDB1D5A397F00D06168 /* StatusLine.xib */,
 				862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */,
 			);
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86BBA8F91D5E01FC00FE8F16 /* CardView.xib in Resources */,
+				86589D911D692B1C0041676C /* TabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

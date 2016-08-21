@@ -303,10 +303,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aBT-5M-2tg">
-                                                    <rect key="frame" x="18" y="29" width="248" height="29"/>
+                                                    <rect key="frame" x="18" y="29" width="331" height="29"/>
                                                     <segments>
                                                         <segment title="Default"/>
                                                         <segment title="Card"/>
+                                                        <segment title="Tab"/>
                                                         <segment title="Status Line"/>
                                                     </segments>
                                                 </segmentedControl>
@@ -591,7 +592,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-jZ-Yo3">
                                         <rect key="frame" x="0.0" y="0.0" width="62" height="33"/>
-                                        <color key="backgroundColor" red="0.19105975696850169" green="0.71583099379292925" blue="0.13084805360049973" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.26666666666666666" green="0.85490196078431369" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                         <state key="normal" title="SHOW"/>
                                         <userDefinedRuntimeAttributes>
@@ -605,7 +606,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaB-mE-Rve">
                                         <rect key="frame" x="66" y="0.0" width="59" height="33"/>
-                                        <color key="backgroundColor" red="0.85507499631818185" green="0.14286500584919343" blue="0.13053950878691239" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.97647058823529409" green="0.25882352941176467" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                         <state key="normal" title="HIDE"/>
                                         <userDefinedRuntimeAttributes>
