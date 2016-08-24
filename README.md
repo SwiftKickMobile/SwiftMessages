@@ -20,6 +20,10 @@ Try exploring [the demo app](./Demo/Demo.xcworkspace) to get a feel for the exte
   <img src="./Demo/demo.png" />
 </p>
 
+<p align="center">
+	<a href="http://goo.gl/C9ymRD"><img src="./Demo/appetize.png" /></a>
+</p>
+
 ## Installation
 
 ### CocoaPods
