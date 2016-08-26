@@ -26,6 +26,10 @@
 		86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495551D4F7C390056EB2A /* Identifiable.swift */; };
 		86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */; };
 		86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF82A1D580DD70031EE32 /* Error.swift */; };
+		E6E49F911D70A344006CB883 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDA1D5A397F00D06168 /* MessageView.xib */; };
+		E6E49F921D70A349006CB883 /* StatusLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDB1D5A397F00D06168 /* StatusLine.xib */; };
+		E6E49F931D70A34C006CB883 /* MessageViewIOS8.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */; };
+		E6E49F941D70A395006CB883 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CD91D5A397F00D06168 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,8 +272,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E49F931D70A34C006CB883 /* MessageViewIOS8.xib in Resources */,
+				E6E49F911D70A344006CB883 /* MessageView.xib in Resources */,
 				86BBA8F91D5E01FC00FE8F16 /* CardView.xib in Resources */,
+				E6E49F941D70A395006CB883 /* Images.xcassets in Resources */,
 				86589D911D692B1C0041676C /* TabView.xib in Resources */,
+				E6E49F921D70A349006CB883 /* StatusLine.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
