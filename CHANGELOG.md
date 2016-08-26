@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.2)
+
+### Bug Fixes
+
+* Fix Carthage-related issues.
+
 ## [1.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.1)
 
 ### Features
