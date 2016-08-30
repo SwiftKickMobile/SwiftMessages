@@ -1,6 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.2)
+
+### Features
+
+* Add default configuration `SwiftMessages.defaultConfig` that can be used when calling the variants of `show()` that don't take a `config` argument or as a global base for custom configs.
+* Add `Array.sm_random()` function that returns a random element from the array. Can be used to create a playful
+     message that cycles randomly through a set of emoji icons, for example.
+
+### Bug Fixes
+
+* Fix #5 Emoji not shown!
+* Fix #6 There is no way to create SwiftMessages instance as there is no public initializer
+
 ## [1.1.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.2)
 
 ### Bug Fixes

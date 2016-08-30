@@ -283,7 +283,7 @@ public class SwiftMessages: PresenterDelegate {
     
     /**
      Specifies the default configuration to use when calling the variants of
-     `show()` that don't take a `config` argument.
+     `show()` that don't take a `config` argument or as a base for custom configs.
      */
     public var defaultConfig = Config()
 
