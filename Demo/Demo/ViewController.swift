@@ -63,7 +63,9 @@ class ViewController: UITableViewController {
         let warning = MessageView.viewFromNib(layout: .CardView)
         warning.configureTheme(.Warning)
         warning.configureDropShadow()
-        warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
+        
+        let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+        warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.hidden = true
         var warningConfig = SwiftMessages.Config()
         warningConfig.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
