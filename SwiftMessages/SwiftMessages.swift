@@ -177,6 +177,11 @@ public class SwiftMessages: PresenterDelegate {
          */
         public var preferredStatusBarStyle: UIStatusBarStyle?
     }
+
+    /**
+     Not much to say here.
+     */
+    public init() {}
     
     /**
      Adds the given configuration and view to the message queue to be displayed.
