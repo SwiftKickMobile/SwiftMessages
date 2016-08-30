@@ -110,6 +110,20 @@ config.preferredStatusBarStyle = .LightContent
 SwiftMessages.show(config: config, view: view)
 ````
 
+Specify global configuration options:
+
+````swift
+SwiftMessages.defaultConfig.presentationStyle = .Bottom
+
+// Show message with default config.
+SwiftMessages.show(view: view)
+
+// Customize config using the default as a base.
+var config = SwiftMessages.defaultConfig
+config.duration = .Forever
+SwiftMessages.show(config: config, view: view)
+````
+
 ### Customization
 
 `MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
