@@ -113,7 +113,7 @@ config.preferredStatusBarStyle = .LightContent
 SwiftMessages.show(config: config, view: view)
 ````
 
-Specify global configuration options:
+Specify default configuration options:
 
 ````swift
 SwiftMessages.defaultConfig.presentationStyle = .Bottom
