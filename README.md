@@ -23,7 +23,7 @@ Try exploring [the demo app](./Demo/Demo.xcworkspace) to get a feel for the exte
 </p>
 
 <p align="center">
-	<a href="http://goo.gl/C9ymRD"><img src="./Demo/appetize.png" /></a>
+	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
 
 ## Installation
