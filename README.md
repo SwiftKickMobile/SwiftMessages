@@ -142,14 +142,18 @@ Because they are optional, you can freely omit the ones you don't need.
 * **iOS 9+** When using one of the `UIStackView` layouts, MessageView.nib or CardView.nib, as a starting point, you can simply delete elements from the nib file or hide them — no need to adjust the Auto Layout constraints.
 * **iOS 8** When using MessageViewIOS8.nib, you'll delete the unwanted elements and fix up the Auto Layout constraints. Or just create your own nib from scratch, which is much like creating a custom `UITableViewCell` or `UICollectionViewCell` — set the base view's class to `MessageView` or whatever subclass or view class you're using and wire up the outlets.
 
-To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the pre-defined nibs. In addition, the `SwiftMessages` class provides some generic loading methods:
+To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the pre-defined nibs:
 
 ````swift
 // Instantiate MessageView from one of the provided nibs in a type-safe way.
 // SwiftMessages searches the main bundle first, so you easily copy the nib into
 // your project and modify it while still using this type-safe call.
 let view = MessageView.viewFromNib(layout: .CardView)
+````
 
+In addition, the `SwiftMessages` class provides some generic loading methods:
+
+````swift
 // Instantiate MessageView from a named nib.
 let view: MessageView = try! SwiftMessages.viewFromNib(named: "MyCustomNib")
 
@@ -169,7 +173,7 @@ messageView.tapHandler = { _ in SwiftMessages.hide() }
 
 ### Message Queueing
 
-You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue shows messages in order, one at a time. If your view implements the `Identifiable` protocol (as `MessageView` does), duplicate messages are removed. The pause between messages can be adjusted:
+You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
 
 ````swift
 SwiftMessages.pauseBetweenMessages = 1.0
@@ -195,6 +199,9 @@ let otherMessages = SwiftMessages()
 SwiftMessages.show(...)
 otherMessages.show(...)
 ````
+
+## About SwiftKick Mobile
+We make apps real good. [Get in touch](mailto:info@swiftkick.it) if you need one.
 
 ## License
 
