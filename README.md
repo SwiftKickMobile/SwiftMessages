@@ -6,9 +6,11 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-SwiftMessages is an iOS library for displaying brief messages in the form of a status bar across the top or bottom of the screen.
+SwiftMessages is a message bar library for iOS. It's very flexible. And written in Swift.
 
-In addition to providing numerous layouts, themes and configuration options, SwiftMessages allows you to fully customize the view:
+Message bars can be displayed across the top or bottom of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And much more!
+
+In addition to numerous configuration options, SwiftMessages provides several attractive layouts and themes. But SwiftMessages was also built to be designer-friendly by allowing you to fully and easily customize the view:
 
 * Copy one of the included nib files into your project and change it.
 * Subclass `MessageView` and add elements, etc.
