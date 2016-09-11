@@ -216,7 +216,7 @@ open class SwiftMessages: PresenterDelegate {
      - Parameter config: The configuration options.
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
-    open func show(config: Config, viewProvider: ViewProvider) {
+    open func show(config: Config, viewProvider: @escaping ViewProvider) {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let view = viewProvider()
@@ -234,7 +234,7 @@ open class SwiftMessages: PresenterDelegate {
      
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
-    open func show(viewProvider: ViewProvider) {
+    open func show(viewProvider: @escaping ViewProvider) {
         show(config: Config(), viewProvider: viewProvider)
     }
     
@@ -485,11 +485,11 @@ extension SwiftMessages {
         return globalInstance
     }
     
-    public static func show(viewProvider: ViewProvider) {
+    public static func show(viewProvider: @escaping ViewProvider) {
         globalInstance.show(viewProvider: viewProvider)
     }
     
-    public static func show(config: Config, viewProvider: ViewProvider) {
+    public static func show(config: Config, viewProvider: @escaping ViewProvider) {
         globalInstance.show(config: config, viewProvider: viewProvider)
     }
     
