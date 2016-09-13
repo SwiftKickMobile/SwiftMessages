@@ -291,5 +291,7 @@ extension MessageView {
         button?.setImage(buttonImage, forState: .Normal)
         button?.setTitle(buttonTitle, forState: .Normal)
         self.buttonTapHandler = buttonTapHandler
+        iconImageView?.hidden = iconImageView?.image == nil
+        iconLabel?.hidden = iconLabel?.text == nil
     }
 }
