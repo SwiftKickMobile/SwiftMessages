@@ -35,6 +35,7 @@ Add the following line to your Podfile:
 ````
 pod 'SwiftMessages'
 ````
+__CocoaPods 1.1.0__ or greater required to work with Swift 2.3.
 
 ### Carthage
 
