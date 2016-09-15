@@ -1,7 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.1.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.2)
+## [1.1.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.4)
+
+### Bug Fixes
+
+* Fix #16 Preserve status bar visibility when displaying message in a new window.
+
+## [1.1.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.3)
 
 ### Features
 
