@@ -43,4 +43,8 @@ class WindowViewController: UIViewController
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return statusBarStyle ?? UIApplication.sharedApplication().statusBarStyle
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return UIApplication.sharedApplication().statusBarHidden
+    }
 }
