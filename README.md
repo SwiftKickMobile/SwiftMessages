@@ -204,7 +204,7 @@ otherMessages.show(...)
 ````
 
 ## About SwiftKick Mobile
-We make apps real good. [Get in touch](mailto:tim@swiftkick.it) if you need one.
+We make apps real nice! [Get in touch](mailto:tim@swiftkick.it) if you need one.
 
 ## License
 
