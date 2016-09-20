@@ -52,7 +52,7 @@ sudo gem install cocoapods --pre
 
 Add one of the following lines to your Cartfile depending on your Swift version:
 
-````
+````ruby
 # Swift 3.0 & Xcode 8
 github "SwiftKickMobile/SwiftMessages"
 
