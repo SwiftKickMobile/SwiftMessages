@@ -60,7 +60,7 @@ github "SwiftKickMobile/SwiftMessages"
 github "SwiftKickMobile/SwiftMessages" ~> 2.0.0
 
 # Swift 2.2 & Xcode 7.3.1
-github "SwiftKickMobile/SwiftMessages" ~> 1.1.3
+github "SwiftKickMobile/SwiftMessages" ~> 1.1.4
 ````
 
 ## Usage
