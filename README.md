@@ -16,7 +16,7 @@ In addition to numerous configuration options, SwiftMessages provides several at
 * Subclass `MessageView` and add elements, etc.
 * Or just supply an arbitrary instance of `UIView`.
 
-Try exploring [the demo app](./Demo/Demo.xcworkspace) to get a feel for the extensive configurability of SwiftMessages.
+Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel for the extensive configurability of SwiftMessages.
 
 <p align="center">
   <img src="./Demo/demo.png" />
@@ -33,13 +33,13 @@ Try exploring [the demo app](./Demo/Demo.xcworkspace) to get a feel for the exte
 Add one of the following lines to your Podfile depending on your Swift version:
 
 ````ruby
-# Swift 3.0 & Xcode 8
+# Swift 3.0 - Xcode 8
 pod 'SwiftMessages'
 
-# Swift 2.3 & Xcode 8
+# Swift 2.3 - Xcode 8
 pod 'SwiftMessages', '~> 2.0.0'
 
-# Swift 2.2 & Xcode 7.3.1
+# Swift 2.2 - Xcode 7.3.1
 pod 'SwiftMessages', '~> 1.1.4'
 ````
 Note that Swift 2.3 and Swift 3.0 require CocoaPods 1.1.0, which is in beta as of September 20, 2016. CocoaPods 1.1.0 beta can be installed with the following command:
@@ -53,13 +53,13 @@ sudo gem install cocoapods --pre
 Add one of the following lines to your Cartfile depending on your Swift version:
 
 ````ruby
-# Swift 3.0 & Xcode 8
+# Swift 3.0 - Xcode 8
 github "SwiftKickMobile/SwiftMessages"
 
-# Swift 2.3 & Xcode 8
+# Swift 2.3 - Xcode 8
 github "SwiftKickMobile/SwiftMessages" ~> 2.0.0
 
-# Swift 2.2 & Xcode 7.3.1
+# Swift 2.2 - Xcode 7.3.1
 github "SwiftKickMobile/SwiftMessages" ~> 1.1.4
 ````
 
