@@ -30,18 +30,37 @@ Try exploring [the demo app](./Demo/Demo.xcworkspace) to get a feel for the exte
 
 ### CocoaPods
 
-Add the following line to your Podfile:
+Add one of the following lines to your Podfile depending on your Swift version:
+
+````ruby
+# Swift 3.0 & Xcode 8
+pod 'SwiftMessages'
+
+# Swift 2.3 & Xcode 8
+pod 'SwiftMessages', '~> 2.0.0'
+
+# Swift 2.2 & Xcode 7.3.1
+pod 'SwiftMessages', '~> 1.1.4'
+````
+Note that Swift 2.3 and Swift 3.0 require CocoaPods 1.1.0, which is in beta as of September 20, 2016. CocoaPods 1.1.0 beta can be installed with the following command:
 
 ````
-pod 'SwiftMessages'
+sudo gem install cocoapods --pre
 ````
 
 ### Carthage
 
-Add the following line to your Cartfile:
+Add one of the following lines to your Cartfile depending on your Swift version:
 
-````
+````ruby
+# Swift 3.0 & Xcode 8
 github "SwiftKickMobile/SwiftMessages"
+
+# Swift 2.3 & Xcode 8
+github "SwiftKickMobile/SwiftMessages" ~> 2.0.0
+
+# Swift 2.2 & Xcode 7.3.1
+github "SwiftKickMobile/SwiftMessages" ~> 1.1.4
 ````
 
 ## Usage
@@ -203,7 +222,7 @@ otherMessages.show(...)
 ````
 
 ## About SwiftKick Mobile
-We make apps real good. [Get in touch](mailto:tim@swiftkick.it) if you need one.
+We make apps real nice! [Get in touch](mailto:tim@swiftkick.it) if you need one.
 
 ## License
 

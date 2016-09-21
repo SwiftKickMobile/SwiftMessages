@@ -11,7 +11,7 @@ import SwiftMessages
 
 class ExploreViewController: UITableViewController, UITextFieldDelegate {
 
-    @IBAction func show(sender: AnyObject) {
+    @IBAction func show(_ sender: AnyObject) {
         
         // View setup
         
@@ -32,50 +32,50 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         let iconStyle: IconStyle
         switch self.iconStyle.selectedSegmentIndex {
         case 1:
-            iconStyle = .Light
+            iconStyle = .light
         case 2:
-            iconStyle = .Subtle
+            iconStyle = .subtle
         default:
-            iconStyle = .Default
+            iconStyle = .default
         }
         
         switch theme.selectedSegmentIndex {
         case 0:
-            view.configureTheme(.Info, iconStyle: iconStyle)
+            view.configureTheme(.info, iconStyle: iconStyle)
         case 1:
-            view.configureTheme(.Success, iconStyle: iconStyle)
+            view.configureTheme(.success, iconStyle: iconStyle)
         case 2:
-            view.configureTheme(.Warning, iconStyle: iconStyle)
+            view.configureTheme(.warning, iconStyle: iconStyle)
         case 3:
-            view.configureTheme(.Error, iconStyle: iconStyle)
+            view.configureTheme(.error, iconStyle: iconStyle)
         default:
             let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
-            view.configureTheme(backgroundColor: UIColor.purpleColor(), foregroundColor: UIColor.whiteColor(), iconImage: nil, iconText: iconText)
-            view.button?.setImage(Icon.ErrorSubtle.image, forState: .Normal)
-            view.button?.setTitle(nil, forState: .Normal)
-            view.button?.backgroundColor = UIColor.clearColor()
-            view.button?.tintColor = UIColor.greenColor().colorWithAlphaComponent(0.7)
+            view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
+            view.button?.setImage(Icon.ErrorSubtle.image, for: .normal)
+            view.button?.setTitle(nil, for: .normal)
+            view.button?.backgroundColor = UIColor.clear
+            view.button?.tintColor = UIColor.green.withAlphaComponent(0.7)
         }
         
-        if dropShadow.on {
+        if dropShadow.isOn {
             view.configureDropShadow()
         }
         
-        if !showButton.on {
-            view.button?.hidden = true
+        if !showButton.isOn {
+            view.button?.isHidden = true
         }
         
-        if !showIcon.on {
-            view.iconImageView?.hidden = true
-            view.iconLabel?.hidden = true
+        if !showIcon.isOn {
+            view.iconImageView?.isHidden = true
+            view.iconLabel?.isHidden = true
         }
         
-        if !showTitle.on {
-            view.titleLabel?.hidden = true
+        if !showTitle.isOn {
+            view.titleLabel?.isHidden = true
         }
         
-        if !showBody.on {
-            view.bodyLabel?.hidden = true
+        if !showBody.isOn {
+            view.bodyLabel?.isHidden = true
         }
         
         // Config setup
@@ -84,48 +84,48 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch presentationStyle.selectedSegmentIndex {
         case 1:
-            config.presentationStyle = .Bottom
+            config.presentationStyle = .bottom
         default:
             break
         }
         
         switch presentationContext.selectedSegmentIndex {
         case 1:
-            config.presentationContext = .Window(windowLevel: UIWindowLevelNormal)
+            config.presentationContext = .window(windowLevel: UIWindowLevelNormal)
         case 2:
-            config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+            config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         default:
             break
         }
         
         switch duration.selectedSegmentIndex {
         case 1:
-            config.duration = .Forever
+            config.duration = .forever
         case 2:
-            config.duration = .Seconds(seconds: 1)
+            config.duration = .seconds(seconds: 1)
         case 3:
-            config.duration = .Seconds(seconds: 5)
+            config.duration = .seconds(seconds: 5)
         default:
             break
         }
         
         switch dimMode.selectedSegmentIndex {
         case 1:
-            config.dimMode = .Gray(interactive: false)
+            config.dimMode = .gray(interactive: false)
         case 2:
-            config.dimMode = .Gray(interactive: true)
+            config.dimMode = .gray(interactive: true)
         default:
             break
         }
         
-        config.interactiveHide = interactiveHide.on
+        config.interactiveHide = interactiveHide.isOn
         
         // Set status bar style unless using card view (since it doesn't
         // go behind the status bar).
-        if case .Top = config.presentationStyle where layout.selectedSegmentIndex != 1 {
+        if case .top = config.presentationStyle, layout.selectedSegmentIndex != 1 {
             switch theme.selectedSegmentIndex {
             case 1...4:
-                config.preferredStatusBarStyle = .LightContent
+                config.preferredStatusBarStyle = .lightContent
             default:
                 break
             }
@@ -135,7 +135,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         SwiftMessages.show(config: config, view: view)
     }
     
-    @IBAction func hide(sender: AnyObject) {
+    @IBAction func hide(_ sender: AnyObject) {
         SwiftMessages.hide()
     }
 
@@ -165,12 +165,12 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
      MARK: - UITextFieldDelegate
      */
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
 }

@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSBundle {
-    static func sm_frameworkBundle() -> NSBundle {
-        let bundle = NSBundle(forClass: MessageView.self)
-        if let path = bundle.pathForResource("SwiftMessages", ofType: "bundle") {
-            return NSBundle(path: path)!
+extension Bundle {
+    static func sm_frameworkBundle() -> Bundle {
+        let bundle = Bundle(for: MessageView.self)
+        if let path = bundle.path(forResource: "SwiftMessages", ofType: "bundle") {
+            return Bundle(path: path)!
         }
         else {
             return bundle

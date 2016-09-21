@@ -10,7 +10,7 @@ import UIKit
 
 /*
  */
-public class MessageView: BaseView, Identifiable {
+open class MessageView: BaseView, Identifiable {
     
     /*
      MARK: - Button tap handler
@@ -18,10 +18,10 @@ public class MessageView: BaseView, Identifiable {
     
     /// An optional button tap handler. The `button` is automatically
     /// configured to call this tap handler on `.TouchUpInside`.
-    public var buttonTapHandler: ((button: UIButton) -> Void)?
+    open var buttonTapHandler: ((_ button: UIButton) -> Void)?
     
-    func buttonTapped(button: UIButton) {
-        buttonTapHandler?(button: button)
+    func buttonTapped(_ button: UIButton) {
+        buttonTapHandler?(button)
     }
     
     /*
@@ -29,27 +29,27 @@ public class MessageView: BaseView, Identifiable {
      */
     
     /// An optional title label.
-    @IBOutlet public var titleLabel: UILabel?
+    @IBOutlet open var titleLabel: UILabel?
     
     /// An optional body text label.
-    @IBOutlet public var bodyLabel: UILabel?
+    @IBOutlet open var bodyLabel: UILabel?
     
     /// An optional icon image view.
-    @IBOutlet public var iconImageView: UIImageView?
+    @IBOutlet open var iconImageView: UIImageView?
     
     /// An optional icon label (e.g. for emoji character, icon font, etc.).
-    @IBOutlet public var iconLabel: UILabel?
+    @IBOutlet open var iconLabel: UILabel?
     
     /// An optional button. This buttons' `.TouchUpInside` event will automatically
     /// invoke the optional `buttonTapHandler`, but its fine to add other target
     /// action handlers can be added.
-    @IBOutlet public var button: UIButton? {
+    @IBOutlet open var button: UIButton? {
         didSet {
             if let old = oldValue {
-                old.removeTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
+                old.removeTarget(self, action: #selector(MessageView.buttonTapped(_:)), for: .touchUpInside)
             }
             if let button = button {
-                button.addTarget(self, action: #selector(MessageView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: #selector(MessageView.buttonTapped(_:)), for: .touchUpInside)
             }
         }
     }
@@ -58,7 +58,7 @@ public class MessageView: BaseView, Identifiable {
      MARK: - Identifiable
      */
     
-    public var id: String {
+    open var id: String {
         return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
     }
 }
@@ -120,7 +120,7 @@ extension MessageView {
      
      - Returns: An instance of generic view type `T: MessageView`.
      */
-    public static func viewFromNib<T: MessageView>(layout layout: Layout, filesOwner: AnyObject = NSNull.init()) -> T {
+    public static func viewFromNib<T: MessageView>(layout: Layout, filesOwner: AnyObject = NSNull.init()) -> T {
         return try! SwiftMessages.viewFromNib(named: layout.rawValue)
     }
     
@@ -135,7 +135,7 @@ extension MessageView {
      
      - Returns: An instance of generic view type `T: MessageView`.
      */
-    public static func viewFromNib<T: MessageView>(layout layout: Layout, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) -> T {
+    public static func viewFromNib<T: MessageView>(layout: Layout, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) -> T {
         return try! SwiftMessages.viewFromNib(named: layout.rawValue, bundle: bundle, filesOwner: filesOwner)
     }
 }
@@ -156,24 +156,24 @@ extension MessageView {
      - Parameter theme: The theme type to use.
      - Parameter iconStyle: The icon style to use. Defaults to `.Default`.
      */
-    public func configureTheme(theme: Theme, iconStyle: IconStyle = .Default) {
+    public func configureTheme(_ theme: Theme, iconStyle: IconStyle = .default) {
         let iconImage = iconStyle.image(theme: theme)
         switch theme {
-        case .Info:
+        case .info:
             let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.darkTextColor()
+            let foregroundColor = UIColor.darkText
             configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
-        case .Success:
+        case .success:
             let backgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.whiteColor()
+            let foregroundColor = UIColor.white
             configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
-        case .Warning:
+        case .warning:
             let backgroundColor = UIColor(red: 238.0/255.0, green: 189.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.whiteColor()
+            let foregroundColor = UIColor.white
             configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
-        case .Error:
+        case .error:
             let backgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
-            let foregroundColor = UIColor.whiteColor()
+            let foregroundColor = UIColor.white
             configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         }
     }
@@ -186,7 +186,7 @@ extension MessageView {
      - Parameter backgroundColor: The background color to use.
      - Parameter foregroundColor: The foreground color to use.
      */
-    public func configureTheme(backgroundColor backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
+    public func configureTheme(backgroundColor: UIColor, foregroundColor: UIColor, iconImage: UIImage? = nil, iconText: String? = nil) {
         iconImageView?.image = iconImage
         iconLabel?.text = iconText
         iconImageView?.tintColor = foregroundColor
@@ -199,8 +199,8 @@ extension MessageView {
         button?.tintColor = backgroundColor
         button?.contentEdgeInsets = UIEdgeInsetsMake(7.0, 7.0, 7.0, 7.0)
         button?.layer.cornerRadius = 5.0
-        iconImageView?.hidden = iconImageView?.image == nil
-        iconLabel?.hidden = iconLabel?.text == nil
+        iconImageView?.isHidden = iconImageView?.image == nil
+        iconLabel?.isHidden = iconLabel?.text == nil
     }
 }
 
@@ -225,7 +225,7 @@ extension MessageView {
      
      - Parameter body: The message body text to use.
      */
-    public func configureContent(body body: String) {
+    public func configureContent(body: String) {
         bodyLabel?.text = body
     }
     
@@ -235,7 +235,7 @@ extension MessageView {
      - Parameter title: The message title to use.
      - Parameter body: The message body text to use.
      */
-    public func configureContent(title title: String, body: String) {
+    public func configureContent(title: String, body: String) {
         configureContent(body: body)
         titleLabel?.text = title
     }
@@ -248,12 +248,12 @@ extension MessageView {
      - Parameter body: The message body text to use.
      - Parameter iconImage: The icon image to use.
      */
-    public func configureContent(title title: String, body: String, iconImage: UIImage) {
+    public func configureContent(title: String, body: String, iconImage: UIImage) {
         configureContent(title: title, body: body)
         iconImageView?.image = iconImage
-        iconImageView?.hidden = false
+        iconImageView?.isHidden = false
         iconLabel?.text = nil
-        iconLabel?.hidden = true
+        iconLabel?.isHidden = true
     }
     
     /**
@@ -264,11 +264,11 @@ extension MessageView {
      - Parameter body: The message body text to use.
      - Parameter iconText: The icon text to use (e.g. an emoji).
      */
-    public func configureContent(title title: String, body: String, iconText: String) {
+    public func configureContent(title: String, body: String, iconText: String) {
         configureContent(title: title, body: body)
         iconLabel?.text = iconText
-        iconLabel?.hidden = false
-        iconImageView?.hidden = true
+        iconLabel?.isHidden = false
+        iconImageView?.isHidden = true
         iconImageView?.image = nil
     }
     
@@ -283,15 +283,15 @@ extension MessageView {
      - Parameter buttonTitle: The button title to use.
      - Parameter buttonTapHandler: The button tap handler block to use.
      */
-    public func configureContent(title title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((button: UIButton) -> Void)?) {
+    public func configureContent(title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?) {
         titleLabel?.text = title
         bodyLabel?.text = body
         iconImageView?.image = iconImage
         iconLabel?.text = iconText
-        button?.setImage(buttonImage, forState: .Normal)
-        button?.setTitle(buttonTitle, forState: .Normal)
+        button?.setImage(buttonImage, for: UIControlState())
+        button?.setTitle(buttonTitle, for: UIControlState())
         self.buttonTapHandler = buttonTapHandler
-        iconImageView?.hidden = iconImageView?.image == nil
-        iconLabel?.hidden = iconLabel?.text == nil
+        iconImageView?.isHidden = iconImageView?.image == nil
+        iconLabel?.isHidden = iconLabel?.text == nil
     }
 }

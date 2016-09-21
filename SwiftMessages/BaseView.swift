@@ -1,3 +1,4 @@
+
 //
 //  BaseView.swift
 //  SwiftMessages
@@ -13,7 +14,7 @@ import UIKit
  of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
  */
-public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
+open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     
     /*
      MARK: - IB outlets
@@ -23,7 +24,7 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Fulfills the `BackgroundViewable` protocol and is the target for
      the optional `tapHandler` block. Defaults to `self`.
      */
-    @IBOutlet public var backgroundView: UIView! {
+    @IBOutlet open var backgroundView: UIView! {
         didSet {
             if let old = oldValue {
                 old.removeGestureRecognizer(tapRecognizer)
@@ -44,7 +45,7 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      MARK: - Initialization
      */
     
-    public required init?(coder aDecoder: NSCoder) {
+   public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundView = self
     }
@@ -54,8 +55,8 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         backgroundView = self
     }
 
-    public override func awakeFromNib() {
-        layoutMargins = UIEdgeInsetsZero
+    open override func awakeFromNib() {
+        layoutMargins = UIEdgeInsets.zero
     }
 
     /*
@@ -71,13 +72,13 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      - Parameter insets: The amount to inset the content view from the background view.
        Default is zero inset.
      */
-    public func installContentView(contentView: UIView, insets: UIEdgeInsets = UIEdgeInsetsZero) {
+    open func installContentView(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(contentView)
-        let top = NSLayoutConstraint(item: contentView, attribute: .Top, relatedBy: .Equal, toItem: backgroundView, attribute: .TopMargin, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: contentView, attribute: .Left, relatedBy: .Equal, toItem: backgroundView, attribute: .LeftMargin, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: backgroundView, attribute: .BottomMargin, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: contentView, attribute: .Right, relatedBy: .Equal, toItem: backgroundView, attribute: .RightMargin, multiplier: 1.0, constant: -insets.right)
+        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .topMargin, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottomMargin, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
         backgroundView.addConstraints([top, left, bottom, right])
     }
     
@@ -88,22 +89,22 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     /**
      An optional tap handler that will be called when the `backgroundView` is tapped.
      */
-    public var tapHandler: ((view: BaseView) -> Void)? {
+    open var tapHandler: ((_ view: BaseView) -> Void)? {
         didSet {
             installTapRecognizer()
         }
     }
     
-    private lazy var tapRecognizer: UITapGestureRecognizer = {
+    fileprivate lazy var tapRecognizer: UITapGestureRecognizer = {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageView.tapped))
         return tapRecognizer
     }()
     
     func tapped() {
-        tapHandler?(view: self)
+        tapHandler?(self)
     }
     
-    private func installTapRecognizer() {
+    fileprivate func installTapRecognizer() {
         guard let backgroundView = backgroundView else { return }
         backgroundView.removeGestureRecognizer(tapRecognizer)
         if tapHandler != nil {
@@ -122,9 +123,9 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      (see MessageView.nib).
      */
     
-    @IBInspectable public var bounceAnimationOffset: CGFloat = 5.0
+    @IBInspectable open var bounceAnimationOffset: CGFloat = 5.0
     
-    @IBInspectable public var statusBarOffset: CGFloat = 20.0
+    @IBInspectable open var statusBarOffset: CGFloat = 20.0
     
     
     /*
@@ -137,17 +138,17 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Note that this height is not guaranteed depending on anyt Auto Layout
      constraints used within the message view.
      */
-    public var preferredHeight: CGFloat? {
+    open var preferredHeight: CGFloat? {
         didSet {
             setNeedsLayout()
         }
     }
     
-    public override func intrinsicContentSize() -> CGSize {
+    open override var intrinsicContentSize: CGSize {
         if let preferredHeight = preferredHeight {
-            return CGSizeMake(UIViewNoIntrinsicMetric, preferredHeight)
+            return CGSize(width: UIViewNoIntrinsicMetric, height: preferredHeight)
         }
-        return super.intrinsicContentSize()
+        return super.intrinsicContentSize
     }
 }
 
@@ -158,9 +159,9 @@ public class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 extension BaseView {
     
     /// A convenience function to configure a default drop shadow effect.
-    public func configureDropShadow() {
+    open func configureDropShadow() {
         let layer = backgroundView.layer
-        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowRadius = 6.0
         layer.shadowOpacity = 0.4
@@ -169,10 +170,10 @@ extension BaseView {
     }
     
     private func updateShadowPath() {
-        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).CGPath
+        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         updateShadowPath()
     }

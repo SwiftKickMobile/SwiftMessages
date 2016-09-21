@@ -10,10 +10,10 @@ import UIKit
 
 /// The theme enum specifies the built-in theme options
 public enum Theme {
-    case Info
-    case Success
-    case Warning
-    case Error
+    case info
+    case success
+    case warning
+    case error
 }
 
 /// The Icon enum provides type-safe access to the included icons.
@@ -34,32 +34,32 @@ public enum Icon: String {
     
     /// Returns the associated image.
     public var image: UIImage {        
-        return UIImage(named: rawValue, inBundle: NSBundle.sm_frameworkBundle(), compatibleWithTraitCollection: nil)!
+        return UIImage(named: rawValue, in: Bundle.sm_frameworkBundle(), compatibleWith: nil)!
     }
 }
 
 /// The IconStyle enum specifies the different variations of the included icons.
 public enum IconStyle {
     
-    case Default
-    case Light
-    case Subtle
+    case `default`
+    case light
+    case subtle
     
     /// Returns the image for the given theme
-    public func image(theme theme: Theme) -> UIImage {
+    public func image(theme: Theme) -> UIImage {
         switch (theme, self) {
-        case (.Info, .Default): return Icon.Info.image
-        case (.Info, .Light): return Icon.InfoLight.image
-        case (.Info, .Subtle): return Icon.InfoSubtle.image
-        case (.Success, .Default): return Icon.Success.image
-        case (.Success, .Light): return Icon.SuccessLight.image
-        case (.Success, .Subtle): return Icon.SuccessSubtle.image
-        case (.Warning, .Default): return Icon.Warning.image
-        case (.Warning, .Light): return Icon.WarningLight.image
-        case (.Warning, .Subtle): return Icon.WarningSubtle.image
-        case (.Error, .Default): return Icon.Error.image
-        case (.Error, .Light): return Icon.ErrorLight.image
-        case (.Error, .Subtle): return Icon.ErrorSubtle.image
+        case (.info, .default): return Icon.Info.image
+        case (.info, .light): return Icon.InfoLight.image
+        case (.info, .subtle): return Icon.InfoSubtle.image
+        case (.success, .default): return Icon.Success.image
+        case (.success, .light): return Icon.SuccessLight.image
+        case (.success, .subtle): return Icon.SuccessSubtle.image
+        case (.warning, .default): return Icon.Warning.image
+        case (.warning, .light): return Icon.WarningLight.image
+        case (.warning, .subtle): return Icon.WarningSubtle.image
+        case (.error, .default): return Icon.Error.image
+        case (.error, .light): return Icon.ErrorLight.image
+        case (.error, .subtle): return Icon.ErrorSubtle.image
         }
     }
 }

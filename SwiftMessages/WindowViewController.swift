@@ -10,7 +10,7 @@ import UIKit
 
 class WindowViewController: UIViewController
 {
-    private var window: UIWindow?
+    fileprivate var window: UIWindow?
     
     let windowLevel: UIWindowLevel
     var statusBarStyle: UIStatusBarStyle?
@@ -18,7 +18,7 @@ class WindowViewController: UIViewController
     init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
     {
         self.windowLevel = windowLevel
-        let window = PassthroughWindow(frame: UIScreen.mainScreen().bounds)
+        let window = PassthroughWindow(frame: UIScreen.main.bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)
         self.view = PassthroughView()
@@ -32,7 +32,7 @@ class WindowViewController: UIViewController
     }
     
     func uninstall() {
-        window?.hidden = true
+        window?.isHidden = true
         window = nil
     }
     
@@ -40,11 +40,11 @@ class WindowViewController: UIViewController
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return statusBarStyle ?? UIApplication.sharedApplication().statusBarStyle
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle ?? UIApplication.shared.statusBarStyle
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return UIApplication.sharedApplication().statusBarHidden
+    override var prefersStatusBarHidden: Bool {
+        return UIApplication.shared.isStatusBarHidden
     }
 }

@@ -1,6 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.0.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/2.0.0)
+
+### Breaking Changes
+
+* Support for Swift 3.0.
+
+## [2.0.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/2.0.0)
+
+### Breaking Changes
+
+* Support for Swift 2.3 and Xcode 8.
+
+  The nib files needed to be updated to Xcode 8 format to work 
+  around an iOS bug. Unfortunately, this makes it necessary 
+  to break backward compatibility with Swift 2.2 and Xcode 7.
+
 ## [1.1.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/1.1.4)
 
 ### Bug Fixes

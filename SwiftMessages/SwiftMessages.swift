@@ -15,7 +15,7 @@ private let globalInstance = SwiftMessages()
  It behaves like a queue, only showing one message at a time. Message views that
  implement the `Identifiable` protocol (as `MessageView` does) will have duplicates removed.
  */
-public class SwiftMessages: PresenterDelegate {
+open class SwiftMessages: PresenterDelegate {
     
     /**
      Specifies whether the message view is displayed at the top or bottom
@@ -26,12 +26,12 @@ public class SwiftMessages: PresenterDelegate {
         /**
          Message view slides down from the top.
         */
-        case Top
+        case top
 
         /**
          Message view slides up from the bottom.
          */
-        case Bottom
+        case bottom
     }
 
     /**
@@ -49,7 +49,7 @@ public class SwiftMessages: PresenterDelegate {
          heirarchy incorporates custom containers. If this is the case, the
          .ViewController option can provide a more targeted context.
         */
-        case Automatic
+        case automatic
 
         /**
          Displays the message in a new window at the specified window level. Use
@@ -58,7 +58,7 @@ public class SwiftMessages: PresenterDelegate {
          increases the top margins of any message view that adopts the `MarginInsetting`
          protocol (as `MessageView` does) to account for the status bar.
         */
-        case Window(windowLevel: UIWindowLevel)
+        case window(windowLevel: UIWindowLevel)
         
         /**
          Displays the message view under navigation bars and tab bars if an
@@ -67,7 +67,7 @@ public class SwiftMessages: PresenterDelegate {
          is displayed in the given view controller's view. This option can be used
          for targeted placement in a view controller heirarchy.
         */
-        case ViewController(_: UIViewController)
+        case viewController(_: UIViewController)
     }
     
     /**
@@ -79,19 +79,19 @@ public class SwiftMessages: PresenterDelegate {
         /**
          Hide the message view after the default duration.
         */
-        case Automatic
+        case automatic
         
         /**
          Disables automatic hiding of the message view.
         */
-        case Forever
+        case forever
         
         /**
          Hide the message view after the speficied number of seconds.
          
          - Parameter seconds: The number of seconds.
         */
-        case Seconds(seconds: NSTimeInterval)
+        case seconds(seconds: TimeInterval)
     }
     
     /**
@@ -103,7 +103,7 @@ public class SwiftMessages: PresenterDelegate {
         /**
          Don't dim the background behind the message view.
         */
-        case None
+        case none
 
         /**
          Dim the background behind the message view a gray color.
@@ -111,7 +111,7 @@ public class SwiftMessages: PresenterDelegate {
          - Parameter interactive: Specifies whether or not tapping the
            dimmed area dismisses the message view.
          */
-        case Gray(interactive: Bool)
+        case gray(interactive: Bool)
 
         /**
          Dim the background behind the message view using the given color.
@@ -122,7 +122,7 @@ public class SwiftMessages: PresenterDelegate {
          - Parameter interactive: Specifies whether or not tapping the
          dimmed area dismisses the message view.
          */
-        case Color(color: UIColor, interactive: Bool)
+        case color(color: UIColor, interactive: Bool)
     }
     
     /**
@@ -137,25 +137,25 @@ public class SwiftMessages: PresenterDelegate {
          Specifies whether the message view is displayed at the top or bottom
          of the selected presentation container. The default is `.Top`.
          */
-        public var presentationStyle = PresentationStyle.Top
+        public var presentationStyle = PresentationStyle.top
 
         /**
          Specifies how the container for presenting the message view
          is selected. The default is `.Automatic`.
          */
-        public var presentationContext = PresentationContext.Automatic
+        public var presentationContext = PresentationContext.automatic
 
         /**
          Specifies the duration of the message view's time on screen before it is
          automatically hidden. The default is `.Automatic`.
          */
-        public var duration = Duration.Automatic
+        public var duration = Duration.automatic
         
         /**
          Specifies options for dimming the background behind the message view
          similar to a popover view controller. The default is `.None`.
          */
-        public var dimMode = DimMode.None
+        public var dimMode = DimMode.none
         
         /**
          Specifies whether or not the interactive pan-to-hide gesture is enabled
@@ -189,8 +189,8 @@ public class SwiftMessages: PresenterDelegate {
      - Parameter config: The configuration options.
      - Parameter view: The view to be displayed.
      */
-    public func show(config config: Config, view: UIView) {
-        dispatch_async(syncQueue) { [weak self] in
+    open func show(config: Config, view: UIView) {
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
             let presenter = Presenter(config: config, view: view, delegate: strongSelf)
             strongSelf.enqueue(presenter: presenter)
@@ -204,7 +204,7 @@ public class SwiftMessages: PresenterDelegate {
      - Parameter config: The configuration options.
      - Parameter view: The view to be displayed.
      */
-    public func show(view view: UIView) {
+    public func show(view: UIView) {
         show(config: defaultConfig, view: view)
     }
     
@@ -221,8 +221,8 @@ public class SwiftMessages: PresenterDelegate {
      - Parameter config: The configuration options.
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
-    public func show(config config: Config, viewProvider: ViewProvider) {
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+    open func show(config: Config, viewProvider: @escaping ViewProvider) {
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let view = viewProvider()
             strongSelf.show(config: config, view: view)
@@ -239,15 +239,15 @@ public class SwiftMessages: PresenterDelegate {
      
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
-    public func show(viewProvider viewProvider: ViewProvider) {
+    public func show(viewProvider: @escaping ViewProvider) {
         show(config: defaultConfig, viewProvider: viewProvider)
     }
     
     /**
      Hide the current message being displayed by animating it away.
      */
-    public func hide() {
-        dispatch_async(syncQueue) { [weak self] in
+    open func hide() {
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.hideCurrent()
         }
@@ -257,8 +257,8 @@ public class SwiftMessages: PresenterDelegate {
      Hide the current message, if there is one, by animating it away and
      clear the message queue.
      */
-    public func hideAll() {
-        dispatch_async(syncQueue) { [weak self] in
+    open func hideAll() {
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.queue.removeAll()
             strongSelf.hideCurrent()
@@ -271,8 +271,8 @@ public class SwiftMessages: PresenterDelegate {
      views, such as `MessageView`, that implement the `Identifiable` protocol.
      - Parameter id: The identifier of the message to remove.
      */
-    public func hide(id id: String) {
-        dispatch_async(syncQueue) { [weak self] in
+    open func hide(id: String) {
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
             if id == strongSelf.current?.id {
                 strongSelf.hideCurrent()
@@ -291,15 +291,15 @@ public class SwiftMessages: PresenterDelegate {
      Specifies the amount of time to pause between removing a message
      and showing the next. Default is 0.5 seconds.
      */
-    public var pauseBetweenMessages: NSTimeInterval = 0.5
+    open var pauseBetweenMessages: TimeInterval = 0.5
     
-    let syncQueue = dispatch_queue_create("it.swiftkick.SwiftMessages", DISPATCH_QUEUE_SERIAL)
+    let syncQueue = DispatchQueue(label: "it.swiftkick.SwiftMessages", attributes: [])
     var queue: [Presenter] = []
     var current: Presenter? = nil {
         didSet {
             if oldValue != nil {
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseBetweenMessages * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, syncQueue, { [weak self] in
+                let delayTime = DispatchTime.now() + pauseBetweenMessages
+                syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.dequeueNext()
                 })
@@ -307,7 +307,7 @@ public class SwiftMessages: PresenterDelegate {
         }
     }
     
-    func enqueue(presenter presenter: Presenter) {
+    func enqueue(presenter: Presenter) {
         if let id = presenter.id {
             if current?.id == id { return }
             if queue.filter({ $0.id == id }).count > 0 { return }
@@ -321,13 +321,13 @@ public class SwiftMessages: PresenterDelegate {
         guard queue.count > 0 else { return }
         let current = queue.removeFirst()
         self.current = current
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             do {
                 try current.show { completed in
                     guard let strongSelf = self else { return }
                     guard completed else {
-                        dispatch_async(strongSelf.syncQueue, {
+                        strongSelf.syncQueue.async(execute: {
                             guard let strongSelf = self else { return }
                             strongSelf.hide(presenter: current)
                         })
@@ -343,11 +343,11 @@ public class SwiftMessages: PresenterDelegate {
     
     func hideCurrent() {
         guard let current = current else { return }
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             current.hide { (completed) in
                 guard completed else { return }
                 guard let strongSelf = self else { return }
-                dispatch_async(strongSelf.syncQueue, {
+                strongSelf.syncQueue.async(execute: {
                     guard let strongSelf = self else { return }
                     strongSelf.current = nil
                 })
@@ -355,14 +355,14 @@ public class SwiftMessages: PresenterDelegate {
         }
     }
     
-    private var autohideToken: AnyObject?
+    fileprivate var autohideToken: AnyObject?
     
-    private func queueAutoHide() {
+    fileprivate func queueAutoHide() {
         guard let current = current else { return }
         autohideToken = current
         if let pauseDuration = current.pauseDuration {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(pauseDuration * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, syncQueue, { [weak self] in
+            let delayTime = DispatchTime.now() + pauseDuration
+            syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self] in
                 guard let strongSelf = self else { return }
                 // Make sure we've still got a green light to auto-hide.
                 if strongSelf.autohideToken !== current { return }
@@ -375,21 +375,21 @@ public class SwiftMessages: PresenterDelegate {
      MARK: - PresenterDelegate
      */
     
-    func hide(presenter presenter: Presenter) {
-        dispatch_async(syncQueue) { [weak self] in
+    func hide(presenter: Presenter) {
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
-            if let current = strongSelf.current where presenter === current {
+            if let current = strongSelf.current, presenter === current {
                 strongSelf.hideCurrent()
             }
             strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
         }
     }
     
-    func panStarted(presenter presenter: Presenter) {
+    func panStarted(presenter: Presenter) {
         autohideToken = nil
     }
     
-    func panEnded(presenter presenter: Presenter) {
+    func panEnded(presenter: Presenter) {
         queueAutoHide()
     }
 }
@@ -418,8 +418,8 @@ extension SwiftMessages {
      
      - Returns: An instance of generic view type `T`.
      */
-    public class func viewFromNib<T: UIView>(filesOwner: AnyObject = NSNull.init()) throws -> T {
-        let name = T.description().componentsSeparatedByString(".").last
+    public class func viewFromNib<T: UIView>(_ filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let name = T.description().components(separatedBy: ".").last
         assert(name != nil)
         let view: T = try internalViewFromNib(named: name!, bundle: nil, filesOwner: filesOwner)
         return view
@@ -455,24 +455,24 @@ extension SwiftMessages {
      
      - Returns: An instance of generic view type `T`.
      */
-    public class func viewFromNib<T: UIView>(named name: String, bundle: NSBundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
+    public class func viewFromNib<T: UIView>(named name: String, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) throws -> T {
         let view: T = try internalViewFromNib(named: name, bundle: bundle, filesOwner: filesOwner)
         return view
     }
     
-    private class func internalViewFromNib<T: UIView>(named name: String, bundle: NSBundle? = nil, filesOwner: AnyObject = NSNull.init()) throws -> T {
-        let resolvedBundle: NSBundle
+    fileprivate class func internalViewFromNib<T: UIView>(named name: String, bundle: Bundle? = nil, filesOwner: AnyObject = NSNull.init()) throws -> T {
+        let resolvedBundle: Bundle
         if let bundle = bundle {
             resolvedBundle = bundle
         } else {
-            if NSBundle.mainBundle().pathForResource(name, ofType: "nib") != nil {
-                resolvedBundle = NSBundle.mainBundle()
+            if Bundle.main.path(forResource: name, ofType: "nib") != nil {
+                resolvedBundle = Bundle.main
             } else {
-                resolvedBundle = NSBundle.sm_frameworkBundle()
+                resolvedBundle = Bundle.sm_frameworkBundle()
             }
         }
-        let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil)
-        guard let view = arrayOfViews.flatMap( { $0 as? T} ).first else { throw Error.CannotLoadViewFromNib(nibName: name) }
+        let arrayOfViews = resolvedBundle.loadNibNamed(name, owner: filesOwner, options: nil) ?? []
+        guard let view = arrayOfViews.flatMap( { $0 as? T} ).first else { throw SwiftMessagesError.cannotLoadViewFromNib(nibName: name) }
         return view
     }
 }
@@ -496,19 +496,19 @@ extension SwiftMessages {
         return globalInstance
     }
     
-    public static func show(viewProvider viewProvider: ViewProvider) {
+    public static func show(viewProvider: @escaping ViewProvider) {
         globalInstance.show(viewProvider: viewProvider)
     }
     
-    public static func show(config config: Config, viewProvider: ViewProvider) {
+    public static func show(config: Config, viewProvider: @escaping ViewProvider) {
         globalInstance.show(config: config, viewProvider: viewProvider)
     }
     
-    public static func show(view view: UIView) {
+    public static func show(view: UIView) {
         globalInstance.show(view: view)
     }
 
-    public static func show(config config: Config, view: UIView) {
+    public static func show(config: Config, view: UIView) {
         globalInstance.show(config: config, view: view)
     }
 
@@ -520,7 +520,7 @@ extension SwiftMessages {
         globalInstance.hideAll()
     }
     
-    public static func hide(id id: String) {
+    public static func hide(id: String) {
         globalInstance.hide(id: id)
     }
     
@@ -533,7 +533,7 @@ extension SwiftMessages {
         }
     }
     
-    public static var pauseBetweenMessages: NSTimeInterval {
+    public static var pauseBetweenMessages: TimeInterval {
         get {
             return globalInstance.pauseBetweenMessages
         }
