@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/2.0.1)
+
+### Improvements
+
+* Enable automatic provisioning on framework target.
+
 ## [2.0.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/2.0.0)
 
 ### Breaking Changes
