@@ -68,9 +68,6 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         
         func newWindowViewController(_ windowLevel: UIWindowLevel) -> UIViewController {
             let viewController = WindowViewController(windowLevel: windowLevel, config: config)
-            if windowLevel == UIWindowLevelNormal {
-                viewController.statusBarStyle = config.preferredStatusBarStyle
-            }
             return viewController
         }
         

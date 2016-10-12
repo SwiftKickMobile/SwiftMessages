@@ -117,15 +117,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         default:
             break
         }
-        
-        switch self.autoRotate.selectedSegmentIndex {
-        case 0:
-            config.shouldAutorotate = true
-        case 1:
-            config.shouldAutorotate = false
-        default:
-            break
-        }
+
+        config.shouldAutorotate = self.autoRotate.isOn
         
         config.interactiveHide = interactiveHide.isOn
         
@@ -156,7 +149,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var layout: UISegmentedControl!
     @IBOutlet weak var theme: UISegmentedControl!
     @IBOutlet weak var iconStyle: UISegmentedControl!
-    @IBOutlet weak var autoRotate: UISegmentedControl!
+    @IBOutlet weak var autoRotate: UISwitch!
     @IBOutlet weak var dropShadow: UISwitch!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var bodyText: UITextField!

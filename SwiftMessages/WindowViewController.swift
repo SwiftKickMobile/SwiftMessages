@@ -13,7 +13,6 @@ class WindowViewController: UIViewController
     fileprivate var window: UIWindow?
     
     let windowLevel: UIWindowLevel
-    var statusBarStyle: UIStatusBarStyle?
     let config: SwiftMessages.Config
     
     override var shouldAutorotate: Bool {
@@ -47,7 +46,7 @@ class WindowViewController: UIViewController
     }
     
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle ?? UIApplication.shared.statusBarStyle
+        return config.preferredStatusBarStyle ?? UIApplication.shared.statusBarStyle
     }
     
     override var prefersStatusBarHidden: Bool {
