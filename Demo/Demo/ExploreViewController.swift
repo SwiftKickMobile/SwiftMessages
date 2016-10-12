@@ -118,6 +118,15 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             break
         }
         
+        switch self.autoRotate.selectedSegmentIndex {
+        case 0:
+            config.shouldAutorotate = true
+        case 1:
+            config.shouldAutorotate = false
+        default:
+            break
+        }
+        
         config.interactiveHide = interactiveHide.isOn
         
         // Set status bar style unless using card view (since it doesn't
@@ -147,6 +156,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var layout: UISegmentedControl!
     @IBOutlet weak var theme: UISegmentedControl!
     @IBOutlet weak var iconStyle: UISegmentedControl!
+    @IBOutlet weak var autoRotate: UISegmentedControl!
     @IBOutlet weak var dropShadow: UISwitch!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var bodyText: UITextField!

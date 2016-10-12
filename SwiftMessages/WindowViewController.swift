@@ -14,10 +14,16 @@ class WindowViewController: UIViewController
     
     let windowLevel: UIWindowLevel
     var statusBarStyle: UIStatusBarStyle?
+    let config: SwiftMessages.Config
     
-    init(windowLevel: UIWindowLevel = UIWindowLevelNormal)
+    override var shouldAutorotate: Bool {
+        return config.shouldAutorotate
+    }
+    
+    init(windowLevel: UIWindowLevel = UIWindowLevelNormal, config: SwiftMessages.Config)
     {
         self.windowLevel = windowLevel
+        self.config = config
         let window = PassthroughWindow(frame: UIScreen.main.bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)

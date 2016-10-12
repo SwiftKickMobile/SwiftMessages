@@ -176,6 +176,14 @@ open class SwiftMessages: PresenterDelegate {
          the current one. The default is `.Default`.
          */
         public var preferredStatusBarStyle: UIStatusBarStyle?
+        
+        /**
+         If a view controller is created to host the message view, should the view 
+         controller auto rotate?  The default is 'true', meaning it should auto
+         rotate.
+         */
+        public var shouldAutorotate: Bool = true
+
     }
     
     /**
