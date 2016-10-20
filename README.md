@@ -42,11 +42,7 @@ pod 'SwiftMessages', '~> 2.0.0'
 # Swift 2.2 - Xcode 7.3.1
 pod 'SwiftMessages', '~> 1.1.4'
 ````
-__Note that Swift 2.3 and Swift 3.0 require CocoaPods 1.1.0__, which is in beta as of September 20, 2016. CocoaPods 1.1.0 beta can be installed with the following command:
-
-````
-sudo gem install cocoapods --pre
-````
+__Note that Swift 2.3 and Swift 3.0 require minimum CocoaPods version 1.1.0__.
 
 ### Carthage
 
