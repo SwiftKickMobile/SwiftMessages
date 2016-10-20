@@ -67,24 +67,21 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func getPresentationContext() throws -> UIViewController {
         
         func newWindowViewController(_ windowLevel: UIWindowLevel) -> UIViewController {
-            let viewController = WindowViewController(windowLevel: windowLevel)
-            if windowLevel == UIWindowLevelNormal {
-                viewController.statusBarStyle = config.preferredStatusBarStyle
-            }
+            let viewController = WindowViewController(windowLevel: windowLevel, config: config)
             return viewController
         }
         
         switch config.presentationContext {
         case .automatic:
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-                return rootViewController.sm_selectPresentationContextTopDown(config.presentationStyle)
+                return rootViewController.sm_selectPresentationContextTopDown(config)
             } else {
                 throw SwiftMessagesError.noRootViewController
             }
         case .window(let level):
             return newWindowViewController(level)
         case .viewController(let viewController):
-            return viewController.sm_selectPresentationContextBottomUp(config.presentationStyle)
+            return viewController.sm_selectPresentationContextBottomUp(config)
         }
     }
     
