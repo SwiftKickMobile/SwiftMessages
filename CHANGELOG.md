@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.0.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.3)
+
+### Features
+
+* Add `ignoreDuplicates` option to `SwiftMessages.Config` to specify whether or not to ignore duplicate `Identifiable` message views.
+
 ## [3.0.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.2)
 
 ### Features
