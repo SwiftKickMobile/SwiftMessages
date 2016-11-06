@@ -10,6 +10,20 @@ import UIKit
 
 private let globalInstance = SwiftMessages()
 
+
+fileprivate class WeakMessageListener {
+    weak var value : MessageListener?
+    init(value: MessageListener) {
+        self.value = value
+    }
+}
+
+public protocol MessageListener: class {
+    func swiftMessageDidHide() -> Void
+    func swiftMessageDidShow() -> Void
+}
+
+
 /**
  The `SwiftMessages` class provides the interface for showing and hiding messages.
  It behaves like a queue, only showing one message at a time. Message views that
@@ -212,6 +226,9 @@ open class SwiftMessages: PresenterDelegate {
      */
     public init() {}
     
+    
+    fileprivate var listeners: [WeakMessageListener] = []
+    
     /**
      Adds the given configuration and view to the message queue to be displayed.
      
@@ -223,6 +240,9 @@ open class SwiftMessages: PresenterDelegate {
             guard let strongSelf = self else { return }
             let presenter = Presenter(config: config, view: view, delegate: strongSelf)
             strongSelf.enqueue(presenter: presenter)
+            for listener in strongSelf.listeners {
+                listener.value?.swiftMessageDidShow()
+            }
         }
     }
     
@@ -380,6 +400,9 @@ open class SwiftMessages: PresenterDelegate {
                     guard let strongSelf = self else { return }
                     strongSelf.current = nil
                 })
+                for listener in strongSelf.listeners {
+                    listener.value?.swiftMessageDidHide()
+                }
             }
         }
     }
@@ -551,6 +574,17 @@ extension SwiftMessages {
     
     public static func hide(id: String) {
         globalInstance.hide(id: id)
+    }
+    
+    public static func addListener(_ newListener: MessageListener) {
+        globalInstance.listeners.append( WeakMessageListener(value: newListener) )
+    }
+    
+    public static func removeListener(_ listener: MessageListener) {
+        let index = globalInstance.listeners.index { $0.value === listener }
+        if let i = index {
+            globalInstance.listeners.remove(at: i)
+        }
     }
     
     public static var defaultConfig: Config {
