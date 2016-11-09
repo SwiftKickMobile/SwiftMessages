@@ -124,6 +124,22 @@ open class SwiftMessages: PresenterDelegate {
          */
         case color(color: UIColor, interactive: Bool)
     }
+//    
+//    /**
+//     Specifies options for handling duplicate `Identifiable` messages.
+//     */
+//    public enum DeduplicationMode {
+//        
+//        /**
+//         Always remove duplicates.
+//        */
+//        case always
+//
+//        /**
+//         Never remove duplicates.
+//         */
+//        case never
+//    }
     
     /**
      The `Config` struct specifies options for displaying a single message view. It is
@@ -176,6 +192,19 @@ open class SwiftMessages: PresenterDelegate {
          the current one. The default is `.Default`.
          */
         public var preferredStatusBarStyle: UIStatusBarStyle?
+        
+        /**
+         If a view controller is created to host the message view, should the view 
+         controller auto rotate?  The default is 'true', meaning it should auto
+         rotate.
+         */
+        public var shouldAutorotate = true
+
+        /**
+         Specified whether or not duplicate `Identifiable` messages are ignored.
+         The default is `true`.
+        */
+        public var ignoreDuplicates = true
     }
     
     /**
@@ -308,7 +337,7 @@ open class SwiftMessages: PresenterDelegate {
     }
     
     func enqueue(presenter: Presenter) {
-        if let id = presenter.id {
+        if presenter.config.ignoreDuplicates, let id = presenter.id {
             if current?.id == id { return }
             if queue.filter({ $0.id == id }).count > 0 { return }
         }

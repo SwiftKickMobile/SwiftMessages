@@ -1,7 +1,25 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [3.0.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/2.0.0)
+## [3.0.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.3)
+
+### Features
+
+* Add `ignoreDuplicates` option to `SwiftMessages.Config` to specify whether or not to ignore duplicate `Identifiable` message views.
+
+## [3.0.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.2)
+
+### Features
+
+* Add `shouldAutorotate` option to `SwiftMessages.Config` for customizing device rotation behavior when messages are presented in an overlay window. By default, message will auto-rotate.
+
+## [3.0.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.1)
+
+### Improvements
+
+* Enable automatic provisioning on framework target
+
+## [3.0.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.0)
 
 ### Breaking Changes
 
