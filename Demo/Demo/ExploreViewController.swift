@@ -80,7 +80,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         // Config setup
         
-        var config = SwiftMessages.Config()
+        var config = SwiftMessages.defaultConfig
         
         switch presentationStyle.selectedSegmentIndex {
         case 1:

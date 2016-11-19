@@ -124,22 +124,21 @@ open class SwiftMessages: PresenterDelegate {
          */
         case color(color: UIColor, interactive: Bool)
     }
-//    
-//    /**
-//     Specifies options for handling duplicate `Identifiable` messages.
-//     */
-//    public enum DeduplicationMode {
-//        
-//        /**
-//         Always remove duplicates.
-//        */
-//        case always
-//
-//        /**
-//         Never remove duplicates.
-//         */
-//        case never
-//    }
+
+    /**
+     Specifies events in the message lifecycle.
+    */
+    public enum Event {
+        case willShow
+        case didShow
+        case willHide
+        case didHide
+    }
+    
+    /**
+     A closure that takes an `Event` as an argument.
+     */
+    public typealias EventListener = (Event) -> Void
     
     /**
      The `Config` struct specifies options for displaying a single message view. It is
@@ -205,6 +204,11 @@ open class SwiftMessages: PresenterDelegate {
          The default is `true`.
         */
         public var ignoreDuplicates = true
+        
+        /**
+         Specifies an optional array of event listeners.
+        */
+        public var eventListeners: [EventListener]?
     }
     
     /**

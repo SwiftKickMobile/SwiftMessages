@@ -1,6 +1,6 @@
 {
   "name": "SwiftMessages",
-  "version": "3.0.0",
+  "version": "3.0.3",
   "license": {
     "type": "MIT"
   },
@@ -11,7 +11,7 @@
   "summary": "A very flexible message bar for iOS written in Swift.",
   "source": {
     "git": "https://github.com/SwiftKickMobile/SwiftMessages.git",
-    "tag": "3.0.0"
+    "tag": "3.0.3"
   },
   "platforms": {
     "ios": "8.0"

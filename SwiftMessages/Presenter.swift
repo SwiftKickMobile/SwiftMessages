@@ -61,7 +61,13 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func show(completion: @escaping (_ completed: Bool) -> Void) throws {
         try presentationContext.value = getPresentationContext()
         install()
-        showAnimation(completion: completion)
+        self.config.eventListeners?.forEach { $0(.willShow) }
+        showAnimation() { completed in
+            completion(completed)
+            if completed {
+                self.config.eventListeners?.forEach { $0(.didShow) }
+            }
+        }
     }
     
     func getPresentationContext() throws -> UIViewController {
@@ -219,7 +225,6 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     }
 
     func showViewAnimation(completion: @escaping (_ completed: Bool) -> Void) {
-        
         switch config.presentationStyle {
         case .top, .bottom:
             let animationDistance = self.translationConstraint.constant + bounceOffset
@@ -231,11 +236,12 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 self.view.superview?.layoutIfNeeded()
                 }, completion: { completed in
                     completion(completed)
-            })
+                })
         }
     }
 
     func hide(completion: @escaping (_ completed: Bool) -> Void) {
+        self.config.eventListeners?.forEach { $0(.willHide) }
         switch config.presentationStyle {
         case .top, .bottom:
             UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
@@ -248,6 +254,9 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                     }
                     self.maskingView.removeFromSuperview()
                     completion(completed)
+                    if completed {
+                        self.config.eventListeners?.forEach { $0(.didHide) }
+                    }
             })
 // TODO the spring animation makes the interactive hide transition smoother, but
 // TODO the added delay due to damping makes status bar style transitions look bad.
