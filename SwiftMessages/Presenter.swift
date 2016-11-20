@@ -61,11 +61,11 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func show(completion: @escaping (_ completed: Bool) -> Void) throws {
         try presentationContext.value = getPresentationContext()
         install()
-        self.config.eventListeners?.forEach { $0(.willShow) }
+        self.config.eventListeners.forEach { $0(.willShow) }
         showAnimation() { completed in
             completion(completed)
             if completed {
-                self.config.eventListeners?.forEach { $0(.didShow) }
+                self.config.eventListeners.forEach { $0(.didShow) }
             }
         }
     }
@@ -241,7 +241,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     }
 
     func hide(completion: @escaping (_ completed: Bool) -> Void) {
-        self.config.eventListeners?.forEach { $0(.willHide) }
+        self.config.eventListeners.forEach { $0(.willHide) }
         switch config.presentationStyle {
         case .top, .bottom:
             UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
@@ -255,7 +255,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                     self.maskingView.removeFromSuperview()
                     completion(completed)
                     if completed {
-                        self.config.eventListeners?.forEach { $0(.didHide) }
+                        self.config.eventListeners.forEach { $0(.didHide) }
                     }
             })
 // TODO the spring animation makes the interactive hide transition smoother, but

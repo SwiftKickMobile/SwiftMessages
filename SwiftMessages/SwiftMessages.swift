@@ -208,7 +208,7 @@ open class SwiftMessages: PresenterDelegate {
         /**
          Specifies an optional array of event listeners.
         */
-        public var eventListeners: [EventListener]?
+        public var eventListeners: [EventListener] = []
     }
     
     /**
