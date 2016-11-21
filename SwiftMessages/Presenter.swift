@@ -35,9 +35,12 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         self.delegate = delegate
         panRecognizer = UIPanGestureRecognizer()
         super.init()
-        panRecognizer.addTarget(self, action: #selector(Presenter.pan(_:)))
-        panRecognizer.delegate = self
         maskingView.clipsToBounds = true
+        
+        if config.enabledPanGestureRecognizer {
+            panRecognizer.addTarget(self, action: #selector(Presenter.pan(_:)))
+            panRecognizer.delegate = self
+        }
     }
     
     var id: String? {
@@ -187,16 +190,16 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     
     func topLayoutConstraint(view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
         if case .top = config.presentationStyle, let nav = presentationContext as? UINavigationController, nav.sm_isVisible(view: nav.navigationBar) {
-            return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: nav.navigationBar, attribute: .bottom, multiplier: 1.00, constant: 0.0)
+            return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: nav.navigationBar, attribute: .bottom, multiplier: 1.00, constant: config.edgeInsets.top)
         }
-        return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: presentationContext.view, attribute: .top, multiplier: 1.00, constant: 0.0)
+        return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: presentationContext.view, attribute: .top, multiplier: 1.00, constant: config.edgeInsets.top)
     }
 
     func bottomLayoutConstraint(view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
         if case .bottom = config.presentationStyle, let tab = presentationContext as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
-            return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: 0.0)
+            return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: config.edgeInsets.bottom)
         }
-        return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: presentationContext.view, attribute: .bottom, multiplier: 1.00, constant: 0.0)
+        return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: presentationContext.view, attribute: .bottom, multiplier: 1.00, constant: config.edgeInsets.bottom)
     }
     
     /*
