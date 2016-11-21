@@ -209,6 +209,17 @@ open class SwiftMessages: PresenterDelegate {
          Specifies an optional array of event listeners.
         */
         public var eventListeners: [EventListener] = []
+        
+        /**
+         Specifies an optional to shift the panel.
+         */
+        public var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero
+        
+        /**
+         Specified need handler enabledPanGestureRecognizer.
+         The default is `true`.
+         */
+        public var enabledPanGestureRecognizer = true
     }
     
     /**
