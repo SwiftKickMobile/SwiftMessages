@@ -68,6 +68,11 @@ open class SwiftMessages: PresenterDelegate {
          for targeted placement in a view controller heirarchy.
         */
         case viewController(_: UIViewController)
+        
+        /**
+         Displays the message view in the given container view.
+         */
+        case view(_: UIView)
     }
     
     /**

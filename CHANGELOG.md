@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.0)
+
+### Features
+
+* Added a `view` case to `presentationContext` for displaying the message in a specific container view.
+
 ## [3.1.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.0)
 
 ### Features

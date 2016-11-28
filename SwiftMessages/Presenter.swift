@@ -10,7 +10,9 @@ import UIKit
 
 class Weak<T: AnyObject> {
     weak var value : T?
-    init() {}
+    init(value: T?) {
+        self.value = value
+    }
 }
 
 protocol PresenterDelegate: class {
@@ -21,11 +23,34 @@ protocol PresenterDelegate: class {
 
 class Presenter: NSObject, UIGestureRecognizerDelegate {
 
+    enum PresentationContext {
+        case viewController(_: Weak<UIViewController>)
+        case view(_: Weak<UIView>)
+        
+        func viewControllerValue() -> UIViewController? {
+            switch self {
+            case .viewController(let weak):
+                return weak.value
+            case .view:
+                return nil
+            }
+        }
+        
+        func viewValue() -> UIView? {
+            switch self {
+            case .viewController(let weak):
+                return weak.value?.view
+            case .view(let weak):
+                return weak.value
+            }
+        }
+    }
+    
     let config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
     let maskingView = PassthroughView()
-    let presentationContext = Weak<UIViewController>()
+    var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let panRecognizer: UIPanGestureRecognizer
     var translationConstraint: NSLayoutConstraint! = nil
     
@@ -59,7 +84,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     }
     
     func show(completion: @escaping (_ completed: Bool) -> Void) throws {
-        try presentationContext.value = getPresentationContext()
+        try presentationContext = getPresentationContext()
         install()
         self.config.eventListeners.forEach { $0(.willShow) }
         showAnimation() { completed in
@@ -70,7 +95,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
-    func getPresentationContext() throws -> UIViewController {
+    func getPresentationContext() throws -> PresentationContext {
         
         func newWindowViewController(_ windowLevel: UIWindowLevel) -> UIViewController {
             let viewController = WindowViewController(windowLevel: windowLevel, config: config)
@@ -80,14 +105,19 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.presentationContext {
         case .automatic:
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-                return rootViewController.sm_selectPresentationContextTopDown(config)
+                let viewController = rootViewController.sm_selectPresentationContextTopDown(config)
+                return .viewController(Weak(value: viewController))
             } else {
                 throw SwiftMessagesError.noRootViewController
             }
         case .window(let level):
-            return newWindowViewController(level)
+            let viewController = newWindowViewController(level)
+            return .viewController(Weak(value: viewController))
         case .viewController(let viewController):
-            return viewController.sm_selectPresentationContextBottomUp(config)
+            let viewController = viewController.sm_selectPresentationContextBottomUp(config)
+            return .viewController(Weak(value: viewController))
+        case .view(let view):
+            return .view(Weak(value: view))
         }
     }
     
@@ -96,24 +126,23 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
      */
     
     func install() {
-        guard let presentationContext = presentationContext.value else { return }
-        if let windowViewController = presentationContext as? WindowViewController {
+        guard let containerView = presentationContext.viewValue() else { return }
+        if let windowViewController = presentationContext.viewControllerValue() as? WindowViewController {
             windowViewController.install()
         }
-        let containerView: UIView = presentationContext.view
         do {
             maskingView.translatesAutoresizingMaskIntoConstraints = false
-            if let nav = presentationContext as? UINavigationController {
+            if let nav = presentationContext.viewControllerValue() as? UINavigationController {
                 containerView.insertSubview(maskingView, belowSubview: nav.navigationBar)
-            } else if let tab = presentationContext as? UITabBarController {
+            } else if let tab = presentationContext.viewControllerValue() as? UITabBarController {
                 containerView.insertSubview(maskingView, belowSubview: tab.tabBar)
             } else {
                 containerView.addSubview(maskingView)
             }
             let leading = NSLayoutConstraint(item: maskingView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.00, constant: 0.0)
             let trailing = NSLayoutConstraint(item: maskingView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.00, constant: 0.0)
-            let top = topLayoutConstraint(view: maskingView, presentationContext: presentationContext)
-            let bottom = bottomLayoutConstraint(view: maskingView, presentationContext: presentationContext)
+            let top = topLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue())
+            let bottom = bottomLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue())
             containerView.addConstraints([top, leading, bottom, trailing])
         }
         do {
@@ -135,15 +164,11 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 case .top:
                     top += adjustable.bounceAnimationOffset
                     if !UIApplication.shared.isStatusBarHidden {
-                        if let vc = presentationContext as? WindowViewController {
+                        if let vc = presentationContext.viewControllerValue() as? WindowViewController {
                             if vc.windowLevel == UIWindowLevelNormal {
                                 top += adjustable.statusBarOffset
                             }
-                        } else if let vc = presentationContext as? UINavigationController {
-                            if !vc.sm_isVisible(view: vc.navigationBar) {
-                                top += adjustable.statusBarOffset
-                            }
-                        } else {
+                        } else if let vc = presentationContext.viewControllerValue() as? UINavigationController, !vc.sm_isVisible(view: vc.navigationBar) {
                             top += adjustable.statusBarOffset
                         }
                     }
@@ -185,18 +210,18 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
-    func topLayoutConstraint(view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
-        if case .top = config.presentationStyle, let nav = presentationContext as? UINavigationController, nav.sm_isVisible(view: nav.navigationBar) {
+    func topLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
+        if case .top = config.presentationStyle, let nav = viewController as? UINavigationController, nav.sm_isVisible(view: nav.navigationBar) {
             return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: nav.navigationBar, attribute: .bottom, multiplier: 1.00, constant: 0.0)
         }
-        return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: presentationContext.view, attribute: .top, multiplier: 1.00, constant: 0.0)
+        return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1.00, constant: 0.0)
     }
 
-    func bottomLayoutConstraint(view: UIView, presentationContext: UIViewController) -> NSLayoutConstraint {
-        if case .bottom = config.presentationStyle, let tab = presentationContext as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
+    func bottomLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
+        if case .bottom = config.presentationStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
             return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: 0.0)
         }
-        return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: presentationContext.view, attribute: .bottom, multiplier: 1.00, constant: 0.0)
+        return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.00, constant: 0.0)
     }
     
     /*
@@ -249,7 +274,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 self.translationConstraint.constant -= size.height
                 self.view.superview?.layoutIfNeeded()
                 }, completion: { completed in
-                    if let viewController = self.presentationContext.value as? WindowViewController {
+                    if let viewController = self.presentationContext.viewControllerValue() as? WindowViewController {
                         viewController.uninstall()
                     }
                     self.maskingView.removeFromSuperview()
@@ -378,3 +403,4 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         return true
     }
 }
+
