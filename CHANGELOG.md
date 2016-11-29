@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [3.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.0)
+## [3.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.1)
 
 ### Features
 
