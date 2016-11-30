@@ -125,6 +125,11 @@ config.interactiveHide = false
 // Specify a status bar style to if the message is displayed directly under the status bar.
 config.preferredStatusBarStyle = .LightContent
 
+// Specify one or more event listeners to respond to show and hide events.
+config.eventListeners.append() { event in
+    if case .didHide = event { print("yep") }
+}
+
 SwiftMessages.show(config: config, view: view)
 ````
 
