@@ -62,10 +62,15 @@ open class SwiftMessages: PresenterDelegate {
         
         /**
          Displays the message view under navigation bars and tab bars if an
-         appropriate one is found using the given view controller as a starting
-         point and searching up the parent view controller chain. Otherwise, it
-         is displayed in the given view controller's view. This option can be used
-         for targeted placement in a view controller heirarchy.
+         appropriate bar is found. The search for bars starts with the given
+         view controller's `parent` continues up the containment heirarchy
+         until there are no more parents. If no bars are found, the message is
+         displayed in the given view controller's view. This option can be used
+         for targeted placement in a view controller heirarchy. Note, that because
+         the search for bars starts with the parent, specifying a navigation 
+         controller will not result in the message being displayed under that
+         controller's navigation bar. One would instead need to specify one of
+         the navigation controller's descendants.
         */
         case viewController(_: UIViewController)
         
