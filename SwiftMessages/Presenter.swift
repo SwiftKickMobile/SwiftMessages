@@ -147,6 +147,8 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         }
         do {
             view.translatesAutoresizingMaskIntoConstraints = false
+            // Have the container layout now so we can see exactly where `maskingView`
+            containerView.layoutIfNeeded()
             maskingView.addSubview(view)
             let leading = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: maskingView, attribute: .leading, multiplier: 1.00, constant: 0.0)
             let trailing = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: maskingView, attribute: .trailing, multiplier: 1.00, constant: 0.0)
@@ -169,6 +171,8 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                                 top += adjustable.statusBarOffset
                             }
                         } else if let vc = presentationContext.viewControllerValue() as? UINavigationController, !vc.sm_isVisible(view: vc.navigationBar) {
+                            top += adjustable.statusBarOffset
+                        } else if viewInterferesWithStatusBar(maskingView) {
                             top += adjustable.statusBarOffset
                         }
                     }
@@ -208,6 +212,14 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 setupInteractive(interactive)
             }
         }
+    }
+    
+    private func viewInterferesWithStatusBar(_ view: UIView) -> Bool {
+        guard let window = view.window else { return false }
+        let statusBarFrame = UIApplication.shared.statusBarFrame
+        let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
+        let statusBarViewFrame = view.convert(statusBarWindowFrame, from: nil)
+        return statusBarViewFrame.intersects(view.bounds)
     }
     
     func topLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
