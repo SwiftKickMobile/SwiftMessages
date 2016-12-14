@@ -128,7 +128,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func install() {
         guard let containerView = presentationContext.viewValue() else { return }
         if let windowViewController = presentationContext.viewControllerValue() as? WindowViewController {
-            windowViewController.install()
+            windowViewController.install(becomeKey: config.becomeKeyWindow)
         }
         do {
             maskingView.translatesAutoresizingMaskIntoConstraints = false

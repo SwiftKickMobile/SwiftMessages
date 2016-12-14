@@ -214,6 +214,22 @@ open class SwiftMessages: PresenterDelegate {
          Specifies an optional array of event listeners.
         */
         public var eventListeners: [EventListener] = []
+        
+        /**
+         Specifies that in cases where the message is displayed in its own window,
+         such as with `.window` presentation context, the window should become
+         the key window. This option should only be used if the message view
+         needs to receive non-touch events, such as keyboard input. From Apple's
+         documentation https://developer.apple.com/reference/uikit/uiwindow:
+         
+         > Whereas touch events are delivered to the window where they occurred,
+         > events that do not have a relevant coordinate value are delivered to
+         > the key window. Only one window at a time can be the key window, and
+         > you can use a window’s keyWindow property to determine its status.
+         > Most of the time, your app’s main window is the key window, but UIKit
+         > may designate a different window as needed.
+         */
+        public var becomeKeyWindow = false
     }
     
     /**
