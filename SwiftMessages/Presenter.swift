@@ -290,10 +290,8 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                         viewController.uninstall()
                     }
                     self.maskingView.removeFromSuperview()
-                    completion(completed)
-                    if completed {
-                        self.config.eventListeners.forEach { $0(.didHide) }
-                    }
+                    completion(true)
+                    self.config.eventListeners.forEach { $0(.didHide) }
             })
 // TODO the spring animation makes the interactive hide transition smoother, but
 // TODO the added delay due to damping makes status bar style transitions look bad.
