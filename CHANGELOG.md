@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.1.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.2)
+
+### Features
+
+* Changed the default behavior when a message is displayed in its own window (such as with `.window` presentation context) to no longer become the key window in order to prevent the keyboard from dismissing. If one needs the message's window to become key, this can be done by setting `SwiftMessages.Config.becomeKeyWindow` to `true`. See 
+
+### Bug Fixes
+
+* Changed the internal logic of hiding a message view to always succeed to work around the problem of the hide animation failing, such as when started while the app is not active.
+* Improved reliability of the automatic adjustments made to avoid message views overlapping the status bar, particularly when using the `.view` presentation context.
+
 ## [3.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.1)
 
 ### Features
