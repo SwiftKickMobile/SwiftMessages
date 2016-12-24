@@ -111,7 +111,7 @@ config.presentationStyle = .Bottom
 
 // Display in a window at the specified window level: UIWindowLevelStatusBar
 // displays over the status bar while UIWindowLevelNormal displays under.
-config.presentationContext = .Window(windowLevel: UIWindowLevelStatusBar)
+config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
 
 // Disable the default auto-hiding behavior.
 config.duration = .Forever
