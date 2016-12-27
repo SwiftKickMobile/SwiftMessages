@@ -59,8 +59,15 @@ open class MessageView: BaseView, Identifiable {
      */
     
     open var id: String {
-        return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+        get {
+            return customId ?? "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+        }
+        set {
+            customId = newValue
+        }
     }
+    
+    private var customId: String?
 }
 
 /*
