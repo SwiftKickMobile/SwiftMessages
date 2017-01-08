@@ -162,13 +162,17 @@ extension MessageView {
      - Parameter size: The size to be translated into Auto Layout constraints.
      - Parameter contentMode: The optional content mode to apply.
      */
-    public func constrainIconImageView(toSize size: CGSize, contentMode: UIViewContentMode? = nil) {
-        guard let iconImageView = iconImageView else { return }
-        let constraints = [iconImageView.heightAnchor.constraint(equalToConstant: size.height),
-                           iconImageView.widthAnchor.constraint(equalToConstant: size.width)]
-        iconImageView.addConstraints(constraints)
-        if let contentMode = contentMode {
-            iconImageView.contentMode = contentMode
+    public func configureIcon(withSize size: CGSize, contentMode: UIViewContentMode? = nil) {
+        var views: [UIView] = []
+        if let iconImageView = iconImageView { views.append(iconImageView) }
+        if let iconLabel = iconLabel { views.append(iconLabel) }
+        views.forEach {
+            let constraints = [$0.heightAnchor.constraint(equalToConstant: size.height),
+                               $0.widthAnchor.constraint(equalToConstant: size.width)]
+            $0.addConstraints(constraints)
+            if let contentMode = contentMode {
+                $0.contentMode = contentMode
+            }
         }
     }
 }
