@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.1.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.4)
+
+### Bug Fixes
+
+* Fixed an issue where UIKit components were being instantiated off the main queue.
+
 ## [3.1.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.3)
 
 ### Features
