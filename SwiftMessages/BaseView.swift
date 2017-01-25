@@ -24,7 +24,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Fulfills the `BackgroundViewable` protocol and is the target for
      the optional `tapHandler` block. Defaults to `self`.
      */
-    @IBOutlet open var backgroundView: UIView! {
+    @IBOutlet open weak var backgroundView: UIView! {
         didSet {
             if let old = oldValue {
                 old.removeGestureRecognizer(tapRecognizer)

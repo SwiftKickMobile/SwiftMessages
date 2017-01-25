@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.1.5](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.5)
+
+### Bug Fixes
+
+* Fix memory leak of `MessageViews`.
+
 ## [3.1.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.4)
 
 ### Bug Fixes
