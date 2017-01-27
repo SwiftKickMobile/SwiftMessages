@@ -366,7 +366,7 @@ open class SwiftMessages: PresenterDelegate {
     
     func enqueue(presenter: Presenter) {
         if presenter.config.ignoreDuplicates, let id = presenter.id {
-            if current?.id == id { return }
+            if current?.id == id && current?.isHiding == false { return }
             if queue.filter({ $0.id == id }).count > 0 { return }
         }
         queue.append(presenter)

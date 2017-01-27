@@ -277,7 +277,10 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         }
     }
 
+    var isHiding = false
+
     func hide(completion: @escaping (_ completed: Bool) -> Void) {
+        isHiding = true
         self.config.eventListeners.forEach { $0(.willHide) }
         switch config.presentationStyle {
         case .top, .bottom:
@@ -311,7 +314,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
 //                completion(completed: completed)
 //            })
         }
-        
+
         func undim() {
             UIView.animate(withDuration: 0.2, animations: {
                 self.maskingView.backgroundColor = UIColor.clear
