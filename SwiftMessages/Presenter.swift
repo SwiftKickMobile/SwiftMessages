@@ -74,15 +74,34 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         let duration: TimeInterval?
         switch self.config.duration {
         case .automatic:
-            duration = 2.0
+            duration = 2
         case .seconds(let seconds):
             duration = seconds
-        case .forever:
+        case .forever, .unknown:
             duration = nil
         }
         return duration
     }
-    
+
+    var showDate: Date?
+
+    private var interactivelyHidden = false;
+
+    var delayShow: TimeInterval? {
+        if case .unknown(let opts) = config.duration { return opts.delay }
+        return nil
+    }
+
+    /// Returns the required delay for hiding based on time shown
+    var delayHide: TimeInterval? {
+        if interactivelyHidden { return 0 }
+        if case .unknown(let opts) = config.duration, let showDate = showDate {
+            let timeIntervalShown = -showDate.timeIntervalSinceNow
+            return max(0, opts.minimum - timeIntervalShown)
+        }
+        return nil
+    }
+
     func show(completion: @escaping (_ completed: Bool) -> Void) throws {
         try presentationContext = getPresentationContext()
         install()
@@ -194,6 +213,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                 if interactive {
                     maskingView.tappedHander = { [weak self] in
                         guard let strongSelf = self else { return }
+                        strongSelf.interactivelyHidden = true
                         self?.delegate?.hide(presenter: strongSelf)
                     }
                 } else {
@@ -376,6 +396,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
             panTranslationY = translation.y
         case .ended, .cancelled:
             if closeSpeed > 750.0 || closePercent > 0.33 {
+                interactivelyHidden = true
                 delegate?.hide(presenter: self)
             } else {
                 closing = false
