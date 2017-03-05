@@ -392,6 +392,7 @@ open class SwiftMessages: PresenterDelegate {
             ids.insert(id)
         }
 
+        @discardableResult
         func remove(presenter: Presenter) -> Bool {
             guard let id = presenter.id, ids.contains(id) else { return false }
             ids.remove(id)
