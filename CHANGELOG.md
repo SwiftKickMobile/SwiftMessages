@@ -10,6 +10,11 @@ This option is useful for displaying a message when a process is taking too long
          
 For example, if a URL load is expected to complete in 2 seconds, you may use the value `unknown(delay: 2, minimum 1)` to ensure that the message will not be displayed most of the time, but will be displayed for at least 1 second if the operation takes longer than 2 seconds. By specifying a minimum duration, you can avoid hiding the message too fast if the operation finishes right after the delay interval.
 
+### Bug Fixes
+* Prevent views below the dim view from receiving accessibility focus.
+* Prevent taps in the message view from hiding when using interactive dim mode.
+* Fix memory leak of single message view
+
 ## [3.1.5](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.5)
 
 ### Bug Fixes

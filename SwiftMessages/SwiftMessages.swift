@@ -476,15 +476,15 @@ open class SwiftMessages: PresenterDelegate {
         }
     }
     
-    fileprivate var autohideToken: AnyObject?
+    fileprivate weak var autohideToken: AnyObject?
     
     fileprivate func queueAutoHide() {
         guard let current = current else { return }
         autohideToken = current
         if let pauseDuration = current.pauseDuration {
             let delayTime = DispatchTime.now() + pauseDuration
-            syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self] in
-                guard let strongSelf = self else { return }
+            syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self, weak current] in
+                guard let strongSelf = self, let current = current else { return }
                 // Make sure we've still got a green light to auto-hide.
                 if strongSelf.autohideToken !== current { return }
                 strongSelf.hide(presenter: current)

@@ -214,7 +214,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                     maskingView.tappedHander = { [weak self] in
                         guard let strongSelf = self else { return }
                         strongSelf.interactivelyHidden = true
-                        self?.delegate?.hide(presenter: strongSelf)
+                        strongSelf.delegate?.hide(presenter: strongSelf)
                     }
                 } else {
                     // There's no action to take, but the presence of
