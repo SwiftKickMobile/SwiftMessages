@@ -77,7 +77,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
             duration = 2
         case .seconds(let seconds):
             duration = seconds
-        case .forever, .unknown:
+        case .forever, .indefinite:
             duration = nil
         }
         return duration
@@ -88,14 +88,14 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     private var interactivelyHidden = false;
 
     var delayShow: TimeInterval? {
-        if case .unknown(let opts) = config.duration { return opts.delay }
+        if case .indefinite(let opts) = config.duration { return opts.delay }
         return nil
     }
 
     /// Returns the required delay for hiding based on time shown
     var delayHide: TimeInterval? {
         if interactivelyHidden { return 0 }
-        if case .unknown(let opts) = config.duration, let showDate = showDate {
+        if case .indefinite(let opts) = config.duration, let showDate = showDate {
             let timeIntervalShown = -showDate.timeIntervalSinceNow
             return max(0, opts.minimum - timeIntervalShown)
         }

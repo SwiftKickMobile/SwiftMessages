@@ -4,11 +4,11 @@ All notable changes to this project will be documented in this file.
 ## [3.2.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.0)
 
 ### Features
-* Added the ability to display messages for an unknown duration while enforcing a minimum duration using `Duration.unknown(delay:minimum)`.
+* Added the ability to display messages for an indefinite duration while enforcing a minimum duration using `Duration.indefinite(delay:minimum)`.
 
 This option is useful for displaying a message when a process is taking too long but you don't want to display the message if the process completes in a reasonable amount of time.
          
-For example, if a URL load is expected to complete in 2 seconds, you may use the value `unknown(delay: 2, minimum 1)` to ensure that the message will not be displayed most of the time, but will be displayed for at least 1 second if the operation takes longer. By specifying a minimum duration, you can avoid hiding the message too fast if the operation happens to complete right after the delay.
+For example, if a URL load is expected to complete in 2 seconds, you may use the value `unknown(delay: 2, minimum 1)` to ensure that the message will not be displayed most of the time, but will be displayed for at least 1 second if the operation takes longer than 2 seconds. By specifying a minimum duration, you can avoid hiding the message too fast if the operation finishes right after the delay interval.
 
 ## [3.1.5](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.5)
 

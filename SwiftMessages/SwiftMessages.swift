@@ -99,36 +99,34 @@ open class SwiftMessages: PresenterDelegate {
         case seconds(seconds: TimeInterval)
 
         /**
-         The `unknown` option is similar to `forever` in the sense that
+         The `indefinite` option is similar to `forever` in the sense that
          the message view will not be automatically hidden. However, it
          provides two options that can be useful in some scenarios:
          
             - `delay`: wait the specified time interval before displaying
-                     the message. If you hide the message during the delay
-                     interval by calling either `hideAll()` or `hide(id:)`, the
-                     message will not be displayed. This is not the case for
-                     `hide()`, which only acts on a visible message. Delayed messages
-                     do not block subsequent messages during the delay interval.
+                       the message. If you hide the message during the delay
+                       interval by calling either `hideAll()` or `hide(id:)`,
+                       the message will not be displayed. This is not the case for
+                       `hide()` because it only acts on a visible message. Messages
+                       shown during another message's delay window are displayed first.
             - `minimum`: if the message is displayed, ensure that it is displayed
                          for a minimum time interval. If you explicitly hide the
-                         during this intewrval, the message will be hidden at the
+                         during this interval, the message will be hidden at the
                          end of the interval.
-         
-         Delayed messages must be hidden using `SwiftMessages.hide(id:)` because
 
          This option is useful for displaying a message when a process is taking
          too long but you don't want to display the message if the process completes
-         in a reasonable amount of time. The value `unknown(delay: 0, minimum: 0)`
+         in a reasonable amount of time. The value `indefinite(delay: 0, minimum: 0)`
          is equivalent to `forever`.
          
          For example, if a URL load is expected to complete in 2 seconds, you may use
-         the value `unknown(delay: 2, minimum 1)` to ensure that the message will not
-         be displayed most of the time, but will be displayed for at least 1 second if
-         the operation takes longer. By specifying a minimum duration, you can avoid
-         hiding the message too fast if the operation happens to complete right after
-         the delay.
+         the value `indefinite(delay: 2, minimum 1)` to ensure that the message will not
+         be displayed in most cases, but will be displayed for at least 1 second if
+         the operation takes longer than 2 seconds. By specifying a minimum duration,
+         you can avoid hiding the message too fast if the operation finishes right
+         after the delay interval.
         */
-        case unknown(delay: TimeInterval, minimum: TimeInterval)
+        case indefinite(delay: TimeInterval, minimum: TimeInterval)
     }
     
     /**
