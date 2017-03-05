@@ -147,7 +147,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     func install() {
         guard let containerView = presentationContext.viewValue() else { return }
         if let windowViewController = presentationContext.viewControllerValue() as? WindowViewController {
-            windowViewController.install(becomeKey: config.becomeKeyWindow)
+            windowViewController.install(becomeKey: becomeKeyWindow)
         }
         do {
             maskingView.translatesAutoresizingMaskIntoConstraints = false
@@ -221,8 +221,8 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
                     // a tap handler prevents interaction with underlying views.
                     maskingView.tappedHander = { }
                 }
+                maskingView.accessibilityViewIsModal = true
             }
-            
             switch config.dimMode {
             case .none:
                 break
@@ -233,7 +233,19 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
             }
         }
     }
-    
+
+    private var becomeKeyWindow: Bool {
+        if config.becomeKeyWindow == .some(true) { return true }
+        switch config.dimMode {
+        case .gray, .color:
+            // Should become key window in modal presentation style
+            // for proper voice over handling.
+            return true
+        case .none:
+            return false
+        }
+    }
+
     private func viewInterferesWithStatusBar(_ view: UIView) -> Bool {
         guard let window = view.window else { return false }
         let statusBarFrame = UIApplication.shared.statusBarFrame

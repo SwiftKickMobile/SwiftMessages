@@ -259,7 +259,7 @@ open class SwiftMessages: PresenterDelegate {
          > Most of the time, your app’s main window is the key window, but UIKit
          > may designate a different window as needed.
          */
-        public var becomeKeyWindow = false
+        public var becomeKeyWindow: Bool?
     }
     
     /**
