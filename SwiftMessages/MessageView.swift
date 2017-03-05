@@ -23,7 +23,18 @@ open class MessageView: BaseView, Identifiable {
     func buttonTapped(_ button: UIButton) {
         buttonTapHandler?(button)
     }
-    
+
+    /*
+     MARK: - Touch handling
+     */
+
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        // Only accept touches within the background view. Anything outside of the
+        // background view's bounds should be transparent and does not need to receive
+        // touches. This helps with tap dismissal when using `DimMode.gray` and `DimMode.color`.
+        return backgroundView.point(inside: point, with: event)
+    }
+
     /*
      MARK: - IB outlets
      */
