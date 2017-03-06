@@ -23,7 +23,20 @@ open class MessageView: BaseView, Identifiable {
     func buttonTapped(_ button: UIButton) {
         buttonTapHandler?(button)
     }
-    
+
+    /*
+     MARK: - Touch handling
+     */
+
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        // Only accept touches within the background view. Anything outside of the
+        // background view's bounds should be transparent and does not need to receive
+        // touches. This helps with tap dismissal when using `DimMode.gray` and `DimMode.color`.
+        return backgroundView == self
+            ? super.point(inside: point, with: event)
+            : backgroundView.point(inside: point, with: event)
+    }
+
     /*
      MARK: - IB outlets
      */
@@ -59,8 +72,15 @@ open class MessageView: BaseView, Identifiable {
      */
     
     open var id: String {
-        return "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+        get {
+            return customId ?? "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+        }
+        set {
+            customId = newValue
+        }
     }
+    
+    private var customId: String?
 }
 
 /*
@@ -137,6 +157,36 @@ extension MessageView {
      */
     public static func viewFromNib<T: MessageView>(layout: Layout, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) -> T {
         return try! SwiftMessages.viewFromNib(named: layout.rawValue, bundle: bundle, filesOwner: filesOwner)
+    }
+}
+
+/*
+ MARK: - Layout adjustments
+
+ This extention provides a few convenience functions for adjusting the layout.
+ */
+
+extension MessageView {
+    @available(iOS 9, *)
+    /**
+     Constrains the image view to a specified size. By default, the size of the
+     image view is determined by its `intrinsicContentSize`.
+     
+     - Parameter size: The size to be translated into Auto Layout constraints.
+     - Parameter contentMode: The optional content mode to apply.
+     */
+    public func configureIcon(withSize size: CGSize, contentMode: UIViewContentMode? = nil) {
+        var views: [UIView] = []
+        if let iconImageView = iconImageView { views.append(iconImageView) }
+        if let iconLabel = iconLabel { views.append(iconLabel) }
+        views.forEach {
+            let constraints = [$0.heightAnchor.constraint(equalToConstant: size.height),
+                               $0.widthAnchor.constraint(equalToConstant: size.width)]
+            $0.addConstraints(constraints)
+            if let contentMode = contentMode {
+                $0.contentMode = contentMode
+            }
+        }
     }
 }
 

@@ -1,6 +1,66 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.2.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.1)
+
+### Bug Fixes
+* Fix infinite loop bug introduced in 3.2.0.
+
+## [3.2.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.0)
+
+### Features
+* Added the ability to display messages for an indefinite duration while enforcing a minimum duration using `Duration.indefinite(delay:minimum)`.
+
+This option is useful for displaying a message when a process is taking too long but you don't want to display the message if the process completes in a reasonable amount of time.
+         
+For example, if a URL load is expected to complete in 2 seconds, you may use the value `unknown(delay: 2, minimum 1)` to ensure that the message will not be displayed most of the time, but will be displayed for at least 1 second if the operation takes longer than 2 seconds. By specifying a minimum duration, you can avoid hiding the message too fast if the operation finishes right after the delay interval.
+
+### Bug Fixes
+* Prevent views below the dim view from receiving accessibility focus.
+* Prevent taps in the message view from hiding when using interactive dim mode.
+* Fix memory leak of single message view
+
+## [3.1.5](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.5)
+
+### Bug Fixes
+
+* Fix memory leak of `MessageViews`.
+
+## [3.1.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.4)
+
+### Bug Fixes
+
+* Fixed an issue where UIKit components were being instantiated off the main queue.
+
+## [3.1.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.3)
+
+### Features
+
+* Added the ability to set a custom value on `MessageView.id`. This can be useful for dismissing specific messages using a pre-defined `id`.
+
+## [3.1.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.2)
+
+### Features
+
+* Changed the default behavior when a message is displayed in its own window (such as with `.window` presentation context) to no longer become the key window in order to prevent the keyboard from dismissing. If one needs the message's window to become key, this can be done by setting `SwiftMessages.Config.becomeKeyWindow` to `true`. See 
+
+### Bug Fixes
+
+* Changed the internal logic of hiding a message view to always succeed to work around the problem of the hide animation failing, such as when started while the app is not active.
+* Improved reliability of the automatic adjustments made to avoid message views overlapping the status bar, particularly when using the `.view` presentation context.
+
+## [3.1.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.1)
+
+### Features
+
+* Added a `view` case to `presentationContext` for displaying the message in a specific container view.
+
+## [3.1.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.1.0)
+
+### Features
+
+* Add `eventListeners` option to `SwiftMessages.Config` to specify a list of event listeners to be notified of message show and hide events.
+
 ## [3.0.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.0.3)
 
 ### Features

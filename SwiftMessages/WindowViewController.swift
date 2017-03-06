@@ -31,9 +31,13 @@ class WindowViewController: UIViewController
         window.windowLevel = windowLevel
     }
     
-    func install() {
+    func install(becomeKey: Bool) {
         guard let window = window else { return }
-        window.makeKeyAndVisible()
+        if becomeKey {
+            window.makeKeyAndVisible()            
+        } else {
+            window.isHidden = false
+        }
     }
     
     func uninstall() {

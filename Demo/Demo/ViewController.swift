@@ -54,7 +54,7 @@ class ViewController: UITableViewController {
      */
 
     static func demoBasics() -> Void {
-
+        
         let error = MessageView.viewFromNib(layout: .TabView)
         error.configureTheme(.error)
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
@@ -67,7 +67,7 @@ class ViewController: UITableViewController {
         let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.isHidden = true
-        var warningConfig = SwiftMessages.Config()
+        var warningConfig = SwiftMessages.defaultConfig
         warningConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
 
         let success = MessageView.viewFromNib(layout: .CardView)
@@ -75,7 +75,7 @@ class ViewController: UITableViewController {
         success.configureDropShadow()
         success.configureContent(title: "Success", body: "Something good happened!")
         success.button?.isHidden = true
-        var successConfig = SwiftMessages.Config()
+        var successConfig = SwiftMessages.defaultConfig
         successConfig.presentationStyle = .bottom
         successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
 
@@ -83,7 +83,7 @@ class ViewController: UITableViewController {
         info.configureTheme(.info)
         info.button?.isHidden = true
         info.configureContent(title: "Info", body: "This is a very lengthy and informative info message that wraps across multiple lines and grows in height as needed.")
-        var infoConfig = SwiftMessages.Config()
+        var infoConfig = SwiftMessages.defaultConfig
         infoConfig.presentationStyle = .bottom
         infoConfig.duration = .seconds(seconds: 0.25)
 
@@ -91,14 +91,14 @@ class ViewController: UITableViewController {
         status.backgroundView.backgroundColor = UIColor.purple
         status.bodyLabel?.textColor = UIColor.white
         status.configureContent(body: "A tiny line of text covering the status bar.")
-        var statusConfig = SwiftMessages.Config()
+        var statusConfig = SwiftMessages.defaultConfig
         statusConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
 
         let status2 = MessageView.viewFromNib(layout: .StatusLine)
         status2.backgroundView.backgroundColor = UIColor.orange
         status2.bodyLabel?.textColor = UIColor.white
         status2.configureContent(body: "Switched to light status bar!")
-        var status2Config = SwiftMessages.Config()
+        var status2Config = SwiftMessages.defaultConfig
         status2Config.presentationContext = .window(windowLevel: UIWindowLevelNormal)
         status2Config.preferredStatusBarStyle = .lightContent
 
@@ -120,7 +120,7 @@ class ViewController: UITableViewController {
         messageView.installContentView(imageView)
         messageView.preferredHeight = 120.0
         messageView.configureDropShadow()
-        var config = SwiftMessages.Config()
+        var config = SwiftMessages.defaultConfig
         config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         SwiftMessages.show(config: config, view: messageView)
     }
@@ -130,7 +130,7 @@ class ViewController: UITableViewController {
         view.configureDropShadow()
         view.getTacosAction = { _ in SwiftMessages.hide() }
         view.cancelAction = { SwiftMessages.hide() }
-        var config = SwiftMessages.Config()
+        var config = SwiftMessages.defaultConfig
         config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         config.duration = .forever
         config.presentationStyle = .bottom

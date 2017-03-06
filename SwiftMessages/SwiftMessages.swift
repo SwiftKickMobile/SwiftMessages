@@ -68,6 +68,11 @@ open class SwiftMessages: PresenterDelegate {
          for targeted placement in a view controller heirarchy.
         */
         case viewController(_: UIViewController)
+        
+        /**
+         Displays the message view in the given container view.
+         */
+        case view(_: UIView)
     }
     
     /**
@@ -92,6 +97,36 @@ open class SwiftMessages: PresenterDelegate {
          - Parameter seconds: The number of seconds.
         */
         case seconds(seconds: TimeInterval)
+
+        /**
+         The `indefinite` option is similar to `forever` in the sense that
+         the message view will not be automatically hidden. However, it
+         provides two options that can be useful in some scenarios:
+         
+            - `delay`: wait the specified time interval before displaying
+                       the message. If you hide the message during the delay
+                       interval by calling either `hideAll()` or `hide(id:)`,
+                       the message will not be displayed. This is not the case for
+                       `hide()` because it only acts on a visible message. Messages
+                       shown during another message's delay window are displayed first.
+            - `minimum`: if the message is displayed, ensure that it is displayed
+                         for a minimum time interval. If you explicitly hide the
+                         during this interval, the message will be hidden at the
+                         end of the interval.
+
+         This option is useful for displaying a message when a process is taking
+         too long but you don't want to display the message if the process completes
+         in a reasonable amount of time. The value `indefinite(delay: 0, minimum: 0)`
+         is equivalent to `forever`.
+         
+         For example, if a URL load is expected to complete in 2 seconds, you may use
+         the value `indefinite(delay: 2, minimum 1)` to ensure that the message will not
+         be displayed in most cases, but will be displayed for at least 1 second if
+         the operation takes longer than 2 seconds. By specifying a minimum duration,
+         you can avoid hiding the message too fast if the operation finishes right
+         after the delay interval.
+        */
+        case indefinite(delay: TimeInterval, minimum: TimeInterval)
     }
     
     /**
@@ -108,8 +143,8 @@ open class SwiftMessages: PresenterDelegate {
         /**
          Dim the background behind the message view a gray color.
          
-         - Parameter interactive: Specifies whether or not tapping the
-           dimmed area dismisses the message view.
+         - `interactive`: Specifies whether or not tapping the
+                          dimmed area dismisses the message view.
          */
         case gray(interactive: Bool)
 
@@ -118,28 +153,27 @@ open class SwiftMessages: PresenterDelegate {
          SwiftMessages does not apply alpha transparency to the color, so any alpha
          must be baked into the `UIColor` instance.
          
-         - Parameter color: The color of the dim view.
-         - Parameter interactive: Specifies whether or not tapping the
-         dimmed area dismisses the message view.
+         - `color`: The color of the dim view.
+         - `interactive`: Specifies whether or not tapping the
+                          dimmed area dismisses the message view.
          */
         case color(color: UIColor, interactive: Bool)
     }
-//    
-//    /**
-//     Specifies options for handling duplicate `Identifiable` messages.
-//     */
-//    public enum DeduplicationMode {
-//        
-//        /**
-//         Always remove duplicates.
-//        */
-//        case always
-//
-//        /**
-//         Never remove duplicates.
-//         */
-//        case never
-//    }
+
+    /**
+     Specifies events in the message lifecycle.
+    */
+    public enum Event {
+        case willShow
+        case didShow
+        case willHide
+        case didHide
+    }
+    
+    /**
+     A closure that takes an `Event` as an argument.
+     */
+    public typealias EventListener = (Event) -> Void
     
     /**
      The `Config` struct specifies options for displaying a single message view. It is
@@ -205,6 +239,27 @@ open class SwiftMessages: PresenterDelegate {
          The default is `true`.
         */
         public var ignoreDuplicates = true
+        
+        /**
+         Specifies an optional array of event listeners.
+        */
+        public var eventListeners: [EventListener] = []
+        
+        /**
+         Specifies that in cases where the message is displayed in its own window,
+         such as with `.window` presentation context, the window should become
+         the key window. This option should only be used if the message view
+         needs to receive non-touch events, such as keyboard input. From Apple's
+         documentation https://developer.apple.com/reference/uikit/uiwindow:
+         
+         > Whereas touch events are delivered to the window where they occurred,
+         > events that do not have a relevant coordinate value are delivered to
+         > the key window. Only one window at a time can be the key window, and
+         > you can use a window’s keyWindow property to determine its status.
+         > Most of the time, your app’s main window is the key window, but UIKit
+         > may designate a different window as needed.
+         */
+        public var becomeKeyWindow: Bool?
     }
     
     /**
@@ -219,10 +274,13 @@ open class SwiftMessages: PresenterDelegate {
      - Parameter view: The view to be displayed.
      */
     open func show(config: Config, view: UIView) {
-        syncQueue.async { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let presenter = Presenter(config: config, view: view, delegate: strongSelf)
-            strongSelf.enqueue(presenter: presenter)
+            strongSelf.syncQueue.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.enqueue(presenter: presenter)
+            }
         }
     }
     
@@ -290,6 +348,7 @@ open class SwiftMessages: PresenterDelegate {
         syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.queue.removeAll()
+            strongSelf.delays.ids.removeAll()
             strongSelf.hideCurrent()
         }
     }
@@ -307,6 +366,7 @@ open class SwiftMessages: PresenterDelegate {
                 strongSelf.hideCurrent()
             }
             strongSelf.queue = strongSelf.queue.filter { $0.id != id }
+            strongSelf.delays.ids.remove(id)
         }
     }
     
@@ -321,9 +381,28 @@ open class SwiftMessages: PresenterDelegate {
      and showing the next. Default is 0.5 seconds.
      */
     open var pauseBetweenMessages: TimeInterval = 0.5
-    
+
+    /// Type for keeping track of delayed presentations
+    class Delays {
+
+        var ids = Set<String>()
+
+        func add(presenter: Presenter) {
+            guard let id = presenter.id else { return }
+            ids.insert(id)
+        }
+
+        @discardableResult
+        func remove(presenter: Presenter) -> Bool {
+            guard let id = presenter.id, ids.contains(id) else { return false }
+            ids.remove(id)
+            return true
+        }
+    }
+
     let syncQueue = DispatchQueue(label: "it.swiftkick.SwiftMessages", attributes: [])
     var queue: [Presenter] = []
+    var delays = Delays()
     var current: Presenter? = nil {
         didSet {
             if oldValue != nil {
@@ -335,14 +414,26 @@ open class SwiftMessages: PresenterDelegate {
             }
         }
     }
-    
+
     func enqueue(presenter: Presenter) {
         if presenter.config.ignoreDuplicates, let id = presenter.id {
-            if current?.id == id { return }
+            if current?.id == id && current?.isHiding == false { return }
             if queue.filter({ $0.id == id }).count > 0 { return }
         }
-        queue.append(presenter)
-        dequeueNext()
+        func doEnqueue() {
+            queue.append(presenter)
+            dequeueNext()
+        }
+        if let delay = presenter.delayShow {
+            delays.add(presenter: presenter)
+            syncQueue.asyncAfter(deadline: .now() + delay) {
+                // Don't enqueue if the view has been hidden during the delay window.
+                if !self.delays.remove(presenter: presenter) { return }
+                doEnqueue()
+            }
+        } else {
+            doEnqueue()
+        }
     }
     
     func dequeueNext() {
@@ -350,6 +441,7 @@ open class SwiftMessages: PresenterDelegate {
         guard queue.count > 0 else { return }
         let current = queue.removeFirst()
         self.current = current
+        current.showDate = Date()
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             do {
@@ -372,7 +464,8 @@ open class SwiftMessages: PresenterDelegate {
     
     func hideCurrent() {
         guard let current = current else { return }
-        DispatchQueue.main.async { [weak self] in
+        let delay = current.delayHide ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             current.hide { (completed) in
                 guard completed else { return }
                 guard let strongSelf = self else { return }
@@ -384,15 +477,15 @@ open class SwiftMessages: PresenterDelegate {
         }
     }
     
-    fileprivate var autohideToken: AnyObject?
+    fileprivate weak var autohideToken: AnyObject?
     
     fileprivate func queueAutoHide() {
         guard let current = current else { return }
         autohideToken = current
         if let pauseDuration = current.pauseDuration {
             let delayTime = DispatchTime.now() + pauseDuration
-            syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self] in
-                guard let strongSelf = self else { return }
+            syncQueue.asyncAfter(deadline: delayTime, execute: { [weak self, weak current] in
+                guard let strongSelf = self, let current = current else { return }
                 // Make sure we've still got a green light to auto-hide.
                 if strongSelf.autohideToken !== current { return }
                 strongSelf.hide(presenter: current)
@@ -411,6 +504,7 @@ open class SwiftMessages: PresenterDelegate {
                 strongSelf.hideCurrent()
             }
             strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
+            strongSelf.delays.remove(presenter: presenter)
         }
     }
     
