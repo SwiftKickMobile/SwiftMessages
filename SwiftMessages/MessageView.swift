@@ -32,7 +32,9 @@ open class MessageView: BaseView, Identifiable {
         // Only accept touches within the background view. Anything outside of the
         // background view's bounds should be transparent and does not need to receive
         // touches. This helps with tap dismissal when using `DimMode.gray` and `DimMode.color`.
-        return backgroundView.point(inside: point, with: event)
+        return backgroundView == self
+            ? super.point(inside: point, with: event)
+            : backgroundView.point(inside: point, with: event)
     }
 
     /*
