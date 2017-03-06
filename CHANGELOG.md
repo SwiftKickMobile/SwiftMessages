@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.2.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.1)
+
+### Bug Fixes
+* Fix infinite loop bug introduced in 3.2.0.
+
 ## [3.2.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.0)
 
 ### Features
