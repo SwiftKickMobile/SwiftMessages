@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.0)
+
+### Features
+* Add proper support for VoiceOver. See the [Accessibility section](README.md#accessibility) of the readme.
+
 ## [3.2.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.2.1)
 
 ### Bug Fixes

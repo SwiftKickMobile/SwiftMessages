@@ -10,7 +10,7 @@ import UIKit
 
 /*
  */
-open class MessageView: BaseView, Identifiable {
+open class MessageView: BaseView, Identifiable, AccessibleMessage {
     
     /*
      MARK: - Button tap handler
@@ -81,6 +81,33 @@ open class MessageView: BaseView, Identifiable {
     }
     
     private var customId: String?
+
+    /*
+     MARK: - AccessibleMessage
+     */
+
+    /**
+     An optional prefix for the `accessibilityMessage` that can
+     be used to futher clarify the message for VoiceOver. For example, 
+     the view's background color or icon might convey that a message is
+     a warning, in which case one may specify the value "warning".
+     */
+    private var accessibilityPrefix: String?
+
+    open var accessibilityMessage: String? {
+        let components = [accessibilityPrefix, titleLabel?.text, bodyLabel?.text].flatMap { $0 }
+        guard components.count > 0 else { return nil }
+        return components.joined(separator: ", ")
+    }
+
+    public var accessibilityElement: NSObject? {
+        return backgroundView
+    }
+
+    open var additonalAccessibilityElements: [NSObject]? {
+        if let button = button { return [button] }
+        return nil
+    }
 }
 
 /*
@@ -345,3 +372,4 @@ extension MessageView {
         iconLabel?.isHidden = iconLabel?.text == nil
     }
 }
+

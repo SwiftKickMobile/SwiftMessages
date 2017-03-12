@@ -158,6 +158,26 @@ open class SwiftMessages: PresenterDelegate {
                           dimmed area dismisses the message view.
          */
         case color(color: UIColor, interactive: Bool)
+
+        public var interactive: Bool {
+            switch self {
+            case .gray(let interactive):
+                return interactive
+            case .color(_, let interactive):
+                return interactive
+            case .none:
+                return false
+            }
+        }
+
+        public var modal: Bool {
+            switch self {
+            case .gray, .color:
+                return true
+            case .none:
+                return false
+            }
+        }
     }
 
     /**
@@ -260,6 +280,12 @@ open class SwiftMessages: PresenterDelegate {
          > may designate a different window as needed.
          */
         public var becomeKeyWindow: Bool?
+
+        /**
+         The `dimMode` background will use this accessibility
+         label, e.g. "dismiss" when the `interactive` option is used.
+        */
+        public var dimModeAccessibilityLabel: String = "dismiss"
     }
     
     /**

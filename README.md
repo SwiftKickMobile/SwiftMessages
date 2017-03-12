@@ -147,6 +147,18 @@ config.duration = .forever
 SwiftMessages.show(config: config, view: view)
 ````
 
+### Accessibility
+
+SwiftMessages provides excellent VoiceOver support out-of-the-box.
+
+* The title and body of the message are combined into a single announcement when the message is shown. The `MessageView.accessibilityPrefix` property can be set to prepend additional clarifying text to the announcement.
+
+    Sometimes, a message may contain important visual cues that aren't captured in the title or body. For example, a message may rely on a yellow background to convey a warning rather than having the word "warning" in the title or body. In this case, it might be helpful to set `MessageView.accessibilityPrefix = "warning"`.
+    
+* If the message is shown with a dim view using `config.dimMode`, elements below the dim view are not focusable until the message is hidden. If `config.dimMode.interactive == true`, the dim view itself will be focusable and read out "dismiss" followed by "button". The former text can be customized by setting the `config.dimModeAccessibilityLabel` property.
+
+See the `AccessibleMessage` protocol for implementing proper accessibility support in custom views.
+
 ### Customization
 
 `MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
