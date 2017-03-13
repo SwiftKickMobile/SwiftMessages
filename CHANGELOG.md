@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.1)
+
+### Bug Fixes
+* Fix regression where the UI was being blocked when using `DimMode.none`.
+
 ## [3.3.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.0)
 
 ### Features

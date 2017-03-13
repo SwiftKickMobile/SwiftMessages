@@ -229,6 +229,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     }
 
     private func installInteractive() {
+        guard config.dimMode.modal else { return }
         if config.dimMode.interactive {
             maskingView.tappedHander = { [weak self] in
                 guard let strongSelf = self else { return }
