@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
+		22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */; };
 		86589D471D64B6E40041676C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86589D461D64B6E40041676C /* BaseView.swift */; };
 		86589D911D692B1C0041676C /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86589D901D692B1B0041676C /* TabView.xib */; };
 		867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867BED201D622793005212E3 /* BackgroundViewable.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
+		22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleMessage.swift; sourceTree = "<group>"; };
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = SOURCE_ROOT; };
 		862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Utils.swift"; sourceTree = "<group>"; };
 		862C0CD91D5A397F00D06168 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 				867BED201D622793005212E3 /* BackgroundViewable.swift */,
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
+				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
 				86DBE0031D75BE800071E51D /* Array+Utils.swift */,
 			);
@@ -143,6 +148,7 @@
 			children = (
 				867E21931D4D50BB00594A41 /* Presenter.swift */,
 				86AAF8171D54F0650031EE32 /* PassthroughView.swift */,
+				22E01F631E74EC8B00ACE19A /* MaskingView.swift */,
 				86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */,
 				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
 				86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */,
@@ -305,7 +311,9 @@
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */,
+				22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
+				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
 				86BBA9041D5E040600FE8F16 /* NSBundle+Utils.swift in Sources */,
 				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
 				86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */,

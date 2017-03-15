@@ -49,7 +49,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
     let config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
-    let maskingView = PassthroughView()
+    let maskingView = MaskingView()
     var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let panRecognizer: UIPanGestureRecognizer
     var translationConstraint: NSLayoutConstraint! = nil
@@ -109,9 +109,26 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         showAnimation() { completed in
             completion(completed)
             if completed {
+                if self.config.dimMode.modal {
+                    self.showAccessibilityFocus()
+                } else {
+                    self.showAccessibilityAnnouncement()
+                }
                 self.config.eventListeners.forEach { $0(.didShow) }
             }
         }
+    }
+
+    private func showAccessibilityAnnouncement() {
+        guard let accessibleMessage = view as? AccessibleMessage,
+            let message = accessibleMessage.accessibilityMessage else { return }
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, message)
+    }
+
+    private func showAccessibilityFocus() {
+        guard let accessibleMessage = view as? AccessibleMessage,
+            let focus = accessibleMessage.accessibilityElement ?? accessibleMessage.additonalAccessibilityElements?.first else { return }
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, focus)
     }
     
     func getPresentationContext() throws -> PresentationContext {
@@ -207,31 +224,56 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         if config.interactiveHide {
             view.addGestureRecognizer(panRecognizer)
         }
-        do {
-            
-            func setupInteractive(_ interactive: Bool) {
-                if interactive {
-                    maskingView.tappedHander = { [weak self] in
-                        guard let strongSelf = self else { return }
-                        strongSelf.interactivelyHidden = true
-                        strongSelf.delegate?.hide(presenter: strongSelf)
-                    }
-                } else {
-                    // There's no action to take, but the presence of
-                    // a tap handler prevents interaction with underlying views.
-                    maskingView.tappedHander = { }
-                }
-                maskingView.accessibilityViewIsModal = true
+        installInteractive()
+        installAccessibility()
+    }
+
+    private func installInteractive() {
+        guard config.dimMode.modal else { return }
+        if config.dimMode.interactive {
+            maskingView.tappedHander = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.interactivelyHidden = true
+                strongSelf.delegate?.hide(presenter: strongSelf)
             }
-            switch config.dimMode {
-            case .none:
-                break
-            case .gray(let interactive):
-                setupInteractive(interactive)
-            case .color(_, let interactive):
-                setupInteractive(interactive)
+        } else {
+            // There's no action to take, but the presence of
+            // a tap handler prevents interaction with underlying views.
+            maskingView.tappedHander = { }
+        }
+    }
+
+    func installAccessibility() {
+        var elements: [NSObject] = []
+        if let accessibleMessage = view as? AccessibleMessage {
+            if let message = accessibleMessage.accessibilityMessage {
+                let element = accessibleMessage.accessibilityElement ?? view
+                element.isAccessibilityElement = true
+                if element.accessibilityLabel == nil {
+                    element.accessibilityLabel = message
+                }
+                elements.append(element)
+            }
+            if let additional = accessibleMessage.additonalAccessibilityElements {
+                elements += additional
             }
         }
+        if config.dimMode.interactive {
+            let dismissView = UIView(frame: maskingView.bounds)
+            dismissView.translatesAutoresizingMaskIntoConstraints = true
+            dismissView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            maskingView.addSubview(dismissView)
+            maskingView.sendSubview(toBack: dismissView)
+            dismissView.isUserInteractionEnabled = false
+            dismissView.isAccessibilityElement = true
+            dismissView.accessibilityLabel = config.dimModeAccessibilityLabel
+            dismissView.accessibilityTraits = UIAccessibilityTraitButton
+            elements.append(dismissView)
+        }
+        if config.dimMode.modal {
+            maskingView.accessibilityViewIsModal = true
+        }
+        maskingView.accessibleElements = elements
     }
 
     private var becomeKeyWindow: Bool {
@@ -239,7 +281,7 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         switch config.dimMode {
         case .gray, .color:
             // Should become key window in modal presentation style
-            // for proper voice over handling.
+            // for proper VoiceOver handling.
             return true
         case .none:
             return false
