@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.2)
+
+### Improvements
+* `MessageView` is smarter about including additional accessibility views for cases where you've added accessible elements to the view. Previously only the `button` was included. Now all views where `isAccessibilityElement == true`.
+
+    Note that all nib files now have `isAccessibilityElement == false` for `titleLabel`, `bodyLabel` and `iconLabel` (`titleLabel` and `bodyLabel` are read out as part of the overall message view's text). If any of these need to be directly accessible, then copy the nib file into your project and select "Enabled" in the Accessibility section of the Identity Inspector.
+
 ## [3.3.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.1)
 
 ### Bug Fixes

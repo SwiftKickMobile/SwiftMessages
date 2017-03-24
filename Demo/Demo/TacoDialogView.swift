@@ -24,7 +24,7 @@ class TacoDialogView: MessageView {
     fileprivate var count = 1 {
         didSet {
             iconLabel?.text = String(repeating: "🌮", count: count)//String(count: count, repeatedValue: )
-            titleLabel?.text = TacoDialogView.tacoTitles[count] ?? "\(count)" + String(repeating: "!", count: count)
+            bodyLabel?.text = TacoDialogView.tacoTitles[count] ?? "\(count)" + String(repeating: "!", count: count)
         }
     }
     
