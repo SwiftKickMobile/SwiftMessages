@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.3)
+
+### Bug Fixes
+* Fix an issue where rapidly showing and hiding messages could result in messages becoming orphaned on-screen.
+
 ## [3.3.2](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.2)
 
 ### Improvements

@@ -497,6 +497,7 @@ open class SwiftMessages: PresenterDelegate {
                 guard let strongSelf = self else { return }
                 strongSelf.syncQueue.async(execute: {
                     guard let strongSelf = self else { return }
+                    guard strongSelf.current === current else { return }
                     strongSelf.current = nil
                 })
             }
