@@ -73,7 +73,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     
     open var id: String {
         get {
-            return customId ?? "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+            return customId ?? "MessageView:title=\(String(describing: titleLabel?.text)), body=\(String(describing: bodyLabel?.text))"
         }
         set {
             customId = newValue
