@@ -73,7 +73,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     
     open var id: String {
         get {
-            return customId ?? "MessageView:title=\(titleLabel?.text), body=\(bodyLabel?.text)"
+            return customId ?? "MessageView:title=\(String(describing: titleLabel?.text)), body=\(String(describing: bodyLabel?.text))"
         }
         set {
             customId = newValue
@@ -105,8 +105,20 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     }
 
     open var additonalAccessibilityElements: [NSObject]? {
-        if let button = button { return [button] }
-        return nil
+        var elements: [NSObject] = []
+        func getAccessibleSubviews(view: UIView) {
+            for subview in view.subviews {
+                if subview.isAccessibilityElement {
+                    elements.append(subview)
+                } else {
+                    // Only doing this for non-accessible `subviews`, which avoids
+                    // including button labels, etc.
+                    getAccessibleSubviews(view: subview)
+                }
+            }
+        }
+        getAccessibleSubviews(view: self.backgroundView)
+        return elements
     }
 }
 

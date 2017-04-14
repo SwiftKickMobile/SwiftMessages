@@ -489,7 +489,7 @@ open class SwiftMessages: PresenterDelegate {
     }
     
     func hideCurrent() {
-        guard let current = current else { return }
+        guard let current = current, !current.isHiding else { return }
         let delay = current.delayHide ?? 0
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             current.hide { (completed) in
@@ -497,6 +497,7 @@ open class SwiftMessages: PresenterDelegate {
                 guard let strongSelf = self else { return }
                 strongSelf.syncQueue.async(execute: {
                     guard let strongSelf = self else { return }
+                    guard strongSelf.current === current else { return }
                     strongSelf.current = nil
                 })
             }
