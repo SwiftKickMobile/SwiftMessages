@@ -159,11 +159,24 @@ open class SwiftMessages: PresenterDelegate {
          */
         case color(color: UIColor, interactive: Bool)
 
+        /**
+         Dim the background behind the message view using a blur effect with
+         the given style
+
+         - `style`: The blur effect style to use
+         - `alpha`: The alpha level of the blur
+         - `interactive`: Specifies whether or not tapping the
+         dimmed area dismisses the message view.
+         */
+        case blur(style: UIBlurEffectStyle, alpha: CGFloat, interactive: Bool)
+
         public var interactive: Bool {
             switch self {
             case .gray(let interactive):
                 return interactive
             case .color(_, let interactive):
+                return interactive
+            case .blur (_, _, let interactive):
                 return interactive
             case .none:
                 return false
@@ -172,7 +185,7 @@ open class SwiftMessages: PresenterDelegate {
 
         public var modal: Bool {
             switch self {
-            case .gray, .color:
+            case .gray, .color, .blur:
                 return true
             case .none:
                 return false

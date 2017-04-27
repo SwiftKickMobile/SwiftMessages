@@ -13,6 +13,18 @@ class MaskingView: PassthroughView {
 
     var accessibleElements: [NSObject] = []
 
+    weak var backgroundView: UIView? {
+        didSet {
+            oldValue?.removeFromSuperview()
+            if let view = backgroundView {
+                view.frame = bounds
+                view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                addSubview(view)
+                sendSubview(toBack: view)
+            }
+        }
+    }
+
     override func accessibilityElementCount() -> Int {
         return accessibleElements.count
     }

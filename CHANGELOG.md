@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.4)
+
+### Features
+* Add `blur` dim mode option.
+
 ## [3.3.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.3)
 
 ### Bug Fixes

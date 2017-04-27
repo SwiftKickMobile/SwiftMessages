@@ -113,6 +113,10 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         case 1:
             config.dimMode = .gray(interactive: false)
         case 2:
+            config.dimMode = .color(color: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 0.4953446062), interactive: false)
+        case 3:
+            config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: false)
+        case 4:
             config.dimMode = .gray(interactive: true)
         default:
             break
