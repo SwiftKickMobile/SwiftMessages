@@ -34,7 +34,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
         // touches. This helps with tap dismissal when using `DimMode.gray` and `DimMode.color`.
         return backgroundView == self
             ? super.point(inside: point, with: event)
-            : backgroundView.point(inside: point, with: event)
+            : backgroundView.point(inside: convert(point, to: backgroundView), with: event)
     }
 
     /*
