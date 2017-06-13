@@ -63,12 +63,10 @@ class Presenter: NSObject, UIGestureRecognizerDelegate {
         panRecognizer.addTarget(self, action: #selector(Presenter.pan(_:)))
         panRecognizer.delegate = self
         maskingView.clipsToBounds = true
+        id = (view as? Identifiable)?.id
     }
     
-    var id: String? {
-        let identifiable = view as? Identifiable
-        return identifiable?.id
-    }
+    var id: String?
     
     var pauseDuration: TimeInterval? {
         let duration: TimeInterval?

@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 ## [3.3.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.4)
 
 ### Features
-* Add `blur` dim mode option.
+* #89 Add `blur` dim mode option.
+
+### Bug Fixes
+* #98 Fix touch handling in message view's background view.
+* #97 Fix main thread checker warning 
 
 ## [3.3.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.3)
 
