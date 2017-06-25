@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.4.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.0)
+
+### Features
+* Added `.center` presentation style with a physics-based dismissal gesture.
+* Added `.custom(animator:)` presentation style, where you provide an instance of the `Animator` protocol. The `TopBottomAnimation` and `CenterAnimation` animations both implement `Animator` and may be subclassed (configuration options will be added in a future release). `PhysicsPanHandler` class to provide a physics-based dismissal gesture.
+* Added `.centered` message view layout with elements centered and arranged vertically.
+* Added `configureBackgroundView(width:)` and `configureBackgroundView(sideMargin:)` convenience methods to `MessageView`.
+
 ## [3.3.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.4)
 
 ### Features

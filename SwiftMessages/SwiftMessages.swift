@@ -15,7 +15,7 @@ private let globalInstance = SwiftMessages()
  It behaves like a queue, only showing one message at a time. Message views that
  implement the `Identifiable` protocol (as `MessageView` does) will have duplicates removed.
  */
-open class SwiftMessages: PresenterDelegate {
+open class SwiftMessages {
     
     /**
      Specifies whether the message view is displayed at the top or bottom
@@ -32,6 +32,16 @@ open class SwiftMessages: PresenterDelegate {
          Message view slides up from the bottom.
          */
         case bottom
+
+        /**
+         Message view fades into the center.
+         */
+        case center
+
+        /**
+         User-defined animation
+        */
+        case custom(animator: Animator)
     }
 
     /**
@@ -480,6 +490,10 @@ open class SwiftMessages: PresenterDelegate {
         guard queue.count > 0 else { return }
         let current = queue.removeFirst()
         self.current = current
+        // Set `autohideToken` before the animation starts in case
+        // the dismiss gesture begins before we've queued the autohide
+        // block on animation completion.
+        self.autohideToken = current
         current.showDate = Date()
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
@@ -493,7 +507,9 @@ open class SwiftMessages: PresenterDelegate {
                         })
                         return
                     }
-                    strongSelf.queueAutoHide()
+                    if current === strongSelf.autohideToken {
+                        strongSelf.queueAutoHide()
+                    }
                 }
             } catch {
                 strongSelf.current = nil
@@ -532,34 +548,52 @@ open class SwiftMessages: PresenterDelegate {
             })
         }
     }
-    
-    /*
-     MARK: - PresenterDelegate
-     */
-    
+}
+
+
+/*
+ MARK: - PresenterDelegate
+ */
+
+extension SwiftMessages: PresenterDelegate {
+
     func hide(presenter: Presenter) {
+        if let current = current, presenter === current {
+            hideCurrent()
+        }
+        queue = queue.filter { $0 !== presenter }
+        delays.remove(presenter: presenter)
+    }
+
+    public func hide(animator: Animator) {
         syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
-            if let current = strongSelf.current, presenter === current {
-                strongSelf.hideCurrent()
+            if let presenter = strongSelf.presenter(forAnimator: animator) {
+                strongSelf.hide(presenter: presenter)
             }
-            strongSelf.queue = strongSelf.queue.filter { $0 !== presenter }
-            strongSelf.delays.remove(presenter: presenter)
         }
     }
-    
-    func panStarted(presenter: Presenter) {
+
+    public func panStarted(animator: Animator) {
         autohideToken = nil
     }
-    
-    func panEnded(presenter: Presenter) {
+
+    public func panEnded(animator: Animator) {
         queueAutoHide()
+    }
+
+    private func presenter(forAnimator animator: Animator) -> Presenter? {
+        if let current = current, animator === current.animator {
+            return current
+        }
+        let queued = queue.filter { $0.animator === animator }
+        return queued.first
     }
 }
 
 /**
  MARK: - Creating views from nibs
- 
+
  This extension provides several convenience functions for instantiating views from nib files.
  SwiftMessages provides several default nib files in the Resources folder that can be
  drag-and-dropped into a project as a starting point and modified.

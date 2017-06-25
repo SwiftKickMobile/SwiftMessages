@@ -44,9 +44,10 @@ public enum IconStyle {
     case `default`
     case light
     case subtle
+    case none
     
     /// Returns the image for the given theme
-    public func image(theme: Theme) -> UIImage {
+    public func image(theme: Theme) -> UIImage? {
         switch (theme, self) {
         case (.info, .default): return Icon.Info.image
         case (.info, .light): return Icon.InfoLight.image
@@ -60,6 +61,7 @@ public enum IconStyle {
         case (.error, .default): return Icon.Error.image
         case (.error, .light): return Icon.ErrorLight.image
         case (.error, .subtle): return Icon.ErrorSubtle.image
+        default: return nil
         }
     }
 }

@@ -17,6 +17,7 @@ class MaskingView: PassthroughView {
         didSet {
             oldValue?.removeFromSuperview()
             if let view = backgroundView {
+                view.isUserInteractionEnabled = false
                 view.frame = bounds
                 view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 addSubview(view)

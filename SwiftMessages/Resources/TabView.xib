@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +17,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8l1-Wp-omF" userLabel="Background view">
-                    <rect key="frame" x="18" y="0.0" width="572" height="123"/>
+                    <rect key="frame" x="18" y="0.0" width="564" height="123"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bdc-by-rjM" userLabel="Content view">
-                            <rect key="frame" x="20" y="28" width="532" height="67"/>
+                            <rect key="frame" x="20" y="28" width="524" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09t-tr-Q8T" userLabel="Icon label">
                                     <rect key="frame" x="0.0" y="11" width="43" height="45.5"/>
@@ -35,7 +35,7 @@
                                     <rect key="frame" x="53" y="16.5" width="33" height="34"/>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="h4V-Az-Wau">
-                                    <rect key="frame" x="96" y="14.5" width="369" height="38.5"/>
+                                    <rect key="frame" x="96" y="14.5" width="361" height="38.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxN-E1-uzx">
                                             <rect key="frame" x="0.0" y="0.0" width="48" height="20.5"/>
@@ -60,7 +60,7 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBc-Qb-BBh">
-                                    <rect key="frame" x="475" y="18.5" width="57" height="30"/>
+                                    <rect key="frame" x="467" y="18.5" width="57" height="30"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="[Button]"/>
                                 </button>
@@ -70,8 +70,8 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="bdc-by-rjM" firstAttribute="top" secondItem="8l1-Wp-omF" secondAttribute="topMargin" constant="20" id="3Q1-Vl-OFg"/>
-                        <constraint firstItem="bdc-by-rjM" firstAttribute="leading" secondItem="8l1-Wp-omF" secondAttribute="leading" constant="20" id="ZeN-Yg-DDA"/>
-                        <constraint firstAttribute="trailing" secondItem="bdc-by-rjM" secondAttribute="trailing" constant="20" id="Zuf-gb-AgS"/>
+                        <constraint firstItem="bdc-by-rjM" firstAttribute="leading" secondItem="8l1-Wp-omF" secondAttribute="leading" priority="900" constant="20" id="ZeN-Yg-DDA"/>
+                        <constraint firstAttribute="trailing" secondItem="bdc-by-rjM" secondAttribute="trailing" priority="900" constant="20" id="Zuf-gb-AgS"/>
                         <constraint firstAttribute="bottomMargin" secondItem="bdc-by-rjM" secondAttribute="bottom" constant="20" id="jri-TS-nOa"/>
                     </constraints>
                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
@@ -84,7 +84,7 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="8l1-Wp-omF" secondAttribute="trailing" constant="10" id="9zp-kw-f7h"/>
+                <constraint firstItem="8l1-Wp-omF" firstAttribute="centerX" secondItem="Kgd-fq-RpT" secondAttribute="centerX" id="7tH-rr-EQZ"/>
                 <constraint firstItem="8l1-Wp-omF" firstAttribute="top" secondItem="Kgd-fq-RpT" secondAttribute="top" id="WBW-gJ-lIP"/>
                 <constraint firstAttribute="bottom" secondItem="8l1-Wp-omF" secondAttribute="bottom" id="cYv-6k-QSZ"/>
                 <constraint firstItem="8l1-Wp-omF" firstAttribute="leading" secondItem="Kgd-fq-RpT" secondAttribute="leadingMargin" constant="10" id="tVC-3b-F2x"/>

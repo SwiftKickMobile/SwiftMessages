@@ -6,11 +6,11 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-SwiftMessages is a message bar library for iOS. It's very flexible. And written in Swift.
+SwiftMessages is a message view library for iOS. It's very flexible. And written in Swift.
 
-Message bars can be displayed across the top or bottom of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And much more!
+Message views can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
 
-In addition to numerous configuration options, SwiftMessages provides several attractive layouts and themes. But SwiftMessages was also built to be designer-friendly, which means you can fully and easily customize the view:
+In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
 * Copy one of the included nib files into your project and change it.
 * Subclass `MessageView` and add elements, etc.
@@ -35,14 +35,8 @@ Add one of the following lines to your Podfile depending on your Swift version:
 ````ruby
 # Swift 3.0 - Xcode 8
 pod 'SwiftMessages'
-
-# Swift 2.3 - Xcode 8
-pod 'SwiftMessages', '~> 2.0.0'
-
-# Swift 2.2 - Xcode 7.3.1
-pod 'SwiftMessages', '~> 1.1.4'
 ````
-__Note that Swift 2.3 and Swift 3.0 require minimum CocoaPods version 1.1.0__.
+__Note that the minimum CocoaPods version is 1.1.0__.
 
 ### Carthage
 
@@ -51,12 +45,6 @@ Add one of the following lines to your Cartfile depending on your Swift version:
 ````ruby
 # Swift 3.0 - Xcode 8
 github "SwiftKickMobile/SwiftMessages"
-
-# Swift 2.3 - Xcode 8
-github "SwiftKickMobile/SwiftMessages" ~> 2.0.0
-
-# Swift 2.2 - Xcode 7.3.1
-github "SwiftKickMobile/SwiftMessages" ~> 1.1.4
 ````
 
 ## Usage

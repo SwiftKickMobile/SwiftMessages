@@ -168,7 +168,7 @@ extension BaseView {
         layer.masksToBounds = false
         updateShadowPath()
     }
-    
+
     private func updateShadowPath() {
         layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
     }

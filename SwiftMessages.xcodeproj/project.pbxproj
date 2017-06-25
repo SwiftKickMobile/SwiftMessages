@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2244656E1EF1D66800C50413 /* CenterAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244656D1EF1D66800C50413 /* CenterAnimation.swift */; };
+		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
+		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
+		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
+		22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */; };
+		22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */; };
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
 		22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */; };
 		86589D471D64B6E40041676C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86589D461D64B6E40041676C /* BaseView.swift */; };
@@ -46,6 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2244656D1EF1D66800C50413 /* CenterAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterAnimation.swift; sourceTree = "<group>"; };
+		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
+		22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CenteredView.xib; path = Resources/CenteredView.xib; sourceTree = "<group>"; };
+		22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsPanHandler.swift; sourceTree = "<group>"; };
 		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
 		22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleMessage.swift; sourceTree = "<group>"; };
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = SOURCE_ROOT; };
@@ -97,6 +109,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2244656C1EF1D62700C50413 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */,
+				2244656D1EF1D66800C50413 /* CenterAnimation.swift */,
+				22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */,
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
 		862C0CD81D5A396900D06168 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +127,7 @@
 				86BBA8F81D5E01FC00FE8F16 /* CardView.xib */,
 				86589D901D692B1B0041676C /* TabView.xib */,
 				862C0CDB1D5A397F00D06168 /* StatusLine.xib */,
+				22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */,
 				862C0CE21D5A3A0D00D06168 /* MessageViewIOS8.xib */,
 			);
 			name = Resources;
@@ -121,6 +144,8 @@
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
 				86DBE0031D75BE800071E51D /* Array+Utils.swift */,
+				2298C2061EE480D000E2DDC1 /* Animator.swift */,
+				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -163,6 +188,7 @@
 				864495581D4FA0AD0056EB2A /* SwiftMessages.swift */,
 				867E21821D4D025200594A41 /* MessageView.swift */,
 				862C0CD81D5A396900D06168 /* Resources */,
+				2244656C1EF1D62700C50413 /* Animations */,
 				864495571D4F7C490056EB2A /* Base */,
 				867E218E1D4D3DFD00594A41 /* Internal */,
 				86B48B031D5A41E500063E2B /* Support */,
@@ -290,6 +316,7 @@
 				E6E49F941D70A395006CB883 /* Images.xcassets in Resources */,
 				86589D911D692B1C0041676C /* TabView.xib in Resources */,
 				E6E49F921D70A349006CB883 /* StatusLine.xib in Resources */,
+				22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,9 +337,13 @@
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
+				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */,
 				22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */,
+				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
+				22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */,
+				2244656E1EF1D66800C50413 /* CenterAnimation.swift in Sources */,
 				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
 				86BBA9041D5E040600FE8F16 /* NSBundle+Utils.swift in Sources */,
 				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
@@ -320,6 +351,7 @@
 				86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */,
 				86BBA9051D5E040C00FE8F16 /* Theme.swift in Sources */,
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
+				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
