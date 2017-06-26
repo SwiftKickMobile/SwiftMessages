@@ -20,7 +20,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     /// configured to call this tap handler on `.TouchUpInside`.
     open var buttonTapHandler: ((_ button: UIButton) -> Void)?
     
-    func buttonTapped(_ button: UIButton) {
+    @objc func buttonTapped(_ button: UIButton) {
         buttonTapHandler?(button)
     }
 
@@ -227,7 +227,7 @@ extension MessageView {
         views.forEach {
             let constraints = [$0.heightAnchor.constraint(equalToConstant: size.height),
                                $0.widthAnchor.constraint(equalToConstant: size.width)]
-            constraints.forEach { $0.priority = 999 }
+            constraints.forEach { $0.priority = UILayoutPriority(rawValue: 999) }
             $0.addConstraints(constraints)
             if let contentMode = contentMode {
                 $0.contentMode = contentMode

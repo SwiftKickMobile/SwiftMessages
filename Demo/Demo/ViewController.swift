@@ -195,7 +195,7 @@ class TitleBodyCell: UITableViewCell {
     func configureBodyTextStyle() {
         let bodyStyle = NSMutableParagraphStyle()
         bodyStyle.lineSpacing = 5.0
-        bodyLabel.attributedText = NSAttributedString(string: bodyLabel.text ?? "", attributes: [NSParagraphStyleAttributeName : bodyStyle])
+        bodyLabel.attributedText = NSAttributedString(string: bodyLabel.text ?? "", attributes: [NSAttributedStringKey.paragraphStyle : bodyStyle])
     }
 }
 

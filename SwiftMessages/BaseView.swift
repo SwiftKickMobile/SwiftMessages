@@ -45,7 +45,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      MARK: - Initialization
      */
     
-   public required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundView = self
     }
@@ -100,7 +100,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         return tapRecognizer
     }()
     
-    func tapped() {
+    @objc func tapped() {
         tapHandler?(self)
     }
     
@@ -126,8 +126,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5.0
     
     @IBInspectable open var statusBarOffset: CGFloat = 20.0
-    
-    
+        
     /*
      MARK: - Setting preferred height
      */
