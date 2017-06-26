@@ -1,3 +1,6 @@
+
+### 🔥 SwiftMessages 3.4.0-beta now supports centered messages!
+
 # SwiftMessages
 
 [![Twitter: @TimothyMoose](https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat)](https://twitter.com/TimothyMoose)
