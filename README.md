@@ -1,5 +1,5 @@
 
-### 🔥 SwiftMessages 3.4.0-beta now supports centered messages!
+### 🔥 SwiftMessages 3.4.0 now supports centered messages!
 
 # SwiftMessages
 
