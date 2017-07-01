@@ -18,11 +18,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         let view: MessageView
         switch layout.selectedSegmentIndex {
         case 1:
-            view = MessageView.viewFromNib(layout: .cardView)
+            view = MessageView.viewFromNib(layout: .CardView)
         case 2:
-            view = MessageView.viewFromNib(layout: .tabView)
+            view = MessageView.viewFromNib(layout: .TabView)
         case 3:
-            view = MessageView.viewFromNib(layout: .statusLine)
+            view = MessageView.viewFromNib(layout: .StatusLine)
         default:
             view = try! SwiftMessages.viewFromNib()
         }
@@ -113,13 +113,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch dimMode.selectedSegmentIndex {
         case 1:
-            config.dimMode = .gray(interactive: false)
-        case 2:
-            config.dimMode = .color(color: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 0.4953446062), interactive: false)
-        case 3:
-            config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: false)
-        case 4:
             config.dimMode = .gray(interactive: true)
+        case 2:
+            config.dimMode = .color(color: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 0.7477525685), interactive: true)
+        case 3:
+            config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: true)
         default:
             break
         }
