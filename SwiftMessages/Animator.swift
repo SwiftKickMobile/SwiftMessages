@@ -6,7 +6,7 @@
 //  Copyright © 2017 SwiftKick Mobile. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public typealias AnimationCompletion = (_ completed: Bool) -> Void
 
