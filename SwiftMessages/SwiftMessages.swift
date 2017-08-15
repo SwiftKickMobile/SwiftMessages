@@ -323,13 +323,10 @@ open class SwiftMessages {
      - Parameter view: The view to be displayed.
      */
     open func show(config: Config, view: UIView) {
-        DispatchQueue.main.async { [weak self] in
+        let presenter = Presenter(config: config, view: view, delegate: self)
+        syncQueue.async { [weak self] in
             guard let strongSelf = self else { return }
-            let presenter = Presenter(config: config, view: view, delegate: strongSelf)
-            strongSelf.syncQueue.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.enqueue(presenter: presenter)
-            }
+            strongSelf.enqueue(presenter: presenter)
         }
     }
     

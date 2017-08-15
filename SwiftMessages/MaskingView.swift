@@ -38,4 +38,14 @@ class MaskingView: PassthroughView {
         guard let object = element as? NSObject else { return 0 }
         return accessibleElements.index(of: object) ?? 0
     }
+
+    init() {
+        super.init(frame: CGRect.zero)
+        clipsToBounds = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        clipsToBounds = true
+    }
 }

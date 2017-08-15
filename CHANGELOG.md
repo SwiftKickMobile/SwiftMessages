@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.4.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.1)
+
+### Bug Fixes
+* Fix #113 MessageView not hiding
+* Fix #87 Support manual install
+
 ## [3.4.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.0)
 
 ### Features

@@ -40,7 +40,7 @@ class Presenter: NSObject {
     let config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
-    let maskingView = MaskingView()
+    lazy var maskingView: MaskingView = { return MaskingView() }()
     var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let animator: Animator
 
@@ -50,7 +50,6 @@ class Presenter: NSObject {
         self.delegate = delegate
         self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
         super.init()
-        maskingView.clipsToBounds = true
         id = (view as? Identifiable)?.id
     }
 
