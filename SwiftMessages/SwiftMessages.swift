@@ -592,7 +592,7 @@ extension SwiftMessages {
      - Parameter id: The id of a message that implements `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
-    public func currentOrQueued(id: String) -> UIView? {
+    public func currentOrQueued<T: UIView>(id: String) -> T? {
         return current(id: id) ?? queued(id: id)
     }
 }
