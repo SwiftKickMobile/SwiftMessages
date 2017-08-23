@@ -49,7 +49,12 @@ class Presenter: NSObject {
         self.view = view
         self.delegate = delegate
         self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
-        id = view.id
+        if let identifiable = view as? Identifiable {
+            id = identifiable.id
+        } else {
+            var mutableView = view
+            id = withUnsafePointer(to: &mutableView) { "\($0)" }
+        }
         super.init()
     }
 

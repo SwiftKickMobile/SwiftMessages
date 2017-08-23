@@ -71,7 +71,7 @@ open class MessageView: BaseView, AccessibleMessage {
      MARK: - Identifiable
      */
     
-    override open var id: String {
+    open var id: String {
         get {
             return customId ?? "MessageView:title=\(String(describing: titleLabel?.text)), body=\(String(describing: bodyLabel?.text))"
         }

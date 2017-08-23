@@ -325,7 +325,7 @@ open class SwiftMessages {
     open func show(config: Config, view: UIView) {
         let presenter = Presenter(config: config, view: view, delegate: self)
         messageQueue.sync {
-            self.enqueue(presenter: presenter)
+            enqueue(presenter: presenter)
         }
     }
     
@@ -380,7 +380,7 @@ open class SwiftMessages {
      */
     open func hide() {
         messageQueue.sync {
-            self.hideCurrent()
+            hideCurrent()
         }
     }
 
@@ -405,10 +405,10 @@ open class SwiftMessages {
     open func hide(id: String) {
         messageQueue.sync {
             if id == current?.id {
-                self.hideCurrent()
+                hideCurrent()
             }
-            self.queue = self.queue.filter { $0.id != id }
-            self.delays.ids.remove(id)
+            queue = queue.filter { $0.id != id }
+            delays.ids.remove(id)
         }
     }
     
@@ -547,6 +547,55 @@ open class SwiftMessages {
     }
 }
 
+/*
+ MARK: - Getting the status of messages
+ */
+
+extension SwiftMessages {
+
+    /**
+     Returns a message view with the given `id` if it is currently being shown or hidden.
+
+     - Parameter id: The id of a message that implements `Identifiable`.
+     - Returns: The view with matching id if currently being shown or hidden.
+    */
+    public func current<T: UIView>(id: String) -> T? {
+        var view: T?
+        messageQueue.sync {
+            if let current = current, current.id == id {
+                view = current.view as? T
+            }
+        }
+        return view
+    }
+
+    /**
+     Returns a message view with the given `id` if it is currently in the queue to be shown.
+
+     - Parameter id: The id of a message that implements `Identifiable`.
+     - Returns: The view with matching id if currently queued to be shown.
+     */
+    public func queued<T: UIView>(id: String) -> T? {
+        var view: T?
+        messageQueue.sync {
+            if let queued = queue.first(where: { $0.id == id }) {
+                view = queued as? T
+            }
+        }
+        return view
+    }
+
+    /**
+     Returns a message view with the given `id` if it is currently being 
+     shown, hidden or in the queue to be shown.
+
+     - Parameter id: The id of a message that implements `Identifiable`.
+     - Returns: The view with matching id if currently queued to be shown.
+     */
+    public func currentOrQueued(id: String) -> UIView? {
+        return current(id: id) ?? queued(id: id)
+    }
+}
 
 /*
  MARK: - PresenterDelegate
