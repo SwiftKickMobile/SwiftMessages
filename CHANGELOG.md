@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [3.4.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.1)
 
 ### Bug Fixes
+* Fix #116 for message views that don't adopt the `Identifiable` protocol by using the memory address as the ID.
 * Fix #113 MessageView not hiding
 * Fix #87 Support manual install
 

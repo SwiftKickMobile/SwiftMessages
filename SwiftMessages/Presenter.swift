@@ -49,8 +49,8 @@ class Presenter: NSObject {
         self.view = view
         self.delegate = delegate
         self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
+        id = view.id
         super.init()
-        id = (view as? Identifiable)?.id
     }
 
     private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate) -> Animator {
@@ -67,7 +67,7 @@ class Presenter: NSObject {
         }
     }
 
-    var id: String?
+    var id: String
     
     var pauseDuration: TimeInterval? {
         let duration: TimeInterval?

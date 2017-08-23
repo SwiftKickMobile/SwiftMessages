@@ -20,3 +20,10 @@ import Foundation
 public protocol Identifiable {
     var id: String { get }
 }
+
+extension UIView: Identifiable {
+    public var id: String {
+        var mutableSelf = self
+        return withUnsafePointer(to: &mutableSelf) { "\($0)" }
+    }
+}

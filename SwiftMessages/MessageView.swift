@@ -10,7 +10,7 @@ import UIKit
 
 /*
  */
-open class MessageView: BaseView, Identifiable, AccessibleMessage {
+open class MessageView: BaseView, AccessibleMessage {
     
     /*
      MARK: - Button tap handler
@@ -71,7 +71,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
      MARK: - Identifiable
      */
     
-    open var id: String {
+    override open var id: String {
         get {
             return customId ?? "MessageView:title=\(String(describing: titleLabel?.text)), body=\(String(describing: bodyLabel?.text))"
         }
