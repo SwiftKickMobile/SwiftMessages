@@ -518,7 +518,8 @@ open class SwiftMessages {
 
     fileprivate func hideCurrent() {
         guard let current = current, !current.isHiding else { return }
-        DispatchQueue.main.async { [weak self, weak current] in
+        let delay = current.delayHide ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self, weak current] in
             guard let strongCurrent = current else { return }
             strongCurrent.hide { (completed) in
                 guard completed, let strongSelf = self, let strongCurrent = current else { return }
