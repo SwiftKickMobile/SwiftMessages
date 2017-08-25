@@ -1,6 +1,4 @@
 
-### 🔥 SwiftMessages 3.4.0 now supports centered messages!
-
 # SwiftMessages
 
 [![Twitter: @TimothyMoose](https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat)](https://twitter.com/TimothyMoose)
@@ -150,6 +148,60 @@ SwiftMessages provides excellent VoiceOver support out-of-the-box.
 
 See the `AccessibleMessage` protocol for implementing proper accessibility support in custom views.
 
+### Message Queueing
+
+You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
+
+````swift
+SwiftMessages.pauseBetweenMessages = 1.0
+````
+
+There are a few ways to hide messages programatically:
+
+````swift
+// Hide the current message.
+SwiftMessages.hide()
+
+// Or hide the current message and clear the queue.
+SwiftMessages.hideAll()
+
+// Or for a view that implements `Identifiable`:
+SwiftMessages.hide(id: someId)
+
+// Or hide when the number of calls to show() and hideCounted(id:) for a 
+// given message ID are equal. This can be useful for messages that may be
+// shown from  multiple code paths to ensure that all paths are ready to hide.
+SwiftMessages.hideCounted(id: someId)
+````
+
+Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`):
+
+````swift
+let otherMessages = SwiftMessages()
+SwiftMessages.show(...)
+otherMessages.show(...)
+````
+
+### Retrieving Messages
+
+There are several APIs available for retrieving messages that are currently being shown, hidden, or queued to be shown. These APIs are useful for updating messages
+when some event happens without needing to keep temporary references around.
+See also `eventListeners`.
+
+````swift
+// Get a message view with the given ID if it is currently 
+// being shown or hidden.
+if let view = SwiftMessages.current(id: "some id") { ... }
+
+// Get a message view with the given ID if is it currently 
+// queued to be shown. 
+if let view = SwiftMessages.queued(id: "some id") { ... }
+
+// Get a message view with the given ID if it is currently being
+// shown, hidden or in the queue to be shown.
+if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
+````
+
 ### Customization
 
 `MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
@@ -194,40 +246,6 @@ messageView.buttonTapHandler = { _ in SwiftMessages.hide() }
 
 // Hide when message view tapped
 messageView.tapHandler = { _ in SwiftMessages.hide() }
-````
-
-### Message Queueing
-
-You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
-
-````swift
-SwiftMessages.pauseBetweenMessages = 1.0
-````
-
-There are a few ways to hide messages programatically:
-
-````swift
-// Hide the current message.
-SwiftMessages.hide()
-
-// Or hide the current message and clear the queue.
-SwiftMessages.hideAll()
-
-// Or for a view that implements `Identifiable`:
-SwiftMessages.hide(id: someId)
-
-// Or hide when the number of calls to show() and hideCounted(id:) for a 
-// given message ID are equal. This can be useful for messages that may be
-// shown from  multiple code paths to ensure that all code paths are ready to hide.
-SwiftMessages.hideCounted(id: someId)
-````
-
-Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`):
-
-````swift
-let otherMessages = SwiftMessages()
-SwiftMessages.show(...)
-otherMessages.show(...)
 ````
 
 ## About SwiftKick Mobile

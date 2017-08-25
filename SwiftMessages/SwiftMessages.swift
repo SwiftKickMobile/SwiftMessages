@@ -415,7 +415,9 @@ open class SwiftMessages {
     }
 
     /**
-
+     Hide the message when the number of calls to show() and hideCounted(id:) for a
+     given message ID are equal. This can be useful for messages that may be
+     shown from  multiple code paths to ensure that all paths are ready to hide.
      */
     open func hideCounted(id: String) {
         messageQueue.sync {
@@ -434,7 +436,23 @@ open class SwiftMessages {
             delays.ids.remove(id)
         }
     }
-    
+
+    /**
+     Get the count of a message with the given ID (see `hideCounted(id:)`)
+     */
+    public func count(id: String) -> Int {
+        return counts[id] ?? 0
+    }
+
+    /**
+     Explicitly set the count of a message with the given ID (see `hideCounted(id:)`).
+     Not sure if there's a use case for this, but why not?!
+     */
+    public func set(count: Int, for id: String) {
+        guard counts[id] != nil else { return }
+        return counts[id] = count
+    }
+
     /**
      Specifies the default configuration to use when calling the variants of
      `show()` that don't take a `config` argument or as a base for custom configs.
@@ -575,7 +593,7 @@ open class SwiftMessages {
 }
 
 /*
- MARK: - Getting the status of messages
+ MARK: - Accessing messages
  */
 
 extension SwiftMessages {
@@ -621,19 +639,6 @@ extension SwiftMessages {
      */
     public func currentOrQueued<T: UIView>(id: String) -> T? {
         return current(id: id) ?? queued(id: id)
-    }
-
-    /**
-     */
-    public func count(id: String) -> Int {
-        return counts[id] ?? 0
-    }
-
-    /**
-     */
-    public func set(count: Int, for id: String) {
-        guard counts[id] != nil else { return }
-        return counts[id] = count
     }
 }
 

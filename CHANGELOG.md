@@ -1,9 +1,30 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [3.4.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.1)
+## [3.5.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.5.0)
 
 ### Features
+* Added `SwiftMessages.hideCounted(id:)` method of hiding. The counted method hides when the number of calls to `show()` and `hideCounted(id:)` for a 
+given message ID are equal. This can be useful for messages that may be
+shown from  multiple code paths to ensure that all paths are ready to hide.
+
+  Also added `SwiftMessages.count(id:)` to get the current count and `SwiftMessages.set(id:count:)` to set the current count.
+
+* Added ways to retrieve message views currently being shown, hidden, or queued to be shown.
+
+  ````swift
+  // Get a message view with the given ID if it is currently 
+  // being shown or hidden.
+  if let view = SwiftMessages.current(id: "some id") { ... }
+  
+  // Get a message view with the given ID if is it currently 
+  // queued to be shown. 
+  if let view = SwiftMessages.queued(id: "some id") { ... }
+  
+  // Get a message view with the given ID if it is currently being
+  // shown, hidden or in the queue to be shown.
+  if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
+  ````
 
 ### Bug Fixes
 * Fix #116 for message views that don't adopt the `Identifiable` protocol by using the memory address as the ID.
