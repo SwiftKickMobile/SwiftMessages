@@ -392,6 +392,7 @@ open class SwiftMessages {
         messageQueue.sync {
             queue.removeAll()
             delays.ids.removeAll()
+            counts.removeAll()
             hideCurrent()
         }
     }
@@ -404,6 +405,28 @@ open class SwiftMessages {
      */
     open func hide(id: String) {
         messageQueue.sync {
+            if id == current?.id {
+                hideCurrent()
+            }
+            queue = queue.filter { $0.id != id }
+            delays.ids.remove(id)
+            counts[id] = nil
+        }
+    }
+
+    /**
+
+     */
+    open func hideCounted(id: String) {
+        messageQueue.sync {
+            if let count = counts[id] {
+                if count < 2 {
+                    counts[id] = nil
+                } else {
+                    counts[id] = count - 1
+                    return
+                }
+            }
             if id == current?.id {
                 hideCurrent()
             }
@@ -444,6 +467,7 @@ open class SwiftMessages {
     fileprivate let messageQueue = DispatchQueue(label: "it.swiftkick.SwiftMessages", attributes: [])
     fileprivate var queue: [Presenter] = []
     fileprivate var delays = Delays()
+    fileprivate var counts: [String : Int] = [:]
     fileprivate var current: Presenter? = nil {
         didSet {
             if oldValue != nil {
@@ -457,6 +481,7 @@ open class SwiftMessages {
 
     fileprivate func enqueue(presenter: Presenter) {
         if presenter.config.ignoreDuplicates {
+            counts[presenter.id] = (counts[presenter.id] ?? 0) + 1
             if current?.id == presenter.id && current?.isHiding == false { return }
             if queue.filter({ $0.id == presenter.id }).count > 0 { return }
         }
@@ -525,6 +550,7 @@ open class SwiftMessages {
                 guard completed, let strongSelf = self, let strongCurrent = current else { return }
                 strongSelf.messageQueue.sync {
                     guard strongSelf.current === strongCurrent else { return }
+                    strongSelf.counts[strongCurrent.id] = nil
                     strongSelf.current = nil
                 }
             }
@@ -595,6 +621,19 @@ extension SwiftMessages {
      */
     public func currentOrQueued<T: UIView>(id: String) -> T? {
         return current(id: id) ?? queued(id: id)
+    }
+
+    /**
+     */
+    public func count(id: String) -> Int {
+        return counts[id] ?? 0
+    }
+
+    /**
+     */
+    public func set(count: Int, for id: String) {
+        guard counts[id] != nil else { return }
+        return counts[id] = count
     }
 }
 
@@ -763,7 +802,11 @@ extension SwiftMessages {
     public static func hide(id: String) {
         globalInstance.hide(id: id)
     }
-    
+
+    public static func hideCounted(id: String) {
+        globalInstance.hideCounted(id: id)
+    }
+
     public static var defaultConfig: Config {
         get {
             return globalInstance.defaultConfig
@@ -780,5 +823,25 @@ extension SwiftMessages {
         set {
             globalInstance.pauseBetweenMessages = newValue
         }
+    }
+
+    public static func current<T: UIView>(id: String) -> T? {
+        return globalInstance.current(id: id)
+    }
+
+    public static func queued<T: UIView>(id: String) -> T? {
+        return globalInstance.queued(id: id)
+    }
+
+    public static func currentOrQueued<T: UIView>(id: String) -> T? {
+        return globalInstance.currentOrQueued(id: id)
+    }
+
+    public static func count(id: String) -> Int {
+        return globalInstance.count(id: id)
+    }
+
+    public static func set(count: Int, for id: String) {
+        globalInstance.set(count: count, for: id)
     }
 }

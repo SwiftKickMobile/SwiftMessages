@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
         .titleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .explore,
         .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
+        .counted,
     ]
 
     /*
@@ -162,6 +163,7 @@ enum Item {
     
     case titleBody(title: String, body: String, function: Function)
     case explore
+    case counted
 
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
@@ -174,6 +176,12 @@ enum Item {
         case .explore:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Explore") as! TitleBodyCell
             cell.configureBodyTextStyle()
+            return cell
+        case .counted:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Counted") as! TitleBodyCell
+            cell.configureBodyTextStyle()
+            cell.bodyLabel.configureCodeStyle(on: "show()")
+            cell.bodyLabel.configureCodeStyle(on: "hideCounted(id:)")
             return cell
         }
     }
@@ -195,7 +203,6 @@ class TitleBodyCell: UITableViewCell {
     func configureBodyTextStyle() {
         let bodyStyle = NSMutableParagraphStyle()
         bodyStyle.lineSpacing = 5.0
-        bodyLabel.attributedText = NSAttributedString(string: bodyLabel.text ?? "", attributes: [NSParagraphStyleAttributeName : bodyStyle])
+        bodyLabel.configureBodyTextStyle()
     }
 }
-

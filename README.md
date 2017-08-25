@@ -215,6 +215,11 @@ SwiftMessages.hideAll()
 
 // Or for a view that implements `Identifiable`:
 SwiftMessages.hide(id: someId)
+
+// Or hide when the number of calls to show() and hideCounted(id:) for a 
+// given message ID are equal. This can be useful for messages that may be
+// shown from  multiple code paths to ensure that all code paths are ready to hide.
+SwiftMessages.hideCounted(id: someId)
 ````
 
 Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`):
