@@ -13,7 +13,7 @@ private let globalInstance = SwiftMessages()
 /**
  The `SwiftMessages` class provides the interface for showing and hiding messages.
  It behaves like a queue, only showing one message at a time. Message views that
- implement the `Identifiable` protocol (as `MessageView` does) will have duplicates removed.
+ adopt the `Identifiable` protocol (as `MessageView` does) will have duplicates removed.
  */
 open class SwiftMessages {
     
@@ -400,7 +400,7 @@ open class SwiftMessages {
     /**
      Hide a message with the given `id`. If the specified message is
      currently being displayed, it will be animated away. Works with message
-     views, such as `MessageView`, that implement the `Identifiable` protocol.
+     views, such as `MessageView`, that adopt the `Identifiable` protocol.
      - Parameter id: The identifier of the message to remove.
      */
     open func hide(id: String) {
@@ -601,7 +601,7 @@ extension SwiftMessages {
     /**
      Returns a message view with the given `id` if it is currently being shown or hidden.
 
-     - Parameter id: The id of a message that implements `Identifiable`.
+     - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently being shown or hidden.
     */
     public func current<T: UIView>(id: String) -> T? {
@@ -617,7 +617,7 @@ extension SwiftMessages {
     /**
      Returns a message view with the given `id` if it is currently in the queue to be shown.
 
-     - Parameter id: The id of a message that implements `Identifiable`.
+     - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
     public func queued<T: UIView>(id: String) -> T? {
@@ -634,7 +634,7 @@ extension SwiftMessages {
      Returns a message view with the given `id` if it is currently being 
      shown, hidden or in the queue to be shown.
 
-     - Parameter id: The id of a message that implements `Identifiable`.
+     - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
     public func currentOrQueued<T: UIView>(id: String) -> T? {
