@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.5.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.5.0)
+
+### Bug Fixes
+* Undo change that broke `MessageView` class reference on nib files copied out of the SwiftMessages framework.
+
 ## [3.5.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.5.0)
 
 ### Features

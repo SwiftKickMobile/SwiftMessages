@@ -48,6 +48,14 @@ Add one of the following lines to your Cartfile depending on your Swift version:
 github "SwiftKickMobile/SwiftMessages"
 ````
 
+### Manual
+
+1. Put SwiftMessages repo somewhere in your project directory.
+1. In Xcode, add `SwiftMessages.xcodeproj` to your project.
+1. On your app's target, add the SwiftMessages framework:
+  1. as an embedded binary on the General tab.
+  1. as a target dependency on the Build Phases tab.
+
 ## Usage
 
 ### Basics
