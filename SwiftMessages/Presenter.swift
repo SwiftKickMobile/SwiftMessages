@@ -40,7 +40,7 @@ class Presenter: NSObject {
     let config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
-    let maskingView = MaskingView()
+    lazy var maskingView: MaskingView = { return MaskingView() }()
     var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let animator: Animator
 
@@ -49,9 +49,13 @@ class Presenter: NSObject {
         self.view = view
         self.delegate = delegate
         self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
+        if let identifiable = view as? Identifiable {
+            id = identifiable.id
+        } else {
+            var mutableView = view
+            id = withUnsafePointer(to: &mutableView) { "\($0)" }
+        }
         super.init()
-        maskingView.clipsToBounds = true
-        id = (view as? Identifiable)?.id
     }
 
     private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate) -> Animator {
@@ -68,7 +72,7 @@ class Presenter: NSObject {
         }
     }
 
-    var id: String?
+    var id: String
     
     var pauseDuration: TimeInterval? {
         let duration: TimeInterval?

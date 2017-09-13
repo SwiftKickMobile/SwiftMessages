@@ -144,36 +144,30 @@ extension MessageView {
          The standard message view that stretches across the full width of the
          container view.
          */
-        case MessageView = "MessageView"
+        case messageView = "MessageView"
         
         /**
          A floating card-style view with rounded corners.
          */
-        case CardView = "CardView"
+        case cardView = "CardView"
 
         /**
          Like `CardView` with one end attached to the super view.
          */
-        case TabView = "TabView"
+        case tabView = "TabView"
 
         /**
          A 20pt tall view that can be used to overlay the status bar.
          Note that this layout will automatically grow taller if displayed
          directly under the status bar (see the `ContentInsetting` protocol).
          */
-        case StatusLine = "StatusLine"
+        case statusLine = "StatusLine"
 
         /**
          A floating card-style view with elements centered and arranged vertically.
          This view is typically used with `.center` presentation style.         
          */
-        case CenteredView = "CenteredView"
-
-        /**
-         A standard message view like `MessageView`, but without
-         stack views for iOS 8.
-         */
-        case MessageViewIOS8 = "MessageViewIOS8"
+        case centeredView = "CenteredView"
     }
     
     /**

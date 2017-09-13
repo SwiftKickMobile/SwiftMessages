@@ -18,11 +18,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         let view: MessageView
         switch layout.selectedSegmentIndex {
         case 1:
-            view = MessageView.viewFromNib(layout: .CardView)
+            view = MessageView.viewFromNib(layout: .cardView)
         case 2:
-            view = MessageView.viewFromNib(layout: .TabView)
+            view = MessageView.viewFromNib(layout: .tabView)
         case 3:
-            view = MessageView.viewFromNib(layout: .StatusLine)
+            view = MessageView.viewFromNib(layout: .statusLine)
         default:
             view = try! SwiftMessages.viewFromNib()
         }
@@ -51,7 +51,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         default:
             let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
             view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
-            view.button?.setImage(Icon.ErrorSubtle.image, for: .normal)
+            view.button?.setImage(Icon.errorSubtle.image, for: .normal)
             view.button?.setTitle(nil, for: .normal)
             view.button?.backgroundColor = UIColor.clear
             view.button?.tintColor = UIColor.green.withAlphaComponent(0.7)
