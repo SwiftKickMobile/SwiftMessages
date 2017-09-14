@@ -23,5 +23,10 @@ import UIKit
  */
 public protocol MarginAdjustable {
     var bounceAnimationOffset: CGFloat { get set }
+    /// Top margin adjustment for status bar avoidance in pre-iOS 11+
     var statusBarOffset: CGFloat { get set }
+    /// Safe area top adjustment in iOS 11+
+    var safeAreaTopOffset: CGFloat { get set }
+    /// Safe area bottom adjustment in iOS 11+
+    var safeAreaBottomOffset: CGFloat { get set }
 }

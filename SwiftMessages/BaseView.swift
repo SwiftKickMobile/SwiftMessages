@@ -124,9 +124,30 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      */
     
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5.0
-    
+
+    /**
+     For iOS 10 and lower, an optional absolute value for the top margin for cases
+     where the view appears behind the status bar.
+     */
     @IBInspectable open var statusBarOffset: CGFloat = 20.0
-        
+
+    /**
+     For iOS 11 and greater, an optional top margin adjustment for cases where the
+     view appears behind known safe zone elements, such as the status bar and the
+     iPhone X notch, as determined by the `safeZoneConflicts` property. This
+     value is added to adjustments already made by SwiftMessages in case the
+     defaults don't work for a particular layout.
+     */
+    @IBInspectable open var safeAreaTopOffset: CGFloat = 0.0
+
+    /**
+     For iOS 11 and greater, an optional bottom margin adjustment for cases where the view
+     appears behind known safe zone elements, such as the home indicator, as determined
+     by the `safeZoneConflicts` property. This value is added to adjustments already made
+     by SwiftMessages in case the defaults don't work for a particular layout.
+     */
+    @IBInspectable open var safeAreaBottomOffset: CGFloat = 0.0
+
     /*
      MARK: - Setting preferred height
      */
