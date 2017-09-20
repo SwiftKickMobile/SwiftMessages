@@ -214,18 +214,55 @@ class Presenter: NSObject {
     }
 
     private func animationContext() -> AnimationContext {
-        return AnimationContext(messageView: view, containerView: maskingView, behindStatusBar: interferesWithStatusBar, interactiveHide: config.interactiveHide)
+        return AnimationContext(messageView: view, containerView: maskingView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
     }
 
-    private var interferesWithStatusBar: Bool {
-        guard let window = maskingView.window else { return false }
-        if UIApplication.shared.isStatusBarHidden { return false }
-        if let vc = presentationContext.viewControllerValue() as? WindowViewController, vc.windowLevel != UIWindowLevelNormal { return false }
-        if let vc = presentationContext.viewControllerValue() as? UINavigationController, vc.sm_isVisible(view: vc.navigationBar) { return false }
-        let statusBarFrame = UIApplication.shared.statusBarFrame
-        let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
-        let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
-        return statusBarViewFrame.intersects(maskingView.bounds)
+    private func safeZoneConflicts() -> SafeZoneConflicts {
+        guard let window = maskingView.window else { return [] }
+        let inNormalWindowLevel: Bool = {
+            if let vc = presentationContext.viewControllerValue() as? WindowViewController {
+                return vc.windowLevel == UIWindowLevelNormal
+            }
+            return true
+        } ()
+        // TODO `underNavigationBar` and `underTabBar` should look up the presentation context's hierarchy
+        // TODO for cases where both should be true (probably not an issue for typical height messages, though).
+        let underNavigationBar: Bool = {
+            if let vc = presentationContext.viewControllerValue() as? UINavigationController { return vc.sm_isVisible(view: vc.navigationBar) }
+            return false
+        }()
+        let underTabBar: Bool = {
+            if let vc = presentationContext.viewControllerValue() as? UITabBarController { return vc.sm_isVisible(view: vc.tabBar) }
+            return false
+        }()
+        if #available(iOS 11, *) {
+            if !inNormalWindowLevel {
+                // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
+                // iPhone 8 with status bar window level, which doesn't seem right
+                // since the status bar is covered by the window. Applying a special rule
+                // to allow the animator to revove this amount from the layout margins if needed.
+                if maskingView.safeAreaInsets.top <= 20 {
+                    return [.coveredStatusBar]
+                } else {
+                    return [.sensorNotch, .homeIndicator]
+                }
+            }
+            var conflicts: SafeZoneConflicts = []
+            if !underNavigationBar {
+                conflicts.formUnion(.sensorNotch)
+            }
+            if !underTabBar {
+                conflicts.formUnion(.homeIndicator)
+            }
+            return conflicts
+        } else {
+            if UIApplication.shared.isStatusBarHidden { return [] }
+            if !inNormalWindowLevel || underNavigationBar { return [] }
+            let statusBarFrame = UIApplication.shared.statusBarFrame
+            let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
+            let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
+            return statusBarViewFrame.intersects(maskingView.bounds) ? SafeZoneConflicts.statusBar : []
+        }
     }
 
     private func getPresentationContext() throws -> PresentationContext {

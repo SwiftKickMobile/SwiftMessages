@@ -7,6 +7,10 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
+<p align="center">
+  <img src="./Design/swiftmessages.png" />
+</p>
+
 SwiftMessages is a message view library for iOS. It's very flexible. And written in Swift.
 
 Message views can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
@@ -26,6 +30,22 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 <p align="center">
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
+
+## 🔥 iOS 11 and iPhone X 🔥
+
+SwiftMessages 4 supports iOS 11 out-of-the-box with built-in support for safe areas. To ensure that message view layouts look just right when overlapping safe areas, views that adopt the `MarginAdjustable` protocol (like `MessageView`) will have their layout margins automatically adjusted by SwiftMessages. However, there is no one-size-fits-all adjustment, so the following properties were added to `MarginAdjustable` to allow for additional adjustments to be made to the layout margins:
+
+````swift
+public protocol MarginAdjustable {
+    ...
+    /// Safe area top adjustment in iOS 11+
+    var safeAreaTopOffset: CGFloat { get set }
+    /// Safe area bottom adjustment in iOS 11+
+    var safeAreaBottomOffset: CGFloat { get set }
+}
+````
+
+If you're using using custom nib files or view classes and your layouts don't look quite right, try adjusting the values of these properties. `BaseView` (the super class of `MessageView`) declares these properties to be `@IBDesignable` and you can find sample values in the nib files included with SwiftMessages.
 
 ## Installation
 

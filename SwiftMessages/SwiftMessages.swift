@@ -624,7 +624,7 @@ extension SwiftMessages {
         var view: T?
         messageQueue.sync {
             if let queued = queue.first(where: { $0.id == id }) {
-                view = queued as? T
+                view = queued.view as? T
             }
         }
         return view

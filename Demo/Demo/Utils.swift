@@ -13,21 +13,21 @@ extension UILabel {
     func configureBodyTextStyle() {
         let bodyStyle = NSMutableParagraphStyle()
         bodyStyle.lineSpacing = 5.0
-        attributedText = NSAttributedString(string: text ?? "", attributes: [NSParagraphStyleAttributeName : bodyStyle])
+        attributedText = NSAttributedString(string: text ?? "", attributes: [NSAttributedStringKey.paragraphStyle : bodyStyle])
     }
 
     func configureCodeStyle(on substring: String?) {
-        var attributes: [String : Any] = [:]
+        var attributes: [NSAttributedStringKey : Any] = [:]
         let codeFont = UIFont(name: "CourierNewPSMT", size: font.pointSize)!
-        attributes[NSFontAttributeName] = codeFont
-        attributes[NSBackgroundColorAttributeName] = UIColor(white: 0.96, alpha: 1)
+        attributes[NSAttributedStringKey.font] = codeFont
+        attributes[NSAttributedStringKey.backgroundColor] = UIColor(white: 0.96, alpha: 1)
         attributedText = attributedText?.setAttributes(attributes: attributes, onSubstring: substring)
     }
 }
 
 extension NSAttributedString {
 
-    public func setAttributes(attributes: [String : Any], onSubstring substring: String?) -> NSAttributedString {
+    public func setAttributes(attributes: [NSAttributedStringKey : Any], onSubstring substring: String?) -> NSAttributedString {
         let mutableSelf = NSMutableAttributedString(attributedString: self)
         if let substring = substring {
             var range = NSRange()
@@ -46,7 +46,7 @@ extension NSAttributedString {
         return mutableSelf
     }
 
-    private static func set(attributes newAttributes: [String : Any], in range: NSRange, of mutableString: NSMutableAttributedString) {
+    private static func set(attributes newAttributes: [NSAttributedStringKey : Any], in range: NSRange, of mutableString: NSMutableAttributedString) {
         if range.length > 0 {
             var attributes = mutableString.attributes(at: range.location, effectiveRange: nil)
             for (key, value) in newAttributes {

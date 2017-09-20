@@ -45,7 +45,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      MARK: - Initialization
      */
     
-   public required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundView = self
     }
@@ -60,9 +60,31 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     }
 
     /*
-     MARK: - Installing content
+     MARK: - Installing background and content
      */
-    
+
+    /**
+     A convenience function for installing a background view and pinning to the layout margins.
+     This is useful for creating programatic layouts where the background view needs to be
+     inset from the message view's bounds.
+
+     - Parameter backgroundView: The view to be installed as a subview and
+     assigned to the `backgroundView` property.
+     */
+    open func installBackgroundView(_ backgroundView: UIView) {
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        if backgroundView != self {
+            backgroundView.removeFromSuperview()
+        }
+        addSubview(backgroundView)
+        self.backgroundView = backgroundView
+        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 0)
+        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: 0)
+        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottomMargin, multiplier: 1.0, constant: 0)
+        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: 0)
+        addConstraints([top, left, bottom, right])
+    }
+
     /**
      A convenience function for installing a content view as a subview of `backgroundView`
      and pinning the edges to `backgroundView` with the specified `insets`.
@@ -75,10 +97,10 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     open func installContentView(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(contentView)
-        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .topMargin, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottomMargin, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
+        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .top, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .left, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
         backgroundView.addConstraints([top, left, bottom, right])
     }
     
@@ -100,7 +122,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         return tapRecognizer
     }()
     
-    func tapped() {
+    @objc func tapped() {
         tapHandler?(self)
     }
     
@@ -124,10 +146,30 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      */
     
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5.0
-    
+
+    /**
+     For iOS 10 and lower, an optional absolute value for the top margin for cases
+     where the view appears behind the status bar.
+     */
     @IBInspectable open var statusBarOffset: CGFloat = 20.0
-    
-    
+
+    /**
+     For iOS 11 and greater, an optional top margin adjustment for cases where the
+     view appears behind known safe zone elements, such as the status bar and the
+     iPhone X notch, as determined by the `safeZoneConflicts` property. This
+     value is added to adjustments already made by SwiftMessages in case the
+     defaults don't work for a particular layout.
+     */
+    @IBInspectable open var safeAreaTopOffset: CGFloat = 0.0
+
+    /**
+     For iOS 11 and greater, an optional bottom margin adjustment for cases where the view
+     appears behind known safe zone elements, such as the home indicator, as determined
+     by the `safeZoneConflicts` property. This value is added to adjustments already made
+     by SwiftMessages in case the defaults don't work for a particular layout.
+     */
+    @IBInspectable open var safeAreaBottomOffset: CGFloat = 0.0
+
     /*
      MARK: - Setting preferred height
      */

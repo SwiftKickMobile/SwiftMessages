@@ -20,7 +20,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     /// configured to call this tap handler on `.TouchUpInside`.
     open var buttonTapHandler: ((_ button: UIButton) -> Void)?
     
-    func buttonTapped(_ button: UIButton) {
+    @objc func buttonTapped(_ button: UIButton) {
         buttonTapHandler?(button)
     }
 
@@ -144,36 +144,36 @@ extension MessageView {
          The standard message view that stretches across the full width of the
          container view.
          */
-        case MessageView = "MessageView"
+        case messageView = "MessageView"
         
         /**
          A floating card-style view with rounded corners.
          */
-        case CardView = "CardView"
+        case cardView = "CardView"
 
         /**
          Like `CardView` with one end attached to the super view.
          */
-        case TabView = "TabView"
+        case tabView = "TabView"
 
         /**
          A 20pt tall view that can be used to overlay the status bar.
          Note that this layout will automatically grow taller if displayed
          directly under the status bar (see the `ContentInsetting` protocol).
          */
-        case StatusLine = "StatusLine"
+        case statusLine = "StatusLine"
 
         /**
          A floating card-style view with elements centered and arranged vertically.
          This view is typically used with `.center` presentation style.         
          */
-        case CenteredView = "CenteredView"
+        case centeredView = "CenteredView"
 
         /**
          A standard message view like `MessageView`, but without
          stack views for iOS 8.
          */
-        case MessageViewIOS8 = "MessageViewIOS8"
+        case messageViewIOS8 = "MessageViewIOS8"
     }
     
     /**
@@ -227,7 +227,7 @@ extension MessageView {
         views.forEach {
             let constraints = [$0.heightAnchor.constraint(equalToConstant: size.height),
                                $0.widthAnchor.constraint(equalToConstant: size.width)]
-            constraints.forEach { $0.priority = 999 }
+            constraints.forEach { $0.priority = UILayoutPriority(rawValue: 999) }
             $0.addConstraints(constraints)
             if let contentMode = contentMode {
                 $0.contentMode = contentMode
