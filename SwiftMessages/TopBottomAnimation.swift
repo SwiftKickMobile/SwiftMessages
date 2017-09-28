@@ -18,6 +18,8 @@ public class TopBottomAnimation: NSObject, Animator {
     public weak var delegate: AnimationDelegate?
 
     var style: Style
+    
+    let config: SwiftMessages.Config
 
     var translationConstraint: NSLayoutConstraint! = nil
 
@@ -25,9 +27,10 @@ public class TopBottomAnimation: NSObject, Animator {
 
     weak var containerView: UIView?
 
-    init(style: Style, delegate: AnimationDelegate) {
+    init(style: Style, delegate: AnimationDelegate, config: SwiftMessages.Config) {
         self.style = style
         self.delegate = delegate
+        self.config = config
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
@@ -180,7 +183,7 @@ public class TopBottomAnimation: NSObject, Animator {
             closePercent = translation.y / height
             panTranslationY = translation.y
         case .ended, .cancelled:
-            if closeSpeed > 750.0 || closePercent > 0.33 {
+            if closeSpeed > config.closeSpeed || closePercent > config.closePercent {
                 delegate?.hide(animator: self)
             } else {
                 closing = false
