@@ -309,6 +309,10 @@ open class SwiftMessages {
          label, e.g. "dismiss" when the `interactive` option is used.
         */
         public var dimModeAccessibilityLabel: String = "dismiss"
+        
+        public var closeSpeed: CGFloat = 750.0
+        
+        public var closePercent: CGFloat = 0.33
     }
     
     /**

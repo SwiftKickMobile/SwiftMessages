@@ -48,7 +48,7 @@ class Presenter: NSObject {
         self.config = config
         self.view = view
         self.delegate = delegate
-        self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
+        self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate, config: config)
         if let identifiable = view as? Identifiable {
             id = identifiable.id
         } else {
@@ -58,12 +58,12 @@ class Presenter: NSObject {
         super.init()
     }
 
-    private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate) -> Animator {
+    private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate, config: SwiftMessages.Config) -> Animator {
         switch style {
         case .top:
-            return TopBottomAnimation(style: .top, delegate: delegate)
+            return TopBottomAnimation(style: .top, delegate: delegate, config: config)
         case .bottom:
-            return TopBottomAnimation(style: .bottom, delegate: delegate)
+            return TopBottomAnimation(style: .bottom, delegate: delegate, config: config)
         case .center:
             return CenterAnimation(delegate: delegate)
         case .custom(let animator):
