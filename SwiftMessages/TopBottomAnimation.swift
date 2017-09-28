@@ -10,13 +10,25 @@ import UIKit
 
 public class TopBottomAnimation: NSObject, Animator {
 
-    enum Style {
+    public enum Style {
         case top
         case bottom
     }
+    
+    public struct Config {
+        let closeSpeedThreshold: CGFloat
+        let closePercentThreshold: CGFloat
+        
+        static var `default` = Config(closeSpeedThreshold: 750.0, closePercentThreshold: 33.0)
+        
+        public init(closeSpeedThreshold: CGFloat, closePercentThreshold: CGFloat) {
+            self.closePercentThreshold = closePercentThreshold
+            self.closeSpeedThreshold = closeSpeedThreshold
+        }
+    }
 
     public weak var delegate: AnimationDelegate?
-
+    let config: Config
     var style: Style
 
     var translationConstraint: NSLayoutConstraint! = nil
@@ -25,7 +37,8 @@ public class TopBottomAnimation: NSObject, Animator {
 
     weak var containerView: UIView?
 
-    init(style: Style, delegate: AnimationDelegate) {
+    init(style: Style, delegate: AnimationDelegate, config: Config = Config.default) {
+        self.config = config
         self.style = style
         self.delegate = delegate
     }
@@ -180,7 +193,7 @@ public class TopBottomAnimation: NSObject, Animator {
             closePercent = translation.y / height
             panTranslationY = translation.y
         case .ended, .cancelled:
-            if closeSpeed > 750.0 || closePercent > 0.33 {
+            if closeSpeed > config.closeSpeedThreshold || closePercent > config.closePercentThreshold {
                 delegate?.hide(animator: self)
             } else {
                 closing = false
