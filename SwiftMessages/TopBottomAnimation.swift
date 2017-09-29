@@ -19,7 +19,7 @@ public class TopBottomAnimation: NSObject, Animator {
         let closeSpeedThreshold: CGFloat
         let closePercentThreshold: CGFloat
         
-        static var `default` = Config(closeSpeedThreshold: 750.0, closePercentThreshold: 33.0)
+        public static var `default` = Config(closeSpeedThreshold: 750.0, closePercentThreshold: 33.0)
         
         public init(closeSpeedThreshold: CGFloat, closePercentThreshold: CGFloat) {
             self.closePercentThreshold = closePercentThreshold
@@ -37,7 +37,7 @@ public class TopBottomAnimation: NSObject, Animator {
 
     weak var containerView: UIView?
 
-    init(style: Style, delegate: AnimationDelegate, config: Config = Config.default) {
+    public init(style: Style, delegate: AnimationDelegate, config: Config = Config.default) {
         self.config = config
         self.style = style
         self.delegate = delegate
