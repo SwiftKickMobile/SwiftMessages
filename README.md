@@ -206,7 +206,7 @@ Multiple instances of `SwiftMessages` can be used to show more than one message 
 
 ````swift
 class SomeViewController: UIViewController {
-	static var otherMessages = SwiftMessages()	
+	static let otherMessages = SwiftMessages()	
 	
 	func someMethod() {
 		SwiftMessages.show(...)
