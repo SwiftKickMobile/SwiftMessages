@@ -202,12 +202,18 @@ SwiftMessages.hide(id: someId)
 SwiftMessages.hideCounted(id: someId)
 ````
 
-Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`):
+Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`). Instances must be retained, thus it should be a property of something (e.g. your view controller):
 
 ````swift
-let otherMessages = SwiftMessages()
-SwiftMessages.show(...)
-otherMessages.show(...)
+class SomeViewController: UIViewController {
+	static var otherMessages = SwiftMessages()
+	
+	
+	func someMethod() {
+		SwiftMessages.show(...)
+		otherMessages.show(...)
+	}
+}
 ````
 
 ### Retrieving Messages
