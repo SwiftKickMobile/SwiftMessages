@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.0.1
+
+### Fixes
+
+* Fix #128 move icons out of asset catalog to prevent mysterious crash
+* 
+
 ## 4.0.0
 
 ### Features
