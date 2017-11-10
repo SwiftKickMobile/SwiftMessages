@@ -23,11 +23,11 @@ public class TopBottomAnimation: NSObject, Animator {
 
     open var closePercentThreshold: CGFloat = 33.0;
 
-    var translationConstraint: NSLayoutConstraint! = nil
+    private(set) var translationConstraint: NSLayoutConstraint! = nil
 
     weak var messageView: UIView?
-
     weak var containerView: UIView?
+    var context: AnimationContext?
 
     public init(style: Style) {
         self.style = style
@@ -39,13 +39,16 @@ public class TopBottomAnimation: NSObject, Animator {
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: Notification.Name.UIDeviceOrientationDidChange, object: nil)
         install(context: context)
         showAnimation(completion: completion)
     }
 
     public func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
+        NotificationCenter.default.removeObserver(self)
         let view = context.messageView
         let container = context.containerView
+        self.context = context
         UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
             self.translationConstraint.constant -= size.height
@@ -60,6 +63,7 @@ public class TopBottomAnimation: NSObject, Animator {
         let container = context.containerView
         messageView = view
         containerView = container
+        self.context = context
         if let adjustable = context.messageView as? MarginAdjustable {
             bounceOffset = adjustable.bounceAnimationOffset
         }
@@ -74,30 +78,9 @@ public class TopBottomAnimation: NSObject, Animator {
             translationConstraint = NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.00, constant: 0.0)
         }
         container.addConstraints([leading, trailing, translationConstraint])
-        if let adjustable = view as? MarginAdjustable & UIView {
-            // Important to layout now in order to get the right safe area insets
-            container.layoutIfNeeded()
-            var top: CGFloat = 0
-            var bottom: CGFloat = 0
-            switch style {
-            case .top:
-                top = adjustable.topAdjustment(container: container, context: context)
-            case .bottom:
-                bottom = adjustable.bottomAdjustment(container: container, context: context)
-            }
-            view.preservesSuperviewLayoutMargins = false
-            if #available(iOS 11, *) {
-                var margins = adjustable.directionalLayoutMargins
-                margins.top = top
-                margins.bottom = bottom
-                adjustable.directionalLayoutMargins = margins
-            } else {
-                var margins = adjustable.layoutMargins
-                margins.top = top
-                margins.bottom = bottom
-                adjustable.layoutMargins = margins
-            }
-        }
+        // Important to layout now in order to get the right safe area insets
+        container.layoutIfNeeded()
+        adjustMargins()
         let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         translationConstraint.constant -= size.height
         container.layoutIfNeeded()
@@ -112,13 +95,31 @@ public class TopBottomAnimation: NSObject, Animator {
         }
     }
 
-//    @available(iOS 11, *)
-//    private func adjustForCoveredStatusBarSafeArea(view: UIView) {
-//        var margins = view.directionalLayoutMargins
-//        margins.top -= 2 * view.safeAreaInsets.top
-//        view.directionalLayoutMargins = margins
-//        view.subviews.forEach { self.adjustForCoveredStatusBarSafeArea(view: $0) }
-//    }
+    @objc public func adjustMargins() {
+        guard let adjustable = messageView as? MarginAdjustable & UIView,
+            let container = containerView,
+            let context = context else { return }
+        var top: CGFloat = 0
+        var bottom: CGFloat = 0
+        switch style {
+        case .top:
+            top = adjustable.topAdjustment(container: container, context: context)
+        case .bottom:
+            bottom = adjustable.bottomAdjustment(container: container, context: context)
+        }
+        adjustable.preservesSuperviewLayoutMargins = false
+        if #available(iOS 11, *) {
+            var margins = adjustable.directionalLayoutMargins
+            margins.top = top
+            margins.bottom = bottom
+            adjustable.directionalLayoutMargins = margins
+        } else {
+            var margins = adjustable.layoutMargins
+            margins.top = top
+            margins.bottom = bottom
+            adjustable.layoutMargins = margins
+        }
+    }
 
     func showAnimation(completion: @escaping AnimationCompletion) {
         guard let container = containerView else {
