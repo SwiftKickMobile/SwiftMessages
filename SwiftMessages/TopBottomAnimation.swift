@@ -74,41 +74,28 @@ public class TopBottomAnimation: NSObject, Animator {
             translationConstraint = NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.00, constant: 0.0)
         }
         container.addConstraints([leading, trailing, translationConstraint])
-        if let adjustable = view as? MarginAdjustable {
+        if let adjustable = view as? MarginAdjustable & UIView {
             // Important to layout now in order to get the right safe area insets
             container.layoutIfNeeded()
             var top: CGFloat = 0
             var bottom: CGFloat = 0
             switch style {
             case .top:
-                top += adjustable.bounceAnimationOffset
-                if !context.safeZoneConflicts.isDisjoint(with: [.sensorNotch, .statusBar]) {
-                    if #available(iOS 11, *), container.safeAreaInsets.top > 0  {
-                        // Linear formula based on:
-                        // iPhone 8 - 20pt top safe area with 0pt adjustment
-                        // iPhone X - 44pt top safe area with -6pt adjustment
-                        top -= 6 * (container.safeAreaInsets.top - 20) / (44 - 20)
-                        top += adjustable.safeAreaTopOffset
-                    } else {
-                        top += adjustable.statusBarOffset
-                    }
-                }
-                if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .coveredStatusBar) {
-                    top -= view.safeAreaInsets.top
-                }
+                top = adjustable.topAdjustment(container: container, context: context)
             case .bottom:
-                bottom += adjustable.bounceAnimationOffset
-                if !context.safeZoneConflicts.isDisjoint(with: [.homeIndicator]) {
-                    if #available(iOS 11, *), container.safeAreaInsets.bottom > 0  {
-                        bottom += adjustable.safeAreaBottomOffset
-                    }
-                }
+                bottom = adjustable.bottomAdjustment(container: container, context: context)
             }
             view.preservesSuperviewLayoutMargins = false
             if #available(iOS 11, *) {
-                view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: top, leading: view.directionalLayoutMargins.leading, bottom: bottom, trailing: view.directionalLayoutMargins.trailing)
+                var margins = adjustable.directionalLayoutMargins
+                margins.top = top
+                margins.bottom = bottom
+                adjustable.directionalLayoutMargins = margins
             } else {
-                view.layoutMargins = UIEdgeInsets(top: top, left: view.layoutMargins.left, bottom: bottom, right: view.layoutMargins.right)
+                var margins = adjustable.layoutMargins
+                margins.top = top
+                margins.bottom = bottom
+                adjustable.layoutMargins = margins
             }
         }
         let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)

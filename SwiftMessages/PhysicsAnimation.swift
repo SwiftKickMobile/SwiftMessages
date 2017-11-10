@@ -1,5 +1,5 @@
 //
-//  CenterAnimation.swift
+//  PhysicsAnimation.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 6/14/17.
@@ -8,11 +8,21 @@
 
 import UIKit
 
-public class CenterAnimation: NSObject, Animator {
+public class PhysicsAnimation: NSObject, Animator {
+
+    public enum Placement {
+        case top
+        case center
+        case bottom
+    }
+
+    public var placement: Placement = .center
 
     public weak var delegate: AnimationDelegate?
     weak var messageView: UIView?
     weak var containerView: UIView?
+
+    public override init() {}
 
     init(delegate: AnimationDelegate) {
         self.delegate = delegate
@@ -51,10 +61,42 @@ public class CenterAnimation: NSObject, Animator {
         containerView = container
         view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(view)
-        let centerX = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: container, attribute: .centerX, multiplier: 1.00, constant: 0.0)
-        let centerY = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: container, attribute: .centerY, multiplier: 1.00, constant: 0.0)
-        let leftMargin = NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal, toItem: container, attribute: .left, multiplier: 1.00, constant: 00.0)
-        container.addConstraints([centerX, centerY, leftMargin])
+        switch placement {
+        case .center:
+            NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: container, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        case .top:
+            NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        case .bottom:
+            NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        }
+        if let adjustable = view as? MarginAdjustable & UIView {
+            // Important to layout now in order to get the right safe area insets
+            container.layoutIfNeeded()
+            var top: CGFloat = 0
+            var bottom: CGFloat = 0
+            switch placement {
+            case .top:
+                top += adjustable.topAdjustment(container: container, context: context)
+            case .bottom:
+                bottom += adjustable.bottomAdjustment(container: container, context: context)
+            case .center:
+                break
+            }
+            adjustable.preservesSuperviewLayoutMargins = false
+            if #available(iOS 11, *) {
+                var margins = adjustable.directionalLayoutMargins
+                margins.top = top
+                margins.bottom = bottom
+                adjustable.directionalLayoutMargins = margins
+            } else {
+                var margins = adjustable.layoutMargins
+                margins.top = top
+                margins.bottom = bottom
+                adjustable.layoutMargins = margins
+            }
+        }
+        NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         container.layoutIfNeeded()
         installInteractive(context: context)
     }
@@ -64,7 +106,7 @@ public class CenterAnimation: NSObject, Animator {
         view.alpha = 0.25
         view.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         CATransaction.begin()
-        CATransaction.setCompletionBlock { 
+        CATransaction.setCompletionBlock {
             completion(true)
         }
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
@@ -83,4 +125,5 @@ public class CenterAnimation: NSObject, Animator {
         panHandler = PhysicsPanHandler(context: context, animator: self)
     }
 }
+
 

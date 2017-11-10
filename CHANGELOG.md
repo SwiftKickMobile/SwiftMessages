@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 ### Fixes
 
 * Fix #128 move icons out of asset catalog to prevent mysterious crash
-* 
+* Fix #134 add support for `CenterAnimation` displayed on top or bottom instead of center (renamed to `PhysicsAnimation`).
+
 
 ## 4.0.0
 

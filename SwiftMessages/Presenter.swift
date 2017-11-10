@@ -65,7 +65,7 @@ class Presenter: NSObject {
         case .bottom:
             return TopBottomAnimation(style: .bottom, delegate: delegate)
         case .center:
-            return CenterAnimation(delegate: delegate)
+            return PhysicsAnimation(delegate: delegate)
         case .custom(let animator):
             animator.delegate = delegate
             return animator

@@ -31,7 +31,7 @@ open class PhysicsPanHandler {
         var time: CFAbsoluteTime = 0
         var angle: CGFloat = 0
 
-        init(messageView: UIView, containerView: UIView) {
+        public init(messageView: UIView, containerView: UIView) {
             self.messageView = messageView
             self.containerView = containerView
             let dynamicAnimator = UIDynamicAnimator(referenceView: containerView)
@@ -64,8 +64,9 @@ open class PhysicsPanHandler {
     weak var animator: Animator?
     weak var messageView: UIView?
     weak var containerView: UIView?
-    var state: State?
-    private(set) var isOffScreen = false
+    private(set) public var state: State?
+    private(set) public var isOffScreen = false
+    private var restingCenter: CGPoint?
 
     public init(context: AnimationContext, animator: Animator) {
         messageView = context.messageView
@@ -89,6 +90,7 @@ open class PhysicsPanHandler {
             let state = State(messageView: messageView, containerView: containerView)
             self.state = state
             let center = messageView.center
+            restingCenter = center
             let offset = UIOffset(horizontal: anchorPoint.x - center.x, vertical: anchorPoint.y - center.y)
             let attachmentBehavior = UIAttachmentBehavior(item: messageView, offsetFromCenter: offset, attachedToAnchor: anchorPoint)
             state.attachmentBehavior = attachmentBehavior
@@ -134,7 +136,7 @@ open class PhysicsPanHandler {
                 state.stop()
                 self.state = nil
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: .beginFromCurrentState, animations: {
-                    messageView.center = CGPoint(x: containerView.bounds.width / 2, y: containerView.bounds.height / 2)
+                    messageView.center = self.restingCenter ?? CGPoint(x: containerView.bounds.width / 2, y: containerView.bounds.height / 2)
                     messageView.transform = CGAffineTransform.identity
                 }, completion: nil)
             }
