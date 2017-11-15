@@ -42,12 +42,16 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         switch theme.selectedSegmentIndex {
         case 0:
             view.configureTheme(.info, iconStyle: iconStyle)
+            view.accessibilityPrefix = "info"
         case 1:
             view.configureTheme(.success, iconStyle: iconStyle)
+            view.accessibilityPrefix = "success"
         case 2:
             view.configureTheme(.warning, iconStyle: iconStyle)
+            view.accessibilityPrefix = "warning"
         case 3:
             view.configureTheme(.error, iconStyle: iconStyle)
+            view.accessibilityPrefix = "error"
         default:
             let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
             view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
