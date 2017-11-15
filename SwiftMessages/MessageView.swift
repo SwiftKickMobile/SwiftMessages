@@ -92,7 +92,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
      the view's background color or icon might convey that a message is
      a warning, in which case one may specify the value "warning".
      */
-    private var accessibilityPrefix: String?
+    open var accessibilityPrefix: String?
 
     open var accessibilityMessage: String? {
         let components = [accessibilityPrefix, titleLabel?.text, bodyLabel?.text].flatMap { $0 }
