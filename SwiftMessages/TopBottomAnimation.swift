@@ -54,7 +54,8 @@ public class TopBottomAnimation: NSObject, Animator {
             self.translationConstraint.constant -= size.height
             container.layoutIfNeeded()
         }, completion: { completed in
-            completion(completed)
+            // Fix #131 by always completing if application isn't active.
+            completion(completed || UIApplication.shared.applicationState != .active)
         })
     }
 
@@ -134,7 +135,8 @@ public class TopBottomAnimation: NSObject, Animator {
             self.translationConstraint.constant = -self.bounceOffset
             container.layoutIfNeeded()
         }, completion: { completed in
-            completion(completed)
+            // Fix #131 by always completing if application isn't active.
+            completion(completed || UIApplication.shared.applicationState != .active)
         })
     }
 
