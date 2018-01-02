@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.1.1
+
+### Features
+* #152 Get current message being displayed without specifying an `id`
+
 ## 4.1.0
 
 ### Features
