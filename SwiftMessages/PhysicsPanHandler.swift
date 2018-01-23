@@ -10,6 +10,11 @@ import UIKit
 
 open class PhysicsPanHandler {
 
+    public struct MotionSnapshot {
+        var angle: CGFloat
+        var time: CFAbsoluteTime
+    }
+
     public final class State {
 
         weak var messageView: UIView?
@@ -23,13 +28,11 @@ open class PhysicsPanHandler {
                 }
                 if let attachmentBehavior = attachmentBehavior {
                     dynamicAnimator.addBehavior(attachmentBehavior)
-                    angle = messageView?.angle ?? angle
-                    time = CFAbsoluteTimeGetCurrent()
+                    addSnapshot()
                 }
             }
         }
-        var time: CFAbsoluteTime = 0
-        var angle: CGFloat = 0
+        var snapshots: [MotionSnapshot] = []
 
         public init(messageView: UIView, containerView: UIView) {
             self.messageView = messageView
@@ -43,9 +46,14 @@ open class PhysicsPanHandler {
         }
 
         func update(attachmentAnchorPoint anchorPoint: CGPoint) {
-            angle = messageView?.angle ?? angle
-            time = CFAbsoluteTimeGetCurrent()
+            addSnapshot()
             attachmentBehavior?.anchorPoint = anchorPoint
+        }
+
+        func addSnapshot() {
+            let angle = messageView?.angle ?? snapshots.last?.angle ?? 0
+            let time = CFAbsoluteTimeGetCurrent()
+            snapshots.append(MotionSnapshot(angle: angle, time: time))
         }
 
         public func stop() {
@@ -58,6 +66,17 @@ open class PhysicsPanHandler {
             dynamicAnimator.removeAllBehaviors()
             messageView.center = center
             messageView.transform = transform
+        }
+
+        public var angularVelocity: CGFloat {
+            guard let last = snapshots.last else { return 0 }
+            for previous in snapshots.reversed() {
+                // Ignore snapshots where the angle or time hasn't changed to avoid degenerate cases.
+                if previous.angle != last.angle && previous.time != last.time {
+                    return (last.angle - previous.angle) / CGFloat(last.time - previous.time)
+                }
+            }
+            return 0
         }
     }
 
@@ -110,15 +129,9 @@ open class PhysicsPanHandler {
             state.update(attachmentAnchorPoint: anchorPoint)
         case .ended, .cancelled:
             guard let state = state else { return }
+            state.update(attachmentAnchorPoint: anchorPoint)
             let velocity = pan.velocity(in: containerView)
-            let time = CFAbsoluteTimeGetCurrent()
-            let angle = messageView.angle
-            let angularVelocity: CGFloat
-            if time > state.time {
-                angularVelocity = (angle - state.angle) / CGFloat(time - state.time)
-            } else {
-                angularVelocity = 0
-            }
+            let angularVelocity = state.angularVelocity
             let speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
             // The multiplier on angular velocity was determined by hand-tuning
             let energy = sqrt(pow(speed, 2) + pow(angularVelocity * 75, 2))
