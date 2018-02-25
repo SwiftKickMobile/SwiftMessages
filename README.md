@@ -76,6 +76,10 @@ github "SwiftKickMobile/SwiftMessages"
   1. as an embedded binary on the General tab.
   1. as a target dependency on the Build Phases tab.
 
+## In the App Store
+
+We'd love to know who's using SwiftMessages! Please take a moment to [let me know about](https://github.com/wtmoose) about your app and, if possible, attach a screenshot. We may feature some of them here in the future.
+
 ## Usage
 
 ### Basics
