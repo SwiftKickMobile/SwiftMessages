@@ -309,6 +309,13 @@ open class SwiftMessages {
          label, e.g. "dismiss" when the `interactive` option is used.
         */
         public var dimModeAccessibilityLabel: String = "dismiss"
+
+        /**
+         If specified, SwiftMessages calls this closure when an instance of
+         `WindowViewController` is needed. Use this if you need to supply a custom subclass
+         of `WindowViewController`.
+         */
+        public var windowViewController: ((_ windowLevel: UIWindowLevel?, _ config: SwiftMessages.Config) -> WindowViewController)?
     }
     
     /**

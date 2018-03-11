@@ -246,6 +246,7 @@
 			children = (
 				86589D461D64B6E40041676C /* BaseView.swift */,
 				86AAF82C1D580F410031EE32 /* Theme.swift */,
+				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
 				867BED201D622793005212E3 /* BackgroundViewable.swift */,
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
@@ -283,7 +284,6 @@
 				86AAF8171D54F0650031EE32 /* PassthroughView.swift */,
 				22E01F631E74EC8B00ACE19A /* MaskingView.swift */,
 				86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */,
-				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
 				86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */,
 				862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */,
 			);

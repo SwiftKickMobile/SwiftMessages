@@ -268,7 +268,7 @@ class Presenter: NSObject {
     private func getPresentationContext() throws -> PresentationContext {
 
         func newWindowViewController(_ windowLevel: UIWindowLevel) -> UIViewController {
-            let viewController = WindowViewController(windowLevel: windowLevel, config: config)
+            let viewController = WindowViewController.newInstance(windowLevel: windowLevel, config: config)
             return viewController
         }
 
