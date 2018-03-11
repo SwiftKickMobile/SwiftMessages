@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.1.2
+
+### Bug Fixes
+* Custom presentation styles using `TopBottomAnimation` now display properly under top and bottom bars.
+
 ## 4.1.1
 
 ### Features
