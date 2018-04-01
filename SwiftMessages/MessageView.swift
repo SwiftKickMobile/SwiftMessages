@@ -95,7 +95,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     open var accessibilityPrefix: String?
 
     open var accessibilityMessage: String? {
-        let components = [accessibilityPrefix, titleLabel?.text, bodyLabel?.text].flatMap { $0 }
+        let components = [accessibilityPrefix, titleLabel?.text, bodyLabel?.text].compactMap { $0 }
         guard components.count > 0 else { return nil }
         return components.joined(separator: ", ")
     }
