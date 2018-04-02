@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 4.1.2
 
 ### Features
+* Updates for Swift 4.1
 * #164 Added an optional `windowViewController` property to `SwiftMessages.Config` for supplying a custom subclass of `WindowViewController`.
 
 ### Bug Fixes
