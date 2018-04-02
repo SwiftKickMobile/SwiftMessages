@@ -73,8 +73,8 @@ github "SwiftKickMobile/SwiftMessages"
 1. Put SwiftMessages repo somewhere in your project directory.
 1. In Xcode, add `SwiftMessages.xcodeproj` to your project.
 1. On your app's target, add the SwiftMessages framework:
-  1. as an embedded binary on the General tab.
-  1. as a target dependency on the Build Phases tab.
+   1. as an embedded binary on the General tab.
+   1. as a target dependency on the Build Phases tab.
 
 ## In the App Store
 
