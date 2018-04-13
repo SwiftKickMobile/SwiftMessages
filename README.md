@@ -94,7 +94,7 @@ and assortment of nib-based layouts that should handle most cases:
 ````swift
 // Instantiate a message view from the provided card view layout. SwiftMessages searches for nib
 // files in the main bundle first, so you can easily copy them into your project and make changes.
-let view = MessageView.viewFromNib(layout: .CardView)
+let view = MessageView.viewFromNib(layout: .cardView)
 
 // Theme message elements with the warning style.
 view.configureTheme(.warning)
@@ -116,7 +116,7 @@ your UIKit code is executed on the main queue:
 
 ````swift
 SwiftMessages.show {
-    let view = MessageView.viewFromNib(layout: .CardView)
+    let view = MessageView.viewFromNib(layout: .cardView)
     // ... configure the view
     return view
 }
@@ -262,7 +262,7 @@ To facilitate the use of nib-based layouts, `MessageView` provides some type-saf
 // Instantiate MessageView from one of the provided nibs in a type-safe way.
 // SwiftMessages searches the main bundle first, so you easily copy the nib into
 // your project and modify it while still using this type-safe call.
-let view = MessageView.viewFromNib(layout: .CardView)
+let view = MessageView.viewFromNib(layout: .cardView)
 ````
 
 In addition, the `SwiftMessages` class provides some generic loading methods:
