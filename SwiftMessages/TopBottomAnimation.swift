@@ -114,10 +114,10 @@ public class TopBottomAnimation: NSObject, Animator {
         }
         adjustable.preservesSuperviewLayoutMargins = false
         if #available(iOS 11, *) {
-            var margins = adjustable.directionalLayoutMargins
+            var margins = adjustable.safeAreaInsets
             margins.top = top
             margins.bottom = bottom
-            adjustable.directionalLayoutMargins = margins
+            adjustable.layoutMargins = margins
         } else {
             var margins = adjustable.layoutMargins
             margins.top = top
