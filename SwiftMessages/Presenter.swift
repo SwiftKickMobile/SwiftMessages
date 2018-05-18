@@ -265,12 +265,16 @@ class Presenter: NSObject {
             }
             return conflicts
         } else {
+            #if SWIFTMESSAGES_APP_EXTENSIONS
+            return []
+            #else
             if UIApplication.shared.isStatusBarHidden { return [] }
             if (windowLevel > UIWindowLevelNormal) || underNavigationBar { return [] }
             let statusBarFrame = UIApplication.shared.statusBarFrame
             let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
             let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
             return statusBarViewFrame.intersects(maskingView.bounds) ? SafeZoneConflicts.statusBar : []
+            #endif
         }
     }
 
@@ -283,12 +287,16 @@ class Presenter: NSObject {
 
         switch config.presentationContext {
         case .automatic:
+            #if SWIFTMESSAGES_APP_EXTENSIONS
+            throw SwiftMessagesError.noRootViewController
+            #else
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
                 let viewController = rootViewController.sm_selectPresentationContextTopDown(config)
                 return .viewController(Weak(value: viewController))
             } else {
                 throw SwiftMessagesError.noRootViewController
             }
+            #endif
         case .window(let level):
             let viewController = newWindowViewController(level)
             return .viewController(Weak(value: viewController))
