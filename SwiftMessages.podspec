@@ -10,11 +10,11 @@ Pod::Spec.new do |spec|
     spec.ios.deployment_target = '8.0'
     spec.framework        = 'UIKit'
     spec.requires_arc     = true
-    spec.default_subspec  = 'Core'
+    spec.default_subspec  = 'App'
 
-    spec.subspec 'Core' do |core|
-        core.source_files = 'SwiftMessages/**/*.swift'
-        core.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/**/*']}
+    spec.subspec 'App' do |app|
+        app.source_files = 'SwiftMessages/**/*.swift'
+        app.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/**/*']}
     end
     
     spec.subspec 'AppExtension' do |ext|

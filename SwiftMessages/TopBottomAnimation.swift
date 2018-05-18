@@ -54,10 +54,10 @@ public class TopBottomAnimation: NSObject, Animator {
             self.translationConstraint.constant -= size.height
             container.layoutIfNeeded()
         }, completion: { completed in
-            // Fix #131 by always completing if application isn't active.
             #if SWIFTMESSAGES_APP_EXTENSIONS
             completion(completed)
             #else
+            // Fix #131 by always completing if application isn't active.
             completion(completed || UIApplication.shared.applicationState != .active)
             #endif
         })
