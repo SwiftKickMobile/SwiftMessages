@@ -14,17 +14,19 @@ public extension MarginAdjustable where Self: UIView {
         var top: CGFloat = 0
         top += bounceAnimationOffset
         if !context.safeZoneConflicts.isDisjoint(with: [.sensorNotch, .statusBar]) {
-            if #available(iOS 11, *), container.safeAreaInsets.top > 0  {
-                // Linear formula based on:
-                // iPhone 8 - 20pt top safe area with 0pt adjustment
-                // iPhone X - 44pt top safe area with -6pt adjustment
-                top -= 6 * (container.safeAreaInsets.top - 20) / (44 - 20)
+            if #available(iOS 11, *)  {
+                do {
+                    // To accommodate future safe areas, using a linear formula based on
+                    // two data points:
+                    // iPhone 8 - 20pt top safe area needs 0pt adjustment
+                    // iPhone X - 44pt top safe area needs -6pt adjustment
+                    top -= 6 * (container.safeAreaInsets.top - 20) / (44 - 20)
+                }
                 top += safeAreaTopOffset
-            } else {
+            } else if UIApplication.shared.statusBarOrientation == .portrait || UIApplication.shared.statusBarOrientation == .portraitUpsideDown {
                 top += statusBarOffset
             }
-        }
-        if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .coveredStatusBar) {
+        } else if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
             top -= safeAreaInsets.top
         }
         return top
@@ -35,6 +37,14 @@ public extension MarginAdjustable where Self: UIView {
         bottom += bounceAnimationOffset
         if !context.safeZoneConflicts.isDisjoint(with: [.homeIndicator]) {
             if #available(iOS 11, *), container.safeAreaInsets.bottom > 0  {
+                do {
+                    // This adjustment was added to fix a layout issue with iPhone X in
+                    // landscape mode. Using a linear formula based on two data points to help
+                    // future proof against future safe areas:
+                    // iPhone X portrait: 34pt bottom safe area needs 0pt adjustment
+                    // iPhone X landscape: 21pt bottom safe area needs 12pt adjustment
+                    bottom -= 12 * (container.safeAreaInsets.bottom - 34) / (34 - 21)
+                }
                 bottom += safeAreaBottomOffset
             }
         }

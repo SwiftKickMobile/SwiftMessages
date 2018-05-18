@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.1.3
+### Bug Fixes
+* Fix #185 Incorrect margin adjustments in landscape
+
 ## 4.1.2
 
 ### Features

@@ -219,12 +219,12 @@ class Presenter: NSObject {
 
     private func safeZoneConflicts() -> SafeZoneConflicts {
         guard let window = maskingView.window else { return [] }
-        let inNormalWindowLevel: Bool = {
+        let windowLevel: UIWindowLevel = {
             if let vc = presentationContext.viewControllerValue() as? WindowViewController {
-                return vc.windowLevel == UIWindowLevelNormal
+                return vc.windowLevel
             }
-            return true
-        } ()
+            return UIWindowLevelNormal
+        }()
         // TODO `underNavigationBar` and `underTabBar` should look up the presentation context's hierarchy
         // TODO for cases where both should be true (probably not an issue for typical height messages, though).
         let underNavigationBar: Bool = {
@@ -236,15 +236,24 @@ class Presenter: NSObject {
             return false
         }()
         if #available(iOS 11, *) {
-            if !inNormalWindowLevel {
+            if windowLevel > UIWindowLevelNormal {
                 // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
-                // iPhone 8 with status bar window level, which doesn't seem right
-                // since the status bar is covered by the window. Applying a special rule
+                // iPhone 8 with status bar window level. This seems like an iOS bug since
+                // the message view's window is above the status bar. Applying a special rule
                 // to allow the animator to revove this amount from the layout margins if needed.
-                if maskingView.safeAreaInsets.top <= 20 {
-                    return [.coveredStatusBar]
+                // This may need to be reworked if any future device has a legitimate 20pt top safe area,
+                // such as with a potentially smaller notch.
+                if maskingView.safeAreaInsets.top == 20 {
+                    return [.overStatusBar]
                 } else {
-                    return [.sensorNotch, .homeIndicator]
+                    var conflicts: SafeZoneConflicts = []
+                    if maskingView.safeAreaInsets.top > 0 {
+                        conflicts.formUnion(.sensorNotch)
+                    }
+                    if maskingView.safeAreaInsets.bottom > 0 {
+                        conflicts.formUnion(.homeIndicator)
+                    }
+                    return conflicts
                 }
             }
             var conflicts: SafeZoneConflicts = []
@@ -257,7 +266,7 @@ class Presenter: NSObject {
             return conflicts
         } else {
             if UIApplication.shared.isStatusBarHidden { return [] }
-            if !inNormalWindowLevel || underNavigationBar { return [] }
+            if (windowLevel > UIWindowLevelNormal) || underNavigationBar { return [] }
             let statusBarFrame = UIApplication.shared.statusBarFrame
             let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
             let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)

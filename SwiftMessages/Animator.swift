@@ -17,8 +17,9 @@ public protocol AnimationDelegate: class {
 }
 
 /**
- An option set that represents the known types of safe zone conflicts
- that may need custom margin adustments.
+ An option set representing the known types of safe area conflicts
+ that could require margin adustments on the message view in order to
+ get the layouts to look right.
  */
 public struct SafeZoneConflicts: OptionSet {
     public let rawValue: Int
@@ -36,11 +37,10 @@ public struct SafeZoneConflicts: OptionSet {
     /// Message view behind home indicator on iPhone X
     public static let homeIndicator = SafeZoneConflicts(rawValue: 1 << 2)
 
-    /// Message view covering status bar on iPhone 8 or lower. One would expect the
-    /// top safe zone to be 0, but in the current version of iOS 11, it is non-zero (20),
-    /// which SwiftMessages will automatically compensate for by subtracting that amount
-    /// form the layout margins.
-    public static let coveredStatusBar = SafeZoneConflicts(rawValue: 1 << 3)
+    /// Message view is over the status bar on an iPhone 8 or lower. This is a special
+    /// case because we logically expect the top safe area to be zero, but it is reported as 20
+    /// (which seems like an iOS bug). We use the `overStatusBar` to indicate this special case.
+    public static let overStatusBar = SafeZoneConflicts(rawValue: 1 << 3)
 }
 
 public class AnimationContext {
