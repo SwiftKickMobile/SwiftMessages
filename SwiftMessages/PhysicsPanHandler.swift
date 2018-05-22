@@ -180,6 +180,7 @@ open class PhysicsPanHandler {
                 let margins = view.layoutMargins
                 view.insetsLayoutMarginsFromSafeArea = false
                 view.layoutMargins = margins
+                view.subviews.forEach { freezeLayoutMargins(view: $0) }
             }
             freezeLayoutMargins(view: messageView)
         }
