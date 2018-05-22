@@ -162,13 +162,13 @@ open class PhysicsPanHandler {
     private func configureSafeAreaWorkaround() {
         guard #available(iOS 11, *), let messageView = messageView else { return }
         // Freeze the layout margins (with respect to safe area) in order to work
-        // around to a visual glitch (bug?) on iOS 11 where the message view's motion
+        // around a visual glitch (bug?) on iOS 11 where the message view's motion
         // becomes temporarily discontinuous. The problem can be seen in the Demo app's
-        // "Centered" example by panning or flinging the message view diagonally up while
+        // "Centered" example by panning or flinging the message view upwards while
         // the device in portrait orientation. As the message view enters the top safe area,
         // the top layout margin gets a proportinal increase, causing the background view's
         // vertical velocity to abruptly go to zero. Once fully inside the safe area, the
-        // layout margin has reached it's maximum value and the vertical velocity abruptly
+        // layout margin has reached its maximum value and the vertical velocity abruptly
         // resumes. By freezing the layout margins here (the message view's resting layout
         // would have already been established), we completely avoid the problem. This could
         // concievably break message views that need to have the layout margins affected by
