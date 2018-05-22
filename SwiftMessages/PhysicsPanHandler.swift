@@ -105,6 +105,7 @@ open class PhysicsPanHandler {
         let anchorPoint = pan.location(in: containerView)
         switch pan.state {
         case .began:
+            configureSafeAreaWorkaround()
             animator.delegate?.panStarted(animator: animator)
             let state = State(messageView: messageView, containerView: containerView)
             self.state = state
@@ -155,6 +156,32 @@ open class PhysicsPanHandler {
             }
         default:
             break
+        }
+    }
+
+    private func configureSafeAreaWorkaround() {
+        guard let messageView = messageView else { return }
+        if #available(iOS 11, *) {
+            // Freeze the layout margins (with respect to safe area) in order to work
+            // around to a visual glitch (bug?) on iOS 11 where the message view's motion
+            // becomes temporarily discontinuous. The problem can be seen in the Demo app's
+            // "Centered" example by panning or flinging the message view diagonally up while
+            // the device in portrait orientation. As the message view enters the top safe area,
+            // the top layout margin gets a proportinal increase, causing the background view's
+            // vertical velocity to abruptly go to zero. Once fully inside the safe area, the
+            // layout margin has reached it's maximum value and the vertical velocity abruptly
+            // resumes. By freezing the layout margins here (the message view's resting layout
+            // would have already been established), we completely avoid the problem. This could
+            // concievably break message views that need to have the layout margins affected by
+            // the save area continuously, but this doesn't seem like a likely scenario. Strangly,
+            // this problem doesn't affect left, right or bottom safe areas or any device
+            // orientation other than portrait.
+            func freezeLayoutMargins(view: UIView) {
+                let margins = view.layoutMargins
+                view.insetsLayoutMarginsFromSafeArea = false
+                view.layoutMargins = margins
+            }
+            freezeLayoutMargins(view: messageView)
         }
     }
 }
