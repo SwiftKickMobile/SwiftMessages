@@ -105,7 +105,6 @@ open class PhysicsPanHandler {
         let anchorPoint = pan.location(in: containerView)
         switch pan.state {
         case .began:
-            configureSafeAreaWorkaround()
             animator.delegate?.panStarted(animator: animator)
             let state = State(messageView: messageView, containerView: containerView)
             self.state = state
@@ -146,73 +145,17 @@ open class PhysicsPanHandler {
                 state.itemBehavior.addAngularVelocity(escapeAngularVelocity, for: messageView)
                 state.attachmentBehavior = nil
             } else {
-                // Undo any changes made to the layoutMargins of these views if the gesture doesn't
-                // resolve in dismissing the messageView
-                removeSafeAreaWorkaround()
-                animator.delegate?.panEnded(animator: animator)
                 state.stop()
                 self.state = nil
+                animator.delegate?.panEnded(animator: animator)
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: .beginFromCurrentState, animations: {
                     messageView.center = self.restingCenter ?? CGPoint(x: containerView.bounds.width / 2, y: containerView.bounds.height / 2)
                     messageView.transform = CGAffineTransform.identity
                 }, completion: nil)
             }
-            // Don't retain any references to these views outside of this gesture
-            originalSafeAreaWorkaroundValues.removeAll()
         default:
             break
         }
-    }
-    
-    private var originalSafeAreaWorkaroundValues = [UIView: (layoutMargins: UIEdgeInsets, safeAreaInsets: UIEdgeInsets, layoutMarginsFromSafeArea: Bool)]()
-
-    private func configureSafeAreaWorkaround() {
-        guard #available(iOS 11, *), let messageView = messageView else { return }
-        // Freeze the layout margins (with respect to safe area) in order to work
-        // around a visual glitch (bug?) on iOS 11 where the message view's motion
-        // becomes temporarily discontinuous. The problem can be seen in the Demo app's
-        // "Centered" example by panning or flinging the message view upwards while
-        // the device in portrait orientation. As the message view enters the top safe area,
-        // the top layout margin gets a proportinal increase, causing the background view's
-        // vertical velocity to abruptly go to zero. Once fully inside the safe area, the
-        // layout margin has reached its maximum value and the vertical velocity abruptly
-        // resumes. By freezing the layout margins here (the message view's resting layout
-        // would have already been established), we completely avoid the problem. Strangely,
-        // this problem doesn't affect left, right or bottom safe areas or any device
-        // orientation other than portrait. The original values are cached for unfreezing
-        // if the pan gesture doesn't resolve in dismissing the messageView, so if bounds
-        // or orientations change while the message is visible later, it handles safeAreas properly.
-        func freezeLayoutMargins(view: UIView) {
-            let margins = view.layoutMargins
-            originalSafeAreaWorkaroundValues[view] = (view.layoutMargins, view.safeAreaInsets, view.insetsLayoutMarginsFromSafeArea)
-            view.insetsLayoutMarginsFromSafeArea = false
-            view.layoutMargins = margins
-            view.subviews.forEach { freezeLayoutMargins(view: $0) }
-        }
-        freezeLayoutMargins(view: messageView)
-    }
-    
-    private func removeSafeAreaWorkaround() {
-        guard #available(iOS 11, *), let messageView = messageView else { return }
-        // Undo any changes to the margins of messageView or its children. If the view
-        // originally had its layoutMargins inset from safe areas, subtract those values
-        // from their original margins and reapply them.
-        func unfreezeLayoutMargins(view: UIView) {
-            guard let originalValues = originalSafeAreaWorkaroundValues[view] else { return }
-            var newMargins = originalValues.layoutMargins
-            if originalValues.layoutMarginsFromSafeArea {
-                newMargins.top -= originalValues.safeAreaInsets.top
-                newMargins.left -= originalValues.safeAreaInsets.left
-                newMargins.right -= originalValues.safeAreaInsets.right
-                newMargins.bottom -= originalValues.safeAreaInsets.bottom
-            }
-            view.insetsLayoutMarginsFromSafeArea = originalValues.layoutMarginsFromSafeArea
-            view.layoutMargins = newMargins
-            view.subviews.forEach { unfreezeLayoutMargins(view: $0) }
-        }
-        unfreezeLayoutMargins(view: messageView)
-        // Enforce messageView and its children have their correct safeAreaInsets before we animate
-        messageView.layoutIfNeeded()
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */; };
 		2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */; };
+		22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */; };
 		228DF5261FACAC51004F8A39 /* errorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5231FACAC51004F8A39 /* errorIcon.png */; };
 		228DF5271FACAC51004F8A39 /* errorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5241FACAC51004F8A39 /* errorIcon@2x.png */; };
 		228DF5281FACAC51004F8A39 /* errorIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5251FACAC51004F8A39 /* errorIcon@3x.png */; };
@@ -90,6 +91,7 @@
 /* Begin PBXFileReference section */
 		220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Animation.swift"; sourceTree = "<group>"; };
 		2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsAnimation.swift; sourceTree = "<group>"; };
+		22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Utils.swift"; sourceTree = "<group>"; };
 		228DF5231FACAC51004F8A39 /* errorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorIcon.png; path = Resources/errorIcon.png; sourceTree = "<group>"; };
 		228DF5241FACAC51004F8A39 /* errorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "errorIcon@2x.png"; path = "Resources/errorIcon@2x.png"; sourceTree = "<group>"; };
 		228DF5251FACAC51004F8A39 /* errorIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "errorIcon@3x.png"; path = "Resources/errorIcon@3x.png"; sourceTree = "<group>"; };
@@ -252,9 +254,10 @@
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
-				86DBE0031D75BE800071E51D /* Array+Utils.swift */,
 				2298C2061EE480D000E2DDC1 /* Animator.swift */,
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
+				86DBE0031D75BE800071E51D /* Array+Utils.swift */,
+				22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */,
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,

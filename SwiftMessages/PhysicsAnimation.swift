@@ -85,29 +85,14 @@ public class PhysicsAnimation: NSObject, Animator {
 
     @objc public func adjustMargins() {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
-            let container = containerView,
             let context = context else { return }
-        var top: CGFloat = 0
-        var bottom: CGFloat = 0
-        switch placement {
-        case .top:
-            top += adjustable.topAdjustment(container: container, context: context)
-        case .bottom:
-            bottom += adjustable.bottomAdjustment(container: container, context: context)
-        case .center:
-            break
-        }
         adjustable.preservesSuperviewLayoutMargins = false
+        let defaultMarginAdjustment = adjustable.defaultMarginAdjustment(context: context)
         if #available(iOS 11, *) {
-            var margins = adjustable.safeAreaInsets
-            margins.top = top
-            margins.bottom = bottom
-            adjustable.layoutMargins = margins
+            adjustable.insetsLayoutMarginsFromSafeArea = false
+            adjustable.layoutMargins = adjustable.safeAreaInsets + defaultMarginAdjustment
         } else {
-            var margins = adjustable.layoutMargins
-            margins.top = top
-            margins.bottom = bottom
-            adjustable.layoutMargins = margins
+            adjustable.layoutMargins = defaultMarginAdjustment
         }
     }
 
