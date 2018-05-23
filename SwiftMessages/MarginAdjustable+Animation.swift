@@ -14,7 +14,7 @@ public extension MarginAdjustable where Self: UIView {
         return UIEdgeInsets(top: topAdjustment(context: context), left: 0, bottom: bottomAdjustment(context: context), right: 0)
     }
 
-    private func topAdjustment(context: AnimationContext) -> CGFloat {
+    private func topAdjustment(context: AnimationContext) -> CGFloat {        
         var top: CGFloat = 0
         if !context.safeZoneConflicts.isDisjoint(with: [.sensorNotch, .statusBar]) {
             if #available(iOS 11, *)  {
@@ -27,7 +27,10 @@ public extension MarginAdjustable where Self: UIView {
                 }
                 top += safeAreaTopOffset
             } else if UIApplication.shared.statusBarOrientation == .portrait || UIApplication.shared.statusBarOrientation == .portraitUpsideDown {
-                top += statusBarOffset
+                let frameInWindow = convert(bounds, to: window)
+                if frameInWindow.minY == 0 {
+                    top += statusBarOffset
+                }
             }
         } else if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
             top -= safeAreaInsets.top
