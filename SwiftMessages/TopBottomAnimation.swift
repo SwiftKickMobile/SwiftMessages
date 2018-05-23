@@ -102,27 +102,20 @@ public class TopBottomAnimation: NSObject, Animator {
 
     @objc public func adjustMargins() {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
-            let container = containerView,
             let context = context else { return }
-        var top: CGFloat = 0
-        var bottom: CGFloat = 0
+        adjustable.preservesSuperviewLayoutMargins = false
+        var defaultMarginAdjustment = adjustable.defaultMarginAdjustment(context: context)
         switch style {
         case .top:
-            top = adjustable.topAdjustment(container: container, context: context)
+            defaultMarginAdjustment.top += bounceOffset
         case .bottom:
-            bottom = adjustable.bottomAdjustment(container: container, context: context)
+            defaultMarginAdjustment.bottom += bounceOffset
         }
-        adjustable.preservesSuperviewLayoutMargins = false
         if #available(iOS 11, *) {
-            var margins = adjustable.safeAreaInsets
-            margins.top = top
-            margins.bottom = bottom
-            adjustable.layoutMargins = margins
+            adjustable.insetsLayoutMarginsFromSafeArea = false
+            adjustable.layoutMargins = adjustable.safeAreaInsets + defaultMarginAdjustment
         } else {
-            var margins = adjustable.layoutMargins
-            margins.top = top
-            margins.bottom = bottom
-            adjustable.layoutMargins = margins
+            adjustable.layoutMargins = defaultMarginAdjustment
         }
     }
 

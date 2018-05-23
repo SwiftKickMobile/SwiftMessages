@@ -145,9 +145,9 @@ open class PhysicsPanHandler {
                 state.itemBehavior.addAngularVelocity(escapeAngularVelocity, for: messageView)
                 state.attachmentBehavior = nil
             } else {
-                animator.delegate?.panEnded(animator: animator)
                 state.stop()
                 self.state = nil
+                animator.delegate?.panEnded(animator: animator)
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: .beginFromCurrentState, animations: {
                     messageView.center = self.restingCenter ?? CGPoint(x: containerView.bounds.width / 2, y: containerView.bounds.height / 2)
                     messageView.transform = CGAffineTransform.identity
