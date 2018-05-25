@@ -17,6 +17,11 @@ public extension MarginAdjustable where Self: UIView {
     private func topAdjustment(context: AnimationContext) -> CGFloat {        
         var top: CGFloat = 0
         if !context.safeZoneConflicts.isDisjoint(with: [.sensorNotch, .statusBar]) {
+            #if SWIFTMESSAGES_APP_EXTENSIONS
+            let application: UIApplication? = nil
+            #else
+            let application: UIApplication? = UIApplication.shared
+            #endif
             if #available(iOS 11, *)  {
                 do {
                     // To accommodate future safe areas, using a linear formula based on
@@ -26,7 +31,7 @@ public extension MarginAdjustable where Self: UIView {
                     top -= 6 * (safeAreaInsets.top - 20) / (44 - 20)
                 }
                 top += safeAreaTopOffset
-            } else if UIApplication.shared.statusBarOrientation == .portrait || UIApplication.shared.statusBarOrientation == .portraitUpsideDown {
+            } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                 let frameInWindow = convert(bounds, to: window)
                 if frameInWindow.minY == 0 {
                     top += statusBarOffset

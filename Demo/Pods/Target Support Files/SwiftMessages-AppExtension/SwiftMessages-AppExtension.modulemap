@@ -1,0 +1,6 @@
+framework module SwiftMessages {
+  umbrella header "SwiftMessages-AppExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}

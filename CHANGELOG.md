@@ -1,7 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.1.4
+
+### Bug Fixes
+* Fix #191 Prevent usage of UIApplication.shared when building for extensions
+
+### Improvements
+* #192 Add a way to test compilation with app extension
+
 ## 4.1.3
+
+### Features
+* #183 Added iOS app extension support at compile time.
 
 ### Bug Fixes
 * Fix #185 Incorrect margin adjustments in landscape
