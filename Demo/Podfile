@@ -4,3 +4,10 @@ target 'Demo' do
     xcodeproj 'Demo.xcodeproj'
     pod 'SwiftMessages', :path => '../'
 end
+
+target 'iMessageDemo' do
+    use_frameworks!
+    workspace 'Demo.xcworkspace'
+    xcodeproj 'Demo.xcodeproj'
+    pod 'SwiftMessages/AppExtension', :path => '../'
+end
