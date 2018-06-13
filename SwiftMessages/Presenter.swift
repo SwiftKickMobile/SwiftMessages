@@ -37,7 +37,7 @@ class Presenter: NSObject {
         }
     }
     
-    let config: SwiftMessages.Config
+    var config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
     lazy var maskingView: MaskingView = { return MaskingView() }()

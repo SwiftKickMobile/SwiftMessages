@@ -49,7 +49,7 @@ public class TopBottomAnimation: NSObject, Animator {
         let view = context.messageView
         let container = context.containerView
         self.context = context
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
+        UIView.animate(withDuration: hideDuration!, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
             self.translationConstraint.constant -= size.height
             container.layoutIfNeeded()
@@ -62,6 +62,10 @@ public class TopBottomAnimation: NSObject, Animator {
             #endif
         })
     }
+
+    public var showDuration: TimeInterval? { return 0.4  }
+
+    public var hideDuration: TimeInterval? { return 0.2  }
 
     func install(context: AnimationContext) {
         let view = context.messageView
@@ -128,7 +132,7 @@ public class TopBottomAnimation: NSObject, Animator {
         // Cap the initial velocity at zero because the bounceOffset may not be great
         // enough to allow for greater bounce induced by a quick panning motion.
         let initialSpringVelocity = animationDistance == 0.0 ? 0.0 : min(0.0, closeSpeed / animationDistance)
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: showDuration!, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
             self.translationConstraint.constant = -self.bounceOffset
             container.layoutIfNeeded()
         }, completion: { completed in

@@ -17,8 +17,28 @@ class ViewController: UITableViewController {
         .titleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .explore,
         .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
-        .counted,
+        .viewController,
+        //.counted,
     ]
+
+    /*
+     MARK: - Lifecycle
+     */
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segue = segue as? StoryboardSegue,
+            segue.identifier == "ViewControllersDemo",
+            let navigationVC = segue.destination as? UINavigationController,
+            let rootVC = navigationVC.viewControllers.first {
+            segue.messageView.preferredHeight = 225
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissPresented))
+            rootVC.navigationItem.rightBarButtonItem = doneButton
+        }
+    }
+
+    @objc private func dismissPresented() {
+        dismiss(animated: true, completion: nil)
+    }
 
     /*
      MARK: - UITableViewDataSource
@@ -176,6 +196,7 @@ enum Item {
     case titleBody(title: String, body: String, function: Function)
     case explore
     case counted
+    case viewController
 
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
@@ -194,6 +215,10 @@ enum Item {
             cell.configureBodyTextStyle()
             cell.bodyLabel.configureCodeStyle(on: "show()")
             cell.bodyLabel.configureCodeStyle(on: "hideCounted(id:)")
+            return cell
+        case .viewController:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ViewController") as! TitleBodyCell
+            cell.configureBodyTextStyle()
             return cell
         }
     }

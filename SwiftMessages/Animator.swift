@@ -65,4 +65,14 @@ public protocol Animator: class {
     func show(context: AnimationContext, completion: @escaping AnimationCompletion)
 
     func hide(context: AnimationContext, completion: @escaping AnimationCompletion)
+
+    var showDuration: TimeInterval? { get }
+
+    var hideDuration: TimeInterval? { get }
 }
+
+public extension Animator {
+    var showDuration: TimeInterval? { return nil }
+    var hideDuration: TimeInterval? { return nil }
+}
+

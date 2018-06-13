@@ -9,7 +9,7 @@
 
 import UIKit
 
-/*
+/**
  The `BaseView` class is a reusable message view base class that implements some
  of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
@@ -70,18 +70,19 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
      - Parameter backgroundView: The view to be installed as a subview and
      assigned to the `backgroundView` property.
+     - Parameter insets: The amount to inset the content view from the margins. Default is zero inset.
      */
-    open func installBackgroundView(_ backgroundView: UIView) {
+    open func installBackgroundView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         if backgroundView != self {
             backgroundView.removeFromSuperview()
         }
         addSubview(backgroundView)
         self.backgroundView = backgroundView
-        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: 0)
-        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: 0)
-        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottomMargin, multiplier: 1.0, constant: 0)
-        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: 0)
+        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottomMargin, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
         addConstraints([top, left, bottom, right])
         installTapRecognizer()
     }
@@ -103,6 +104,21 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
         let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
         backgroundView.addConstraints([top, left, bottom, right])
+    }
+
+    func installTabBackgroundView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        if backgroundView != self {
+            backgroundView.removeFromSuperview()
+        }
+        addSubview(backgroundView)
+        self.backgroundView = backgroundView
+        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
+        addConstraints([top, left, bottom, right])
+        installTapRecognizer()
     }
 
     /*
@@ -202,6 +218,11 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         }
         return super.intrinsicContentSize
     }
+
+    /*
+     MARK: - Drop shadow
+     */
+
 }
 
 /*
@@ -212,7 +233,6 @@ extension BaseView {
 
     /// A convenience function to configure a default drop shadow effect.
     open func configureDropShadow() {
-        let layer = backgroundView.layer
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowRadius = 6.0
@@ -221,8 +241,15 @@ extension BaseView {
         updateShadowPath()
     }
 
+    /// A convenience function to turn off drop shadow
+    open func configureNoDropShadow() {
+        layer.shadowOpacity = 0
+    }
+
     private func updateShadowPath() {
-        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
+        let shadowLayer = backgroundView?.layer ?? layer
+        let shadowRect = layer.convert(shadowLayer.bounds, from: shadowLayer)
+        layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: shadowLayer.cornerRadius).cgPath
     }
 
     open override func layoutSubviews() {

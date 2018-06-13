@@ -1,8 +1,8 @@
 PODS:
-  - SwiftMessages (4.1.3):
-    - SwiftMessages/App (= 4.1.3)
-  - SwiftMessages/App (4.1.3)
-  - SwiftMessages/AppExtension (4.1.3)
+  - SwiftMessages (4.1.4):
+    - SwiftMessages/App (= 4.1.4)
+  - SwiftMessages/App (4.1.4)
+  - SwiftMessages/AppExtension (4.1.4)
 
 DEPENDENCIES:
   - SwiftMessages (from `../`)
@@ -13,8 +13,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftMessages: dea7e8f42d8c166bc7ca6ded4e5bd45300f36bf0
+  SwiftMessages: e275a7c7dd47af001bc95d51c862dab03be6ffd8
 
-PODFILE CHECKSUM: 1146262ef9e9150bdfd257730666a46938cb783c
+PODFILE CHECKSUM: eb4a8d64cb6765922e46eb820b136cafb7c711ad
 
 COCOAPODS: 1.5.2
