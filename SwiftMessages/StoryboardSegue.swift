@@ -10,15 +10,29 @@ import UIKit
 
 /**
  A configurable `UIStoryboardSegue subclass that utilizes SwiftMessages to
- present a view controller modally. Several convenience classes are provided below,
+ present a view controller modally. Several convenience sub-classes are provided below,
  providing pre-defined configurations (e.g. `TopMessageViewSegue`), so you don't have
  to write any configuration code. However, if the pre-defined configurations aren't
  sufficient, you can further configure the segue in `prepare(for:sender:)` whether or not
  you use the convenience classes.
 
- This class can be used programatically by initializing an instance and calling `perform()`.
- To dismiss, just call `dismiss(animated:, completion:)` on the presenting view controller.
- There is no need to retain the instance of `StoryboardSegue` (it retains and releases itself).
+ To configure in Interface Builder, create a segue to your view controller and configure
+ the segue as follows:
+ 1. Set the "Class" to `StoryboardSegue` or one of the convenience sub-classes.
+ 2. Set the "Kind" to "Custom"
+
+ To further configure in code, cast the segue to `StoryboardSegue` in `prepare(for:sender:)`
+ and set any of the provided configuration options.
+
+ This class can be used programatically without Interface Builder by initializing an instance
+ and calling `perform()`. To dismiss, just call `dismiss(animated:, completion:)` on the
+ presenting view controller. There is no need to retain the instance of `StoryboardSegue`
+ (it retains and releases itself).
+
+ Note that some view controllers' views do not provide an ideal `intrinsicContentSize` value
+ for SwiftMessages presentations. One such case is `UINavigationController`. While subclassing
+ is an option, a good alternative is to specify `StoryboardSegue.messageView.preferredHeight`
+ in `prepare(for:sender:)`.
 
  See the "View Controllers" selection in the Demo app.
  */
@@ -67,6 +81,11 @@ public class StoryboardSegue: UIStoryboardSegue {
      The view that the view controller's view is installed into and displayed using
      `SwiftMessages.show()`. This class is responsible for performing this installation,
      but any other configuration is up to the caller.
+
+     Note that some view controllers' views do not provide an ideal `intrinsicContentSize` value
+     for SwiftMessages presentations. One such case is `UINavigationController`. While subclassing
+     is an option, a good alternative is to specify `StoryboardSegue.messageView.preferredHeight`
+     in `prepare(for:sender:)`.
      */
     public var messageView = BaseView()
 
