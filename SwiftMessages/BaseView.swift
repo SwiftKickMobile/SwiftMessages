@@ -218,11 +218,6 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         }
         return super.intrinsicContentSize
     }
-
-    /*
-     MARK: - Drop shadow
-     */
-
 }
 
 /*

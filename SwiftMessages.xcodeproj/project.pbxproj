@@ -10,7 +10,7 @@
 		220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */; };
 		2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */; };
 		22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */; };
-		227BA6D920BF224A00E5A843 /* StoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BA6D820BF224A00E5A843 /* StoryboardSegue.swift */; };
+		227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */; };
 		228DF5261FACAC51004F8A39 /* errorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5231FACAC51004F8A39 /* errorIcon.png */; };
 		228DF5271FACAC51004F8A39 /* errorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5241FACAC51004F8A39 /* errorIcon@2x.png */; };
 		228DF5281FACAC51004F8A39 /* errorIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5251FACAC51004F8A39 /* errorIcon@3x.png */; };
@@ -93,7 +93,7 @@
 		220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Animation.swift"; sourceTree = "<group>"; };
 		2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsAnimation.swift; sourceTree = "<group>"; };
 		22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Utils.swift"; sourceTree = "<group>"; };
-		227BA6D820BF224A00E5A843 /* StoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardSegue.swift; sourceTree = "<group>"; };
+		227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesSegue.swift; sourceTree = "<group>"; };
 		228DF5231FACAC51004F8A39 /* errorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorIcon.png; path = Resources/errorIcon.png; sourceTree = "<group>"; };
 		228DF5241FACAC51004F8A39 /* errorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "errorIcon@2x.png"; path = "Resources/errorIcon@2x.png"; sourceTree = "<group>"; };
 		228DF5251FACAC51004F8A39 /* errorIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "errorIcon@3x.png"; path = "Resources/errorIcon@3x.png"; sourceTree = "<group>"; };
@@ -196,12 +196,12 @@
 			name = Animations;
 			sourceTree = "<group>";
 		};
-		22D4779B20BF1C54005D0D71 /* View Controller */ = {
+		22D4779B20BF1C54005D0D71 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				227BA6D820BF224A00E5A843 /* StoryboardSegue.swift */,
+				227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */,
 			);
-			name = "View Controller";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		862C0CD81D5A396900D06168 /* Resources */ = {
@@ -310,7 +310,7 @@
 				867E21821D4D025200594A41 /* MessageView.swift */,
 				862C0CD81D5A396900D06168 /* Resources */,
 				2244656C1EF1D62700C50413 /* Animations */,
-				22D4779B20BF1C54005D0D71 /* View Controller */,
+				22D4779B20BF1C54005D0D71 /* View Controllers */,
 				864495571D4F7C490056EB2A /* Base */,
 				867E218E1D4D3DFD00594A41 /* Internal */,
 				86B48B031D5A41E500063E2B /* Support */,
@@ -501,7 +501,7 @@
 				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
 				22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */,
-				227BA6D920BF224A00E5A843 /* StoryboardSegue.swift in Sources */,
+				227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */,
 				220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */,
 				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
 				2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */,

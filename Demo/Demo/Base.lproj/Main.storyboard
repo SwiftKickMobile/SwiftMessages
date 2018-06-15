@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -140,7 +141,7 @@
                                 <connections>
                                     <outlet property="bodyLabel" destination="sCg-K7-URy" id="RNc-md-GU0"/>
                                     <outlet property="titleLabel" destination="Qz1-BL-wQN" id="U3l-JI-Mxx"/>
-                                    <segue destination="dHK-y5-h16" kind="custom" identifier="ViewControllersDemo" customClass="BottomCardViewSegue" customModule="SwiftMessages" id="xmh-kM-q1s"/>
+                                    <segue destination="dHK-y5-h16" kind="custom" customClass="BottomCardViewSegue" customModule="SwiftMessages" id="sPt-oZ-fdc"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Counted" rowHeight="80" id="rS6-xs-t4z" userLabel="Counted Cell" customClass="TitleBodyCell" customModule="Demo" customModuleProvider="target">
@@ -898,7 +899,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to see here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bv-DK-h4b">
-                                <rect key="frame" x="109.5" y="323" width="156" height="21"/>
+                                <rect key="frame" x="109.5" y="355" width="156" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -907,7 +908,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2bv-DK-h4b" firstAttribute="centerX" secondItem="0Cn-7n-ODp" secondAttribute="centerX" id="1aC-Jw-Zyl"/>
-                            <constraint firstItem="2bv-DK-h4b" firstAttribute="centerY" secondItem="0Cn-7n-ODp" secondAttribute="centerY" id="93w-dz-NPV"/>
+                            <constraint firstItem="2bv-DK-h4b" firstAttribute="centerY" secondItem="0Cn-7n-ODp" secondAttribute="centerYWithinMargins" id="93w-dz-NPV"/>
                         </constraints>
                     </view>
                 </viewController>

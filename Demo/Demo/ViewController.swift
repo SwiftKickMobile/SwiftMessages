@@ -26,7 +26,7 @@ class ViewController: UITableViewController {
      */
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? StoryboardSegue,
+        if let segue = segue as? SwiftMessagesSegue,
             segue.identifier == "ViewControllersDemo",
             let navigationVC = segue.destination as? UINavigationController,
             let rootVC = navigationVC.viewControllers.first {
