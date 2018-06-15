@@ -141,7 +141,7 @@
                                 <connections>
                                     <outlet property="bodyLabel" destination="sCg-K7-URy" id="RNc-md-GU0"/>
                                     <outlet property="titleLabel" destination="Qz1-BL-wQN" id="U3l-JI-Mxx"/>
-                                    <segue destination="dHK-y5-h16" kind="custom" customClass="BottomCardViewSegue" customModule="SwiftMessages" id="sPt-oZ-fdc"/>
+                                    <segue destination="dHK-y5-h16" kind="custom" identifier="ViewControllersDemo" customClass="BottomCardViewSegue" customModule="SwiftMessages" id="sPt-oZ-fdc"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Counted" rowHeight="80" id="rS6-xs-t4z" userLabel="Counted Cell" customClass="TitleBodyCell" customModule="Demo" customModuleProvider="target">
