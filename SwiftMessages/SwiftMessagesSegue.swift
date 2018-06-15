@@ -1,5 +1,5 @@
 //
-//  StoryboardSegue.swift
+//  SwiftMessagesSegue.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 5/30/18.
@@ -9,34 +9,56 @@
 import UIKit
 
 /**
- A configurable `UIStoryboardSegue subclass that utilizes SwiftMessages to
- present a view controller modally. Several convenience sub-classes are provided below,
- providing pre-defined configurations (e.g. `TopMessageViewSegue`), so you don't have
- to write any configuration code. However, if the pre-defined configurations aren't
- sufficient, you can further configure the segue in `prepare(for:sender:)` whether or not
- you use the convenience classes.
+ Take advantage of SwiftMessages directly from within Interface Builder to present your modal
+ view controllers! Utilize many of SwiftMessage's bells and whistles — animations,
+ layouts, background dimming, etc. — for free with a simple control-drag between view
+ controllers.
 
- To configure in Interface Builder, create a segue to your view controller and configure
- the segue as follows:
- 1. Set the "Class" to `StoryboardSegue` or one of the convenience sub-classes.
- 2. Set the "Kind" to "Custom"
+ `SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes
+ SwiftMessages to present and dismiss modal view controllers. `SwiftMessagesSegue` performs
+ these transitions by becoming your view controller's `transitioningDelegate`, calling
+ SwiftMessage's `show()` and `hide()` under the hood.
 
- To further configure in code, cast the segue to `StoryboardSegue` in `prepare(for:sender:)`
- and set any of the provided configuration options.
+ `SwiftMessagesSegue` is easy to use: just select "swift messages" Manual Segue type when
+ control-dragging a new segue in IB. If you need to set any of the `SwiftMessagesSegue`
+ configuration options, you can do so in `prepare(for:sender:)` (ask Apple to
+ support `IBInspectable` for segues!) or define your own self-configuring subclass.
 
- This class can be used programatically without Interface Builder by initializing an instance
- and calling `perform()`. To dismiss, just call `dismiss(animated:, completion:)` on the
- presenting view controller. There is no need to retain the instance of `StoryboardSegue`
- (it retains and releases itself).
+ A number of pre-defined configurations are provided for your convenience in the form of
+ self-configuring subclasses: `TopMessageViewSegue`, `BottomMessageViewSegue`, `TopCardViewSegue`,
+ `BottomCardViewSegue`, and `CenteredViewSegue`. You'll see these in IB as Manual Segue types:
+ "top message view", "bottom message view", "top card view", "bottom card view", and "centered view"
+ (more coming soon).
 
- Note that some view controllers' views do not provide an ideal `intrinsicContentSize` value
- for SwiftMessages presentations. One such case is `UINavigationController`. While subclassing
- is an option, a good alternative is to specify `StoryboardSegue.messageView.preferredHeight`
- in `prepare(for:sender:)`.
+ The `SwiftMessagesSegue` class can alternatively be used programatically without an associated IB
+ segue. Just create an instance in the presenting view controller and call `perform()`:
 
- See the "View Controllers" selection in the Demo app.
+     let destinationVC = ... // make a reference to a destination view controller
+     let segue = BottomCardViewSegue(identifier: nil, source: self, destination: destinationVC)
+     ... // do any configuration here
+     segue.perform()
+
+ To dismiss, just call the normal API:
+
+     dismiss(animated: true, completion: nil)
+
+ It is not necessary to retain `segue` because it retains itself until dismissal. However, you can
+ retain it if you plan to `perform()` more than once.
+
+ Some additional things to note:
+ 1. Your view controller's view will be embedded in a `SwiftMessages.BaseView` in order to
+    utilize some SwiftMessages features. This view can be accessed and configured via the
+    `SwiftMessagesSegue.messageView` property.
+ 2. Some view controller's views do not define a good `intrinsicContentSize`, which
+    SwiftMessages generally relies on to establish the message view's height. A typical example
+    is `UINavigationController`. As a workaround, you can specify an explicit height in your
+    configuration:
+
+     segue.messageView.preferredHeight = 300
+
+ See the "View Controllers" selection in the Demo app for examples.
  */
-public class StoryboardSegue: UIStoryboardSegue {
+public class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
      Specifies one of the pre-defined configurations, mirroring a subset of `MessageView.Layout`.
@@ -79,13 +101,13 @@ public class StoryboardSegue: UIStoryboardSegue {
 
     /**
      The view that the view controller's view is installed into and displayed using
-     `SwiftMessages.show()`. This class is responsible for performing this installation,
-     but any other configuration is up to the caller.
+     `SwiftMessages.show()`. This class is responsible for performing the installation,
+     but any other optional configuration of `messageView` is up to the caller.
 
-     Note that some view controllers' views do not provide an ideal `intrinsicContentSize` value
-     for SwiftMessages presentations. One such case is `UINavigationController`. While subclassing
-     is an option, a good alternative is to specify `StoryboardSegue.messageView.preferredHeight`
-     in `prepare(for:sender:)`.
+     Note that some view controller's views do not define a good `intrinsicContentSize`, which
+     SwiftMessages generally relies on to establish the message view's height. A typical example
+     is `UINavigationController`. As a workaround, you can specify an explicit height in your
+     configuration using `StoryboardSegue.messageView.preferredHeight`.
      */
     public var messageView = BaseView()
 
@@ -96,28 +118,27 @@ public class StoryboardSegue: UIStoryboardSegue {
     public var containment: Containment = .content
 
     /**
-     Specifies how much the view controller's view is inset from it's superview
+     Specifies how much the view controller's view is inset from its superview
      when installed by the segue. This value is passed to either `BaseView.installContentView(:insets:)`
      or `BaseView.installBackgroundView(:insets:)` depending on the value of `containment`.
      */
     public var containmentInsets: UIEdgeInsets = .zero
 
-    // The presentation style to use. See the SwiftMessages.PresentationStyle documentation for details.
+    /// The presentation style to use. See the SwiftMessages.PresentationStyle documentation for details.
     public var presentationStyle: SwiftMessages.PresentationStyle {
         get { return messenger.defaultConfig.presentationStyle }
         set { messenger.defaultConfig.presentationStyle = newValue }
     }
 
-    // The dim mode to use. See the SwiftMessages.DimMode documentation for details.
+    /// The dim mode to use. See the SwiftMessages.DimMode documentation for details.
     public var dimMode: SwiftMessages.DimMode {
         get { return messenger.defaultConfig.dimMode}
         set { messenger.defaultConfig.dimMode = newValue }
     }
 
     private var messenger = SwiftMessages()
-    private var selfRetainer: StoryboardSegue? = nil
+    private var selfRetainer: SwiftMessagesSegue? = nil
     private lazy var hider = { return Hider(segue: self) }()
-    private var configuredLayout: Layout?
 
     private lazy var presenter = {
         return Presenter(config: messenger.defaultConfig, view: messageView, delegate: messenger)
@@ -140,9 +161,9 @@ public class StoryboardSegue: UIStoryboardSegue {
 
 /**
  A convenience class that presents a top message using the standard message view layout.
- This class is intended for use with Interface Builder. Reference as `StoryboardSegue` in code.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
 */
-public class TopMessageViewSegue: StoryboardSegue {
+public class TopMessageViewSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         presentationStyle = .top
@@ -152,9 +173,9 @@ public class TopMessageViewSegue: StoryboardSegue {
 
 /**
  A convenience class that presents a top message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `StoryboardSegue` in code.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
 */
-public class TopCardViewSegue: StoryboardSegue {
+public class TopCardViewSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         presentationStyle = .top
@@ -164,9 +185,9 @@ public class TopCardViewSegue: StoryboardSegue {
 
 /**
  A convenience class that presents a bottom message using the standard message view layout.
- This class is intended for use with Interface Builder. Reference as `StoryboardSegue` in code.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class BottomMessageViewSegue: StoryboardSegue {
+public class BottomMessageViewSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         presentationStyle = .bottom
@@ -176,9 +197,9 @@ public class BottomMessageViewSegue: StoryboardSegue {
 
 /**
  A convenience class that presents a bottom message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `StoryboardSegue` in code.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class BottomCardViewSegue: StoryboardSegue {
+public class BottomCardViewSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         presentationStyle = .bottom
@@ -188,9 +209,9 @@ public class BottomCardViewSegue: StoryboardSegue {
 
 /**
  A convenience class that presents centered message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `StoryboardSegue` in code.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class CenteredViewSegue: StoryboardSegue {
+public class CenteredViewSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         presentationStyle = .center
@@ -198,7 +219,7 @@ public class CenteredViewSegue: StoryboardSegue {
     }
 }
 
-extension StoryboardSegue {
+extension SwiftMessagesSegue {
     public func configure(layout: Layout) {
         let layer = destination.view.layer
         switch layout {
@@ -231,11 +252,10 @@ extension StoryboardSegue {
             layer.masksToBounds = true
             messageView.configureDropShadow()
         }
-        configuredLayout = layout
     }
 }
 
-extension StoryboardSegue: UIViewControllerTransitioningDelegate {
+extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let shower = Shower(segue: self)
         messenger.defaultConfig.eventListeners.append { [unowned self] in
@@ -256,13 +276,13 @@ extension StoryboardSegue: UIViewControllerTransitioningDelegate {
     }
 }
 
-extension StoryboardSegue {
+extension SwiftMessagesSegue {
     private class Shower: NSObject, UIViewControllerAnimatedTransitioning {
 
-        fileprivate private(set) var completeTransition: ((_: Bool) -> Void)?
-        private weak var segue: StoryboardSegue?
+        fileprivate private(set) var completeTransition: ((Bool) -> Void)?
+        private weak var segue: SwiftMessagesSegue?
 
-        fileprivate init(segue: StoryboardSegue) {
+        fileprivate init(segue: SwiftMessagesSegue) {
             self.segue = segue
         }
 
@@ -290,13 +310,13 @@ extension StoryboardSegue {
     }
 }
 
-extension StoryboardSegue {
+extension SwiftMessagesSegue {
     private class Hider: NSObject, UIViewControllerAnimatedTransitioning {
 
-        fileprivate private(set) var completeTransition: ((_: Bool) -> Void)?
-        private weak var segue: StoryboardSegue?
+        fileprivate private(set) var completeTransition: ((Bool) -> Void)?
+        private weak var segue: SwiftMessagesSegue?
 
-        fileprivate init(segue: StoryboardSegue) {
+        fileprivate init(segue: SwiftMessagesSegue) {
             self.segue = segue
         }
 
