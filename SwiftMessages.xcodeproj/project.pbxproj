@@ -47,6 +47,7 @@
 		228DF5681FAD0806004F8A39 /* infoIconSubtle.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5471FAD0805004F8A39 /* infoIconSubtle.png */; };
 		228DF5691FAD0806004F8A39 /* successIconLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5481FAD0805004F8A39 /* successIconLight.png */; };
 		228DF56A1FAD0806004F8A39 /* infoIconSubtle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */; };
+		2292BAB720D86AD1004FD4B3 /* SegueConvenienceClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292BAB620D86AD1004FD4B3 /* SegueConvenienceClasses.swift */; };
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
@@ -130,6 +131,7 @@
 		228DF5471FAD0805004F8A39 /* infoIconSubtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = infoIconSubtle.png; path = Resources/infoIconSubtle.png; sourceTree = "<group>"; };
 		228DF5481FAD0805004F8A39 /* successIconLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = successIconLight.png; path = Resources/successIconLight.png; sourceTree = "<group>"; };
 		228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "infoIconSubtle@3x.png"; path = "Resources/infoIconSubtle@3x.png"; sourceTree = "<group>"; };
+		2292BAB620D86AD1004FD4B3 /* SegueConvenienceClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueConvenienceClasses.swift; sourceTree = "<group>"; };
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */,
+				2292BAB620D86AD1004FD4B3 /* SegueConvenienceClasses.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */,
 				22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */,
 				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
+				2292BAB720D86AD1004FD4B3 /* SegueConvenienceClasses.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
 				22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */,
 				227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */,

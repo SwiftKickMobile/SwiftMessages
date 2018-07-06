@@ -78,11 +78,11 @@ public class PhysicsAnimation: NSObject, Animator {
         case .bottom:
             NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         }
+        NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
-        NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         container.layoutIfNeeded()
         installInteractive(context: context)
     }
@@ -91,13 +91,10 @@ public class PhysicsAnimation: NSObject, Animator {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
-        let defaultMarginAdjustment = adjustable.defaultMarginAdjustment(context: context)
         if #available(iOS 11, *) {
             adjustable.insetsLayoutMarginsFromSafeArea = false
-            adjustable.layoutMargins = adjustable.safeAreaInsets + defaultMarginAdjustment
-        } else {
-            adjustable.layoutMargins = defaultMarginAdjustment
         }
+        adjustable.layoutMargins = adjustable.defaultMarginAdjustment(context: context)
     }
 
     func showAnimation(context: AnimationContext, completion: @escaping AnimationCompletion) {

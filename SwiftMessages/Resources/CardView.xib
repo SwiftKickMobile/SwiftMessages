@@ -17,13 +17,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7b-0a-fJG" userLabel="Background view">
-                    <rect key="frame" x="30" y="10" width="540" height="140"/>
+                    <rect key="frame" x="20" y="0.0" width="560" height="160"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SU0-uJ-4pP" userLabel="Content view">
-                            <rect key="frame" x="20" y="20" width="500" height="100"/>
+                            <rect key="frame" x="20" y="20" width="520" height="120"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1i-ce-9y8" userLabel="Icon label">
-                                    <rect key="frame" x="0.0" y="27.5" width="43" height="45.5"/>
+                                    <rect key="frame" x="0.0" y="37.5" width="43" height="45.5"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -32,10 +32,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="RxA-tv-YM7" userLabel="Icon image view">
-                                    <rect key="frame" x="53" y="33" width="33" height="34"/>
+                                    <rect key="frame" x="53" y="43" width="33" height="34"/>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="i9r-ex-CgT">
-                                    <rect key="frame" x="96" y="31" width="337" height="38.5"/>
+                                    <rect key="frame" x="96" y="41" width="357" height="38.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HR-oh-U9F">
                                             <rect key="frame" x="0.0" y="0.0" width="48.5" height="20.5"/>
@@ -60,7 +60,7 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxK-Y3-nSI">
-                                    <rect key="frame" x="443" y="35" width="57" height="30"/>
+                                    <rect key="frame" x="463" y="45" width="57" height="30"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="[Button]"/>
                                 </button>
@@ -76,33 +76,37 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="10"/>
+                            <integer key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailingMargin" secondItem="A7b-0a-fJG" secondAttribute="trailing" priority="900" constant="10" id="O6e-Yz-cwK"/>
-                <constraint firstItem="A7b-0a-fJG" firstAttribute="leading" secondItem="uEa-1P-F1Y" secondAttribute="leadingMargin" priority="900" constant="10" id="RiR-2q-ZY5"/>
+                <constraint firstAttribute="trailingMargin" secondItem="A7b-0a-fJG" secondAttribute="trailing" priority="900" id="O6e-Yz-cwK"/>
+                <constraint firstItem="A7b-0a-fJG" firstAttribute="leading" secondItem="uEa-1P-F1Y" secondAttribute="leadingMargin" priority="900" id="RiR-2q-ZY5"/>
                 <constraint firstItem="A7b-0a-fJG" firstAttribute="centerX" secondItem="uEa-1P-F1Y" secondAttribute="centerX" priority="950" id="jLv-ud-1WD"/>
-                <constraint firstItem="A7b-0a-fJG" firstAttribute="top" secondItem="uEa-1P-F1Y" secondAttribute="topMargin" constant="10" id="yAH-C4-oUg"/>
-                <constraint firstAttribute="bottomMargin" secondItem="A7b-0a-fJG" secondAttribute="bottom" constant="10" id="ygs-aa-zj3"/>
+                <constraint firstItem="A7b-0a-fJG" firstAttribute="top" secondItem="uEa-1P-F1Y" secondAttribute="topMargin" id="yAH-C4-oUg"/>
+                <constraint firstAttribute="bottomMargin" secondItem="A7b-0a-fJG" secondAttribute="bottom" id="ygs-aa-zj3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
                     <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
+                <userDefinedRuntimeAttribute type="number" keyPath="topLayoutMarginAddition">
                     <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaTopOffset">
-                    <real key="value" value="-8"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="leftLayoutMarginAddition">
+                    <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaBottomOffset">
-                    <real key="value" value="-20"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="bottomLayoutMarginAddition">
+                    <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="rightLayoutMarginAddition">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="collapseLayoutMarginAdditions" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="backgroundView" destination="A7b-0a-fJG" id="R1k-6D-zIA"/>

@@ -19,9 +19,13 @@ public class TopBottomAnimation: NSObject, Animator {
 
     open let style: Style
 
+    open var springDamping: CGFloat = 0.8
+
     open var closeSpeedThreshold: CGFloat = 750.0;
 
     open var closePercentThreshold: CGFloat = 33.0;
+
+    open var closeAbsoluteThreshold: CGFloat = 75.0;
 
     private(set) var translationConstraint: NSLayoutConstraint! = nil
 
@@ -108,19 +112,17 @@ public class TopBottomAnimation: NSObject, Animator {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
-        var defaultMarginAdjustment = adjustable.defaultMarginAdjustment(context: context)
-        switch style {
-        case .top:
-            defaultMarginAdjustment.top += bounceOffset
-        case .bottom:
-            defaultMarginAdjustment.bottom += bounceOffset
-        }
         if #available(iOS 11, *) {
             adjustable.insetsLayoutMarginsFromSafeArea = false
-            adjustable.layoutMargins = adjustable.safeAreaInsets + defaultMarginAdjustment
-        } else {
-            adjustable.layoutMargins = defaultMarginAdjustment
         }
+        var layoutMargins = adjustable.defaultMarginAdjustment(context: context)
+        switch style {
+        case .top:
+            layoutMargins.top += bounceOffset
+        case .bottom:
+            layoutMargins.bottom += bounceOffset
+        }
+        adjustable.layoutMargins = layoutMargins
     }
 
     func showAnimation(completion: @escaping AnimationCompletion) {
@@ -132,7 +134,7 @@ public class TopBottomAnimation: NSObject, Animator {
         // Cap the initial velocity at zero because the bounceOffset may not be great
         // enough to allow for greater bounce induced by a quick panning motion.
         let initialSpringVelocity = animationDistance == 0.0 ? 0.0 : min(0.0, closeSpeed / animationDistance)
-        UIView.animate(withDuration: showDuration!, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: showDuration!, delay: 0.0, usingSpringWithDamping: springDamping, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
             self.translationConstraint.constant = -self.bounceOffset
             container.layoutIfNeeded()
         }, completion: { completed in
@@ -183,7 +185,7 @@ public class TopBottomAnimation: NSObject, Animator {
             closePercent = translation.y / height
             panTranslationY = translation.y
         case .ended, .cancelled:
-            if closeSpeed > closeSpeedThreshold || closePercent > closePercentThreshold {
+            if closeSpeed > closeSpeedThreshold || closePercent > closePercentThreshold || panTranslationY > closeAbsoluteThreshold {
                 delegate?.hide(animator: self)
             } else {
                 closing = false

@@ -30,6 +30,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
                 old.removeGestureRecognizer(tapRecognizer)
             }
             installTapRecognizer()
+            updateBackgroundHeightConstraint()
         }
     }
 
@@ -48,14 +49,12 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundView = self
+        layoutMargins = UIEdgeInsets.zero
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundView = self
-    }
-
-    open override func awakeFromNib() {
         layoutMargins = UIEdgeInsets.zero
     }
 
@@ -104,21 +103,6 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
         let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
         backgroundView.addConstraints([top, left, bottom, right])
-    }
-
-    func installTabBackgroundView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        if backgroundView != self {
-            backgroundView.removeFromSuperview()
-        }
-        addSubview(backgroundView)
-        self.backgroundView = backgroundView
-        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
-        addConstraints([top, left, bottom, right])
-        installTapRecognizer()
     }
 
     /*
@@ -171,34 +155,62 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      (see MessageView.nib).
      */
 
-    @IBInspectable open var bounceAnimationOffset: CGFloat = 5.0
-     
-    /**
-     For iOS 10 and lower, an optional absolute value for the top margin for cases
-     where the view appears behind the status bar.
-     */
-    @IBInspectable open var statusBarOffset: CGFloat = 20.0
-    
-    /**
-     For iOS 11 and greater, an optional top margin adjustment for cases where the
-     view appears behind known safe zone elements, such as the status bar and the
-     iPhone X notch, as determined by the `safeZoneConflicts` property. This
-     value is added to adjustments already made by SwiftMessages in case the
-     defaults don't work for a particular layout.
-     */
-    @IBInspectable open var safeAreaTopOffset: CGFloat = 0.0
+    @IBInspectable open var topLayoutMarginAddition: CGFloat = 0
 
-    /**
-     For iOS 11 and greater, an optional bottom margin adjustment for cases where the view
-     appears behind known safe zone elements, such as the home indicator, as determined
-     by the `safeZoneConflicts` property. This value is added to adjustments already made
-     by SwiftMessages in case the defaults don't work for a particular layout.
-     */
-    @IBInspectable open var safeAreaBottomOffset: CGFloat = 0.0
+    @IBInspectable open var leftLayoutMarginAddition: CGFloat = 0
+
+    @IBInspectable open var bottomLayoutMarginAddition: CGFloat = 0
+
+    @IBInspectable open var rightLayoutMarginAddition: CGFloat = 0
+
+    @IBInspectable open var collapseLayoutMarginAdditions: Bool = true
+
+    @IBInspectable open var bounceAnimationOffset: CGFloat = 5
+     
+    /// Deprecated
+    open var statusBarOffset: CGFloat = 0
+    
+    /// Deprecated
+    open var safeAreaTopOffset: CGFloat = 0
+
+    /// Deprecated
+    open var safeAreaBottomOffset: CGFloat = 0
 
     /*
-     MARK: - Setting preferred height
+     MARK: - Setting the height
      */
+
+    /**
+     An optional explicit height for the background view, which can be used if
+     the message view's intrinsic content size does not produce the desired height.
+     */
+    open var backgroundHeight: CGFloat? {
+        didSet {
+            updateBackgroundHeightConstraint()
+        }
+    }
+
+    private func updateBackgroundHeightConstraint() {
+        if let existing = backgroundHeightConstraint {
+            let view = existing.firstItem as! UIView
+            view.removeConstraint(existing)
+            backgroundHeightConstraint = nil
+        }
+        if let height = backgroundHeight {
+            let constraint = NSLayoutConstraint(item: backgroundView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
+            backgroundView.addConstraint(constraint)
+            backgroundHeightConstraint = constraint
+        }
+    }
+
+    private var backgroundHeightConstraint: NSLayoutConstraint?
+
+    open override var intrinsicContentSize: CGSize {
+        if let preferredHeight = (self as InternalPreferredHeight).preferredHeight {
+            return CGSize(width: UIViewNoIntrinsicMetric, height: preferredHeight)
+        }
+        return super.intrinsicContentSize
+    }
 
     /**
      An optional value that sets the message view's intrinsic content height.
@@ -206,19 +218,19 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Note that this height is not guaranteed depending on anyt Auto Layout
      constraints used within the message view.
      */
+    @available(*, deprecated:4.2.0, message:"Use `backgroundHeight` instead to specify preferred height of the visiable region of the message.")
     open var preferredHeight: CGFloat? {
         didSet {
             setNeedsLayout()
         }
     }
-
-    open override var intrinsicContentSize: CGSize {
-        if let preferredHeight = preferredHeight {
-            return CGSize(width: UIViewNoIntrinsicMetric, height: preferredHeight)
-        }
-        return super.intrinsicContentSize
-    }
 }
+
+// A workaround to prevent warning on deprecated property.
+private protocol InternalPreferredHeight {
+    var preferredHeight: CGFloat? { get }
+}
+extension BaseView: InternalPreferredHeight {}
 
 /*
  MARK: - Theming

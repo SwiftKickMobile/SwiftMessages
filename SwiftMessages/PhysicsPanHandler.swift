@@ -114,7 +114,7 @@ open class PhysicsPanHandler {
             let attachmentBehavior = UIAttachmentBehavior(item: messageView, offsetFromCenter: offset, attachedToAnchor: anchorPoint)
             state.attachmentBehavior = attachmentBehavior
             state.itemBehavior.action = { [weak self, weak messageView, weak containerView] in
-                guard let strongSelf = self, let messageView = messageView, let containerView = containerView, let animator = strongSelf.animator else { return }
+                guard let strongSelf = self, !strongSelf.isOffScreen, let messageView = messageView, let containerView = containerView, let animator = strongSelf.animator else { return }
                 let view = (messageView as? BackgroundViewable)?.backgroundView ?? messageView
                 let frame = containerView.convert(view.bounds, from: view)
                 if !containerView.bounds.intersects(frame) {

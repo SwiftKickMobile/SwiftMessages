@@ -6,19 +6,25 @@ Pod::Spec.new do |spec|
     spec.authors          = { 'Timothy Moose' => 'tim@swiftkick.it' }
     spec.summary          = 'A very flexible message bar for iOS written in Swift.'
     spec.source           = {:git => 'https://github.com/SwiftKickMobile/SwiftMessages.git', :tag => '4.2.0'}
-    spec.platform         = :ios, '8.0'
-    spec.ios.deployment_target = '8.0'
+    spec.platform         = :ios, '9.0'
+    spec.ios.deployment_target = '9.0'
     spec.framework        = 'UIKit'
     spec.requires_arc     = true
     spec.default_subspec  = 'App'
 
     spec.subspec 'App' do |app|
         app.source_files = 'SwiftMessages/**/*.swift'
+        app.exclude_files = 'SwiftMessages/**/SegueConvenienceClasses.swift'
         app.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/**/*']}
     end
-    
+
+    spec.subspec 'Segues' do |segues|
+        segues.source_files = 'SwiftMessages/**/SegueConvenienceClasses.swift'
+    end
+
     spec.subspec 'AppExtension' do |ext|
         ext.source_files  = 'SwiftMessages/**/*.swift'
+        ext.exclude_files = 'SwiftMessages/**/SegueConvenienceClasses.swift'
         ext.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/**/*']}
 
         # For app extensions, disabling code paths using unavailable API

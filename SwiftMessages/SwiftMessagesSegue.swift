@@ -20,15 +20,15 @@ import UIKit
  support `IBInspectable` for segues!) or define your own self-configuring subclass.
 
  A number of pre-defined configurations are provided for your convenience in the form of
- self-configuring subclasses: `TopMessageViewSegue`, `BottomMessageViewSegue`, `TopCardViewSegue`,
- `BottomCardViewSegue`, and `CenteredViewSegue`. You'll see these in IB as Manual Segue types:
+ self-configuring subclasses: `TopMessageSegue`, `BottomMessageSegue`, `TopCardSegue`,
+ `BottomCardSegue`, and `CenteredSegue`. You'll see these in IB as Manual Segue types:
  "top message view", "bottom message view", "top card view", "bottom card view", and "centered view".
 
  The `SwiftMessagesSegue` class can alternatively be used programatically without an associated IB
  segue. Create an instance in the presenting view controller and call `perform()`:
 
      let destinationVC = ... // make a reference to a destination view controller
-     let segue = BottomCardViewSegue(identifier: nil, source: self, destination: destinationVC)
+     let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
      ... // do any configuration here
      segue.perform()
 
@@ -59,14 +59,20 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
      */
     public enum Layout {
 
-        /// The standard message view layout.
-        case messageView
+        /// The standard message view layout on top.
+        case topMessage
 
-        /// A floating card-style view with rounded corners.
-        case cardView
+        /// The standard message view layout on bottom.
+        case bottomMessage
+
+        /// A floating card-style view with rounded corners on top
+        case topCard
+
+        /// A floating card-style view with rounded corners on bottom
+        case bottomCard
 
         /// A floating card-style view typically used with `.center` presentation style.
-        case centeredView
+        case centered
     }
 
     /**
@@ -77,18 +83,16 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
 
         /**
          The view controller's view is installed using `BaseView.installContentView(:insets:)`.
-         Use this option when the message view itself should provide a visible background and the
-         view controller's view should be inset from the margins (and safe areas) but the background
-         should span the full width and not avoid margins (or safe areas).
-         See that method's documentation for details.
+         Use this option when the view controller's view should be edge-to-edge, extending into
+         the margins (safe areas). See that method's documentation for details.
          */
         case content
 
         /**
          The view controller's view is installed using `BaseView.installBackgroundView(:insets:)`.
-         Use this option when the message view's background should be transparent because the view
-         controller's view is providing the visible background, which should be inset from the margins
-         (and safe areas). See that method's documentation for details.
+         Use this option for card-style layouts where the message view's background is transparent
+         and the view controller's view is inset from the margins (safe area). See that method's
+         documentation for details.
          */
         case background
     }
@@ -111,13 +115,6 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
      */
     public var containment: Containment = .content
 
-    /**
-     Specifies how much the view controller's view is inset from its superview
-     when installed by the segue. This value is passed to either `BaseView.installContentView(:insets:)`
-     or `BaseView.installBackgroundView(:insets:)` depending on the value of `containment`.
-     */
-    public var containmentInsets: UIEdgeInsets = .zero
-
     /// The presentation style to use. See the SwiftMessages.PresentationStyle documentation for details.
     public var presentationStyle: SwiftMessages.PresentationStyle {
         get { return messenger.defaultConfig.presentationStyle }
@@ -130,6 +127,15 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
         set { messenger.defaultConfig.dimMode = newValue }
     }
 
+    /// Specifies whether or not the interactive pan-to-hide gesture is enabled
+    /// on the message view.
+    public var interactiveHide: Bool {
+        get { return messenger.defaultConfig.interactiveHide }
+        set { messenger.defaultConfig.interactiveHide = newValue }
+    }
+
+    var bounces = true
+
     private var messenger = SwiftMessages()
     private var selfRetainer: SwiftMessagesSegue? = nil
     private lazy var hider = { return Hider(segue: self) }()
@@ -140,7 +146,7 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
 
     override public func perform() {
         selfRetainer = self
-        destination.modalPresentationStyle = .overFullScreen
+        destination.modalPresentationStyle = .custom
         destination.transitioningDelegate = self
         source.present(destination, animated: true, completion: nil)
     }
@@ -148,103 +154,59 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
     override public init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         dimMode = .gray(interactive: true)
-        messenger.defaultConfig.interactiveHide = false
         messenger.defaultConfig.duration = .forever
     }
-}
 
-/**
- A convenience class that presents a top message using the standard message view layout.
- This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
-*/
-public class TopMessageViewSegue: SwiftMessagesSegue {
-    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        presentationStyle = .top
-        configure(layout: .messageView)
-    }
-}
-
-/**
- A convenience class that presents a top message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
-*/
-public class TopCardViewSegue: SwiftMessagesSegue {
-    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        presentationStyle = .top
-        configure(layout: .cardView)
-    }
-}
-
-/**
- A convenience class that presents a bottom message using the standard message view layout.
- This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
- */
-public class BottomMessageViewSegue: SwiftMessagesSegue {
-    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        presentationStyle = .bottom
-        configure(layout: .messageView)
-    }
-}
-
-/**
- A convenience class that presents a bottom message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
- */
-public class BottomCardViewSegue: SwiftMessagesSegue {
-    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        presentationStyle = .bottom
-        configure(layout: .cardView)
-    }
-}
-
-/**
- A convenience class that presents centered message using the card-style layout.
- This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
- */
-public class CenteredViewSegue: SwiftMessagesSegue {
-    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        presentationStyle = .center
-        configure(layout: .centeredView)
-    }
+    fileprivate let safeAreaWorkaroundViewController = UIViewController()
 }
 
 extension SwiftMessagesSegue {
     public func configure(layout: Layout) {
+        messageView.bounceAnimationOffset = 0
+        messageView.statusBarOffset = 0
+        messageView.safeAreaTopOffset = 0
+        messageView.safeAreaBottomOffset = 0
+        containment = .content
         let layer = destination.view.layer
+        layer.cornerRadius = 0
+        messageView.configureDropShadow()
         switch layout {
-        case .messageView:
-            messageView.bounceAnimationOffset = 5
-            messageView.statusBarOffset = 8
-            messageView.safeAreaTopOffset = -8
-            messageView.safeAreaBottomOffset = -18
-            containment = .content
-            containmentInsets = .zero
-            layer.cornerRadius = 0
-            messageView.configureDropShadow()
-        case .cardView:
-            messageView.bounceAnimationOffset = 0
-            messageView.statusBarOffset = 10
-            messageView.safeAreaTopOffset = -8
-            messageView.safeAreaBottomOffset = -20
+        case .topMessage:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.collapseLayoutMarginAdditions = false
+            let animation = TopBottomAnimation(style: .top)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .bottomMessage:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.collapseLayoutMarginAdditions = false
+            let animation = TopBottomAnimation(style: .bottom)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .topCard:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.collapseLayoutMarginAdditions = true
             containment = .background
-            containmentInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            layer.cornerRadius = 10
+            layer.cornerRadius = 15
             layer.masksToBounds = true
-            messageView.configureDropShadow()
-        case .centeredView:
-            messageView.bounceAnimationOffset = 0
-            messageView.statusBarOffset = 10
-            messageView.safeAreaTopOffset = -8
-            messageView.safeAreaBottomOffset = -20
-            containmentInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            layer.cornerRadius = 10
+            let animation = TopBottomAnimation(style: .top)
+            presentationStyle = .custom(animator: animation)
+        case .bottomCard:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.collapseLayoutMarginAdditions = true
+            containment = .background
+            layer.cornerRadius = 15
             layer.masksToBounds = true
-            messageView.configureDropShadow()
+            let animation = TopBottomAnimation(style: .bottom)
+            presentationStyle = .custom(animator: animation)
+        case .centered:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.collapseLayoutMarginAdditions = true
+            containment = .background
+            layer.cornerRadius = 15
+            layer.masksToBounds = true
+            let animation = PhysicsAnimation()
+            presentationStyle = .custom(animator: animation)
         }
     }
 }
@@ -257,7 +219,13 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
             case .didShow:
                 shower.completeTransition?(true)
             case .didHide:
-                self.hider.completeTransition?(true)
+                if let completeTransition = self.hider.completeTransition {
+                    completeTransition(true)
+                } else {
+                    // Case where message is interinally hidden by SwiftMessages, such as with a
+                    // dismiss gesture, rather than by view controller dismissal.
+                    source.dismiss(animated: false, completion: nil)
+                }
                 self.selfRetainer = nil
             default: break
             }
@@ -290,13 +258,21 @@ extension SwiftMessagesSegue {
                 transitionContext.completeTransition(false)
                 return
             }
+            if #available(iOS 12, *) {}
+            else if #available(iOS 11.0, *) {
+                // This works around a bug in iOS 11 where the safe area of `messageView` (
+                // and all ancestor views) is not set except on iPhone X. By assigning `messageView`
+                // to a view controller, its safe area is set consistently. This bug has been resolved as
+                // of Xcode 10 beta 2.
+                segue.safeAreaWorkaroundViewController.view = segue.presenter.maskingView
+            }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
             switch segue.containment {
             case .content:
-                segue.messageView.installContentView(toView, insets: segue.containmentInsets)
+                segue.messageView.installContentView(toView)
             case .background:
-                segue.messageView.installBackgroundView(toView, insets: segue.containmentInsets)
+                segue.messageView.installBackgroundView(toView)
             }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)

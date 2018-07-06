@@ -172,12 +172,6 @@ extension MessageView {
          This view is typically used with `.center` presentation style.         
          */
         case centeredView = "CenteredView"
-
-        /**
-         A standard message view like `MessageView`, but without
-         stack views for iOS 8.
-         */
-        case messageViewIOS8 = "MessageViewIOS8"
     }
     
     /**

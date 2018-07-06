@@ -23,11 +23,40 @@ import UIKit
  */
 public protocol MarginAdjustable {
     var bounceAnimationOffset: CGFloat { get set }
+    var topLayoutMarginAddition: CGFloat { get set }
+    var leftLayoutMarginAddition: CGFloat { get set }
+    var bottomLayoutMarginAddition: CGFloat { get set }
+    var rightLayoutMarginAddition: CGFloat { get set }
+    /// When `true`, SwiftMessages will automatically collapse layout margin additions (topLayoutMarginAddition, etc.)
+    /// when the layout margins are greater than zero.
+    var collapseLayoutMarginAdditions: Bool { get set }
+
+    /**
+     Deprecated APIs
+     */
+
     /// Top margin adjustment for status bar avoidance in pre-iOS 11+
+    @available(iOS, deprecated, message: "Now handled by `collapseLayoutMarginAdditions`")
     var statusBarOffset: CGFloat { get set }
     /// Safe area top adjustment in iOS 11+
+    @available(iOS, deprecated, message: "Use the `topLayoutMarginAddition` instead.")
     var safeAreaTopOffset: CGFloat { get set }
     /// Safe area bottom adjustment in iOS 11+
+    @available(iOS, deprecated, message: "Use the `bottomLayoutMarginAddition` instead.")
     var safeAreaBottomOffset: CGFloat { get set }
+}
+
+extension MarginAdjustable {
+    public var layoutMarginAdditions: UIEdgeInsets {
+        get {
+            return UIEdgeInsets(top: topLayoutMarginAddition, left: leftLayoutMarginAddition, bottom: bottomLayoutMarginAddition, right: rightLayoutMarginAddition)
+        }
+        set {
+            topLayoutMarginAddition = newValue.top
+            leftLayoutMarginAddition = newValue.left
+            bottomLayoutMarginAddition = newValue.bottom
+            rightLayoutMarginAddition = newValue.right
+        }
+    }
 }
 
