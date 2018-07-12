@@ -16,6 +16,8 @@ class ViewController: UITableViewController {
         .titleBody(title: "ANY VIEW", body: "Any view, no matter how cute, can be displayed as a message.", function: ViewController.demoAnyView),
         .titleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .explore,
+        .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
+        .counted,
     ]
 
     /*
@@ -55,12 +57,12 @@ class ViewController: UITableViewController {
 
     static func demoBasics() -> Void {
         
-        let error = MessageView.viewFromNib(layout: .TabView)
+        let error = MessageView.viewFromNib(layout: .tabView)
         error.configureTheme(.error)
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
         error.button?.setTitle("Stop", for: .normal)
         
-        let warning = MessageView.viewFromNib(layout: .CardView)
+        let warning = MessageView.viewFromNib(layout: .cardView)
         warning.configureTheme(.warning)
         warning.configureDropShadow()
         
@@ -70,16 +72,16 @@ class ViewController: UITableViewController {
         var warningConfig = SwiftMessages.defaultConfig
         warningConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
 
-        let success = MessageView.viewFromNib(layout: .CardView)
+        let success = MessageView.viewFromNib(layout: .cardView)
         success.configureTheme(.success)
         success.configureDropShadow()
         success.configureContent(title: "Success", body: "Something good happened!")
         success.button?.isHidden = true
         var successConfig = SwiftMessages.defaultConfig
-        successConfig.presentationStyle = .bottom
+        successConfig.presentationStyle = .center
         successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
 
-        let info = MessageView.viewFromNib(layout: .MessageView)
+        let info = MessageView.viewFromNib(layout: .messageView)
         info.configureTheme(.info)
         info.button?.isHidden = true
         info.configureContent(title: "Info", body: "This is a very lengthy and informative info message that wraps across multiple lines and grows in height as needed.")
@@ -87,14 +89,14 @@ class ViewController: UITableViewController {
         infoConfig.presentationStyle = .bottom
         infoConfig.duration = .seconds(seconds: 0.25)
 
-        let status = MessageView.viewFromNib(layout: .StatusLine)
+        let status = MessageView.viewFromNib(layout: .statusLine)
         status.backgroundView.backgroundColor = UIColor.purple
         status.bodyLabel?.textColor = UIColor.white
         status.configureContent(body: "A tiny line of text covering the status bar.")
         var statusConfig = SwiftMessages.defaultConfig
         statusConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
 
-        let status2 = MessageView.viewFromNib(layout: .StatusLine)
+        let status2 = MessageView.viewFromNib(layout: .statusLine)
         status2.backgroundView.backgroundColor = UIColor.orange
         status2.bodyLabel?.textColor = UIColor.white
         status2.configureContent(body: "Switched to light status bar!")
@@ -115,10 +117,22 @@ class ViewController: UITableViewController {
         imageView.image = UIImage(named: "puppies")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        let f = CGRect(x: 100, y: 100, width: 100, height: 100)
-        let messageView = BaseView(frame: f)
-        messageView.installContentView(imageView)
+        let messageView = BaseView(frame: .zero)
+        messageView.layoutMargins = .zero
         messageView.preferredHeight = 120.0
+        if #available(iOS 11, *) {
+            // Switch to a card-style layout for iOS 11 because the image
+            // doesn't fit well behind the notch. Need to install a background
+            // view for the drop shadow.
+            let backgroundView = UIView()
+            backgroundView.layer.cornerRadius = 10
+            imageView.layer.cornerRadius = 10
+            messageView.installBackgroundView(backgroundView)
+            messageView.installContentView(imageView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            messageView.safeAreaTopOffset = -6
+        } else {
+            messageView.installContentView(imageView)
+        }
         messageView.configureDropShadow()
         var config = SwiftMessages.defaultConfig
         config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
@@ -138,8 +152,20 @@ class ViewController: UITableViewController {
         SwiftMessages.show(config: config, view: view)
     }
 
-    static func demoExplore() {
-        
+    static func demoCentered() {
+        let messageView: MessageView = MessageView.viewFromNib(layout: .centeredView)
+        messageView.configureBackgroundView(width: 250)
+        messageView.configureContent(title: "Hey There!", body: "Please try swiping to dismiss this message.", iconImage: nil, iconText: "🦄", buttonImage: nil, buttonTitle: "No Thanks") { _ in
+            SwiftMessages.hide()
+        }
+        messageView.backgroundView.backgroundColor = UIColor.init(white: 0.97, alpha: 1)
+        messageView.backgroundView.layer.cornerRadius = 10
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.duration = .forever
+        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
+        config.presentationContext  = .window(windowLevel: UIWindowLevelStatusBar)
+        SwiftMessages.show(config: config, view: messageView)
     }
 }
 
@@ -149,7 +175,8 @@ enum Item {
     
     case titleBody(title: String, body: String, function: Function)
     case explore
-    
+    case counted
+
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
         case .titleBody(let data):
@@ -161,6 +188,12 @@ enum Item {
         case .explore:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Explore") as! TitleBodyCell
             cell.configureBodyTextStyle()
+            return cell
+        case .counted:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Counted") as! TitleBodyCell
+            cell.configureBodyTextStyle()
+            cell.bodyLabel.configureCodeStyle(on: "show()")
+            cell.bodyLabel.configureCodeStyle(on: "hideCounted(id:)")
             return cell
         }
     }
@@ -182,7 +215,6 @@ class TitleBodyCell: UITableViewCell {
     func configureBodyTextStyle() {
         let bodyStyle = NSMutableParagraphStyle()
         bodyStyle.lineSpacing = 5.0
-        bodyLabel.attributedText = NSAttributedString(string: bodyLabel.text ?? "", attributes: [NSParagraphStyleAttributeName : bodyStyle])
+        bodyLabel.configureBodyTextStyle()
     }
 }
-

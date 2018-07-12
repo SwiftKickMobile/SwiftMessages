@@ -13,15 +13,15 @@ private let fullScreenStyles: [UIModalPresentationStyle] = [.fullScreen, .overFu
 extension UIViewController {
     
     func sm_selectPresentationContextTopDown(_ config: SwiftMessages.Config) -> UIViewController {
-        let presentationStyle = config.presentationStyle
+        let topBottomStyle = config.presentationStyle.topBottomStyle
         if let presented = sm_presentedFullScreenViewController() {
             return presented.sm_selectPresentationContextTopDown(config)
-        } else if case .top = presentationStyle, let navigationController = sm_selectNavigationControllerTopDown() {
+        } else if case .top? = topBottomStyle, let navigationController = sm_selectNavigationControllerTopDown() {
             return navigationController
-        } else if case .bottom = presentationStyle, let tabBarController = sm_selectTabBarControllerTopDown() {
+        } else if case .bottom? = topBottomStyle, let tabBarController = sm_selectTabBarControllerTopDown() {
             return tabBarController
         }
-        return WindowViewController(windowLevel: self.view.window?.windowLevel ?? UIWindowLevelNormal, config: config)
+        return WindowViewController.newInstance(windowLevel: self.view.window?.windowLevel, config: config)
     }
     
     fileprivate func sm_selectNavigationControllerTopDown() -> UINavigationController? {
@@ -60,15 +60,15 @@ extension UIViewController {
     }
 
     func sm_selectPresentationContextBottomUp(_ config: SwiftMessages.Config) -> UIViewController {
-        let presentationStyle = config.presentationStyle
+        let topBottomStyle = config.presentationStyle.topBottomStyle
         if let parent = parent {
             if let navigationController = parent as? UINavigationController {
-                if case .top = presentationStyle, navigationController.sm_isVisible(view: navigationController.navigationBar) {
+                if case .top? = topBottomStyle, navigationController.sm_isVisible(view: navigationController.navigationBar) {
                     return navigationController
                 }
                 return navigationController.sm_selectPresentationContextBottomUp(config)
             } else if let tabBarController = parent as? UITabBarController {
-                if case .bottom = presentationStyle, tabBarController.sm_isVisible(view: tabBarController.tabBar) {
+                if case .bottom? = topBottomStyle, tabBarController.sm_isVisible(view: tabBarController.tabBar) {
                     return tabBarController
                 }
                 return tabBarController.sm_selectPresentationContextBottomUp(config)
@@ -80,7 +80,7 @@ extension UIViewController {
             if let parent = self.parent {
                 return parent.sm_selectPresentationContextBottomUp(config)
             } else {
-                return WindowViewController(windowLevel: self.view.window?.windowLevel ?? UIWindowLevelNormal, config: config)
+                return WindowViewController.newInstance(windowLevel: self.view.window?.windowLevel, config: config)
             }
         }
         return self
@@ -92,5 +92,19 @@ extension UIViewController {
         let frame = self.view.convert(view.bounds, from: view)
         if !self.view.bounds.intersects(frame) { return false }
         return true
+    }
+}
+
+extension SwiftMessages.PresentationStyle {
+    /// A temporary workaround to allow custom presentation contexts using `TopBottomAnimation`
+    /// to display properly behind bars. THe long term solution is to refactor all of the
+    /// presentation context logic to work with safe area insets.
+    var topBottomStyle: TopBottomAnimation.Style? {
+        switch self {
+        case .top: return .top
+        case .bottom: return .bottom
+        case .custom(let animator): return (animator as? TopBottomAnimation)?.style
+        case .center: return nil
+        }
     }
 }

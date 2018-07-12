@@ -1,6 +1,126 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.1.4
+
+### Bug Fixes
+* Fix #191 Prevent usage of UIApplication.shared when building for extensions
+
+### Improvements
+* #192 Add a way to test compilation with app extension
+
+## 4.1.3
+
+### Features
+* #183 Added iOS app extension support at compile time.
+
+### Bug Fixes
+* Fix #185 Incorrect margin adjustments in landscape
+* Fix #188 Physics animation visual glitch
+
+## 4.1.2
+
+### Features
+* Updates for Swift 4.1
+* #164 Added an optional `windowViewController` property to `SwiftMessages.Config` for supplying a custom subclass of `WindowViewController`.
+
+### Bug Fixes
+* Custom presentation styles using `TopBottomAnimation` now display properly under top and bottom bars.
+
+## 4.1.1
+
+### Features
+* #152 Get current message being displayed without specifying an `id`
+
+## 4.1.0
+
+### Features
+
+* Fix #134 add support for `CenterAnimation` displayed on top or bottom instead of center (renamed to `PhysicsAnimation`).
+
+### Fixes
+
+* Fix #128 move icons out of asset catalog to prevent mysterious crash
+* Fix #129 adjust layout margins on orientation change to preserve layout when iOS hides status bar in landscape.
+* Fix #131 by always completing hide/show animations if application isn't active.
+
+
+## 4.0.0
+
+### Features
+* Swift 4.0 syntax
+* Added support for iOS 11 and iPhone X. From the readme:
+
+  SwiftMessages 4 supports iOS 11 out-of-the-box with built-in support   for safe areas. To ensur  that message view layouts look just right when overlapping safe areas, views that adopt the `MarginAdjustable` protocol (like `MessageView`) will have their layout margins automatically adjusted by SwiftMessages. However, there is no one-size-fits-all adjustment, so the following properties were added to `MarginAdjustable` to allow for additional adjustments to be made to the layout margins:
+
+  ````swift
+  public protocol MarginAdjustable {
+      ...
+      /// Safe area top adjustment in iOS 11+
+      var safeAreaTopOffset: CGFloat { get set }
+      /// Safe area bottom adjustment in iOS 11+
+      var safeAreaBottomOffset: CGFloat { get set }
+  }
+  ````
+
+  If you're using using custom nib files or view classes and your layouts don't look quite right, try adjusting the values of these properties. `BaseView` (the super class of `MessageView`) declares these properties to be `@IBDesignable` and you can find sample values in the nib files included with SwiftMessages.
+
+### Bug Fixes
+* Fix #100 memory leak.
+* Change `Layout` enum capitalization to current Swift conventions.
+
+## [3.5.1](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.5.0)
+
+### Bug Fixes
+* Undo change that broke `MessageView` class reference on nib files copied out of the SwiftMessages framework.
+
+## [3.5.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.5.0)
+
+### Features
+* Added `SwiftMessages.hideCounted(id:)` method of hiding. The counted method hides when the number of calls to `show()` and `hideCounted(id:)` for a 
+given message ID are equal. This can be useful for messages that may be
+shown from  multiple code paths to ensure that all paths are ready to hide.
+
+  Also added `SwiftMessages.count(id:)` to get the current count and `SwiftMessages.set(id:count:)` to set the current count.
+
+* Added ways to retrieve message views currently being shown, hidden, or queued to be shown.
+
+  ````swift
+  // Get a message view with the given ID if it is currently 
+  // being shown or hidden.
+  if let view = SwiftMessages.current(id: "some id") { ... }
+  
+  // Get a message view with the given ID if is it currently 
+  // queued to be shown. 
+  if let view = SwiftMessages.queued(id: "some id") { ... }
+  
+  // Get a message view with the given ID if it is currently being
+  // shown, hidden or in the queue to be shown.
+  if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
+  ````
+
+### Bug Fixes
+* Fix #116 for message views that don't adopt the `Identifiable` protocol by using the memory address as the ID.
+* Fix #113 MessageView not hiding
+* Fix #87 Support manual install
+
+## [3.4.0](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.4.0)
+
+### Features
+* Added `.center` presentation style with a physics-based dismissal gesture.
+* Added `.custom(animator:)` presentation style, where you provide an instance of the `Animator` protocol. The `TopBottomAnimation` and `CenterAnimation` animations both implement `Animator` and may be subclassed (configuration options will be added in a future release). `PhysicsPanHandler` class to provide a physics-based dismissal gesture.
+* Added `.centered` message view layout with elements centered and arranged vertically.
+* Added `configureBackgroundView(width:)` and `configureBackgroundView(sideMargin:)` convenience methods to `MessageView`.
+
+## [3.3.4](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.4)
+
+### Features
+* #89 Add `blur` dim mode option.
+
+### Bug Fixes
+* #98 Fix touch handling in message view's background view.
+* #97 Fix main thread checker warning 
+
 ## [3.3.3](https://github.com/SwiftKickMobile/SwiftMessages/releases/tag/3.3.3)
 
 ### Bug Fixes

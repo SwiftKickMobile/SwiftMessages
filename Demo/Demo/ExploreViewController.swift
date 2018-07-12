@@ -18,11 +18,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         let view: MessageView
         switch layout.selectedSegmentIndex {
         case 1:
-            view = MessageView.viewFromNib(layout: .CardView)
+            view = MessageView.viewFromNib(layout: .cardView)
         case 2:
-            view = MessageView.viewFromNib(layout: .TabView)
+            view = MessageView.viewFromNib(layout: .tabView)
         case 3:
-            view = MessageView.viewFromNib(layout: .StatusLine)
+            view = MessageView.viewFromNib(layout: .statusLine)
         default:
             view = try! SwiftMessages.viewFromNib()
         }
@@ -42,16 +42,20 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         switch theme.selectedSegmentIndex {
         case 0:
             view.configureTheme(.info, iconStyle: iconStyle)
+            view.accessibilityPrefix = "info"
         case 1:
             view.configureTheme(.success, iconStyle: iconStyle)
+            view.accessibilityPrefix = "success"
         case 2:
             view.configureTheme(.warning, iconStyle: iconStyle)
+            view.accessibilityPrefix = "warning"
         case 3:
             view.configureTheme(.error, iconStyle: iconStyle)
+            view.accessibilityPrefix = "error"
         default:
             let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
             view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
-            view.button?.setImage(Icon.ErrorSubtle.image, for: .normal)
+            view.button?.setImage(Icon.errorSubtle.image, for: .normal)
             view.button?.setTitle(nil, for: .normal)
             view.button?.backgroundColor = UIColor.clear
             view.button?.tintColor = UIColor.green.withAlphaComponent(0.7)
@@ -85,6 +89,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         switch presentationStyle.selectedSegmentIndex {
         case 1:
             config.presentationStyle = .bottom
+        case 2:
+            config.presentationStyle = .center
         default:
             break
         }
@@ -111,9 +117,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch dimMode.selectedSegmentIndex {
         case 1:
-            config.dimMode = .gray(interactive: false)
-        case 2:
             config.dimMode = .gray(interactive: true)
+        case 2:
+            config.dimMode = .color(color: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 0.7477525685), interactive: true)
+        case 3:
+            config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: true)
         default:
             break
         }

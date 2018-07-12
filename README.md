@@ -1,3 +1,4 @@
+
 # SwiftMessages
 
 [![Twitter: @TimothyMoose](https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat)](https://twitter.com/TimothyMoose)
@@ -6,11 +7,15 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-SwiftMessages is a message bar library for iOS. It's very flexible. And written in Swift.
+<p align="center">
+  <img src="./Design/swiftmessages.png" />
+</p>
 
-Message bars can be displayed across the top or bottom of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And much more!
+SwiftMessages is a message view library for iOS. It's very flexible. And written in Swift.
 
-In addition to numerous configuration options, SwiftMessages provides several attractive layouts and themes. But SwiftMessages was also built to be designer-friendly, which means you can fully and easily customize the view:
+Message views can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
+
+In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
 * Copy one of the included nib files into your project and change it.
 * Subclass `MessageView` and add elements, etc.
@@ -26,6 +31,22 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
 
+## 🔥 iOS 11 and iPhone X 🔥
+
+SwiftMessages 4 supports iOS 11 out-of-the-box with built-in support for safe areas. To ensure that message view layouts look just right when overlapping safe areas, views that adopt the `MarginAdjustable` protocol (like `MessageView`) will have their layout margins automatically adjusted by SwiftMessages. However, there is no one-size-fits-all adjustment, so the following properties were added to `MarginAdjustable` to allow for additional adjustments to be made to the layout margins:
+
+````swift
+public protocol MarginAdjustable {
+    ...
+    /// Safe area top adjustment in iOS 11+
+    var safeAreaTopOffset: CGFloat { get set }
+    /// Safe area bottom adjustment in iOS 11+
+    var safeAreaBottomOffset: CGFloat { get set }
+}
+````
+
+If you're using using custom nib files or view classes and your layouts don't look quite right, try adjusting the values of these properties. `BaseView` (the super class of `MessageView`) declares these properties to be `@IBDesignable` and you can find sample values in the nib files included with SwiftMessages.
+
 ## Installation
 
 ### CocoaPods
@@ -35,14 +56,8 @@ Add one of the following lines to your Podfile depending on your Swift version:
 ````ruby
 # Swift 3.0 - Xcode 8
 pod 'SwiftMessages'
-
-# Swift 2.3 - Xcode 8
-pod 'SwiftMessages', '~> 2.0.0'
-
-# Swift 2.2 - Xcode 7.3.1
-pod 'SwiftMessages', '~> 1.1.4'
 ````
-__Note that Swift 2.3 and Swift 3.0 require minimum CocoaPods version 1.1.0__.
+__Note that the minimum CocoaPods version is 1.1.0__.
 
 ### Carthage
 
@@ -51,13 +66,19 @@ Add one of the following lines to your Cartfile depending on your Swift version:
 ````ruby
 # Swift 3.0 - Xcode 8
 github "SwiftKickMobile/SwiftMessages"
-
-# Swift 2.3 - Xcode 8
-github "SwiftKickMobile/SwiftMessages" ~> 2.0.0
-
-# Swift 2.2 - Xcode 7.3.1
-github "SwiftKickMobile/SwiftMessages" ~> 1.1.4
 ````
+
+### Manual
+
+1. Put SwiftMessages repo somewhere in your project directory.
+1. In Xcode, add `SwiftMessages.xcodeproj` to your project.
+1. On your app's target, add the SwiftMessages framework:
+   1. as an embedded binary on the General tab.
+   1. as a target dependency on the Build Phases tab.
+
+## In the App Store
+
+We'd love to know who's using SwiftMessages! Please take a moment to [let me know about](https://github.com/wtmoose) about your app and, if possible, attach a screenshot. We may feature some of them here in the future.
 
 ## Usage
 
@@ -159,6 +180,65 @@ SwiftMessages provides excellent VoiceOver support out-of-the-box.
 
 See the `AccessibleMessage` protocol for implementing proper accessibility support in custom views.
 
+### Message Queueing
+
+You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
+
+````swift
+SwiftMessages.pauseBetweenMessages = 1.0
+````
+
+There are a few ways to hide messages programatically:
+
+````swift
+// Hide the current message.
+SwiftMessages.hide()
+
+// Or hide the current message and clear the queue.
+SwiftMessages.hideAll()
+
+// Or for a view that implements `Identifiable`:
+SwiftMessages.hide(id: someId)
+
+// Or hide when the number of calls to show() and hideCounted(id:) for a 
+// given message ID are equal. This can be useful for messages that may be
+// shown from  multiple code paths to ensure that all paths are ready to hide.
+SwiftMessages.hideCounted(id: someId)
+````
+
+Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`). Instances must be retained, thus it should be a property of something (e.g. your view controller):
+
+````swift
+class SomeViewController: UIViewController {
+    let otherMessages = SwiftMessages()	
+	
+    func someMethod() {
+        SwiftMessages.show(...)
+        otherMessages.show(...)
+    }
+}
+````
+
+### Retrieving Messages
+
+There are several APIs available for retrieving messages that are currently being shown, hidden, or queued to be shown. These APIs are useful for updating messages
+when some event happens without needing to keep temporary references around.
+See also `eventListeners`.
+
+````swift
+// Get a message view with the given ID if it is currently 
+// being shown or hidden.
+if let view = SwiftMessages.current(id: "some id") { ... }
+
+// Get a message view with the given ID if is it currently 
+// queued to be shown. 
+if let view = SwiftMessages.queued(id: "some id") { ... }
+
+// Get a message view with the given ID if it is currently being
+// shown, hidden or in the queue to be shown.
+if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
+````
+
 ### Customization
 
 `MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
@@ -203,35 +283,6 @@ messageView.buttonTapHandler = { _ in SwiftMessages.hide() }
 
 // Hide when message view tapped
 messageView.tapHandler = { _ in SwiftMessages.hide() }
-````
-
-### Message Queueing
-
-You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
-
-````swift
-SwiftMessages.pauseBetweenMessages = 1.0
-````
-
-There are a few ways to hide messages programatically:
-
-````swift
-// Hide the current message.
-SwiftMessages.hide()
-
-// Or hide the current message and clear the queue.
-SwiftMessages.hideAll()
-
-// Or for a view that implements `Identifiable`:
-SwiftMessages.hide(id: someId)
-````
-
-Multiple instances of `SwiftMessages` can be used to show more than one message at a time. Note that the static `SwiftMessages.show()` and other static APIs on `SwiftMessage` are just convenience wrappers around the shared instance `SwiftMessages.sharedInstance`):
-
-````swift
-let otherMessages = SwiftMessages()
-SwiftMessages.show(...)
-otherMessages.show(...)
 ````
 
 ## About SwiftKick Mobile
