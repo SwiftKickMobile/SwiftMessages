@@ -42,10 +42,7 @@
 		226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountedMessageView.swift; sourceTree = "<group>"; };
 		226FA5E91F507586004CB2BC /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		22774C1420B8461900813732 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		22774C1720B8461900813732 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		22774C1A20B8461900813732 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		22774C1C20B8461A00813732 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22774C1E20B8461A00813732 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ECDFAAC604B9F7CC3EA256E /* Pods-iMessageDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessageDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMessageDemo/Pods-iMessageDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8642F4351D5F7F540061BDCD /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		86AEDCE21D5D1DB70030232E /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86AEDCE51D5D1DB70030232E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +53,7 @@
 		86AEDCF11D5D1DB70030232E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TacoDialogView.xib; sourceTree = "<group>"; };
 		86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TacoDialogView.swift; sourceTree = "<group>"; };
+		96C25B475C8029C287FB5BE0 /* Pods-iMessageDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessageDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMessageDemo/Pods-iMessageDemo.release.xcconfig"; sourceTree = "<group>"; };
 		E324A1347929E70AC48D632C /* Pods_iMessageDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMessageDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,17 +69,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22774C1620B8461900813732 /* iMessageDemo */ = {
-			isa = PBXGroup;
-			children = (
-				22774C1720B8461900813732 /* MessagesViewController.swift */,
-				22774C1920B8461900813732 /* MainInterface.storyboard */,
-				22774C1C20B8461A00813732 /* Assets.xcassets */,
-				22774C1E20B8461A00813732 /* Info.plist */,
-			);
-			path = iMessageDemo;
-			sourceTree = "<group>";
-		};
 		6AB98897E817EE976DD72852 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +84,8 @@
 			children = (
 				160AC8A3EE68E1D705664BF8 /* Pods-Demo.debug.xcconfig */,
 				16131DA1E3BA049C9E4C0308 /* Pods-Demo.release.xcconfig */,
+				2ECDFAAC604B9F7CC3EA256E /* Pods-iMessageDemo.debug.xcconfig */,
+				96C25B475C8029C287FB5BE0 /* Pods-iMessageDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -105,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				86AEDCE41D5D1DB70030232E /* Demo */,
-				22774C1620B8461900813732 /* iMessageDemo */,
 				86AEDCE31D5D1DB70030232E /* Products */,
 				7AEB2A3BA8EF9DC4D87CD5FA /* Pods */,
 				6AB98897E817EE976DD72852 /* Frameworks */,
@@ -168,7 +156,7 @@
 		86AEDCDA1D5D1DB70030232E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "SwiftKick Mobile";
 				TargetAttributes = {
@@ -268,14 +256,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		22774C1920B8461900813732 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22774C1A20B8461900813732 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		86AEDCE91D5D1DB70030232E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

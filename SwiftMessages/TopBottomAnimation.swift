@@ -23,11 +23,9 @@ public class TopBottomAnimation: NSObject, Animator {
 
     open var closeSpeedThreshold: CGFloat = 750.0;
 
-    open var closePercentThreshold: CGFloat = 33.0;
+    open var closePercentThreshold: CGFloat = 0.33;
 
     open var closeAbsoluteThreshold: CGFloat = 75.0;
-
-    private(set) var translationConstraint: NSLayoutConstraint! = nil
 
     weak var messageView: UIView?
     weak var containerView: UIView?
@@ -51,12 +49,14 @@ public class TopBottomAnimation: NSObject, Animator {
     public func hide(context: AnimationContext, completion: @escaping AnimationCompletion) {
         NotificationCenter.default.removeObserver(self)
         let view = context.messageView
-        let container = context.containerView
         self.context = context
         UIView.animate(withDuration: hideDuration!, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
-            let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-            self.translationConstraint.constant -= size.height
-            container.layoutIfNeeded()
+            switch self.style {
+            case .top:
+                view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
+            case .bottom:
+                view.transform = CGAffineTransform(translationX: 0, y: view.frame.maxY + view.frame.height)
+            }
         }, completion: { completed in
             #if SWIFTMESSAGES_APP_EXTENSIONS
             completion(completed)
@@ -84,19 +84,25 @@ public class TopBottomAnimation: NSObject, Animator {
         container.addSubview(view)
         let leading = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.00, constant: 0.0)
         let trailing = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.00, constant: 0.0)
+        let vertical: NSLayoutConstraint
         switch style {
         case .top:
-            translationConstraint = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.00, constant: 0.0)
+            vertical = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.00, constant: -bounceOffset)
         case .bottom:
-            translationConstraint = NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.00, constant: 0.0)
+            vertical = NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.00, constant: -bounceOffset)
         }
-        container.addConstraints([leading, trailing, translationConstraint])
+        container.addConstraints([leading, trailing, vertical])
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
-        let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-        translationConstraint.constant -= size.height
         container.layoutIfNeeded()
+        let animationDistance = view.frame.height - bounceOffset
+        switch style {
+        case .top:
+            view.transform = CGAffineTransform(translationX: 0, y: -animationDistance)
+        case .bottom:
+            view.transform = CGAffineTransform(translationX: 0, y: animationDistance)
+        }
         if context.interactiveHide {
             let pan = UIPanGestureRecognizer()
             pan.addTarget(self, action: #selector(pan(_:)))
@@ -126,17 +132,16 @@ public class TopBottomAnimation: NSObject, Animator {
     }
 
     func showAnimation(completion: @escaping AnimationCompletion) {
-        guard let container = containerView else {
+        guard let view = messageView else {
             completion(false)
             return
         }
-        let animationDistance = self.translationConstraint.constant + bounceOffset
+        let animationDistance = fabs(view.transform.ty)
         // Cap the initial velocity at zero because the bounceOffset may not be great
         // enough to allow for greater bounce induced by a quick panning motion.
         let initialSpringVelocity = animationDistance == 0.0 ? 0.0 : min(0.0, closeSpeed / animationDistance)
         UIView.animate(withDuration: showDuration!, delay: 0.0, usingSpringWithDamping: springDamping, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
-            self.translationConstraint.constant = -self.bounceOffset
-            container.layoutIfNeeded()
+            view.transform = .identity
         }, completion: { completed in
             // Fix #131 by always completing if application isn't active.
             #if SWIFTMESSAGES_APP_EXTENSIONS
@@ -161,7 +166,7 @@ public class TopBottomAnimation: NSObject, Animator {
     @objc func pan(_ pan: UIPanGestureRecognizer) {
         switch pan.state {
         case .changed:
-            guard let view = pan.view else { return }
+            guard let view = messageView else { return }
             let height = view.bounds.height - bounceOffset
             if height <= 0 { return }
             let point = pan.location(ofTouch: 0, in: view)
@@ -180,7 +185,13 @@ public class TopBottomAnimation: NSObject, Animator {
             }
             if !closing { return }
             let translationAmount = -bounceOffset - max(0.0, translation.y)
-            translationConstraint.constant = translationAmount
+            switch style {
+            case .top:
+                print("transform")
+                view.transform = CGAffineTransform(translationX: 0, y: translationAmount)
+            case .bottom:
+                view.transform = CGAffineTransform(translationX: 0, y: -translationAmount)
+            }
             closeSpeed = velocity.y
             closePercent = translation.y / height
             panTranslationY = translation.y

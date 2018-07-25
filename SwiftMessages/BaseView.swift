@@ -105,6 +105,16 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         backgroundView.addConstraints([top, left, bottom, right])
     }
 
+    open func installTBD(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(contentView)
+        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .top, multiplier: 1.0, constant: insets.top)
+        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .left, multiplier: 1.0, constant: insets.left)
+        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
+        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
+        backgroundView.addConstraints([top, left, bottom, right])
+    }
+
     /*
      MARK: - Tap handler
      */

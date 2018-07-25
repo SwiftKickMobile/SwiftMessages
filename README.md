@@ -11,9 +11,9 @@
   <img src="./Design/swiftmessages.png" />
 </p>
 
-SwiftMessages is a message view library for iOS. It's very flexible. And written in Swift.
+SwiftMessages is a very flexible message view library for iOS.
 
-Message views can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
+Messages can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
 
 In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
