@@ -226,7 +226,7 @@ extension SwiftMessagesSegue {
         case .centered:
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
             messageView.collapseLayoutMarginAdditions = true
-            containment = .background
+            containment = .backgroundVertical
             containerView.cornerRadius = 15
             let animation = PhysicsAnimation()
             presentationStyle = .custom(animator: animation)

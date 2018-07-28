@@ -13,7 +13,7 @@ public extension MarginAdjustable where Self: UIView {
     public func defaultMarginAdjustment(context: AnimationContext) -> UIEdgeInsets {
         // Best effort to determine if we should use the new or deprecated margin adjustments.
         if layoutMarginAdditions != .zero
-            || (safeAreaTopOffset != 0 && safeAreaBottomOffset != 0 && statusBarOffset != 0) {
+            || (undeprecated.safeAreaTopOffset != 0 && undeprecated.safeAreaBottomOffset != 0 && undeprecated.statusBarOffset != 0) {
             var layoutMargins: UIEdgeInsets = layoutMarginAdditions
             var safeAreaInsets: UIEdgeInsets
             if #available(iOS 11, *) {
@@ -63,11 +63,11 @@ public extension MarginAdjustable where Self: UIView {
                     // iPhone X - 44pt top safe area needs -6pt adjustment
                     top -= 6 * (safeAreaInsets.top - 20) / (44 - 20)
                 }
-                top += safeAreaTopOffset
+                top += undeprecated.safeAreaTopOffset
             } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                 let frameInWindow = convert(bounds, to: window)
                 if frameInWindow.minY == 0 {
-                    top += statusBarOffset
+                    top += undeprecated.statusBarOffset
                 }
             }
         } else if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
@@ -88,7 +88,7 @@ public extension MarginAdjustable where Self: UIView {
                     // iPhone X landscape: 21pt bottom safe area needs 12pt adjustment
                     bottom -= 12 * (safeAreaInsets.bottom - 34) / (34 - 21)
                 }
-                bottom += safeAreaBottomOffset
+                bottom += undeprecated.safeAreaBottomOffset
             }
         }
         return bottom
