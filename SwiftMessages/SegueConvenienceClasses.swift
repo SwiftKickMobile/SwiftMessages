@@ -31,6 +31,17 @@ public class TopCardSegue: SwiftMessagesSegue {
 }
 
 /**
+ A convenience class that presents a top message using the tab-style layout.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
+ */
+public class TopTabSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .topTab)
+    }
+}
+
+/**
  A convenience class that presents a bottom message using the standard message view layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
@@ -49,6 +60,17 @@ public class BottomCardSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .bottomCard)
+    }
+}
+
+/**
+ A convenience class that presents a bottom message using the tab-style layout.
+ This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
+ */
+public class BottomTabSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .bottomTab)
     }
 }
 

@@ -210,7 +210,6 @@ extension MessageView {
  */
 
 extension MessageView {
-    @available(iOS 9, *)
     /**
      Constrains the image view to a specified size. By default, the size of the
      image view is determined by its `intrinsicContentSize`.

@@ -82,16 +82,14 @@ public class TopBottomAnimation: NSObject, Animator {
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(view)
-        let leading = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.00, constant: 0.0)
-        let trailing = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.00, constant: 0.0)
-        let vertical: NSLayoutConstraint
+        view.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
         switch style {
         case .top:
-            vertical = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.00, constant: -bounceOffset)
+            view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
         case .bottom:
-            vertical = NSLayoutConstraint(item: container, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.00, constant: -bounceOffset)
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
         }
-        container.addConstraints([leading, trailing, vertical])
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()

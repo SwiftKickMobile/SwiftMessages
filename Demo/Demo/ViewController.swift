@@ -23,25 +23,6 @@ class ViewController: UITableViewController {
     ]
 
     /*
-     MARK: - Lifecycle
-     */
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? SwiftMessagesSegue,
-            segue.identifier == "ViewControllersDemo" || segue.identifier == "ViewControllersDemo2",
-            let navigationVC = segue.destination as? UINavigationController,
-            let rootVC = navigationVC.viewControllers.first {
-            segue.messageView.backgroundHeight = 225
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissPresented))
-            rootVC.navigationItem.rightBarButtonItem = doneButton
-        }
-    }
-
-    @objc private func dismissPresented() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    /*
      MARK: - UITableViewDataSource
      */
     

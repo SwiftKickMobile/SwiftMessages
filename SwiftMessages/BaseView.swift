@@ -63,6 +63,24 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      */
 
     /**
+     A convenience function for installing a content view as a subview of `backgroundView`
+     and pinning the edges to `backgroundView` with the specified `insets`.
+
+     - Parameter contentView: The view to be installed into the background view
+     and assigned to the `contentView` property.
+     - Parameter insets: The amount to inset the content view from the background view.
+     Default is zero inset.
+     */
+    open func installContentView(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: insets.top).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -insets.bottom).isActive = true
+        contentView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: insets.left).isActive = true
+        contentView.rightAnchor.constraint(equalTo: backgroundView.rightAnchor, constant: -insets.right).isActive = true
+    }
+
+    /**
      A convenience function for installing a background view and pinning to the layout margins.
      This is useful for creating programatic layouts where the background view needs to be
      inset from the message view's bounds.
@@ -78,41 +96,27 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         }
         addSubview(backgroundView)
         self.backgroundView = backgroundView
-        let top = NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottomMargin, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1.0, constant: -insets.right)
-        addConstraints([top, left, bottom, right])
+        backgroundView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: insets.top).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -insets.bottom).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor, constant: insets.left).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor, constant: -insets.right).isActive = true
         installTapRecognizer()
     }
 
     /**
-     A convenience function for installing a content view as a subview of `backgroundView`
-     and pinning the edges to `backgroundView` with the specified `insets`.
-
-     - Parameter contentView: The view to be installed into the background view
-     and assigned to the `contentView` property.
-     - Parameter insets: The amount to inset the content view from the background view.
-     Default is zero inset.
      */
-    open func installContentView(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.addSubview(contentView)
-        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .top, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .left, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
-        backgroundView.addConstraints([top, left, bottom, right])
-    }
-
-    open func installTBD(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.addSubview(contentView)
-        let top = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: backgroundView, attribute: .top, multiplier: 1.0, constant: insets.top)
-        let left = NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: backgroundView, attribute: .left, multiplier: 1.0, constant: insets.left)
-        let bottom = NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1.0, constant: -insets.bottom)
-        let right = NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: backgroundView, attribute: .right, multiplier: 1.0, constant: -insets.right)
-        backgroundView.addConstraints([top, left, bottom, right])
+    open func installBackgroundVerticalView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        if backgroundView != self {
+            backgroundView.removeFromSuperview()
+        }
+        addSubview(backgroundView)
+        self.backgroundView = backgroundView
+        backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: insets.top).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor, constant: insets.left).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor, constant: -insets.right).isActive = true
+        installTapRecognizer()
     }
 
     /*

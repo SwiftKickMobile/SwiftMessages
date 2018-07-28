@@ -68,8 +68,14 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
         /// A floating card-style view with rounded corners on top
         case topCard
 
+        /// A floating tab-style view with rounded corners on bottom
+        case topTab
+
         /// A floating card-style view with rounded corners on bottom
         case bottomCard
+
+        /// A floating tab-style view with rounded corners on top
+        case bottomTab
 
         /// A floating card-style view typically used with `.center` presentation style.
         case centered
@@ -95,6 +101,8 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
          documentation for details.
          */
         case background
+
+        case backgroundVertical
     }
 
     /**
@@ -108,6 +116,8 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
      configuration using `StoryboardSegue.messageView.preferredHeight`.
      */
     public var messageView = BaseView()
+
+    public var containerView = CornerRoundingView()
 
     /**
      Specifies how the view controller's view is installed into the
@@ -167,8 +177,8 @@ extension SwiftMessagesSegue {
         messageView.safeAreaTopOffset = 0
         messageView.safeAreaBottomOffset = 0
         containment = .content
-        let layer = destination.view.layer
-        layer.cornerRadius = 0
+        containerView.cornerRadius = 0
+        containerView.roundsLeadingCorners = false
         messageView.configureDropShadow()
         switch layout {
         case .topMessage:
@@ -186,25 +196,38 @@ extension SwiftMessagesSegue {
         case .topCard:
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
             messageView.collapseLayoutMarginAdditions = true
+            containerView.cornerRadius = 15
             containment = .background
-            layer.cornerRadius = 15
-            layer.masksToBounds = true
             let animation = TopBottomAnimation(style: .top)
             presentationStyle = .custom(animator: animation)
         case .bottomCard:
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
             messageView.collapseLayoutMarginAdditions = true
+            containerView.cornerRadius = 15
             containment = .background
-            layer.cornerRadius = 15
-            layer.masksToBounds = true
+            let animation = TopBottomAnimation(style: .bottom)
+            presentationStyle = .custom(animator: animation)
+        case .topTab:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.collapseLayoutMarginAdditions = true
+            containerView.cornerRadius = 15
+            containerView.roundsLeadingCorners = true
+            containment = .backgroundVertical
+            let animation = TopBottomAnimation(style: .top)
+            presentationStyle = .custom(animator: animation)
+        case .bottomTab:
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.collapseLayoutMarginAdditions = true
+            containerView.cornerRadius = 15
+            containerView.roundsLeadingCorners = true
+            containment = .backgroundVertical
             let animation = TopBottomAnimation(style: .bottom)
             presentationStyle = .custom(animator: animation)
         case .centered:
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
             messageView.collapseLayoutMarginAdditions = true
             containment = .background
-            layer.cornerRadius = 15
-            layer.masksToBounds = true
+            containerView.cornerRadius = 15
             let animation = PhysicsAnimation()
             presentationStyle = .custom(animator: animation)
         }
@@ -268,11 +291,19 @@ extension SwiftMessagesSegue {
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
+            toView.translatesAutoresizingMaskIntoConstraints = false
+            segue.containerView.addSubview(toView)
+            toView.topAnchor.constraint(equalTo: segue.containerView.topAnchor).isActive = true
+            toView.bottomAnchor.constraint(equalTo: segue.containerView.bottomAnchor).isActive = true
+            toView.leftAnchor.constraint(equalTo: segue.containerView.leftAnchor).isActive = true
+            toView.rightAnchor.constraint(equalTo: segue.containerView.rightAnchor).isActive = true
             switch segue.containment {
             case .content:
-                segue.messageView.installContentView(toView)
+                segue.messageView.installContentView(segue.containerView)
             case .background:
-                segue.messageView.installBackgroundView(toView)
+                segue.messageView.installBackgroundView(segue.containerView)
+            case .backgroundVertical:
+                segue.messageView.installBackgroundVerticalView(segue.containerView)
             }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)
