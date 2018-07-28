@@ -51,11 +51,11 @@
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
-		22B3E84B1F72FC6200CE309D /* MessageViewIOS8.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3E84A1F72FC6100CE309D /* MessageViewIOS8.xib */; };
 		22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */; };
 		22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */; };
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
 		22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */; };
+		22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27950210CE25900273E7F /* CornerRoundingView.swift */; };
 		86589D471D64B6E40041676C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86589D461D64B6E40041676C /* BaseView.swift */; };
 		86589D911D692B1C0041676C /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86589D901D692B1B0041676C /* TabView.xib */; };
 		867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867BED201D622793005212E3 /* BackgroundViewable.swift */; };
@@ -135,11 +135,11 @@
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
-		22B3E84A1F72FC6100CE309D /* MessageViewIOS8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewIOS8.xib; path = Resources/MessageViewIOS8.xib; sourceTree = "<group>"; };
 		22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CenteredView.xib; path = Resources/CenteredView.xib; sourceTree = "<group>"; };
 		22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsPanHandler.swift; sourceTree = "<group>"; };
 		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
 		22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleMessage.swift; sourceTree = "<group>"; };
+		22F27950210CE25900273E7F /* CornerRoundingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRoundingView.swift; sourceTree = "<group>"; };
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = SOURCE_ROOT; };
 		862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Utils.swift"; sourceTree = "<group>"; };
 		862C0CDA1D5A397F00D06168 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageView.xib; path = Resources/MessageView.xib; sourceTree = "<group>"; };
@@ -215,7 +215,6 @@
 				86589D901D692B1B0041676C /* TabView.xib */,
 				862C0CDB1D5A397F00D06168 /* StatusLine.xib */,
 				22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */,
-				22B3E84A1F72FC6100CE309D /* MessageViewIOS8.xib */,
 				228DF52B1FAD0802004F8A39 /* errorIconLight.png */,
 				228DF53E1FAD0804004F8A39 /* errorIconLight@2x.png */,
 				228DF5391FAD0804004F8A39 /* errorIconLight@3x.png */,
@@ -271,6 +270,7 @@
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 				86DBE0031D75BE800071E51D /* Array+Utils.swift */,
 				22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */,
+				22F27950210CE25900273E7F /* CornerRoundingView.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -473,7 +473,6 @@
 				228DF5561FAD0806004F8A39 /* successIconSubtle.png in Resources */,
 				228DF5541FAD0806004F8A39 /* successIcon@3x.png in Resources */,
 				228DF54B1FAD0806004F8A39 /* warningIconLight.png in Resources */,
-				22B3E84B1F72FC6200CE309D /* MessageViewIOS8.xib in Resources */,
 				228DF54D1FAD0806004F8A39 /* infoIcon@2x.png in Resources */,
 				22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */,
 				228DF5281FACAC51004F8A39 /* errorIcon@3x.png in Resources */,
@@ -497,6 +496,7 @@
 				22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */,
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
+				22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Utils.swift in Sources */,

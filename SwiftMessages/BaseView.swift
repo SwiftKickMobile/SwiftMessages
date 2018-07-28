@@ -249,6 +249,10 @@ extension BaseView: InternalPreferredHeight {}
 extension BaseView {
 
     /// A convenience function to configure a default drop shadow effect.
+    /// The shadow is to this view's layer instead of that of the background view
+    /// because the background view may be masked. So, when modifying the drop shadow,
+    /// be sure to set the shadow properties of this view's layer. The shadow path is
+    /// updated for you automatically.
     open func configureDropShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -264,9 +268,16 @@ extension BaseView {
     }
 
     private func updateShadowPath() {
+        backgroundView?.layoutIfNeeded()
         let shadowLayer = backgroundView?.layer ?? layer
         let shadowRect = layer.convert(shadowLayer.bounds, from: shadowLayer)
-        layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: shadowLayer.cornerRadius).cgPath
+        if let backgroundMaskLayer = shadowLayer.mask as? CAShapeLayer,
+            let backgroundMaskPath = backgroundMaskLayer.path {
+            var transform = CGAffineTransform(translationX: shadowRect.minX, y: shadowRect.minY)
+            layer.shadowPath = backgroundMaskPath.copy(using: &transform)
+        } else {
+            layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: shadowLayer.cornerRadius).cgPath
+        }
     }
 
     open override func layoutSubviews() {

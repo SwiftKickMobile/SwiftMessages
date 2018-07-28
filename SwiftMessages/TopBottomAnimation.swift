@@ -112,6 +112,16 @@ public class TopBottomAnimation: NSObject, Animator {
                 view.addGestureRecognizer(pan)
             }
         }
+        if let view = view as? BackgroundViewable,
+            let cornerRoundingView = view.backgroundView as? CornerRoundingView,
+            cornerRoundingView.roundsLeadingCorners {
+            switch style {
+            case .top:
+                cornerRoundingView.roundedCorners = [.bottomLeft, .bottomRight]
+            case .bottom:
+                cornerRoundingView.roundedCorners = [.topLeft, .topRight]
+            }
+        }
     }
 
     @objc public func adjustMargins() {
@@ -187,7 +197,6 @@ public class TopBottomAnimation: NSObject, Animator {
             let translationAmount = -bounceOffset - max(0.0, translation.y)
             switch style {
             case .top:
-                print("transform")
                 view.transform = CGAffineTransform(translationX: 0, y: translationAmount)
             case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: -translationAmount)

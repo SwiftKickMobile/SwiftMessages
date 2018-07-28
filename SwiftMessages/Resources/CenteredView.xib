@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="337" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mj-jC-BX6" userLabel="Background view">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mj-jC-BX6" userLabel="Background view" customClass="CornerRoundingView" customModule="SwiftMessages" customModuleProvider="target">
                     <rect key="frame" x="16" y="0.0" width="305" height="270"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YST-yc-0HK" userLabel="Content view">
@@ -69,8 +69,8 @@
                         <constraint firstItem="YST-yc-0HK" firstAttribute="top" secondItem="0Mj-jC-BX6" secondAttribute="top" constant="20" id="yRl-kK-cQH"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
