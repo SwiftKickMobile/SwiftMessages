@@ -750,7 +750,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-jZ-Yo3">
                                         <rect key="frame" x="0.0" y="5" width="62" height="34"/>
-                                        <color key="backgroundColor" red="0.015686274510000001" green="0.80000000000000004" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="900" constant="33" id="4dH-D2-IES"/>
                                         </constraints>
@@ -846,7 +846,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0039215686269999999" green="0.72156862749999995" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="200" constant="300" id="8n4-gN-YVC"/>
                                     <constraint firstItem="neB-c0-C0M" firstAttribute="centerX" secondItem="Yq2-ek-ErI" secondAttribute="centerX" id="AgT-2e-RVF"/>
@@ -913,7 +913,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGn-eY-EEX">
                                         <rect key="frame" x="0.0" y="138.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.015686274510000001" green="0.80000000000000004" blue="0.32259114583333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Top Card"/>
                                         <userDefinedRuntimeAttributes>
@@ -927,7 +927,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-MK-vK3">
                                         <rect key="frame" x="0.0" y="207.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.015686274510000001" green="0.80000000000000004" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Bottom Card"/>
                                         <userDefinedRuntimeAttributes>
@@ -1198,7 +1198,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ped-mP-cRg">
                                         <rect key="frame" x="0.0" y="138.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.015686274510000001" green="0.80000000000000004" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26627604166666669" green="0.76907009548611116" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Top Card"/>
                                         <userDefinedRuntimeAttributes>
@@ -1212,7 +1212,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHj-WL-xob">
                                         <rect key="frame" x="0.0" y="207.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.015686274510000001" green="0.80000000000000004" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Bottom Card"/>
                                         <userDefinedRuntimeAttributes>
