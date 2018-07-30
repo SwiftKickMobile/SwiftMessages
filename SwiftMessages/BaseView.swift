@@ -182,13 +182,13 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5
      
     /// Deprecated
-    open var statusBarOffset: CGFloat = 0
+    @objc open var statusBarOffset: CGFloat = 0
     
     /// Deprecated
-    open var safeAreaTopOffset: CGFloat = 0
+    @objc  open var safeAreaTopOffset: CGFloat = 0
 
     /// Deprecated
-    open var safeAreaBottomOffset: CGFloat = 0
+    @objc  open var safeAreaBottomOffset: CGFloat = 0
 
     /*
      MARK: - Setting the height

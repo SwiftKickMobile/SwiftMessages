@@ -119,21 +119,16 @@ class ViewController: UITableViewController {
         imageView.image = UIImage(named: "puppies")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        let messageView = BaseView(frame: .zero)
+        var messageView = BaseView(frame: .zero)
         messageView.layoutMargins = .zero
         messageView.preferredHeight = 120.0
-        if #available(iOS 11, *) {
-            // Switch to a card-style layout for iOS 11 because the image
-            // doesn't fit well behind the notch. Need to install a background
-            // view for the drop shadow.
-            let backgroundView = UIView()
-            backgroundView.layer.cornerRadius = 10
-            imageView.layer.cornerRadius = 10
+        do {
+            let backgroundView = CornerRoundingView()
+            backgroundView.cornerRadius = 15
+            backgroundView.layer.masksToBounds = true
             messageView.installBackgroundView(backgroundView)
-            messageView.installContentView(imageView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            messageView.safeAreaTopOffset = -6
-        } else {
             messageView.installContentView(imageView)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         }
         messageView.configureDropShadow()
         var config = SwiftMessages.defaultConfig

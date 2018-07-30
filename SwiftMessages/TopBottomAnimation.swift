@@ -86,15 +86,15 @@ public class TopBottomAnimation: NSObject, Animator {
         view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
         switch style {
         case .top:
-            view.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            view.topAnchor.constraint(equalTo: container.topAnchor, constant: -bounceOffset).isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: bounceOffset).isActive = true
         }
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
         container.layoutIfNeeded()
-        let animationDistance = view.frame.height - bounceOffset
+        let animationDistance = view.frame.height
         switch style {
         case .top:
             view.transform = CGAffineTransform(translationX: 0, y: -animationDistance)

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="309"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-Ae-zep" userLabel="Background view">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-Ae-zep" userLabel="Background view" customClass="CornerRoundingView" customModule="SwiftMessages">
                     <rect key="frame" x="30" y="10" width="540" height="289"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RJH-Fp-YDa" userLabel="Content view">
@@ -142,8 +142,8 @@
                         <constraint firstItem="RJH-Fp-YDa" firstAttribute="leading" secondItem="dp3-Ae-zep" secondAttribute="leading" constant="30" id="zmH-aG-8Ij"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="10"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>

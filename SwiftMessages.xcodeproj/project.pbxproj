@@ -56,7 +56,6 @@
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
 		22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */; };
 		22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27950210CE25900273E7F /* CornerRoundingView.swift */; };
-		22F27955210D243B00273E7F /* Undeprecate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27954210D243B00273E7F /* Undeprecate.swift */; };
 		86589D471D64B6E40041676C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86589D461D64B6E40041676C /* BaseView.swift */; };
 		86589D911D692B1C0041676C /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86589D901D692B1B0041676C /* TabView.xib */; };
 		867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867BED201D622793005212E3 /* BackgroundViewable.swift */; };
@@ -141,7 +140,6 @@
 		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
 		22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleMessage.swift; sourceTree = "<group>"; };
 		22F27950210CE25900273E7F /* CornerRoundingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRoundingView.swift; sourceTree = "<group>"; };
-		22F27954210D243B00273E7F /* Undeprecate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Undeprecate.swift; sourceTree = "<group>"; };
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Utils.swift"; sourceTree = "<group>"; };
 		862C0CDA1D5A397F00D06168 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageView.xib; path = Resources/MessageView.xib; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 				86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */,
 				86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */,
 				862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */,
-				22F27954210D243B00273E7F /* Undeprecate.swift */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -520,7 +517,6 @@
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
 				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
-				22F27955210D243B00273E7F /* Undeprecate.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
 				86DBE0041D75BE800071E51D /* Array+Utils.swift in Sources */,
@@ -662,6 +658,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -675,6 +672,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -688,6 +686,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -700,6 +699,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};

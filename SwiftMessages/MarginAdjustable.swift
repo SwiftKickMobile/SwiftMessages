@@ -46,7 +46,7 @@ public protocol MarginAdjustable {
     var safeAreaBottomOffset: CGFloat { get set }
 }
 
-extension MarginAdjustable {
+public extension MarginAdjustable {
     public var layoutMarginAdditions: UIEdgeInsets {
         get {
             return UIEdgeInsets(top: topLayoutMarginAddition, left: leftLayoutMarginAddition, bottom: bottomLayoutMarginAddition, right: rightLayoutMarginAddition)

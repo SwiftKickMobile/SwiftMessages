@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22652712210F698600310344 /* TacoDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */; };
 		226FA5E61F506993004CB2BC /* CountedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E51F506993004CB2BC /* CountedViewController.swift */; };
 		226FA5E81F5071D0004CB2BC /* CountedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */; };
 		226FA5EA1F507586004CB2BC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E91F507586004CB2BC /* Utils.swift */; };
@@ -18,7 +19,6 @@
 		86AEDCEB1D5D1DB70030232E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCE91D5D1DB70030232E /* Main.storyboard */; };
 		86AEDCED1D5D1DB70030232E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCEC1D5D1DB70030232E /* Assets.xcassets */; };
 		86AEDCF01D5D1DB70030232E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCEE1D5D1DB70030232E /* LaunchScreen.storyboard */; };
-		86C0ABA01D5E814600F76BD6 /* TacoDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */; };
 		86C0ABA21D5E816600F76BD6 /* TacoDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */; };
 /* End PBXBuildFile section */
 
@@ -194,8 +194,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86AEDCF01D5D1DB70030232E /* LaunchScreen.storyboard in Resources */,
+				22652712210F698600310344 /* TacoDialogView.xib in Resources */,
 				86AEDCED1D5D1DB70030232E /* Assets.xcassets in Resources */,
-				86C0ABA01D5E814600F76BD6 /* TacoDialogView.xib in Resources */,
 				86AEDCEB1D5D1DB70030232E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
