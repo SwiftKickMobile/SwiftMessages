@@ -68,7 +68,7 @@ open class SwiftMessages {
          increases the top margins of any message view that adopts the `MarginInsetting`
          protocol (as `MessageView` does) to account for the status bar.
         */
-        case window(windowLevel: UIWindowLevel)
+        case window(windowLevel: UIWindow.Level)
         
         /**
          Displays the message view under navigation bars and tab bars if an
@@ -178,7 +178,7 @@ open class SwiftMessages {
          - `interactive`: Specifies whether or not tapping the
          dimmed area dismisses the message view.
          */
-        case blur(style: UIBlurEffectStyle, alpha: CGFloat, interactive: Bool)
+        case blur(style: UIBlurEffect.Style, alpha: CGFloat, interactive: Bool)
 
         public var interactive: Bool {
             switch self {
@@ -315,7 +315,7 @@ open class SwiftMessages {
          `WindowViewController` is needed. Use this if you need to supply a custom subclass
          of `WindowViewController`.
          */
-        public var windowViewController: ((_ windowLevel: UIWindowLevel?, _ config: SwiftMessages.Config) -> WindowViewController)?
+        public var windowViewController: ((_ windowLevel: UIWindow.Level?, _ config: SwiftMessages.Config) -> WindowViewController)?
     }
     
     /**
