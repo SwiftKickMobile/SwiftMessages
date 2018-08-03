@@ -39,7 +39,7 @@ public class TopBottomAnimation: NSObject, Animator {
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: Notification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
         install(context: context)
         showAnimation(completion: completion)
     }
@@ -50,7 +50,7 @@ public class TopBottomAnimation: NSObject, Animator {
         let container = context.containerView
         self.context = context
         UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
-            let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            let size = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             self.translationConstraint.constant -= size.height
             container.layoutIfNeeded()
         }, completion: { completed in
@@ -86,7 +86,7 @@ public class TopBottomAnimation: NSObject, Animator {
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
-        let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let size = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         translationConstraint.constant -= size.height
         container.layoutIfNeeded()
         if context.interactiveHide {

@@ -136,7 +136,7 @@ class Presenter: NSObject {
             })
         }
 
-        func blur(style: UIBlurEffectStyle, alpha: CGFloat) {
+        func blur(style: UIBlurEffect.Style, alpha: CGFloat) {
             let blurView = UIVisualEffectView(effect: nil)
             blurView.alpha = alpha
             maskingView.backgroundView = blurView
@@ -164,13 +164,13 @@ class Presenter: NSObject {
     private func showAccessibilityAnnouncement() {
         guard let accessibleMessage = view as? AccessibleMessage,
             let message = accessibleMessage.accessibilityMessage else { return }
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, message)
+        UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: message)
     }
 
     private func showAccessibilityFocus() {
         guard let accessibleMessage = view as? AccessibleMessage,
             let focus = accessibleMessage.accessibilityElement ?? accessibleMessage.additonalAccessibilityElements?.first else { return }
-        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, focus)
+        UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: focus)
     }
 
     var isHiding = false
@@ -219,11 +219,11 @@ class Presenter: NSObject {
 
     private func safeZoneConflicts() -> SafeZoneConflicts {
         guard let window = maskingView.window else { return [] }
-        let windowLevel: UIWindowLevel = {
+        let windowLevel: UIWindow.Level = {
             if let vc = presentationContext.viewControllerValue() as? WindowViewController {
                 return vc.windowLevel
             }
-            return UIWindowLevelNormal
+            return UIWindow.Level.normal
         }()
         // TODO `underNavigationBar` and `underTabBar` should look up the presentation context's hierarchy
         // TODO for cases where both should be true (probably not an issue for typical height messages, though).
@@ -236,7 +236,7 @@ class Presenter: NSObject {
             return false
         }()
         if #available(iOS 11, *) {
-            if windowLevel > UIWindowLevelNormal {
+            if windowLevel > UIWindow.Level.normal {
                 // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
                 // iPhone 8 with status bar window level. This seems like an iOS bug since
                 // the message view's window is above the status bar. Applying a special rule
@@ -269,7 +269,7 @@ class Presenter: NSObject {
             return []
             #else
             if UIApplication.shared.isStatusBarHidden { return [] }
-            if (windowLevel > UIWindowLevelNormal) || underNavigationBar { return [] }
+            if (windowLevel > UIWindow.Level.normal) || underNavigationBar { return [] }
             let statusBarFrame = UIApplication.shared.statusBarFrame
             let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
             let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
@@ -280,7 +280,7 @@ class Presenter: NSObject {
 
     private func getPresentationContext() throws -> PresentationContext {
 
-        func newWindowViewController(_ windowLevel: UIWindowLevel) -> UIViewController {
+        func newWindowViewController(_ windowLevel: UIWindow.Level) -> UIViewController {
             let viewController = WindowViewController.newInstance(windowLevel: windowLevel, config: config)
             return viewController
         }
@@ -381,11 +381,11 @@ class Presenter: NSObject {
                 dismissView.translatesAutoresizingMaskIntoConstraints = true
                 dismissView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 maskingView.addSubview(dismissView)
-                maskingView.sendSubview(toBack: dismissView)
+                maskingView.sendSubviewToBack(dismissView)
                 dismissView.isUserInteractionEnabled = false
                 dismissView.isAccessibilityElement = true
                 dismissView.accessibilityLabel = config.dimModeAccessibilityLabel
-                dismissView.accessibilityTraits = UIAccessibilityTraitButton
+                dismissView.accessibilityTraits = UIAccessibilityTraits.button
                 elements.append(dismissView)
             }
             if config.dimMode.modal {

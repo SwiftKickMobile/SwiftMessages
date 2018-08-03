@@ -139,7 +139,7 @@ open class PhysicsPanHandler {
                 // Limit the speed and angular velocity to reasonable values
                 let speedScale = speed > 0 ? min(1, 1800 / speed) : 1
                 let escapeVelocity = CGPoint(x: velocity.x * speedScale, y: velocity.y * speedScale)
-                let angularSpeedScale = min(1, 10 / fabs(angularVelocity))
+                let angularSpeedScale = min(1, 10 / abs(angularVelocity))
                 let escapeAngularVelocity = angularVelocity * angularSpeedScale
                 state.itemBehavior.addLinearVelocity(escapeVelocity, for: messageView)
                 state.itemBehavior.addAngularVelocity(escapeAngularVelocity, for: messageView)
