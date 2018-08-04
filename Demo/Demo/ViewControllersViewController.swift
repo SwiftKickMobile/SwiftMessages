@@ -10,13 +10,6 @@ import UIKit
 import SwiftMessages
 
 class ViewControllersViewController: UIViewController {
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? SwiftMessagesSegue {
-            segue.messageView.backgroundHeight = 225
-        }
-    }
-
     @objc @IBAction private func dismissPresented(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }

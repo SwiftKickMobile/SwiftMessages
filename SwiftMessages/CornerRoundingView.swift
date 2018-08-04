@@ -60,11 +60,8 @@ open class CornerRoundingView: UIView {
     private func updateMaskPath() {
         let newPath = UIBezierPath(roundedRect: layer.bounds, byRoundingCorners: roundedCorners, cornerRadii: cornerRadii).cgPath
         // Update the `shapeLayer's` path with animation if we detect our `layer's` size is being animated.
-        // This is needed for smooth rotation animations.
-        if let foundAnimation = layer.animationKeys()?
-            .compactMap({ self.layer.animation(forKey: $0) as? CABasicAnimation })
-            .filter({ $0.keyPath == "bounds.size" })
-            .first {
+        // This is a workaround needed for smooth rotation animations.
+        if let foundAnimation = layer.findAnimation(forKeyPath: "bounds.size") {
             // Update the `shapeLayer's` path with animation, copying the relevant properties
             // from the found animation.
             let animation = CABasicAnimation(keyPath: "path")
@@ -75,7 +72,7 @@ open class CornerRoundingView: UIView {
             shapeLayer.add(animation, forKey: "path")
             shapeLayer.path = newPath
         } else {
-            // Update the `shapeLayer's` path without animation
+            // Update the `shapeLayer's` path  without animation
             shapeLayer.path = newPath
         }
     }

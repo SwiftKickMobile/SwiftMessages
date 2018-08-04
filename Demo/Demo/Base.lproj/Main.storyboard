@@ -750,7 +750,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-jZ-Yo3">
                                         <rect key="frame" x="0.0" y="5" width="62" height="34"/>
-                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="900" constant="33" id="4dH-D2-IES"/>
                                         </constraints>
@@ -1002,6 +1002,7 @@
             <objects>
                 <navigationController id="dHK-y5-h16" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="lRD-YW-2WT"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="0.0" height="225"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eD6-og-rzJ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1289,6 +1290,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="h5n-Vv-Q3y"/>
         <segue reference="6Le-RH-0Un"/>
-        <segue reference="wUk-y2-6l6"/>
+        <segue reference="4vR-Mg-o6M"/>
     </inferredMetricsTieBreakers>
 </document>

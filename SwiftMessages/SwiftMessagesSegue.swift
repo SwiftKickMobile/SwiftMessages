@@ -117,7 +117,7 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
      */
     public var messageView = BaseView()
 
-    public var containerView = CornerRoundingView()
+    public var containerView = ViewControllerContainerView()
 
     /**
      Specifies how the view controller's view is installed into the
@@ -214,6 +214,7 @@ extension SwiftMessagesSegue {
             containerView.roundsLeadingCorners = true
             containment = .backgroundVertical
             let animation = TopBottomAnimation(style: .top)
+            animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomTab:
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
@@ -222,6 +223,7 @@ extension SwiftMessagesSegue {
             containerView.roundsLeadingCorners = true
             containment = .backgroundVertical
             let animation = TopBottomAnimation(style: .bottom)
+            animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .centered:
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
@@ -291,12 +293,16 @@ extension SwiftMessagesSegue {
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
-            toView.translatesAutoresizingMaskIntoConstraints = false
-            segue.containerView.addSubview(toView)
-            toView.topAnchor.constraint(equalTo: segue.containerView.topAnchor).isActive = true
-            toView.bottomAnchor.constraint(equalTo: segue.containerView.bottomAnchor).isActive = true
-            toView.leftAnchor.constraint(equalTo: segue.containerView.leftAnchor).isActive = true
-            toView.rightAnchor.constraint(equalTo: segue.containerView.rightAnchor).isActive = true
+            // Setup the layout of the `toView`
+            do {
+                toView.translatesAutoresizingMaskIntoConstraints = false
+                segue.containerView.addSubview(toView)
+                toView.topAnchor.constraint(equalTo: segue.containerView.topAnchor).isActive = true
+                toView.bottomAnchor.constraint(equalTo: segue.containerView.bottomAnchor).isActive = true
+                toView.leftAnchor.constraint(equalTo: segue.containerView.leftAnchor).isActive = true
+                toView.rightAnchor.constraint(equalTo: segue.containerView.rightAnchor).isActive = true
+            }
+            // Install the `toView` into the message view.
             switch segue.containment {
             case .content:
                 segue.messageView.installContentView(segue.containerView)
@@ -305,6 +311,7 @@ extension SwiftMessagesSegue {
             case .backgroundVertical:
                 segue.messageView.installBackgroundVerticalView(segue.containerView)
             }
+            segue.containerView.viewController = transitionContext.viewController(forKey: .to)
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)
         }

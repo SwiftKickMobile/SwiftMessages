@@ -232,7 +232,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Note that this height is not guaranteed depending on anyt Auto Layout
      constraints used within the message view.
      */
-    @available(*, deprecated:4.2.0, message:"Use `backgroundHeight` instead to specify preferred height of the visiable region of the message.")
+    @available(*, deprecated:4.2.0, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
     open var preferredHeight: CGFloat? {
         didSet {
             setNeedsLayout()
@@ -275,13 +275,28 @@ extension BaseView {
         backgroundView?.layoutIfNeeded()
         let shadowLayer = backgroundView?.layer ?? layer
         let shadowRect = layer.convert(shadowLayer.bounds, from: shadowLayer)
+        let shadowPath: CGPath?
         if let backgroundMaskLayer = shadowLayer.mask as? CAShapeLayer,
             let backgroundMaskPath = backgroundMaskLayer.path {
             var transform = CGAffineTransform(translationX: shadowRect.minX, y: shadowRect.minY)
-            layer.shadowPath = backgroundMaskPath.copy(using: &transform)
+            shadowPath = backgroundMaskPath.copy(using: &transform)
         } else {
-            layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: shadowLayer.cornerRadius).cgPath
+            shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: shadowLayer.cornerRadius).cgPath
         }
+        // This is a workaround needed for smooth rotation animations.
+        if let foundAnimation = layer.findAnimation(forKeyPath: "bounds.size") {
+            // Update the layer's `shadowPath` with animation, copying the relevant properties
+            // from the found animation.
+            let animation = CABasicAnimation(keyPath: "shadowPath")
+            animation.duration = foundAnimation.duration
+            animation.timingFunction = foundAnimation.timingFunction
+            animation.fromValue = layer.shadowPath
+            animation.toValue = shadowPath
+            layer.add(animation, forKey: "shadowPath")
+            layer.shadowPath = shadowPath
+        } else {
+            // Update the layer's `shadowPath` without animation
+            layer.shadowPath = shadowPath        }
     }
 
     open override func layoutSubviews() {
