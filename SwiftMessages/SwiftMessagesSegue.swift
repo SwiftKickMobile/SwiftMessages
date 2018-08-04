@@ -52,7 +52,7 @@ import UIKit
 
  See the "View Controllers" selection in the Demo app for examples.
  */
-public class SwiftMessagesSegue: UIStoryboardSegue {
+open class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
      Specifies one of the pre-defined configurations, mirroring a subset of `MessageView.Layout`.
@@ -154,7 +154,7 @@ public class SwiftMessagesSegue: UIStoryboardSegue {
         return Presenter(config: messenger.defaultConfig, view: messageView, delegate: messenger)
     }()
 
-    override public func perform() {
+    override open func perform() {
         selfRetainer = self
         destination.modalPresentationStyle = .custom
         destination.transitioningDelegate = self

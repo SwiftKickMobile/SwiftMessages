@@ -7,6 +7,9 @@
 //
 
 import UIKit
+#if canImport(SwiftMessages)
+import SwiftMessages
+#endif
 
 /**
  A convenience class that presents a top message using the standard message view layout.

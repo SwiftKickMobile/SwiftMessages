@@ -84,6 +84,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		224FB6CA211651EB0081D4DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 867E21471D4D01D500594A41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86B48AEB1D5A41C900063E2B;
+			remoteInfo = SwiftMessages;
+		};
 		86B48AF71D5A41C900063E2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 867E21471D4D01D500594A41 /* Project object */;
@@ -223,6 +230,13 @@
 			path = SwiftMessagesSegueExtras;
 			sourceTree = "<group>";
 		};
+		224FB6C8211651D10081D4DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		22D4779B20BF1C54005D0D71 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +322,7 @@
 				224FB6A221163FB90081D4DE /* SwiftMessagesSegueExtras */,
 				867E21501D4D01D500594A41 /* Products */,
 				862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */,
+				224FB6C8211651D10081D4DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -402,6 +417,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				224FB6CB211651EB0081D4DE /* PBXTargetDependency */,
 			);
 			name = SwiftMessagesSegueExtras;
 			productName = SwiftMessagesSegueExtras;
@@ -451,7 +467,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "SwiftKick Mobile";
 				TargetAttributes = {
 					224FB6A021163FB90081D4DE = {
@@ -610,6 +626,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		224FB6CB211651EB0081D4DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86B48AEB1D5A41C900063E2B /* SwiftMessages */;
+			targetProxy = 224FB6CA211651EB0081D4DE /* PBXContainerItemProxy */;
+		};
 		86B48AF81D5A41C900063E2B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86B48AEB1D5A41C900063E2B /* SwiftMessages */;
@@ -626,7 +647,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -658,7 +679,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
