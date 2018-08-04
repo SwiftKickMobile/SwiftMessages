@@ -3,6 +3,6 @@ target 'Demo' do
     workspace 'Demo.xcworkspace'
     xcodeproj 'Demo.xcodeproj'
     pod 'SwiftMessages/App', :path => '../'
-    pod 'SwiftMessages/Segues', :path => '../'
+    pod 'SwiftMessages/SegueExtras', :path => '../'
 end
 

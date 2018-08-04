@@ -23,7 +23,6 @@
     {
       "name": "App",
       "source_files": "SwiftMessages/**/*.swift",
-      "exclude_files": "SwiftMessages/**/SegueConvenienceClasses.swift",
       "resource_bundles": {
         "SwiftMessages": [
           "SwiftMessages/Resources/**/*"
@@ -31,8 +30,8 @@
       }
     },
     {
-      "name": "Segues",
-      "source_files": "SwiftMessages/**/SegueConvenienceClasses.swift"
+      "name": "SegueExtras",
+      "source_files": "SwiftMessagesSegueExtras/**/*.swift"
     },
     {
       "name": "AppExtension",

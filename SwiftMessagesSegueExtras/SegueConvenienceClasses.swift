@@ -12,7 +12,7 @@ import UIKit
  A convenience class that presents a top message using the standard message view layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class TopMessageSegue: SwiftMessagesSegue {
+public class SwiftMessagesTopSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .topMessage)
@@ -23,7 +23,7 @@ public class TopMessageSegue: SwiftMessagesSegue {
  A convenience class that presents a top message using the card-style layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class TopCardSegue: SwiftMessagesSegue {
+public class SwiftMessagesTopCardSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .topCard)
@@ -34,7 +34,7 @@ public class TopCardSegue: SwiftMessagesSegue {
  A convenience class that presents a top message using the tab-style layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class TopTabSegue: SwiftMessagesSegue {
+public class SwiftMessagesTopTabSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .topTab)
@@ -45,7 +45,7 @@ public class TopTabSegue: SwiftMessagesSegue {
  A convenience class that presents a bottom message using the standard message view layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class BottomMessageSegue: SwiftMessagesSegue {
+public class SwiftMessagesBottomSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .bottomMessage)
@@ -56,7 +56,7 @@ public class BottomMessageSegue: SwiftMessagesSegue {
  A convenience class that presents a bottom message using the card-style layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class BottomCardSegue: SwiftMessagesSegue {
+public class SwiftMessagesBottomCardSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .bottomCard)
@@ -67,7 +67,7 @@ public class BottomCardSegue: SwiftMessagesSegue {
  A convenience class that presents a bottom message using the tab-style layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class BottomTabSegue: SwiftMessagesSegue {
+public class SwiftMessagesBottomTabSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .bottomTab)
@@ -78,7 +78,7 @@ public class BottomTabSegue: SwiftMessagesSegue {
  A convenience class that presents centered message using the card-style layout.
  This class is intended for use with Interface Builder. Reference as `SwiftMessagesSegue` in code.
  */
-public class CenteredSegue: SwiftMessagesSegue {
+public class SwiftMessagesCenteredSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .centered)

@@ -768,7 +768,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaB-mE-Rve">
                                         <rect key="frame" x="67" y="5" width="58" height="34"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.4665354619" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="900" constant="33" id="rTo-Jm-6qi"/>
                                         </constraints>
@@ -894,7 +894,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="TopMessageSegue" customModule="SwiftMessages" id="mcJ-EU-jv8"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopSegue" customModule="SwiftMessages" id="LI8-6K-7oJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-SP-rSC">
@@ -908,7 +908,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="BottomMessageSegue" customModule="SwiftMessages" id="wdT-n8-yRY"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomSegue" customModule="SwiftMessages" id="6Yg-dE-eXA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGn-eY-EEX">
@@ -922,7 +922,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="TopCardSegue" customModule="SwiftMessages" id="6Le-RH-0Un"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopCardSegue" customModule="SwiftMessages" id="Hzu-ei-Yah"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-MK-vK3">
@@ -936,7 +936,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="BottomCardSegue" customModule="SwiftMessages" id="lEc-Il-8te"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomCardSegue" customModule="SwiftMessages" id="TBl-s0-9vL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kux-aE-Bdv" userLabel="Top Tab">
@@ -950,7 +950,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="TopTabSegue" customModule="SwiftMessages" id="ZgE-8D-3lB"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopTabSegue" customModule="SwiftMessages" id="p7Y-6q-gfK"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-xF-RwV" userLabel="Bottom Tab">
@@ -964,7 +964,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="BottomTabSegue" customModule="SwiftMessages" id="0DA-TV-AZs"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomTabSegue" customModule="SwiftMessages" id="EaG-Ea-U3j"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDi-Gu-bE2" userLabel="Centered">
@@ -978,7 +978,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="dHK-y5-h16" kind="custom" customClass="CenteredSegue" customModule="SwiftMessages" id="mk3-DE-sZO"/>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesCenteredSegue" customModule="SwiftMessages" id="had-cE-9YN"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1180,7 +1180,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="TopMessageSegue" customModule="SwiftMessages" id="4vR-Mg-o6M"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopSegue" customModule="SwiftMessages" id="fRK-19-AWT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylZ-Gb-R3v">
@@ -1194,7 +1194,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="BottomMessageSegue" customModule="SwiftMessages" id="4pm-Zh-Gwe"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomSegue" customModule="SwiftMessages" id="fBl-Z6-8fO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ped-mP-cRg">
@@ -1208,7 +1208,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="TopCardSegue" customModule="SwiftMessages" id="ghg-rY-f7o"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopCardSegue" customModule="SwiftMessages" id="QwZ-o3-Xtk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHj-WL-xob">
@@ -1222,7 +1222,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="BottomCardSegue" customModule="SwiftMessages" id="TYw-7h-3h1"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomCardSegue" customModule="SwiftMessages" id="9Dg-CG-pFQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMM-ck-f0V" userLabel="Top Tab">
@@ -1236,7 +1236,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="TopTabSegue" customModule="SwiftMessages" id="roD-k1-I5u"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopTabSegue" customModule="SwiftMessages" id="YnZ-Wd-GzX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPB-J3-fvL" userLabel="Bottom Tab">
@@ -1250,7 +1250,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="BottomTabSegue" customModule="SwiftMessages" id="wUk-y2-6l6"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomTabSegue" customModule="SwiftMessages" id="fdh-UA-tb6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5f-EK-dp6" userLabel="Centered">
@@ -1264,7 +1264,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="CenteredSegue" customModule="SwiftMessages" id="wDd-Pp-75g"/>
+                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesCenteredSegue" customModule="SwiftMessages" id="zcN-0x-tSh"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1289,7 +1289,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="h5n-Vv-Q3y"/>
-        <segue reference="6Le-RH-0Un"/>
-        <segue reference="4vR-Mg-o6M"/>
+        <segue reference="6Yg-dE-eXA"/>
+        <segue reference="fBl-Z6-8fO"/>
     </inferredMetricsTieBreakers>
 </document>
