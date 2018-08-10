@@ -21,7 +21,7 @@ public class TopBottomAnimation: NSObject, Animator {
 
     open var closeSpeedThreshold: CGFloat = 750.0;
 
-    open var closePercentThreshold: CGFloat = 33.0;
+    open var closePercentThreshold: CGFloat = 0.33;
 
     private(set) var translationConstraint: NSLayoutConstraint! = nil
 
