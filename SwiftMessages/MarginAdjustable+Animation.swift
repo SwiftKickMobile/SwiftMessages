@@ -33,7 +33,7 @@ public extension MarginAdjustable where Self: UIView {
                 top += safeAreaTopOffset
             } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                 let frameInWindow = convert(bounds, to: window)
-                if frameInWindow.minY == 0 {
+                if frameInWindow.minY <= 0 {
                     top += statusBarOffset
                 }
             }
