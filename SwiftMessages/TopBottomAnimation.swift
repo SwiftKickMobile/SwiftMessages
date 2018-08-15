@@ -167,6 +167,7 @@ public class TopBottomAnimation: NSObject, Animator {
      */
 
     fileprivate var closing = false
+    fileprivate var rubberBanding = false
     fileprivate var closeSpeed: CGFloat = 0.0
     fileprivate var closePercent: CGFloat = 0.0
     fileprivate var panTranslationY: CGFloat = 0.0
@@ -177,27 +178,33 @@ public class TopBottomAnimation: NSObject, Animator {
             guard let view = messageView else { return }
             let height = view.bounds.height - bounceOffset
             if height <= 0 { return }
-            let point = pan.location(ofTouch: 0, in: view)
             var velocity = pan.velocity(in: view)
             var translation = pan.translation(in: view)
             if case .top = style {
                 velocity.y *= -1.0
                 translation.y *= -1.0
             }
+            var translationAmount = translation.y >= 0 ? translation.y : -pow(fabs(translation.y), 0.7)
             if !closing {
-                if view.bounds.contains(point) && velocity.y > 0.0 && velocity.x / velocity.y < 5.0 {
-                    closing = true
-                    pan.setTranslation(CGPoint.zero, in: view)
-                    delegate?.panStarted(animator: self)
+                // Turn on rubber banding if background view is inset from message view.
+                if let background = (messageView as? BackgroundViewable)?.backgroundView, background != view {
+                    switch style {
+                    case .top:
+                        rubberBanding = background.frame.minY > 0
+                    case .bottom:
+                        rubberBanding = background.frame.maxY < view.bounds.height
+                    }
                 }
+                if !rubberBanding && translationAmount < 0 { return }
+                closing = true
+                delegate?.panStarted(animator: self)
             }
-            if !closing { return }
-            let translationAmount = -bounceOffset - max(0.0, translation.y)
+            if !rubberBanding && translationAmount < 0 { translationAmount = 0 }
             switch style {
             case .top:
-                view.transform = CGAffineTransform(translationX: 0, y: translationAmount)
-            case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: -translationAmount)
+            case .bottom:
+                view.transform = CGAffineTransform(translationX: 0, y: translationAmount)
             }
             closeSpeed = velocity.y
             closePercent = translation.y / height
@@ -207,6 +214,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 delegate?.hide(animator: self)
             } else {
                 closing = false
+                rubberBanding = false
                 closeSpeed = 0.0
                 closePercent = 0.0
                 panTranslationY = 0.0
