@@ -16,7 +16,7 @@ import UIKit
 
  To use `SwiftMessagesSegue` with Interface Builder, control-drag a segue, then select
  "swift messages" from the segue type dialog. This configures a default transition. There are
- two ways to futher configure the transition by setting configuration options on `SwiftMessagesSegue`.
+ two ways to further configure the transition by setting configuration options on `SwiftMessagesSegue`.
  First, you may override `prepare(for:sender:)` in the presenting view controller and downcast the
  segue to `SwiftMessagesSegue`. Second, and recommended, you may subclass `SwiftMessagesSegue` and
  override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue
@@ -24,8 +24,9 @@ import UIKit
 
  The SwiftMessagesSegueExtras framework contains several pre-configured subclasses: `TopMessageSegue`,
  `BottomMessageSegue`, `TopCardSegue`, `BottomCardSegue`, `TopTabSegue`, `BottomTabSegue`, and
- `CenteredSegue`. SwiftMessagesSegueExtras must be explicitly added to the project (see the readme).
- These are not included in the SwiftMessages to avoid cluttering the segue type dialog by default.
+ `CenteredSegue`. These classes are not included in the SwiftMessages to avoid cluttering the segue type
+ dialog by default. Therefore, SwiftMessagesSegueExtras must be explicitly added to the project
+ (see the View Controller readme).
 
  `SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in
  the presenting view controller.
@@ -56,6 +57,25 @@ import UIKit
 
  See the "View Controllers" selection in the Demo app for examples.
  */
+
+func foo() {
+    let segue: SwiftMessagesSegue! = nil
+
+    // Configure a bottom card-style presentation
+    segue.configure(layout: .bottomCard)
+
+    // Add a default drop shadow
+    segue.messageView.configureDropShadow()
+
+    // Turn off interactive dismiss
+    segue.interactiveHide = false
+
+    // Enable dimmed background with tap-to-dismiss
+    segue.dimMode = .gray(interactive: true)
+
+
+}
+
 open class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
@@ -205,44 +225,41 @@ extension SwiftMessagesSegue {
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .topCard:
+            containment = .background
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
-            containment = .background
-            let animation = TopBottomAnimation(style: .top)
-            presentationStyle = .custom(animator: animation)
+            presentationStyle = .top
         case .bottomCard:
+            containment = .background
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
-            containment = .background
-            let animation = TopBottomAnimation(style: .bottom)
-            presentationStyle = .custom(animator: animation)
+            presentationStyle = .bottom
         case .topTab:
+            containment = .backgroundVertical
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
-            containment = .backgroundVertical
             let animation = TopBottomAnimation(style: .top)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomTab:
+            containment = .backgroundVertical
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
-            containment = .backgroundVertical
             let animation = TopBottomAnimation(style: .bottom)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .centered:
+            containment = .backgroundVertical
             messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
             messageView.collapseLayoutMarginAdditions = true
-            containment = .backgroundVertical
             containerView.cornerRadius = 15
-            let animation = PhysicsAnimation()
-            presentationStyle = .custom(animator: animation)
+            presentationStyle = .center
         }
     }
 }

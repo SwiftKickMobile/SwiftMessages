@@ -11,6 +11,24 @@
   <img src="./Design/swiftmessages.png" />
 </p>
 
+
+## 🔥 View Controllers 🔥
+
+SwiftMessages now supports modal view controller presentation!
+
+<p align="center">
+  <img src="./Design/SwiftMessagesSegue.gif" />
+</p>
+
+Utilize SwiftMessages layouts, animations and more directly within Interface Builder with the [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue. But Interface Builder isn't required, so `SwiftMessagesSegue` can be used on any UIKit project. Refer to the View Controllers readme below for more information:
+
+#### [View Controllers](./View)
+
+And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
+
+
+## Overview
+
 SwiftMessages is a very flexible view and view controller presentation library for iOS.
 
 Message views and view controllers can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
@@ -31,38 +49,21 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
 
-## 🔥 View Controllers 🔥
-
-SwiftMessages now supports modal view controller presentation!
-
-<p align="center">
-  <img src="./Design/SwiftMessagesSegue.gif" />
-</p>
-
-Utilize the SwiftMessages layouts, animations and more directly in Interface Builder with the `SwiftMessagesSegue` custom segue. Storyboards aren't required, however, so it can be used on any UIKit project. The documentation can be found in [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) and here:
-
-####[View Controllers](./View)
-
-And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
-
 ## Installation
 
 ### CocoaPods
 
-Add one of the following lines to your Podfile depending on your Swift version:
+Add the following line to your Podfile:
 
 ````ruby
-# Swift 3.0 - Xcode 8
 pod 'SwiftMessages'
 ````
-__Note that the minimum CocoaPods version is 1.1.0__.
 
 ### Carthage
 
-Add one of the following lines to your Cartfile depending on your Swift version:
+Add the following line to your Cartfile:
 
 ````ruby
-# Swift 3.0 - Xcode 8
 github "SwiftKickMobile/SwiftMessages"
 ````
 
@@ -73,10 +74,6 @@ github "SwiftKickMobile/SwiftMessages"
 1. On your app's target, add the SwiftMessages framework:
    1. as an embedded binary on the General tab.
    1. as a target dependency on the Build Phases tab.
-
-## In the App Store
-
-We'd love to know who's using SwiftMessages! Please take a moment to [let me know about](https://github.com/wtmoose) about your app and, if possible, attach a screenshot. We may feature some of them here in the future.
 
 ## Usage
 
