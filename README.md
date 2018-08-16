@@ -11,9 +11,9 @@
   <img src="./Design/swiftmessages.png" />
 </p>
 
-SwiftMessages is a very flexible message view library for iOS.
+SwiftMessages is a very flexible view and view controller presentation library for iOS.
 
-Messages can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There's an interactive dismiss gesture. You can dim the background if you like. And a lot more!
+Message views and view controllers can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
 
 In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
@@ -31,21 +31,19 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
 
-## 🔥 iOS 11 and iPhone X 🔥
+## 🔥 View Controllers 🔥
 
-SwiftMessages 4 supports iOS 11 out-of-the-box with built-in support for safe areas. To ensure that message view layouts look just right when overlapping safe areas, views that adopt the `MarginAdjustable` protocol (like `MessageView`) will have their layout margins automatically adjusted by SwiftMessages. However, there is no one-size-fits-all adjustment, so the following properties were added to `MarginAdjustable` to allow for additional adjustments to be made to the layout margins:
+SwiftMessages now supports modal view controller presentation!
 
-````swift
-public protocol MarginAdjustable {
-    ...
-    /// Safe area top adjustment in iOS 11+
-    var safeAreaTopOffset: CGFloat { get set }
-    /// Safe area bottom adjustment in iOS 11+
-    var safeAreaBottomOffset: CGFloat { get set }
-}
-````
+<p align="center">
+  <img src="./Design/SwiftMessagesSegue.gif" />
+</p>
 
-If you're using using custom nib files or view classes and your layouts don't look quite right, try adjusting the values of these properties. `BaseView` (the super class of `MessageView`) declares these properties to be `@IBDesignable` and you can find sample values in the nib files included with SwiftMessages.
+Utilize the SwiftMessages layouts, animations and more directly in Interface Builder with the `SwiftMessagesSegue` custom segue. Storyboards aren't required, however, so it can be used on any UIKit project. The documentation can be found in [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) and here:
+
+####[View Controllers](./View)
+
+And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
 
 ## Installation
 
