@@ -6,6 +6,7 @@
 
 The `SwiftMessagesSegue` class is included when you install SwiftMessages and this provides all of the functionality. However, a number subclasses are contained in the SwiftMessagesSegueExtras framework, providing pre-configured layouts that roughly mirror the options in `MessageView.Layout`:
 
+---------------------
 | `TopMessageSegue`    | Edge-to-edge from the top
 | `BottomMessageSegue` | Edge-to-edge from the bottom
 | `TopCardSegue`       | Card-style from the top
