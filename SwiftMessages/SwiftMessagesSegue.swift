@@ -10,29 +10,32 @@ import UIKit
 
 /**
  `SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes
- SwiftMessages to present and dismiss modal view controllers. `SwiftMessagesSegue` performs
- these transitions by becoming your view controller's `transitioningDelegate`, calling
- SwiftMessage's `show()` and `hide()` under the hood.
+ SwiftMessages to present and dismiss modal view controllers. It performs these transitions by
+ becoming your view controller's `transitioningDelegate` and calling SwiftMessage's `show()`
+ and `hide()` under the hood.
 
- `SwiftMessagesSegue` is easy to use: start by selecting "swift messages" Manual Segue type
- when control-dragging a new segue in IB. If you need to set any of the `SwiftMessagesSegue`
- configuration options, you can do so in `prepare(for:sender:)` (ask Apple to
- support `IBInspectable` for segues!) or define your own self-configuring subclass.
+ To use `SwiftMessagesSegue` with Interface Builder, control-drag a segue, then select
+ "swift messages" from the segue type dialog. This configures a default transition. There are
+ two ways to futher configure the transition by setting configuration options on `SwiftMessagesSegue`.
+ First, you may override `prepare(for:sender:)` in the presenting view controller and downcast the
+ segue to `SwiftMessagesSegue`. Second, and recommended, you may subclass `SwiftMessagesSegue` and
+ override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue
+ type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
 
- A number of pre-defined configurations are provided for your convenience in the form of
- self-configuring subclasses: `TopMessageSegue`, `BottomMessageSegue`, `TopCardSegue`,
- `BottomCardSegue`, and `CenteredSegue`. You'll see these in IB as Manual Segue types:
- "top message view", "bottom message view", "top card view", "bottom card view", and "centered view".
+ The SwiftMessagesSegueExtras framework contains several pre-configured subclasses: `TopMessageSegue`,
+ `BottomMessageSegue`, `TopCardSegue`, `BottomCardSegue`, `TopTabSegue`, `BottomTabSegue`, and
+ `CenteredSegue`. SwiftMessagesSegueExtras must be explicitly added to the project (see the readme).
+ These are not included in the SwiftMessages to avoid cluttering the segue type dialog by default.
 
- The `SwiftMessagesSegue` class can alternatively be used programatically without an associated IB
- segue. Create an instance in the presenting view controller and call `perform()`:
+ `SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in
+ the presenting view controller.
 
      let destinationVC = ... // make a reference to a destination view controller
      let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
      ... // do any configuration here
      segue.perform()
 
- To dismiss, call the UIKit API:
+ To dismiss, call the UIKit API on the presenting view controller:
 
      dismiss(animated: true, completion: nil)
 
@@ -42,20 +45,21 @@ import UIKit
  + note: Some additional details:
  1. Your view controller's view will be embedded in a `SwiftMessages.BaseView` in order to
     utilize some SwiftMessages features. This view can be accessed and configured via the
-    `SwiftMessagesSegue.messageView` property.
- 2. Some view controllers' views do not define a good `intrinsicContentSize`, which
-    SwiftMessages generally uses to establish the message view's height. A typical example
-    is `UINavigationController`. As a workaround, you can specify an explicit height in your
-    configuration:
-
-        segue.messageView.preferredHeight = 300
+    `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
+    shadow by calling `segue.messageView.configureDropShadow()`.
+ 2. SwiftMessages relies on a view's `intrinsicContentSize` to determine the height of a message.
+    However, some view controllers' views does not define a good `intrinsicContentSize`
+    (`UINavigationController` is a common example). For these cases, there are a couple of ways
+    to specify the preferred height. First, you may set the `preferredContentSize` on the destination
+    view controller (available as "Use Preferred Explicit Size" in IB's attribute inspector). Second,
+    you may set `SwiftMessagesSegue.messageView.backgroundHeight`.
 
  See the "View Controllers" selection in the Demo app for examples.
  */
 open class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
-     Specifies one of the pre-defined configurations, mirroring a subset of `MessageView.Layout`.
+     Specifies one of the pre-defined layouts, mirroring a subset of `MessageView.Layout`.
      */
     public enum Layout {
 
@@ -88,63 +92,69 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     public enum Containment {
 
         /**
-         The view controller's view is installed using `BaseView.installContentView(:insets:)`.
-         Use this option when the view controller's view should be edge-to-edge, extending into
-         the margins (safe areas). See that method's documentation for details.
-         */
+         The view controller's view is installed for edge-to-edge display, extending into the safe areas
+         to the device edges. This is done by calling `messageView.installContentView(:insets:)`
+         See that method's documentation for additional details.
+        */
         case content
 
         /**
-         The view controller's view is installed using `BaseView.installBackgroundView(:insets:)`.
-         Use this option for card-style layouts where the message view's background is transparent
-         and the view controller's view is inset from the margins (safe area). See that method's
-         documentation for details.
-         */
+         The view controller's view is installed for card-style layouts, inset from the margins
+         and avoiding safe areas. This is done by calling `messageView.installBackgroundView(:insets:)`.
+         See that method's documentation for details.
+        */
         case background
 
+        /**
+         The view controller's view is installed for tab-style layouts, inset from the side margins, but extending
+         to the device edge on the top or bottom. This is done by calling `messageView.installBackgroundVerticalView(:insets:)`.
+         See that method's documentation for details.
+         */
         case backgroundVertical
     }
 
     /**
-     The view that the view controller's view is installed into and displayed using
-     `SwiftMessages.show()`. This class is responsible for performing the installation,
-     but any other optional configuration of `messageView` is up to the caller.
-
-     Note that some view controllers' views do not define a good `intrinsicContentSize`, which
-     SwiftMessages generally relies on to establish the message view's height. A typical example
-     is `UINavigationController`. As a workaround, you can specify an explicit height in your
-     configuration using `StoryboardSegue.messageView.preferredHeight`.
+     The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
+     The view controller's view is installed into `containerView`, which is itself installed
+     into `messageView`. `SwiftMessagesSegue` does this installation automatically based on the
+     value of the `containment` property. `BaseView` is the parent of `MessageView` and provides a
+     number of configuration options that you may use. For example, you may configure a default drop
+     shadow by calling `messageView.configureDropShadow()`.
      */
     public var messageView = BaseView()
 
+    /**
+     The view controller's view is embedded in `containerView` before being installed into
+     `messageView`. This view provides configurable squircle (round) corners (see the parent
+     class `CornerRoundingView`).
+    */
     public var containerView = ViewControllerContainerView()
 
     /**
      Specifies how the view controller's view is installed into the
-     containing message view.
+     containing message view. See `Containment` for details.
      */
     public var containment: Containment = .content
 
-    /// The presentation style to use. See the SwiftMessages.PresentationStyle documentation for details.
+    /// The presentation style to use. See the SwiftMessages.PresentationStyle for details.
     public var presentationStyle: SwiftMessages.PresentationStyle {
         get { return messenger.defaultConfig.presentationStyle }
         set { messenger.defaultConfig.presentationStyle = newValue }
     }
 
-    /// The dim mode to use. See the SwiftMessages.DimMode documentation for details.
+    /// The dim mode to use. See the SwiftMessages.DimMode for details.
     public var dimMode: SwiftMessages.DimMode {
         get { return messenger.defaultConfig.dimMode}
         set { messenger.defaultConfig.dimMode = newValue }
     }
 
     /// Specifies whether or not the interactive pan-to-hide gesture is enabled
-    /// on the message view.
+    /// on the message view. The default value is `true`, but may not be appropriate
+    /// for view controllers that use swipe or pan gestures.
     public var interactiveHide: Bool {
         get { return messenger.defaultConfig.interactiveHide }
         set { messenger.defaultConfig.interactiveHide = newValue }
     }
-
-    var bounces = true
 
     private var messenger = SwiftMessages()
     private var selfRetainer: SwiftMessagesSegue? = nil
@@ -171,6 +181,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 }
 
 extension SwiftMessagesSegue {
+    /// A convenience method for configuring some pre-defined layouts that mirror a subset of `MessageView.Layout`.
     public func configure(layout: Layout) {
         messageView.bounceAnimationOffset = 0
         messageView.statusBarOffset = 0

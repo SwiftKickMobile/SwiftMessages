@@ -22,14 +22,26 @@ import UIKit
  is responsible for setting is own internal margins appropriately.
  */
 public protocol MarginAdjustable {
-    var bounceAnimationOffset: CGFloat { get set }
+
+    /// The amount to add to the default top safe area inset.
     var topLayoutMarginAddition: CGFloat { get set }
+
+    /// The amount to add to the default left safe area inset.
     var leftLayoutMarginAddition: CGFloat { get set }
+
+    /// The amount to add to the default bottom safe area inset.
     var bottomLayoutMarginAddition: CGFloat { get set }
+
+    /// The amount to add to the default right safe area inset.
     var rightLayoutMarginAddition: CGFloat { get set }
-    /// When `true`, SwiftMessages will automatically collapse layout margin additions (topLayoutMarginAddition, etc.)
-    /// when the layout margins are greater than zero.
+
+    /// When `true`, SwiftMessages automatically collapses layout margin additions (topLayoutMarginAddition, etc.)
+    /// when the default layout margins are greater than zero. This is typically used when a margin addition is only
+    /// needed when the safe area inset is zero for a given edge. When the safe area inset for a given edge is non-zero,
+    /// the additional margin is not added.
     var collapseLayoutMarginAdditions: Bool { get set }
+
+    var bounceAnimationOffset: CGFloat { get set }
 
     /**
      Deprecated APIs
@@ -47,6 +59,7 @@ public protocol MarginAdjustable {
 }
 
 public extension MarginAdjustable {
+    /// An shortcut for programatically getting/setting layout margin additions.
     public var layoutMarginAdditions: UIEdgeInsets {
         get {
             return UIEdgeInsets(top: topLayoutMarginAddition, left: leftLayoutMarginAddition, bottom: bottomLayoutMarginAddition, right: rightLayoutMarginAddition)

@@ -67,9 +67,9 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      and pinning the edges to `backgroundView` with the specified `insets`.
 
      - Parameter contentView: The view to be installed into the background view
-     and assigned to the `contentView` property.
+       and assigned to the `contentView` property.
      - Parameter insets: The amount to inset the content view from the background view.
-     Default is zero inset.
+       Default is zero inset.
      */
     open func installContentView(_ contentView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,10 +83,10 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     /**
      A convenience function for installing a background view and pinning to the layout margins.
      This is useful for creating programatic layouts where the background view needs to be
-     inset from the message view's bounds.
+     inset from the message view's edges (like a card-style layout).
 
      - Parameter backgroundView: The view to be installed as a subview and
-     assigned to the `backgroundView` property.
+       assigned to the `backgroundView` property.
      - Parameter insets: The amount to inset the content view from the margins. Default is zero inset.
      */
     open func installBackgroundView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
@@ -104,6 +104,14 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     }
 
     /**
+     A convenience function for installing a background view and pinning to the horizontal
+     layout margins and to the vertical edges. This is useful for creating programatic layouts where
+     the background view needs to be inset from the message view's horizontal edges (like a tab-style layout).
+
+     - Parameter backgroundView: The view to be installed as a subview and
+       assigned to the `backgroundView` property.
+     - Parameter insets: The amount to inset the content view from the horizontal margins and vertical edges.
+       Default is zero inset.
      */
     open func installBackgroundVerticalView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
