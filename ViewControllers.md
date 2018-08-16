@@ -6,7 +6,6 @@
 
 The `SwiftMessagesSegue` class is included when you install SwiftMessages and this provides all of the functionality. However, a number subclasses are contained in the SwiftMessagesSegueExtras framework, providing pre-configured layouts that roughly mirror the options in `MessageView.Layout`:
 
----------------------
 | `TopMessageSegue`    | Edge-to-edge from the top
 | `BottomMessageSegue` | Edge-to-edge from the bottom
 | `TopCardSegue`       | Card-style from the top
@@ -14,6 +13,12 @@ The `SwiftMessagesSegue` class is included when you install SwiftMessages and th
 | `TopTabSegue`        | Tab-style from the top
 | `BottomTabSegue`     | Tab-style from the bottom
 | `CenteredSegue`      | Centered with physics-based dismissal
+
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 
 These classes are not included in the SwiftMessages to avoid cluttering the Interface Builder segue type dialog by default. Therefore, SwiftMessagesSegueExtras must be explicitly added to the project as follows.
