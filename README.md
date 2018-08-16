@@ -20,9 +20,9 @@ SwiftMessages now supports modal view controller presentation!
   <img src="./Design/SwiftMessagesSegue.gif" />
 </p>
 
-Utilize SwiftMessages layouts, animations and more directly within Interface Builder with the [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue. But Interface Builder isn't required, so `SwiftMessagesSegue` can be used on any UIKit project. Refer to the View Controllers readme below for more information:
+Utilize the SwiftMessages layouts, animations and more directly within Interface Builder with the [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue. But Interface Builder isn't required, so `SwiftMessagesSegue` can be used on any UIKit project. Refer to the View Controllers readme below for more information:
 
-#### [View Controllers](./View)
+#### [View Controllers](./ViewControllers.md)
 
 And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
 
