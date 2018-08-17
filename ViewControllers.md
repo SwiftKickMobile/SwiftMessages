@@ -39,7 +39,7 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ## Usage
 
-To use `SwiftMessagesSegue`, control-drag a segue in Interface Builder from the sender to the destination. Then select "swift messages" in the Segue Type prompt.
+To use `SwiftMessagesSegue`, control-drag from the sender to the destination in Interface Builder to create a segue. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt.
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
