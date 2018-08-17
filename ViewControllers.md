@@ -80,7 +80,7 @@ There are quite a few configuration options, may of which are borrowed from `Swi
 // Configure a bottom card-style presentation
 segue.configure(layout: .bottomCard)
 
-// Add a default drop shadow
+// Add a default drop shadow.
 segue.messageView.configureDropShadow()
 
 // Turn off interactive dismiss
