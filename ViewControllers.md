@@ -98,7 +98,7 @@ messageView.collapseLayoutMarginAdditions = true
 segue.messageView.configureDropShadow()
 ````
 
-The view controller's view is wrapped in an instance of `ViewControllerContainerView`, which exposes configurable corner rounding options:
+The view controller's view is wrapped in an instance of `ViewControllerContainerView`, which provides corner rounding options:
 
 ````swift
 // Change the corner radius
