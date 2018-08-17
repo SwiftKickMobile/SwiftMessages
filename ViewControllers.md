@@ -16,7 +16,7 @@ The `SwiftMessagesSegue` base class is included with the SwiftMessages installat
   <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
-To avoid cluttering the Interface Builder Segue Type dialog with these options, SwiftMessagesSegueExtras is not installed by default. To install SwiftMessagesSegueExtras:
+When SwiftMessagesSegueExtras is installed, these options will automatically appear in the Interface Builder Segue Type dialog. To avoid cluttering the dialog by default, SwiftMessagesSegueExtras must be installed explicitly:
 
 ### CocoaPods
 
