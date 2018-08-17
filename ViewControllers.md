@@ -1,10 +1,10 @@
 # View Controllers
 
-`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes SwiftMessages to present and dismiss modal view controllers. It performs these transitions by becoming your view controller's `transitioningDelegate` and calling SwiftMessage's `show()` and `hide()` under the hood.
+`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes SwiftMessages to present and dismiss modal view controllers. It performs these transitions by becoming your view controller's `transitioningDelegate`, calling SwiftMessage's `show()` and `hide()` under the hood.
 
 ## Installation
 
-The SwiftMessages framework includes the `SwiftMessagesSegue` base class, which provides all of the functionality needed for view controller presentation. But it requires configuration. The SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options in `MessageView.Layout`:
+The `SwiftMessagesSegue` base class is included in the basic SwiftMessages installation and provides all of the functionality needed for view controller presentation. But this base class generally requires configuration to achieve specific layouts and optional behaviors. To help with this, the SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
 
 <table>
   <tr><td><code>TopMessageSegue</code></td></tr>
@@ -16,7 +16,7 @@ The SwiftMessages framework includes the `SwiftMessagesSegue` base class, which 
   <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
-SwiftMessagesSegueExtras is not installed by default in order to avoid cluttering the Interface Builder Segue Type dialog with these options. To install SwiftMessagesSegueExtras:
+To avoid cluttering the Interface Builder Segue Type dialog with these options, SwiftMessagesSegueExtras is not installed by default. To install SwiftMessagesSegueExtras:
 
 ### CocoaPods
 
