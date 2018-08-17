@@ -41,7 +41,7 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ### Interface Builder
 
-Create a segue by control-dragging from the sender to the destination. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt.
+Create a segue by control-dragging from the sender to the destination. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass of `SwiftMessagesSegue` by selecting "very nice".
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
