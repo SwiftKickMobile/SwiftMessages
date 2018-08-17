@@ -53,7 +53,7 @@ Create a segue by control-dragging from the sender to the destination. Then sele
 
 ````swift
 let destinationVC = ... // make a reference to a destination view controller
-let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
+let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
 ... // do any configuration here
 segue.perform()
 ````
