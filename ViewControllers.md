@@ -47,7 +47,28 @@ Create a segue by control-dragging from the sender to the destination. Then sele
   <img src="./Design/SwiftMessagesSegueCreate.png" />
 </p>
 
-This configures the default transition. There a few good ways to configure the transition to suit your needs by setting options on `SwiftMessagesSegue`:
+### Programatic
+
+`SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in the presenting view controller.
+
+````swift
+let destinationVC = ... // make a reference to a destination view controller
+let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
+... // do any configuration here
+segue.perform()
+````
+
+To dismiss, call the UIKit API on the presenting view controller:
+
+````swift
+dismiss(animated: true, completion: nil)
+````
+
+It is not necessary to retain `segue` because it retains itself until dismissal. However, you can retain it if you plan to `perform()` more than once.
+
+### Configuration
+
+`SwiftMessagesSegue` generally requires configuration to achieve specific layouts and optional behaviors. There are a few good ways to do this:
 
   * __Option #1__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
   * __Option #2__ Override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
@@ -90,24 +111,5 @@ containerView.cornerRadius = 15
 presentationStyle = .bottom
 
 ````
-
-### Programatic
-
-`SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in the presenting view controller.
-
-````swift
-let destinationVC = ... // make a reference to a destination view controller
-let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
-... // do any configuration here
-segue.perform()
-````
-
-To dismiss, call the UIKit API on the presenting view controller:
-
-````swift
-dismiss(animated: true, completion: nil)
-````
-
-It is not necessary to retain `segue` because it retains itself until dismissal. However, you can retain it if you plan to `perform()` more than once.
 
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
