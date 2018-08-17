@@ -4,25 +4,22 @@
 
 ## Installation
 
-The `SwiftMessagesSegue` class is included when you install SwiftMessages and this provides all of the functionality. However, a number subclasses are contained in the SwiftMessagesSegueExtras framework, providing pre-configured layouts that roughly mirror the options in `MessageView.Layout`:
+The SwiftMessages framework includes the `SwiftMessagesSegue` base class, which provides all of the functionality needed for view controller presentation. But it requires configuration. The SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options in `MessageView.Layout`:
 
-| `TopMessageSegue`    | Edge-to-edge from the top
-| `BottomMessageSegue` | Edge-to-edge from the bottom
-| `TopCardSegue`       | Card-style from the top
-| `BottomCardSegue`    | Card-style from the bottom
-| `TopTabSegue`        | Tab-style from the top
-| `BottomTabSegue`     | Tab-style from the bottom
-| `CenteredSegue`      | Centered with physics-based dismissal
+<table>
+  <tr><td>TopMessageSegue</td></tr>
+  <tr><td>BottomMessageSegue</td></tr>
+  <tr><td>TopCardSegue</td></tr>
+  <tr><td>BottomCardSegue</td></tr>
+  <tr><td>TopTabSegue</td></tr>
+  <tr><td>BottomTabSegue</td></tr>
+  <tr><td>CenteredSegue</td></tr>
+</table>
 
+SwiftMessagesSegueExtras is not installed by default in order to avoid cluttering the Interface Builder Segue Type dialog with these options. To install SwiftMessagesSegueExtras:
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+### CocoaPods
 
-
-These classes are not included in the SwiftMessages to avoid cluttering the Interface Builder segue type dialog by default. Therefore, SwiftMessagesSegueExtras must be explicitly added to the project as follows.
- 
 Add the following line to your Podfile and do `pod install`:
 
 ````ruby
@@ -31,7 +28,7 @@ pod 'SwiftMessages/SegueExtras'
 
 ### Carthage
 
-After building SwiftMessages, add the SwiftMessagesSegueExtras framework to your project alongside SwiftMessages.
+Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessages.framework`.
 
 ### Manual
 
@@ -42,16 +39,17 @@ After building SwiftMessages, add the SwiftMessagesSegueExtras framework to your
 
 ## Usage
 
-To use `SwiftMessagesSegue` with Interface Builder, control-drag a segue, as you would with any other segue, from the sender to the destination. Then select "swift messages" that Interface Builder has conveniently added to the segue type prompt.
+To use `SwiftMessagesSegue`, control-drag a segue in Interface Builder from the sender to the destination. Then select "swift messages" in the Segue Type prompt.
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
 </p>
 
-This configures a default transition. There are two ways to further configure the transition by setting configuration options on `SwiftMessagesSegue`.
+This configures the default transition. There a few good ways to configure the transition to suit your needs by setting options on `SwiftMessagesSegue`:
 
-  * __Option #1__ you may override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
-  * __Option #2__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
+  * __Option #1__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
+  * __Option #2__ Override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
+  * __Option #3__ Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
   
 There are quite a few configuration options, may of which are borrowed from `SwiftMessages.Config`:
 
