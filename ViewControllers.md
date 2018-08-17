@@ -87,7 +87,8 @@ The `messageView` property provides access to the instance of `BaseView` that th
 // Install the view controller's view as the `backgroundView` of `messageView`
 segue.containment = .background
 
-// Increase the padding to 20pt
+// Increase the internal layout margins. With `.background` containment, this controls the padding
+// around `messageView.backgroundView`.
 segue.messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
 // Collapse the layout margin edge when the safe area inset is greater than zero.
