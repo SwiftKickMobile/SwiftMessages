@@ -39,7 +39,9 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ## Usage
 
-To use `SwiftMessagesSegue`, control-drag from the sender to the destination in Interface Builder to create a segue. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt.
+### Interface Builder
+
+Create a segue by control-dragging from the sender to the destination. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt.
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
@@ -88,5 +90,24 @@ containerView.cornerRadius = 15
 presentationStyle = .bottom
 
 ````
+
+### Programatic
+
+`SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in the presenting view controller.
+
+````swift
+let destinationVC = ... // make a reference to a destination view controller
+let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
+... // do any configuration here
+segue.perform()
+````
+
+To dismiss, call the UIKit API on the presenting view controller:
+
+````swift
+dismiss(animated: true, completion: nil)
+````
+
+It is not necessary to retain `segue` because it retains itself until dismissal. However, you can retain it if you plan to `perform()` more than once.
 
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
