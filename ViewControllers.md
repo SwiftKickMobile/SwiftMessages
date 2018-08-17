@@ -70,9 +70,9 @@ It is not necessary to retain `segue` because it retains itself until dismissal.
 
 `SwiftMessagesSegue` generally requires configuration to achieve specific layouts and optional behaviors. There are a few good ways to do this:
 
-  * __Option #1__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
-  * __Option #2__ Override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
-  * __Option #3__ Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
+  * __Option 1__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
+  * __Option 2__ Override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
+  * __Option 3__ Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
   
 There are quite a few configuration options, may of which are borrowed from `SwiftMessages.Config`:
 
