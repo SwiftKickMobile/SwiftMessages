@@ -105,7 +105,7 @@ The view controller's view is wrapped in an instance of `ViewControllerContainer
 segue.containerView.cornerRadius = 20
 ````
 
-Some options from `SwiftMessages.Config` are accessible:
+The options from `SwiftMessages.Config` that make sense for view controller presentation are available:
 
 ````swift
 // Turn off interactive dismiss
