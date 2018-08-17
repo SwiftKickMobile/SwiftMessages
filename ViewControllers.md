@@ -73,43 +73,48 @@ It is not necessary to retain `segue` because it retains itself until dismissal.
   1. __(Recommended)__ Subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)` to apply configuration. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
   1. Override `prepare(for:sender:)` in the presenting view controller, down-cast the segue to `SwiftMessagesSegue`, and apply configuration steps to the instance.
   1. Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
-  
-There are quite a few configuration options, may of which are borrowed from `SwiftMessages.Config`:
+
+The `configure(layout:)` method is a shortcut for configuring some basic layout and animation options that roughly mirror the options in `SwiftMessages.Layout`:
 
 ````swift
 // Configure a bottom card-style presentation
 segue.configure(layout: .bottomCard)
+````
+
+The `messageView` property provides access to the instance of `BaseView` that the view controller's view is installed into. It provides some configuration options:
+
+````swift
+// Install the view controller's view as the `backgroundView` of `messageView`
+segue.containment = .background
+
+// Increase the padding to 20pt
+segue.messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+
+// Collapse the layout margin edge when the safe area inset is greater than zero.
+messageView.collapseLayoutMarginAdditions = true
 
 // Add a default drop shadow.
 segue.messageView.configureDropShadow()
+````
 
+The view controller's view is wrapped in an instance of `ViewControllerContainerView`, which exposes configurable corner rounding options:
+
+````swift
+// Change the corner radius to 20pt
+segue.containerView.cornerRadius = 20
+````
+
+Some options from `SwiftMessages.Config` are accessible:
+
+````swift
 // Turn off interactive dismiss
 segue.interactiveHide = false
 
 // Enable dimmed background with tap-to-dismiss
 segue.dimMode = .gray(interactive: true)
-````
-
-The `SwiftMessagesSegue.configure(layout:)` method is a convenience function that combines several settings, which you can modify directly:
-
-````swift
-// Install the view controller's view as the `backgroundView` of `messageView`
-containment = .background
-
-// Set the layout margin additions to inset the view controller's
-// view by 10pt for a card-style look.
-messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
-
-
-// Collapse the layout margin edge when the safe area inset is greater than zero.
-messageView.collapseLayoutMarginAdditions = true
-
-// Set the corner radius for the view controller's view's container view.
-containerView.cornerRadius = 15
 
 // Set the animation and adjust the spring damping
-presentationStyle = .bottom
-
+segue.presentationStyle = .bottom
 ````
 
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
