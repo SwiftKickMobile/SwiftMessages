@@ -4,7 +4,7 @@
 
 ## Installation
 
-The `SwiftMessagesSegue` base class is included in the basic SwiftMessages installation and provides all of the functionality needed for view controller presentation. But this base class generally requires configuration to achieve specific layouts and optional behaviors. To help with this, the SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
+The `SwiftMessagesSegue` base class is included with the SwiftMessages installation and provides all of the functionality needed for view controller presentation. But this base class generally requires configuration to achieve specific layouts and optional behaviors. To help with this, the SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
 
 <table>
   <tr><td><code>TopMessageSegue</code></td></tr>
