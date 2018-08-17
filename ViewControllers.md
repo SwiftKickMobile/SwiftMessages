@@ -7,13 +7,13 @@
 The SwiftMessages framework includes the `SwiftMessagesSegue` base class, which provides all of the functionality needed for view controller presentation. But it requires configuration. The SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options in `MessageView.Layout`:
 
 <table>
-  <tr><td>TopMessageSegue</td></tr>
-  <tr><td>BottomMessageSegue</td></tr>
-  <tr><td>TopCardSegue</td></tr>
-  <tr><td>BottomCardSegue</td></tr>
-  <tr><td>TopTabSegue</td></tr>
-  <tr><td>BottomTabSegue</td></tr>
-  <tr><td>CenteredSegue</td></tr>
+  <tr><td><code>TopMessageSegue</code></td></tr>
+  <tr><td><code>BottomMessageSegue</code></td></tr>
+  <tr><td><code>TopCardSegue</code></td></tr>
+  <tr><td><code>BottomCardSegue</code></td></tr>
+  <tr><td><code>TopTabSegue</code></td></tr>
+  <tr><td><code>BottomTabSegue</code></td></tr>
+  <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
 SwiftMessagesSegueExtras is not installed by default in order to avoid cluttering the Interface Builder Segue Type dialog with these options. To install SwiftMessagesSegueExtras:
