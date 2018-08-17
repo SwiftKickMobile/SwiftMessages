@@ -15,7 +15,7 @@ import UIKit
  and `hide()` under the hood.
 
  To use `SwiftMessagesSegue` with Interface Builder, control-drag a segue, then select
- "swift messages" from the segue type dialog. This configures a default transition. There are
+ "swift messages" from the Segue Type dialog. This configures a default transition. There are
  two ways to further configure the transition by setting configuration options on `SwiftMessagesSegue`.
  First, you may override `prepare(for:sender:)` in the presenting view controller and downcast the
  segue to `SwiftMessagesSegue`. Second, and recommended, you may subclass `SwiftMessagesSegue` and
@@ -24,7 +24,7 @@ import UIKit
 
  The SwiftMessagesSegueExtras framework contains several pre-configured subclasses: `TopMessageSegue`,
  `BottomMessageSegue`, `TopCardSegue`, `BottomCardSegue`, `TopTabSegue`, `BottomTabSegue`, and
- `CenteredSegue`. These classes are not included in the SwiftMessages to avoid cluttering the segue type
+ `CenteredSegue`. These classes are not included in the SwiftMessages to avoid cluttering the Segue Type
  dialog by default. Therefore, SwiftMessagesSegueExtras must be explicitly added to the project
  (see the View Controller readme).
 
