@@ -1,10 +1,10 @@
 # View Controllers
 
-`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes SwiftMessages to present and dismiss modal view controllers. It performs these transitions by becoming your view controller's `transitioningDelegate`, calling SwiftMessage's `show()` and `hide()` under the hood.
+`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that presents and dismisses modal view controllers by acting as the presenting view controller's `transitioningDelegate` and utilizing SwiftMessages' `show()` and `hide()` methods on the destination view controller's view.
 
 ## Installation
 
-The `SwiftMessagesSegue` base class is included with the SwiftMessages installation and provides all of the functionality needed for view controller presentation. But to achieve specific layouts and optional behaviors, it generally requires configuration. To help with this, the SwiftMessagesSegueExtras framework provides a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
+`SwiftMessagesSegue` is included in the SwiftMessages installation and provides all of the functionality needed for modal view controller presentation. However, to achieve specific layouts and optional behaviors, the segue will generally need to be configured. To help with this, the SwiftMessagesSegueExtras framework provides a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
 
 <table>
   <tr><td><code>TopMessageSegue</code></td></tr>
@@ -16,7 +16,7 @@ The `SwiftMessagesSegue` base class is included with the SwiftMessages installat
   <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
-When SwiftMessagesSegueExtras is installed, these options will automatically appear in the Interface Builder Segue Type dialog. To avoid cluttering the dialog by default, SwiftMessagesSegueExtras must be installed explicitly:
+With SwiftMessagesSegueExtras installed, these options will automatically appear in the Segue Type dialog when creating a segue in Interface Builder. SwiftMessagesSegueExtras is optional and must be explicitly installed to avoid cluttering the dialog by default:
 
 ### CocoaPods
 
@@ -41,7 +41,7 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ### Interface Builder
 
-Create a segue by control-dragging from the sender to the destination. Then select "swift messages" (or the auto-generated name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass of `SwiftMessagesSegue` by selecting "very nice".
+First, create a segue by control-dragging from the sender element to the destination view controller. Then select "swift messages" (or the name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass by selecting "very nice".
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
