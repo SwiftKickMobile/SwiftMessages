@@ -1,22 +1,22 @@
 # View Controllers
 
-`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that utilizes SwiftMessages to present and dismiss modal view controllers. It performs these transitions by becoming your view controller's `transitioningDelegate` and calling SwiftMessage's `show()` and `hide()` under the hood.
+`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that presents and dismisses modal view controllers by acting as the presenting view controller's `transitioningDelegate` and utilizing SwiftMessages' `show()` and `hide()` methods on the destination view controller's view.
 
 ## Installation
 
-The SwiftMessages framework includes the `SwiftMessagesSegue` base class, which provides all of the functionality needed for view controller presentation. But it requires configuration. The SwiftMessagesSegueExtras framework contains a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options in `MessageView.Layout`:
+`SwiftMessagesSegue` is included in the SwiftMessages installation and provides all of the functionality needed for modal view controller presentation. However, to achieve specific layouts and optional behaviors, the segue will generally need to be configured. To help with this, the SwiftMessagesSegueExtras framework provides a number of pre-configured layouts in the form of `SwiftMessagesSegue` sub-classes. These classes roughly mirror the layout options found in `MessageView.Layout`:
 
 <table>
-  <tr><td>TopMessageSegue</td></tr>
-  <tr><td>BottomMessageSegue</td></tr>
-  <tr><td>TopCardSegue</td></tr>
-  <tr><td>BottomCardSegue</td></tr>
-  <tr><td>TopTabSegue</td></tr>
-  <tr><td>BottomTabSegue</td></tr>
-  <tr><td>CenteredSegue</td></tr>
+  <tr><td><code>TopMessageSegue</code></td></tr>
+  <tr><td><code>BottomMessageSegue</code></td></tr>
+  <tr><td><code>TopCardSegue</code></td></tr>
+  <tr><td><code>BottomCardSegue</code></td></tr>
+  <tr><td><code>TopTabSegue</code></td></tr>
+  <tr><td><code>BottomTabSegue</code></td></tr>
+  <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
-SwiftMessagesSegueExtras is not installed by default in order to avoid cluttering the Interface Builder Segue Type dialog with these options. To install SwiftMessagesSegueExtras:
+With SwiftMessagesSegueExtras installed, these options will automatically appear in the Segue Type dialog when creating a segue in Interface Builder. SwiftMessagesSegueExtras is optional and must be explicitly installed to avoid cluttering the dialog by default:
 
 ### CocoaPods
 
@@ -39,54 +39,83 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ## Usage
 
-To use `SwiftMessagesSegue`, control-drag a segue in Interface Builder from the sender to the destination. Then select "swift messages" in the Segue Type prompt.
+### Interface Builder
+
+First, create a segue by control-dragging from the sender element to the destination view controller. Then select "swift messages" (or the name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass by selecting "very nice".
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
 </p>
 
-This configures the default transition. There a few good ways to configure the transition to suit your needs by setting options on `SwiftMessagesSegue`:
+### Programatic
 
-  * __Option #1__ (recommended) you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
-  * __Option #2__ Override `prepare(for:sender:)` in the presenting view controller and down-cast the segue to `SwiftMessagesSegue`.
-  * __Option #3__ Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
-  
-There are quite a few configuration options, may of which are borrowed from `SwiftMessages.Config`:
+`SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in the presenting view controller.
+
+````swift
+let destinationVC = ... // make a reference to a destination view controller
+let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
+... // do any configuration here
+segue.perform()
+````
+
+To dismiss, call the UIKit API on the presenting view controller:
+
+````swift
+dismiss(animated: true, completion: nil)
+````
+
+It is not necessary to retain `segue` because it retains itself until dismissal. However, you can retain it if you plan to `perform()` more than once.
+
+### Configuration
+
+`SwiftMessagesSegue` generally requires configuration to achieve specific layouts and optional behaviors. There are a few good ways to do this:
+
+  1. __(Recommended)__ Subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)` to apply configuration. Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
+  1. Override `prepare(for:sender:)` in the presenting view controller, down-cast the segue to `SwiftMessagesSegue`, and apply configuration steps to the instance.
+  1. Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
+
+The `configure(layout:)` method is a shortcut for configuring some basic layout and animation options that roughly mirror the options in `SwiftMessages.Layout`:
 
 ````swift
 // Configure a bottom card-style presentation
 segue.configure(layout: .bottomCard)
+````
 
-// Add a default drop shadow
+The `messageView` property provides access to the instance of `BaseView` that the view controller's view is installed into. It provides some configuration options:
+
+````swift
+// Install the view controller's view as the `backgroundView` of `messageView`
+segue.containment = .background
+
+// Increase the internal layout margins. With `.background` containment, this controls the padding
+// around `messageView.backgroundView`.
+segue.messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+
+// Collapse the layout margin edge when the safe area inset is greater than zero.
+messageView.collapseLayoutMarginAdditions = true
+
+// Add a default drop shadow.
 segue.messageView.configureDropShadow()
+````
 
+The view controller's view is wrapped in an instance of `ViewControllerContainerView`, which provides corner rounding options:
+
+````swift
+// Change the corner radius
+segue.containerView.cornerRadius = 20
+````
+
+The options from `SwiftMessages.Config` that work with view controller presentation are also available:
+
+````swift
 // Turn off interactive dismiss
 segue.interactiveHide = false
 
 // Enable dimmed background with tap-to-dismiss
 segue.dimMode = .gray(interactive: true)
-````
-
-The `SwiftMessagesSegue.configure(layout:)` method is a convenience function that combines several settings, which you can modify directly:
-
-````swift
-// Install the view controller's view as the `backgroundView` of `messageView`
-containment = .background
-
-// Set the layout margin additions to inset the view controller's
-// view by 10pt for a card-style look.
-messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
-
-
-// Collapse the layout margin edge when the safe area inset is greater than zero.
-messageView.collapseLayoutMarginAdditions = true
-
-// Set the corner radius for the view controller's view's container view.
-containerView.cornerRadius = 15
 
 // Set the animation and adjust the spring damping
-presentationStyle = .bottom
-
+segue.presentationStyle = .bottom
 ````
 
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
