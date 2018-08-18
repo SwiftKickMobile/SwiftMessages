@@ -32,7 +32,7 @@ import UIKit
  the presenting view controller.
 
      let destinationVC = ... // make a reference to a destination view controller
-     let segue = BottomCardSegue(identifier: nil, source: self, destination: destinationVC)
+     let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
      ... // do any configuration here
      segue.perform()
 
@@ -57,24 +57,6 @@ import UIKit
 
  See the "View Controllers" selection in the Demo app for examples.
  */
-
-func foo() {
-    let segue: SwiftMessagesSegue! = nil
-
-    // Configure a bottom card-style presentation
-    segue.configure(layout: .bottomCard)
-
-    // Add a default drop shadow
-    segue.messageView.configureDropShadow()
-
-    // Turn off interactive dismiss
-    segue.interactiveHide = false
-
-    // Enable dimmed background with tap-to-dismiss
-    segue.dimMode = .gray(interactive: true)
-
-
-}
 
 open class SwiftMessagesSegue: UIStoryboardSegue {
 
