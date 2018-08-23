@@ -177,12 +177,28 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      (see MessageView.nib).
      */
 
+    public var layoutMarginAdditions: UIEdgeInsets {
+        get {
+            return UIEdgeInsets(top: topLayoutMarginAddition, left: leftLayoutMarginAddition, bottom: bottomLayoutMarginAddition, right: rightLayoutMarginAddition)
+        }
+        set {
+            topLayoutMarginAddition = newValue.top
+            leftLayoutMarginAddition = newValue.left
+            bottomLayoutMarginAddition = newValue.bottom
+            rightLayoutMarginAddition = newValue.right
+        }
+    }
+
+    /// IBInspectable access to layoutMarginAdditions.top
     @IBInspectable open var topLayoutMarginAddition: CGFloat = 0
 
+    /// IBInspectable access to layoutMarginAdditions.left
     @IBInspectable open var leftLayoutMarginAddition: CGFloat = 0
 
+    /// IBInspectable access to layoutMarginAdditions.bottom
     @IBInspectable open var bottomLayoutMarginAddition: CGFloat = 0
 
+    /// IBInspectable access to layoutMarginAdditions.right
     @IBInspectable open var rightLayoutMarginAddition: CGFloat = 0
 
     @IBInspectable open var collapseLayoutMarginAdditions: Bool = true

@@ -23,17 +23,9 @@ import UIKit
  */
 public protocol MarginAdjustable {
 
-    /// The amount to add to the default top safe area inset.
-    var topLayoutMarginAddition: CGFloat { get set }
-
-    /// The amount to add to the default left safe area inset.
-    var leftLayoutMarginAddition: CGFloat { get set }
-
-    /// The amount to add to the default bottom safe area inset.
-    var bottomLayoutMarginAddition: CGFloat { get set }
-
-    /// The amount to add to the default right safe area inset.
-    var rightLayoutMarginAddition: CGFloat { get set }
+    /// The amount to add to the safe area insets in calculating
+    /// the layout margins.
+    var layoutMarginAdditions: UIEdgeInsets { get }
 
     /// When `true`, SwiftMessages automatically collapses layout margin additions (topLayoutMarginAddition, etc.)
     /// when the default layout margins are greater than zero. This is typically used when a margin addition is only
@@ -56,20 +48,5 @@ public protocol MarginAdjustable {
     /// Safe area bottom adjustment in iOS 11+
     @available(iOS, deprecated, message: "Use the `bottomLayoutMarginAddition` instead.")
     var safeAreaBottomOffset: CGFloat { get set }
-}
-
-public extension MarginAdjustable {
-    /// An shortcut for programatically getting/setting layout margin additions.
-    public var layoutMarginAdditions: UIEdgeInsets {
-        get {
-            return UIEdgeInsets(top: topLayoutMarginAddition, left: leftLayoutMarginAddition, bottom: bottomLayoutMarginAddition, right: rightLayoutMarginAddition)
-        }
-        set {
-            topLayoutMarginAddition = newValue.top
-            leftLayoutMarginAddition = newValue.left
-            bottomLayoutMarginAddition = newValue.bottom
-            rightLayoutMarginAddition = newValue.right
-        }
-    }
 }
 
