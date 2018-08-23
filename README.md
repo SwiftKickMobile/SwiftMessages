@@ -102,8 +102,9 @@ view.configureDropShadow()
 let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
 
-// Adjust the internal margins.
-view.layoutMarginAdditions = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+// Increase the external margin around the card. In general, the effect of this setting
+// depends on how the given layout is constrained to the layout margins.
+view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
 // Show the message.
 SwiftMessages.show(view: view)
