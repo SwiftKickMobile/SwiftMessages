@@ -264,13 +264,15 @@ let view: MyCustomView = try! SwiftMessages.viewFromNib()
 
 #### MessageView
 
-`MessageView` is a light-weight view, primarily consisting of the following optional `@IBOutlet` properties:
+[`MessageView`](./SwiftMessages/MessageView.swift) is a light-weight view, primarily consisting of the following optional `@IBOutlet` properties:
 
-* __Title__ (`titleLabel: UILabel`)
-* __Message body__ (`bodyLabel: UILabel`)
-* __Image Icon__ (`iconImageView: UIImageView`)
-* __Text Icon__ (`iconLabel: UILabel`)
-* __Button__ (`button: UIButton`)
+Element | Declaration | Description
+--------|-----------|-----
+__Title__ | `titleLabel: UILabel` | The message title.
+__Message body__ | `bodyLabel: UILabel` |  The body of the message.
+__Image Icon__ | `iconImageView: UIImageView` | An image-based icon.
+__Text Icon__ | `iconLabel: UILabel` |  A text-based (emoji) alternative to the image icon.
+__Button__ | `button: UIButton` | An action button.
 
 SwiftMessages nib files are connected to these outlets. The nib file layouts use stack views, which means that you can hide a given element and the layout will adjust correctly:
 
@@ -280,7 +282,7 @@ view.titleLabel.isHidden = true
 
 A common mistake is setting an element to `nil`, which does not remove the element from the view hierarchy.
 
-[`MessageView`](./SwiftMessages/MessageView.swift) provides numerous methods that follow the `configure*` naming convention:
+`MessageView` provides numerous methods that follow the `configure*` naming convention:
 
 ````swift
 view.configureTheme(.warning)
@@ -298,6 +300,17 @@ messageView.buttonTapHandler = { _ in SwiftMessages.hide() }
 // Hide when message view tapped
 messageView.tapHandler = { _ in SwiftMessages.hide() }
 ````
+
+The suggested method for starting with `MessageView` as a base and __adding new elements__, such as additional buttons, is as follows:
+
+1. Copy one of the bundled nib files into your project or create a new one from scratch.
+1. Add the new elements to the nib file.
+1. Sublcass `MessageView` and create outlets for the new elements.
+1. Assign the top-level view in the nib file to the subclass.
+1. Connect outlets between the nib file and the subclass.
+1. (recommended) override the implementation of `Identifiable` as needed to incorporate new elements into the message's identity.
+1. (recommended) override the implementation of `AccessibleMessage` as needed to incorporate new elements into Voice Over.
+1. Use one of the nib-loading methods above to load the view.
 
 #### BaseView
 
