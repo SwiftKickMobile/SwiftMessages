@@ -102,6 +102,9 @@ view.configureDropShadow()
 let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
 
+// Adjust the internal margins.
+view.layoutMarginAdditions = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+
 // Show the message.
 SwiftMessages.show(view: view)
 ````
