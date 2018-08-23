@@ -106,6 +106,9 @@ view.configureContent(title: "Warning", body: "Consider yourself warned.", iconT
 // depends on how the given layout is constrained to the layout margins.
 view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
+// Reduce the corner radius.
+(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+
 // Show the message.
 SwiftMessages.show(view: view)
 ````
@@ -315,6 +318,10 @@ The suggested method for starting with `MessageView` as a base and __adding new 
 #### BaseView
 
 [`BaseView`](./SwiftMessages/BaseView.swift) is the superclass of `MessageView` and provides numerous options that aren't specific to the "title + body + icon + button" design of `MessageView`. Custom views that are significantly different from `MessageView`, such as a progress indicator, should subclass `BaseView`.
+
+#### CornerRoundingView
+
+[`CornerRoundingView`](./SwiftMessages/CornerRoundingView.swift) is background view that messages can use for rounding all or a subset of corners with squircles (the smoother method of rounding corners that you see on app icons). The card and tab-style nib files assign the background view to this type.
 
 #### MarginAdjustable
 
