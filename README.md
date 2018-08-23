@@ -240,26 +240,15 @@ if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
 
 ### Customization
 
-`MessageView` provides the following UI elements, exposed as public, optional `@IBOutlets`:
+SwiftMessages can display any `UIView`. However, there are varying degrees of customization that can be done to the bundled views.
 
-* __Title__ (`UILabel`)
-* __Message body__ (`UILabel`)
-* __Image Icon__ (`UIImageView`)
-* __Text Icon__ (`UILabel`)
-* __Button__ (`UIButton`)
+#### Nib Files
 
-Because they are optional, you can freely omit the ones you don't need.
+Copy a nib file from SwiftMessages into your project and modify it. SwiftMessages will load your copy instead of the original.
 
-**The easiest way to customize `MessageView` is to drag-and-drop one of the pre-defined nib files into your project and make changes.** SwiftMessages always searches the main bundle for nib files first, so it is not necessary to rename the file or make a different API call. However, there are some OS-specific considerations to be aware of:
-
-* **iOS 9+** When using one of the `UIStackView` layouts, MessageView.nib, CardView.nib or TabView.nib, as a starting point, you can simply delete elements from the nib file or hide them — no need to adjust the Auto Layout constraints.
-
-To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the pre-defined nibs:
+To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the bundled nibs:
 
 ````swift
-// Instantiate MessageView from one of the provided nibs in a type-safe way.
-// SwiftMessages searches the main bundle first, so you easily copy the nib into
-// your project and modify it while still using this type-safe call.
 let view = MessageView.viewFromNib(layout: .cardView)
 ````
 
@@ -273,6 +262,33 @@ let view: MessageView = try! SwiftMessages.viewFromNib(named: "MyCustomNib")
 let view: MyCustomView = try! SwiftMessages.viewFromNib()
 ````
 
+#### MessageView
+
+`MessageView` is a light-weight view, primarily consisting of the following optional `@IBOutlet` properties:
+
+* __Title__ (`titleLabel: UILabel`)
+* __Message body__ (`bodyLabel: UILabel`)
+* __Image Icon__ (`iconImageView: UIImageView`)
+* __Text Icon__ (`iconLabel: UILabel`)
+* __Button__ (`button: UIButton`)
+
+SwiftMessages nib files are connected to these outlets. The nib file layouts use stack views, which means that you can hide a given element and the layout will adjust correctly:
+
+````swift
+view.titleLabel.isHidden = true
+````
+
+A common mistake is setting an element to `nil`, which does not remove the element from the view hierarchy.
+
+[`MessageView`](./SwiftMessages/MessageView.swift) provides numerous methods that follow the `configure*` naming convention:
+
+````swift
+view.configureTheme(.warning)
+view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
+````
+
+All of these methods are shortcuts for quickly configuring the underlying view properties. You do not need to call them. You can configure the view properties directly.
+
 `MessageView` provides an optional block-based tap handler for the button and another for the view itself:
 
 ````swift
@@ -282,6 +298,31 @@ messageView.buttonTapHandler = { _ in SwiftMessages.hide() }
 // Hide when message view tapped
 messageView.tapHandler = { _ in SwiftMessages.hide() }
 ````
+
+#### BaseView
+
+[`BaseView`](./SwiftMessages/BaseView.swift) is the superclass of `MessageView` and provides numerous options that aren't specific to the "title + body + icon + button" design of `MessageView`. Custom views that are significantly different from `MessageView`, such as a progress indicator, should subclass `BaseView`.
+
+#### MarginAdjustable
+
+[`MarginAdjustable`](./SwiftMessages/MarginAdjustable.swift) is a protocol adopted by `BaseView`. If the view being presented adopts `MarginAdjustable`, SwiftMessages takes ownership of the view's layout margins to ensure ideal spacing across the full range of presentation contexts.
+
+#### BackgroundViewable
+
+[`BackgroundViewable`](./SwiftMessages/BackgroundViewable.swift) is a protocol adopted by `BaseView` and requires that a view provide a single `backgroundView` property. `BaseView` initializes `backgroundView = self`, which you can freely re-assign to any subview.
+
+If the view being presented adopts `BackgroundViewable`, SwiftMessages will ignore touches outside of `backgroundView`. This is important because message views always span the full width of the device. Card and tab-style layouts appear inset from the edges of the device because the message view's background is transparent and `backgroundView` is assigned to a subview constrained to the layout margins. In these layouts, touches in the transparent margins should be ignored.
+
+#### Identifiable
+
+[`Identifiable`](./SwiftMessages/Identifiable.swift) is a protocol adopted by `MessageView` and requires that a view provide a single `id` property, which SwiftMessages uses for message deduplication.
+
+`MessageView` computes the `id` based on the message content, but `id` can also be set explicitly as needed.
+
+#### AccessibleMessage
+
+[`AccessibleMessage`](./SwiftMessages/AccessibleMessage.swift) is a protocol adopted by `MessageView`. If the view being presented adopts `AccessibleMessage`, SwiftMessages provides improved Voice Over.
+
 
 ## About SwiftKick Mobile
 We build high quality apps! [Get in touch](http://www.swiftkickmobile.com) if you need help with a project.
