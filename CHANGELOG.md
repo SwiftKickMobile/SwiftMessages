@@ -1,6 +1,27 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 4.2.0
+
+### Features
+* Add support for modal view controller presentation using [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue subclass.
+* Update nib files to be more visually consistent with iPhone X:
+  * Introduce [`CornerRoundingView`](./SwiftMessages/CornerRoundingView.swift), which provides configurable corner rounding using squircles (the smoother method of rounding corners that you see on app icons). Nib files that feature rounded corners have their `backgroundView` assigned to a `CornerRoundingView`. `CornerRoundingView` provides a `roundsLeadingCorners` option to dynamically round only the leading corners of the view when presented from top or bottom (a feature used for the tab-style layouts).
+  * Increased the default corner radius to 20. Corner radius can be changed by either modifying the nib file or 
+* Reworked the `MarginAdjustable` to provide easier configuration of the layout margins.
+* Add rubber-banding to the interactive dismissal gesture. Rubber banding is automatically applied for views where `backgroundView` is inset from the message view's edges.
+* Added `showDuration` and `hideDuration` properties to the `Animator` protocol (with default implementation that returns `nil`). These values enable animations to work for view controller presentation.
+
+### Fixes
+
+* #202 bodyLabel should set textAlignment to .natural
+* #200 Automatic Presentation Context Broken
+* Fix default value of `TopBottomAnimation.closePercentThreshold`
+
+### Changes
+
+* Removed support for iOS 8.
+
 ## 4.1.4
 
 ### Bug Fixes

@@ -247,7 +247,7 @@ SwiftMessages can display any `UIView`. However, there are varying degrees of cu
 
 #### Nib Files
 
-Copy a nib file from SwiftMessages into your project and modify it. SwiftMessages will load your copy instead of the original.
+All of the message designs bundled with SwiftMessages have associated nib files. You are encouraged to copy any of these nib files into your project and modify them to suit your needs. SwiftMessages will load your copy of the file instead of the original. Nib files may be copied in Xcode using drag-and-drop.
 
 To facilitate the use of nib-based layouts, `MessageView` provides some type-safe convenience methods for loading the bundled nibs:
 
@@ -267,7 +267,7 @@ let view: MyCustomView = try! SwiftMessages.viewFromNib()
 
 #### MessageView
 
-[`MessageView`](./SwiftMessages/MessageView.swift) is a light-weight view, primarily consisting of the following optional `@IBOutlet` properties:
+`MessageView` is a light-weight view that all of the bundled designs use. It primarily consists of the following optional `@IBOutlet` properties:
 
 Element | Declaration | Description
 --------|-----------|-----
@@ -277,13 +277,15 @@ __Image Icon__ | `iconImageView: UIImageView` | An image-based icon.
 __Text Icon__ | `iconLabel: UILabel` |  A text-based (emoji) alternative to the image icon.
 __Button__ | `button: UIButton` | An action button.
 
-SwiftMessages nib files are connected to these outlets. The nib file layouts use stack views, which means that you can hide a given element and the layout will adjust correctly:
+The SwiftMessages nib file use `MessageView` as the top-level view with content connected to these outlets. The layouts are done using stack views, which means that you can remove an element by simply hiding it:
 
 ````swift
 view.titleLabel.isHidden = true
 ````
 
-A common mistake is setting an element to `nil`, which does not remove the element from the view hierarchy.
+A common mistake is attempting to remove an element by setting the corresponding outlet to `nil`. This does not work because it does not remove the element from the view hierarchy.
+
+#### Configuration
 
 `MessageView` provides numerous methods that follow the `configure*` naming convention:
 
@@ -293,6 +295,8 @@ view.configureContent(title: "Warning", body: "Consider yourself warned.", iconT
 ````
 
 All of these methods are shortcuts for quickly configuring the underlying view properties. SwiftMessages strives to avoid doing any internal magic in these methods, so you do not need to call them. You can configure the view properties directly or combine the two approaches.
+
+#### Interaction
 
 `MessageView` provides an optional block-based tap handler for the button and another for the view itself:
 
@@ -304,10 +308,12 @@ messageView.buttonTapHandler = { _ in SwiftMessages.hide() }
 messageView.tapHandler = { _ in SwiftMessages.hide() }
 ````
 
+#### Extending
+
 The suggested method for starting with `MessageView` as a base and __adding new elements__, such as additional buttons, is as follows:
 
 1. Copy one of the bundled nib files into your project or create a new one from scratch.
-1. Add the new elements to the nib file.
+1. Add new elements to the nib file.
 1. Sublcass `MessageView` and create outlets for the new elements.
 1. Assign the top-level view in the nib file to the subclass.
 1. Connect outlets between the nib file and the subclass.
@@ -321,7 +327,16 @@ The suggested method for starting with `MessageView` as a base and __adding new 
 
 #### CornerRoundingView
 
-[`CornerRoundingView`](./SwiftMessages/CornerRoundingView.swift) is background view that messages can use for rounding all or a subset of corners with squircles (the smoother method of rounding corners that you see on app icons). The card and tab-style nib files assign the background view to this type.
+[`CornerRoundingView`](./SwiftMessages/CornerRoundingView.swift) is a custom view that messages can use for rounding all or a subset of corners with squircles (the smoother method of rounding corners that you see on app icons). The nib files that feature rounded corners have `backgroundView` assigned to a `CornerRoundingView`. It provides a `roundsLeadingCorners` option to dynamically round only the leading corners of the view when presented from top or bottom (a feature used for the tab-style layouts).
+
+#### Animator
+
+[`Animator`](./SwiftMessages/Animator.swift) is the protocol that SwiftMessages uses for presentation and dismissal animations. Custom animations can be done through the `SwiftMessages.PresentationStyle.custom(animator:)`. Some related components:
+* [`TopBottomAnimation`](./SwiftMessages/TopBottomAnimation.swift) is a sliding implementation of `Animator` used internally by `.top` and `.bottom` presentation styles. It provides some customization options.
+* [`PhysicsAnimation`](./SwiftMessages/PhysicsAnimation.swift) is a scaling + opacity implementation of `Animator` used internally by the `.center` presentation style. It provides a fun physics-based dismissal gesture and provides customization options including `.top` and `.bottom` placement.
+* [`PhysicsPanHandler`](./SwiftMessages/PhysicsPanHandler.swift) provides the physics-based dismissal gesture for `PhysicsAnimation` and can be incorporated into other `Animator` implementations.
+
+High-quality PRs for cool `Animator` implementations are welcome!
 
 #### MarginAdjustable
 
