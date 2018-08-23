@@ -289,7 +289,7 @@ view.configureTheme(.warning)
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
 ````
 
-All of these methods are shortcuts for quickly configuring the underlying view properties. You do not need to call them. You can configure the view properties directly.
+All of these methods are shortcuts for quickly configuring the underlying view properties. SwiftMessages strives to avoid doing any internal magic in these methods, so you do not need to call them. You can configure the view properties directly or combine the two approaches.
 
 `MessageView` provides an optional block-based tap handler for the button and another for the view itself:
 
