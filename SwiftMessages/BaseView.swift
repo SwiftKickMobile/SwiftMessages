@@ -179,6 +179,11 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      by SwiftMessages in case the defaults don't work for a particular layout.
      */
     @IBInspectable open var safeAreaBottomOffset: CGFloat = 0.0
+    
+     /**
+     To enable custom bottom offset
+     */
+    open var customBottomOffset: CGFloat = 0.0
 
     /*
      MARK: - Setting preferred height
