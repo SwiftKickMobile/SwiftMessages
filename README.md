@@ -20,9 +20,9 @@ SwiftMessages now supports modal view controller presentation!
   <img src="./Design/SwiftMessagesSegue.gif" />
 </p>
 
-Utilize the SwiftMessages layouts, animations and more directly within Interface Builder with the [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue. But Interface Builder isn't required, so `SwiftMessagesSegue` can be used on any UIKit project. Refer to the View Controllers readme below for more information:
+[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a custom segue type that integrates directly with Interface Builder to perform modal view controller presentations using SwiftMessages' layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
 
-#### [View Controllers](./ViewControllers.md)
+#### [View Controllers Readme](./ViewControllers.md)
 
 And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
 
@@ -101,6 +101,10 @@ view.configureDropShadow()
 // image with an emoji character.
 let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
+
+// Increase the external margin around the card. In general, the effect of this setting
+// depends on how the given layout is constrained to the layout margins.
+view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
 // Show the message.
 SwiftMessages.show(view: view)
