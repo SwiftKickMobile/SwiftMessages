@@ -44,7 +44,7 @@ public extension MarginAdjustable where Self: UIView {
     }
 
     private func bottomAdjustment(context: AnimationContext) -> CGFloat {
-        var bottom: CGFloat = 0
+        var bottom: CGFloat = customBottomOffset
         if !context.safeZoneConflicts.isDisjoint(with: [.homeIndicator]) {
             if #available(iOS 11, *), safeAreaInsets.bottom > 0  {
                 do {
