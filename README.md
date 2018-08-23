@@ -106,7 +106,7 @@ view.configureContent(title: "Warning", body: "Consider yourself warned.", iconT
 // depends on how the given layout is constrained to the layout margins.
 view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 
-// Reduce the corner radius.
+// Reduce the corner radius (applicable to layouts featuring rounded corners).
 (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 
 // Show the message.
