@@ -268,11 +268,11 @@ let view: MyCustomView = try! SwiftMessages.viewFromNib()
 
 Element | Declaration | Description
 --------|-----------|-----
-__Title__ | `titleLabel: UILabel` | The message title.
-__Message body__ | `bodyLabel: UILabel` |  The body of the message.
-__Image Icon__ | `iconImageView: UIImageView` | An image-based icon.
-__Text Icon__ | `iconLabel: UILabel` |  A text-based (emoji) alternative to the image icon.
-__Button__ | `button: UIButton` | An action button.
+Title | `titleLabel: UILabel` | The message title.
+Message body | `bodyLabel: UILabel` |  The body of the message.
+Image icon | `iconImageView: UIImageView` | An image-based icon.
+Text icon | `iconLabel: UILabel` |  A text-based (emoji) alternative to the image icon.
+Button | `button: UIButton` | An action button.
 
 The SwiftMessages nib file use `MessageView` as the top-level view with content connected to these outlets. The layouts are done using stack views, which means that you can remove an element by simply hiding it:
 
