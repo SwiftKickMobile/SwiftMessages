@@ -1,4 +1,3 @@
-
 # SwiftMessages
 
 [![Twitter: @TimothyMoose](https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat)](https://twitter.com/TimothyMoose)
@@ -6,11 +5,6 @@
 [![License](https://img.shields.io/cocoapods/l/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
-<p align="center">
-  <img src="./Design/swiftmessages.png" />
-</p>
-
 
 ## 🔥 View Controllers 🔥
 
@@ -21,6 +15,10 @@ SwiftMessages can now present view controllers using the `SwiftMessagesSegue` cu
 </p>
 
 [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
+
+<p align="center">
+  <img src="./Design/swiftmessages.png" />
+</p>
 
 #### [View Controllers Readme](./ViewControllers.md)
 
