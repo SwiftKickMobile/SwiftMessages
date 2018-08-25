@@ -160,15 +160,6 @@
                 <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
                     <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
-                    <real key="value" value="10"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaTopOffset">
-                    <real key="value" value="-8"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaBottomOffset">
-                    <real key="value" value="-18"/>
-                </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="backgroundView" destination="dp3-Ae-zep" id="ZiK-GN-SXH"/>

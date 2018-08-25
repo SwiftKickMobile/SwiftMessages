@@ -177,7 +177,6 @@
                                 <connections>
                                     <outlet property="bodyLabel" destination="T5Q-9f-KQC" id="IwS-Zu-cgl"/>
                                     <outlet property="titleLabel" destination="N18-CP-QIt" id="Vwg-pB-W5F"/>
-                                    <segue destination="23s-LV-n6f" kind="show" id="GRZ-PM-kjd"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Counted" rowHeight="80" id="rS6-xs-t4z" userLabel="Counted Cell" customClass="TitleBodyCell" customModule="Demo" customModuleProvider="target">
@@ -821,53 +820,6 @@
             </objects>
             <point key="canvasLocation" x="2281" y="-100"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="dcr-7C-q41">
-            <objects>
-                <viewController id="cHV-0z-DzZ" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FDU-0i-st4"/>
-                        <viewControllerLayoutGuide type="bottom" id="jvq-7B-iPo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cFu-YH-XcP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yq2-ek-ErI">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neB-c0-C0M">
-                                        <rect key="frame" x="153" y="308" width="37" height="30"/>
-                                        <state key="normal" title="Done">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="wuJ-Xc-5Dt" kind="unwind" unwindAction="dismissPresentedWithSegue:" id="PZ0-EK-Mhw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="200" constant="300" id="8n4-gN-YVC"/>
-                                    <constraint firstItem="neB-c0-C0M" firstAttribute="centerX" secondItem="Yq2-ek-ErI" secondAttribute="centerX" id="AgT-2e-RVF"/>
-                                    <constraint firstItem="neB-c0-C0M" firstAttribute="centerY" secondItem="Yq2-ek-ErI" secondAttribute="centerY" id="vM5-1s-q3g"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Yq2-ek-ErI" firstAttribute="leading" secondItem="cFu-YH-XcP" secondAttribute="leadingMargin" id="Uhq-YL-Uad"/>
-                            <constraint firstItem="Yq2-ek-ErI" firstAttribute="trailing" secondItem="cFu-YH-XcP" secondAttribute="trailingMargin" id="YGe-g0-OYc"/>
-                            <constraint firstItem="Yq2-ek-ErI" firstAttribute="top" secondItem="FDU-0i-st4" secondAttribute="bottom" id="dU4-FD-wUk"/>
-                            <constraint firstItem="jvq-7B-iPo" firstAttribute="top" secondItem="Yq2-ek-ErI" secondAttribute="bottom" id="h8t-De-iGH"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uQx-ph-iFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="wuJ-Xc-5Dt" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1282" y="1190"/>
-        </scene>
         <!--View Controllers-->
         <scene sceneID="heM-VN-xQk">
             <objects>
@@ -1154,135 +1106,6 @@
             </objects>
             <point key="canvasLocation" x="473" y="305"/>
         </scene>
-        <!--View Controllers-->
-        <scene sceneID="VLd-QW-jAa">
-            <objects>
-                <viewController title="View Controllers" id="23s-LV-n6f" customClass="ViewControllersViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N63-Rd-6Rp"/>
-                        <viewControllerLayoutGuide type="bottom" id="rF6-WJ-O6z"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="M8Z-Fb-e7U">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2aS-1n-2Q9">
-                                <rect key="frame" x="46" y="104" width="283" height="474"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ci-IQ-NfQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Top Message"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopSegue" customModule="SwiftMessagesSegueExtras" id="16A-Ph-GUK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylZ-Gb-R3v">
-                                        <rect key="frame" x="0.0" y="69" width="283" height="59.5"/>
-                                        <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Bottom Message"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomSegue" customModule="SwiftMessagesSegueExtras" id="fBl-Z6-8fO"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ped-mP-cRg">
-                                        <rect key="frame" x="0.0" y="138.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.26627604166666669" green="0.76907009548611116" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Top Card"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopCardSegue" customModule="SwiftMessagesSegueExtras" id="QwZ-o3-Xtk"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHj-WL-xob">
-                                        <rect key="frame" x="0.0" y="207.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Bottom Card"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomCardSegue" customModule="SwiftMessagesSegueExtras" id="9Dg-CG-pFQ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMM-ck-f0V" userLabel="Top Tab">
-                                        <rect key="frame" x="0.0" y="276.5" width="283" height="59"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Top Tab"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesTopTabSegue" customModule="SwiftMessagesSegueExtras" id="YnZ-Wd-GzX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPB-J3-fvL" userLabel="Bottom Tab">
-                                        <rect key="frame" x="0.0" y="345.5" width="283" height="59.5"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Bottom Tab"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesBottomTabSegue" customModule="SwiftMessagesSegueExtras" id="fdh-UA-tb6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5f-EK-dp6" userLabel="Centered">
-                                        <rect key="frame" x="0.0" y="415" width="283" height="59"/>
-                                        <color key="backgroundColor" red="1" green="0.4665354619" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Centered"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="cHV-0z-DzZ" kind="custom" customClass="SwiftMessagesCenteredSegue" customModule="SwiftMessagesSegueExtras" id="zcN-0x-tSh"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="2aS-1n-2Q9" firstAttribute="top" secondItem="N63-Rd-6Rp" secondAttribute="bottom" constant="40" id="0fl-eR-Qyk"/>
-                            <constraint firstItem="rF6-WJ-O6z" firstAttribute="top" secondItem="2aS-1n-2Q9" secondAttribute="bottom" constant="40" id="ArR-D5-2hB"/>
-                            <constraint firstItem="2aS-1n-2Q9" firstAttribute="leading" secondItem="M8Z-Fb-e7U" secondAttribute="leadingMargin" constant="30" id="YyX-V0-1I3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2aS-1n-2Q9" secondAttribute="trailing" constant="30" id="gMh-DU-86o"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BYp-mN-TMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="393" y="1190"/>
-        </scene>
     </scenes>
     <resources>
         <image name="iconSwiftMessages" width="38" height="31"/>
@@ -1290,6 +1113,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="h5n-Vv-Q3y"/>
         <segue reference="EaG-Ea-U3j"/>
-        <segue reference="16A-Ph-GUK"/>
     </inferredMetricsTieBreakers>
 </document>
