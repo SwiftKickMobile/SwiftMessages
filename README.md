@@ -1,4 +1,3 @@
-
 # SwiftMessages
 
 [![Twitter: @TimothyMoose](https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat)](https://twitter.com/TimothyMoose)
@@ -6,11 +5,6 @@
 [![License](https://img.shields.io/cocoapods/l/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
-<p align="center">
-  <img src="./Design/swiftmessages.png" />
-</p>
-
 
 ## 🔥 View Controllers 🔥
 
@@ -25,6 +19,10 @@ SwiftMessages can now present view controllers using the `SwiftMessagesSegue` cu
 #### [View Controllers Readme](./ViewControllers.md)
 
 And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
+
+<p align="center">
+  <img src="./Design/swiftmessages.png" />
+</p>
 
 ## Overview
 
@@ -270,11 +268,11 @@ let view: MyCustomView = try! SwiftMessages.viewFromNib()
 
 Element | Declaration | Description
 --------|-----------|-----
-__Title__ | `titleLabel: UILabel` | The message title.
-__Message body__ | `bodyLabel: UILabel` |  The body of the message.
-__Image Icon__ | `iconImageView: UIImageView` | An image-based icon.
-__Text Icon__ | `iconLabel: UILabel` |  A text-based (emoji) alternative to the image icon.
-__Button__ | `button: UIButton` | An action button.
+Title | `titleLabel: UILabel?` | The message title.
+Message body | `bodyLabel: UILabel?` |  The body of the message.
+Image icon | `iconImageView: UIImageView?` | An image-based icon.
+Text icon | `iconLabel: UILabel?` |  A text-based (emoji) alternative to the image icon.
+Button | `button: UIButton?` | An action button.
 
 The SwiftMessages nib file use `MessageView` as the top-level view with content connected to these outlets. The layouts are done using stack views, which means that you can remove an element by simply hiding it:
 
@@ -311,14 +309,14 @@ messageView.tapHandler = { _ in SwiftMessages.hide() }
 
 The suggested method for starting with `MessageView` as a base and __adding new elements__, such as additional buttons, is as follows:
 
-1. Copy one of the bundled nib files into your project or create a new one from scratch.
-1. Add new elements to the nib file.
-1. Sublcass `MessageView` and create outlets for the new elements.
-1. Assign the top-level view in the nib file to the subclass.
-1. Connect outlets between the nib file and the subclass.
-1. (recommended) override the implementation of `Identifiable` as needed to incorporate new elements into the message's identity.
-1. (recommended) override the implementation of `AccessibleMessage` as needed to incorporate new elements into Voice Over.
-1. Use one of the nib-loading methods above to load the view.
+  1. Copy one of the bundled nib files into your project or create a new one from scratch.
+  1. Add new elements to the nib file.
+  1. Sublcass `MessageView` and create outlets for the new elements.
+  1. Assign the top-level view in the nib file to the subclass.
+  1. Connect outlets between the nib file and the subclass.
+  1. (recommended) override the implementation of `Identifiable` as needed to incorporate new elements into the message's identity.
+  1. (recommended) override the implementation of `AccessibleMessage` as needed to incorporate new elements into Voice Over.
+  1. Use one of the nib-loading methods above to load the view.
 
 #### BaseView
 
