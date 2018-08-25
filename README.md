@@ -20,7 +20,7 @@ SwiftMessages now supports modal view controller presentation!
   <img src="./Design/SwiftMessagesSegue.gif" />
 </p>
 
-[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a custom segue type that integrates directly with Interface Builder to perform modal view controller presentations using SwiftMessages' layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
+[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
 
 #### [View Controllers Readme](./ViewControllers.md)
 
