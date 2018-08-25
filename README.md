@@ -14,7 +14,7 @@
 
 ## 🔥 View Controllers 🔥
 
-SwiftMessages can now present modal view controllers!
+SwiftMessages can now present view controllers using the `SwiftMessagesSegue` custom modal segue!
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegue.gif" />
@@ -24,7 +24,7 @@ SwiftMessages can now present modal view controllers!
 
 #### [View Controllers Readme](./ViewControllers.md)
 
-And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique for building your own custom segues.
+And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
 
 ## Overview
 
