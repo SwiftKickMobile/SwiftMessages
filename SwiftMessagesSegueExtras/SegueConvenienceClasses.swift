@@ -7,7 +7,7 @@
 //
 
 import UIKit
-#if canImport(SwiftMessages)
+#if canImport(SwiftMessages) && !(COCOAPODS)
 import SwiftMessages
 #endif
 
