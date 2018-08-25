@@ -24,8 +24,7 @@ SwiftMessages now supports modal view controller presentation!
 
 #### [View Controllers Readme](./ViewControllers.md)
 
-And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
-
+And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique for building your own custom segues.
 
 ## Overview
 
