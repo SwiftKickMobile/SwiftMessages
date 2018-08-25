@@ -43,7 +43,15 @@ public extension MarginAdjustable where Self: UIView {
                 : layoutMargins + safeAreaInsets
             return layoutMargins
         } else {
-            return UIEdgeInsets(top: topAdjustment(context: context), left: 0, bottom: bottomAdjustment(context: context), right: 0)
+            var insets: UIEdgeInsets
+            if #available(iOS 11, *) {
+                insets = safeAreaInsets
+            } else {
+                insets = .zero
+            }
+            insets.top += topAdjustment(context: context)
+            insets.bottom += bottomAdjustment(context: context)
+            return insets
         }
     }
 
@@ -66,7 +74,7 @@ public extension MarginAdjustable where Self: UIView {
                 top += safeAreaTopOffset
             } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                 let frameInWindow = convert(bounds, to: window)
-                if frameInWindow.minY == 0 {
+                if frameInWindow.minY == -bounceAnimationOffset {
                     top += statusBarOffset
                 }
             }
