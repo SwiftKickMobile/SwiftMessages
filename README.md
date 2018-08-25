@@ -14,18 +14,17 @@
 
 ## 🔥 View Controllers 🔥
 
-SwiftMessages now supports modal view controller presentation!
+SwiftMessages can now present view controllers using the `SwiftMessagesSegue` custom modal segue!
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegue.gif" />
 </p>
 
-[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a custom segue type that integrates directly with Interface Builder to perform modal view controller presentations using SwiftMessages' layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
+[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
 
 #### [View Controllers Readme](./ViewControllers.md)
 
-And check out our <span style="color: red">Elegant Custom UIViewController Transitioning</span> blog post to learn how to use our technique to build your own custom segues.
-
+And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
 
 ## Overview
 
