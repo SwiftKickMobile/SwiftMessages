@@ -18,7 +18,6 @@ class ViewController: UITableViewController {
         .explore,
         .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
         .viewController,
-        .viewController2,
         //.counted,
     ]
 
@@ -174,7 +173,6 @@ enum Item {
     case explore
     case counted
     case viewController
-    case viewController2
 
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
@@ -196,10 +194,6 @@ enum Item {
             return cell
         case .viewController:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ViewController") as! TitleBodyCell
-            cell.configureBodyTextStyle()
-            return cell
-        case .viewController2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ViewController2") as! TitleBodyCell
             cell.configureBodyTextStyle()
             return cell
         }
