@@ -309,14 +309,14 @@ messageView.tapHandler = { _ in SwiftMessages.hide() }
 
 The suggested method for starting with `MessageView` as a base and __adding new elements__, such as additional buttons, is as follows:
 
-1. Copy one of the bundled nib files into your project or create a new one from scratch.
-1. Add new elements to the nib file.
-1. Sublcass `MessageView` and create outlets for the new elements.
-1. Assign the top-level view in the nib file to the subclass.
-1. Connect outlets between the nib file and the subclass.
-1. (recommended) override the implementation of `Identifiable` as needed to incorporate new elements into the message's identity.
-1. (recommended) override the implementation of `AccessibleMessage` as needed to incorporate new elements into Voice Over.
-1. Use one of the nib-loading methods above to load the view.
+  1. Copy one of the bundled nib files into your project or create a new one from scratch.
+  1. Add new elements to the nib file.
+  1. Sublcass `MessageView` and create outlets for the new elements.
+  1. Assign the top-level view in the nib file to the subclass.
+  1. Connect outlets between the nib file and the subclass.
+  1. (recommended) override the implementation of `Identifiable` as needed to incorporate new elements into the message's identity.
+  1. (recommended) override the implementation of `AccessibleMessage` as needed to incorporate new elements into Voice Over.
+  1. Use one of the nib-loading methods above to load the view.
 
 #### BaseView
 
