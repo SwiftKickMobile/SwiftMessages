@@ -14,7 +14,7 @@
 
 ## 🔥 View Controllers 🔥
 
-SwiftMessages now supports modal view controller presentation!
+SwiftMessages can now present modal view controllers!
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegue.gif" />
