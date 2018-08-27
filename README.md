@@ -18,7 +18,7 @@ SwiftMessages can now present view controllers using the `SwiftMessagesSegue` cu
 
 #### [View Controllers Readme](./ViewControllers.md)
 
-And check out our blog post <span style="color: red">Elegant Custom UIViewController Transitioning</span> to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
+And check out our blog post [Elegant Custom UIViewController Transitioning](http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/) to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
 
 <p align="center">
   <img src="./Design/swiftmessages.png" />
