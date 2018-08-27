@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 * Removed support for iOS 8.
 
 ### Features
-* Add support for modal view controller presentation using [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue subclass. Try it out in the "View Controllers" section of the Demo app. In addition to the class documentation, more can be found in the [View Controllers](./View Controllers.md) readme.
+* Add support for modal view controller presentation using [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) custom segue subclass. Try it out in the "View Controllers" section of the Demo app. In addition to the class documentation, more can be found in the [View Controllers](./ViewControllers.md) readme.
 * Update nib files to be more visually consistent with iPhone X:
   * Introduce [`CornerRoundingView`](./SwiftMessages/CornerRoundingView.swift), which provides configurable corner rounding using squircles (the smoother method of rounding corners that you see on app icons). Nib files that feature rounded corners have their `backgroundView` assigned to a `CornerRoundingView`. `CornerRoundingView` provides a `roundsLeadingCorners` option to dynamically round only the leading corners of the view when presented from top or bottom (a feature used for the tab-style layouts).
   * Increased the default corner radius to 20. Corner radius can be changed by either modifying the nib file or 
