@@ -172,12 +172,6 @@ extension MessageView {
          This view is typically used with `.center` presentation style.         
          */
         case centeredView = "CenteredView"
-
-        /**
-         A standard message view like `MessageView`, but without
-         stack views for iOS 8.
-         */
-        case messageViewIOS8 = "MessageViewIOS8"
     }
     
     /**
@@ -216,7 +210,6 @@ extension MessageView {
  */
 
 extension MessageView {
-    @available(iOS 9, *)
     /**
      Constrains the image view to a specified size. By default, the size of the
      image view is determined by its `intrinsicContentSize`.

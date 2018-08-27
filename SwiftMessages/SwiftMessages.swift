@@ -489,6 +489,12 @@ open class SwiftMessages {
         }
     }
 
+    func show(presenter: Presenter) {
+        messageQueue.sync {
+            enqueue(presenter: presenter)
+        }
+    }
+
     fileprivate let messageQueue = DispatchQueue(label: "it.swiftkick.SwiftMessages", attributes: [])
     fileprivate var queue: [Presenter] = []
     fileprivate var delays = Delays()

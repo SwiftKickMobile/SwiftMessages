@@ -37,7 +37,7 @@ class Presenter: NSObject {
         }
     }
     
-    let config: SwiftMessages.Config
+    var config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
     lazy var maskingView: MaskingView = { return MaskingView() }()
@@ -337,11 +337,10 @@ class Presenter: NSObject {
             } else {
                 containerView.addSubview(maskingView)
             }
-            let leading = NSLayoutConstraint(item: maskingView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.00, constant: 0.0)
-            let trailing = NSLayoutConstraint(item: maskingView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.00, constant: 0.0)
-            let top = topLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue())
-            let bottom = bottomLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue())
-            containerView.addConstraints([top, leading, bottom, trailing])
+            maskingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+            maskingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+            topLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
+            bottomLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
             // Update the container view's layout in order to know the masking view's frame
             containerView.layoutIfNeeded()
         }

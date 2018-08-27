@@ -17,7 +17,8 @@ class ViewController: UITableViewController {
         .titleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .explore,
         .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
-        .counted,
+        .viewController,
+        //.counted,
     ]
 
     /*
@@ -120,18 +121,13 @@ class ViewController: UITableViewController {
         let messageView = BaseView(frame: .zero)
         messageView.layoutMargins = .zero
         messageView.preferredHeight = 120.0
-        if #available(iOS 11, *) {
-            // Switch to a card-style layout for iOS 11 because the image
-            // doesn't fit well behind the notch. Need to install a background
-            // view for the drop shadow.
-            let backgroundView = UIView()
-            backgroundView.layer.cornerRadius = 10
-            imageView.layer.cornerRadius = 10
+        do {
+            let backgroundView = CornerRoundingView()
+            backgroundView.cornerRadius = 15
+            backgroundView.layer.masksToBounds = true
             messageView.installBackgroundView(backgroundView)
-            messageView.installContentView(imageView, insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            messageView.safeAreaTopOffset = -6
-        } else {
             messageView.installContentView(imageView)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         }
         messageView.configureDropShadow()
         var config = SwiftMessages.defaultConfig
@@ -176,6 +172,7 @@ enum Item {
     case titleBody(title: String, body: String, function: Function)
     case explore
     case counted
+    case viewController
 
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
@@ -194,6 +191,10 @@ enum Item {
             cell.configureBodyTextStyle()
             cell.bodyLabel.configureCodeStyle(on: "show()")
             cell.bodyLabel.configureCodeStyle(on: "hideCounted(id:)")
+            return cell
+        case .viewController:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ViewController") as! TitleBodyCell
+            cell.configureBodyTextStyle()
             return cell
         }
     }

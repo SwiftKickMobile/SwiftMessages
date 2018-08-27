@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtv-Px-mvN" userLabel="Body Label">
-                    <rect key="frame" x="50" y="0.0" width="500" height="32"/>
+                    <rect key="frame" x="20" y="0.0" width="560" height="32"/>
                     <accessibility key="accessibilityConfiguration">
                         <bool key="isElement" value="NO"/>
                     </accessibility>
@@ -32,22 +32,26 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Jtv-Px-mvN" firstAttribute="leading" secondItem="mGT-Jp-zjF" secondAttribute="leadingMargin" constant="30" id="CHS-zo-loe"/>
+                <constraint firstItem="Jtv-Px-mvN" firstAttribute="leading" secondItem="mGT-Jp-zjF" secondAttribute="leadingMargin" id="CHS-zo-loe"/>
                 <constraint firstItem="Jtv-Px-mvN" firstAttribute="top" secondItem="mGT-Jp-zjF" secondAttribute="topMargin" id="dki-gE-LYc"/>
                 <constraint firstAttribute="bottomMargin" secondItem="Jtv-Px-mvN" secondAttribute="bottom" id="gJ8-94-HgY"/>
-                <constraint firstAttribute="trailingMargin" secondItem="Jtv-Px-mvN" secondAttribute="trailing" constant="30" id="hII-4c-bJX"/>
+                <constraint firstAttribute="trailingMargin" secondItem="Jtv-Px-mvN" secondAttribute="trailing" id="hII-4c-bJX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="yBK-G0-nSP"/>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
-                    <real key="value" value="14"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="leftLayoutMarginAddition">
+                    <real key="value" value="30"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaTopOffset">
-                    <real key="value" value="-6"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="rightLayoutMarginAddition">
+                    <real key="value" value="30"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaBottomOffset">
-                    <real key="value" value="-18"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="collapseLayoutMarginAdditions" value="NO"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="topLayoutMarginAddition">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="bottomLayoutMarginAddition">
+                    <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>

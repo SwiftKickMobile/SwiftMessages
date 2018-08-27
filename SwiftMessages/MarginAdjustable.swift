@@ -22,12 +22,31 @@ import UIKit
  is responsible for setting is own internal margins appropriately.
  */
 public protocol MarginAdjustable {
+
+    /// The amount to add to the safe area insets in calculating
+    /// the layout margins.
+    var layoutMarginAdditions: UIEdgeInsets { get }
+
+    /// When `true`, SwiftMessages automatically collapses layout margin additions (topLayoutMarginAddition, etc.)
+    /// when the default layout margins are greater than zero. This is typically used when a margin addition is only
+    /// needed when the safe area inset is zero for a given edge. When the safe area inset for a given edge is non-zero,
+    /// the additional margin is not added.
+    var collapseLayoutMarginAdditions: Bool { get set }
+
     var bounceAnimationOffset: CGFloat { get set }
+
+    /**
+     Deprecated APIs
+     */
+
     /// Top margin adjustment for status bar avoidance in pre-iOS 11+
+    @available(iOS, deprecated, message: "Now handled by `collapseLayoutMarginAdditions`")
     var statusBarOffset: CGFloat { get set }
     /// Safe area top adjustment in iOS 11+
+    @available(iOS, deprecated, message: "Use the `topLayoutMarginAddition` instead.")
     var safeAreaTopOffset: CGFloat { get set }
     /// Safe area bottom adjustment in iOS 11+
+    @available(iOS, deprecated, message: "Use the `bottomLayoutMarginAddition` instead.")
     var safeAreaBottomOffset: CGFloat { get set }
 }
 

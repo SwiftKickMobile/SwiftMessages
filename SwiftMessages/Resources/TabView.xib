@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +16,14 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="123"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8l1-Wp-omF" userLabel="Background view">
-                    <rect key="frame" x="10" y="0.0" width="580" height="123"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8l1-Wp-omF" userLabel="Corner rounding view" customClass="CornerRoundingView" customModule="SwiftMessages" customModuleProvider="target">
+                    <rect key="frame" x="20" y="0.0" width="560" height="123"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bdc-by-rjM" userLabel="Content view">
-                            <rect key="frame" x="20" y="20" width="0.0" height="83"/>
+                            <rect key="frame" x="20" y="0.0" width="520" height="123"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="😬" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09t-tr-Q8T" userLabel="Icon label">
-                                    <rect key="frame" x="0.0" y="19" width="43" height="45.5"/>
+                                    <rect key="frame" x="0.0" y="39" width="43" height="45.5"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -32,12 +32,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iJe-yo-EnG" userLabel="Icon image view">
-                                    <rect key="frame" x="53" y="24.5" width="33" height="34"/>
+                                    <rect key="frame" x="53" y="44.5" width="33" height="34"/>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="h4V-Az-Wau">
-                                    <rect key="frame" x="96" y="22.5" width="0.0" height="38.5"/>
+                                    <rect key="frame" x="96" y="42.5" width="357" height="38.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxN-E1-uzx">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxN-E1-uzx">
                                             <rect key="frame" x="0.0" y="0.0" width="48.5" height="20.5"/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
@@ -46,8 +46,8 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoS-PU-kVw">
-                                            <rect key="frame" x="0.0" y="20.5" width="0.0" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Message Body]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoS-PU-kVw">
+                                            <rect key="frame" x="0.0" y="20.5" width="112" height="18"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
@@ -60,7 +60,7 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBc-Qb-BBh">
-                                    <rect key="frame" x="-30" y="26.5" width="57" height="30"/>
+                                    <rect key="frame" x="463" y="46.5" width="57" height="30"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="[Button]"/>
                                 </button>
@@ -74,36 +74,41 @@
                     </constraints>
                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="10"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="roundsLeadingCorners" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8l1-Wp-omF" firstAttribute="centerX" secondItem="Kgd-fq-RpT" secondAttribute="centerX" priority="950" id="7tH-rr-EQZ"/>
-                <constraint firstItem="bdc-by-rjM" firstAttribute="top" secondItem="Kgd-fq-RpT" secondAttribute="topMargin" constant="20" id="ORK-bM-dJT"/>
+                <constraint firstItem="bdc-by-rjM" firstAttribute="top" secondItem="Kgd-fq-RpT" secondAttribute="topMargin" id="ORK-bM-dJT"/>
                 <constraint firstItem="8l1-Wp-omF" firstAttribute="top" secondItem="Kgd-fq-RpT" secondAttribute="top" id="WBW-gJ-lIP"/>
                 <constraint firstAttribute="bottom" secondItem="8l1-Wp-omF" secondAttribute="bottom" id="cYv-6k-QSZ"/>
-                <constraint firstAttribute="bottomMargin" secondItem="bdc-by-rjM" secondAttribute="bottom" constant="20" id="foq-FY-TKq"/>
-                <constraint firstItem="8l1-Wp-omF" firstAttribute="leading" secondItem="Kgd-fq-RpT" secondAttribute="leadingMargin" priority="900" constant="10" id="tVC-3b-F2x"/>
-                <constraint firstItem="8l1-Wp-omF" firstAttribute="trailing" secondItem="Kgd-fq-RpT" secondAttribute="trailingMargin" priority="900" constant="10" id="uZe-cg-8cw"/>
+                <constraint firstAttribute="bottomMargin" secondItem="bdc-by-rjM" secondAttribute="bottom" id="foq-FY-TKq"/>
+                <constraint firstItem="8l1-Wp-omF" firstAttribute="leading" secondItem="Kgd-fq-RpT" secondAttribute="leadingMargin" priority="900" id="tVC-3b-F2x"/>
+                <constraint firstItem="8l1-Wp-omF" firstAttribute="trailing" secondItem="Kgd-fq-RpT" secondAttribute="trailingMargin" priority="900" id="uZe-cg-8cw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
                     <real key="value" value="5"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
+                <userDefinedRuntimeAttribute type="number" keyPath="topLayoutMarginAddition">
+                    <real key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="leftLayoutMarginAddition">
                     <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaTopOffset">
-                    <real key="value" value="-8"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="bottomLayoutMarginAddition">
+                    <real key="value" value="20"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="safeAreaBottomOffset">
-                    <real key="value" value="-18"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="rightLayoutMarginAddition">
+                    <real key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="collapseLayoutMarginAdditions" value="NO"/>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="backgroundView" destination="8l1-Wp-omF" id="3L7-KM-Nup"/>

@@ -11,7 +11,48 @@ import UIKit
 public extension MarginAdjustable where Self: UIView {
 
     public func defaultMarginAdjustment(context: AnimationContext) -> UIEdgeInsets {
-        return UIEdgeInsets(top: topAdjustment(context: context), left: 0, bottom: bottomAdjustment(context: context), right: 0)
+        // Best effort to determine if we should use the new or deprecated margin adjustments.
+        if layoutMarginAdditions != .zero
+            || (safeAreaTopOffset == 0 && safeAreaBottomOffset == 0 && statusBarOffset == 0) {
+            var layoutMargins: UIEdgeInsets = layoutMarginAdditions
+            var safeAreaInsets: UIEdgeInsets
+            if #available(iOS 11, *) {
+                insetsLayoutMarginsFromSafeArea = false
+                safeAreaInsets = self.safeAreaInsets
+            } else {
+                #if SWIFTMESSAGES_APP_EXTENSIONS
+                let application: UIApplication? = nil
+                #else
+                let application: UIApplication? = UIApplication.shared
+                #endif
+                if !context.safeZoneConflicts.isDisjoint(with: [.statusBar]),
+                    let app = application,
+                    app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
+                    let frameInWindow = convert(bounds, to: window)
+                    let top = max(0, 20 - frameInWindow.minY)
+                    safeAreaInsets = UIEdgeInsetsMake(top, 0, 0, 0)
+                } else {
+                    safeAreaInsets = .zero
+                }
+            }
+            if !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
+                safeAreaInsets.top = 0
+            }
+            layoutMargins = collapseLayoutMarginAdditions
+                ? layoutMargins.collapse(toInsets: safeAreaInsets)
+                : layoutMargins + safeAreaInsets
+            return layoutMargins
+        } else {
+            var insets: UIEdgeInsets
+            if #available(iOS 11, *) {
+                insets = safeAreaInsets
+            } else {
+                insets = .zero
+            }
+            insets.top += topAdjustment(context: context)
+            insets.bottom += bottomAdjustment(context: context)
+            return insets
+        }
     }
 
     private func topAdjustment(context: AnimationContext) -> CGFloat {        
@@ -22,7 +63,7 @@ public extension MarginAdjustable where Self: UIView {
             #else
             let application: UIApplication? = UIApplication.shared
             #endif
-            if #available(iOS 11, *)  {
+            if #available(iOS 11, *), safeAreaInsets.top > 0  {
                 do {
                     // To accommodate future safe areas, using a linear formula based on
                     // two data points:
@@ -33,7 +74,7 @@ public extension MarginAdjustable where Self: UIView {
                 top += safeAreaTopOffset
             } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                 let frameInWindow = convert(bounds, to: window)
-                if frameInWindow.minY == 0 {
+                if frameInWindow.minY == -bounceAnimationOffset {
                     top += statusBarOffset
                 }
             }
@@ -59,5 +100,21 @@ public extension MarginAdjustable where Self: UIView {
             }
         }
         return bottom
+    }
+}
+
+extension UIEdgeInsets {
+    func collapse(toInsets insets: UIEdgeInsets) -> UIEdgeInsets {
+        let top = self.top.collapse(toInset: insets.top)
+        let left = self.left.collapse(toInset: insets.left)
+        let bottom = self.bottom.collapse(toInset: insets.bottom)
+        let right = self.right.collapse(toInset: insets.right)
+        return UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+    }
+}
+
+extension CGFloat {
+    func collapse(toInset inset: CGFloat) -> CGFloat {
+        return Swift.max(self, inset)
     }
 }
