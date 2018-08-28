@@ -1,6 +1,6 @@
 # View Controllers
 
-`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that presents and dismisses modal view controllers by acting as the presenting view controller's `transitioningDelegate` and utilizing SwiftMessages' `show()` and `hide()` methods on the destination view controller's view.
+`SwiftMessagesSegue` is a configurable subclass of `UIStoryboardSegue` that presents and dismisses modal view controllers by acting as the presenting view controller's `transitioningDelegate` and utilizing SwiftMessages' `show()` and `hide()` function on the destination view controller's view.
 
 ## Installation
 
@@ -16,7 +16,7 @@
   <tr><td><code>CenteredSegue</code></td></tr>
 </table>
 
-With SwiftMessagesSegueExtras installed, these options will automatically appear in the Segue Type dialog when creating a segue in Interface Builder. SwiftMessagesSegueExtras is optional and must be explicitly installed to avoid cluttering the dialog by default:
+With SwiftMessagesSegueExtras installed, these options will automatically appear in the segue type dialog when creating a segue in Interface Builder. SwiftMessagesSegueExtras is optional and must be explicitly installed to avoid cluttering the dialog by default.
 
 ### CocoaPods
 
@@ -41,7 +41,7 @@ Add `SwiftMessagesSegueExtras.framework` to your project alongside `SwiftMessage
 
 ### Interface Builder
 
-First, create a segue by control-dragging from the sender element to the destination view controller. Then select "swift messages" (or the name of a `SwiftMessagesSegue` subclass) in the Segue Type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass by selecting "very nice" from the prompt.
+First, create a segue by control-dragging from the sender element to the destination view controller. Then select "swift messages" (or the name of a `SwiftMessagesSegue` subclass) in the segue type prompt. In the image below, we've created a segue using the `VeryNiceSegue` subclass by selecting "very nice" from the prompt.
 
 <p align="center">
   <img src="./Design/SwiftMessagesSegueCreate.png" />
@@ -70,7 +70,7 @@ It is not necessary to retain `segue` because it retains itself until dismissal.
 
 `SwiftMessagesSegue` generally requires configuration to achieve specific layouts and optional behaviors. There are a few good ways to do this:
 
-  1. __(Recommended)__ Subclass `SwiftMessagesSegue` and apply configurations in `init(identifier:source:destination:)`. Subclasses will automatically appear in the Segue Type dialog using an auto-generated name. For example, the name for "VeryNiceSegue" would be "very nice".
+  1. __(Recommended)__ Subclass `SwiftMessagesSegue` and apply configurations in `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name. For example, the name for "VeryNiceSegue" would be "very nice".
   1. Apply configurations in `prepare(for:sender:)` of the presenting view controller after down-casting the segue to `SwiftMessagesSegue`.
   1. Install the SwiftMessagesSegueExtras framework as outlined in the Installation section and select from the pre-configured subclasses.
 
