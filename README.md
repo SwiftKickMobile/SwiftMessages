@@ -264,7 +264,8 @@ let view: MyCustomView = try! SwiftMessages.viewFromNib()
 
 #### MessageView
 
-`MessageView` is a light-weight view that all of the bundled designs use. It primarily consists of the following optional `@IBOutlet` properties:
+
+[`MessageView`](./SwiftMessages/MessageView.swift) is a light-weight view that all of the bundled designs use. It primarily consists of the following optional `@IBOutlet` properties:
 
 Element | Declaration | Description
 --------|-----------|-----

@@ -18,16 +18,6 @@ Pod::Spec.new do |spec|
         app.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/**/*']}
     end
 
-    # Contains sub-classes of SwiftMessagesSegue with pre-defined layout and animation
-    # configurations (all of them can be seen in the "View Controllers" section of the Demo app.
-    # Note that by including this sub-spec, Interface Builder will display all seven options
-    # in the "Segue Type" picker when creating a new segue. If you don't want this, create your
-    # own sub-classes as needed or use the `SwiftMessagesSegue` base class (which appears in the picker
-    # as "swift messages" and configure it in prepare(for:sender).
-    spec.subspec 'SegueExtras' do |segues|
-        segues.source_files = 'SwiftMessagesSegueExtras/**/*.swift'
-    end
-
     spec.subspec 'AppExtension' do |ext|
         ext.source_files  = 'SwiftMessages/**/*.swift'
         ext.exclude_files = 'SwiftMessages/**/SegueConvenienceClasses.swift'

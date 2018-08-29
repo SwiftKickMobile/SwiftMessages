@@ -16,17 +16,11 @@ import UIKit
 
  To use `SwiftMessagesSegue` with Interface Builder, control-drag a segue, then select
  "swift messages" from the Segue Type dialog. This configures a default transition. There are
- two ways to further configure the transition by setting configuration options on `SwiftMessagesSegue`.
- First, you may override `prepare(for:sender:)` in the presenting view controller and downcast the
- segue to `SwiftMessagesSegue`. Second, and recommended, you may subclass `SwiftMessagesSegue` and
- override `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue
- type dialog using an auto-generated name (for example, the name for "VeryNiceSegue" would be "very nice").
-
- The SwiftMessagesSegueExtras framework contains several pre-configured subclasses: `TopMessageSegue`,
- `BottomMessageSegue`, `TopCardSegue`, `BottomCardSegue`, `TopTabSegue`, `BottomTabSegue`, and
- `CenteredSegue`. These classes are not included in the SwiftMessages to avoid cluttering the Segue Type
- dialog by default. Therefore, SwiftMessagesSegueExtras must be explicitly added to the project
- (see the View Controller readme).
+ two suggested ways to further configure the transition by setting options on `SwiftMessagesSegue`.
+ First, and recommended, you may subclass `SwiftMessagesSegue` and override `init(identifier:source:destination:)`.
+ Subclasses will automatically appear in the segue type dialog using an auto-generated name (for example, the
+ name for "VeryNiceSegue" would be "very nice"). Second, you may override `prepare(for:sender:)` in the
+ presenting view controller and downcast the segue to `SwiftMessagesSegue`.
 
  `SwiftMessagesSegue` can be used without an associated storyboard or segue by doing the following in
  the presenting view controller.

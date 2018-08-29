@@ -14,8 +14,6 @@
 		22F27953210D0FDE00273E7F /* ViewControllersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27952210D0FDE00273E7F /* ViewControllersViewController.swift */; };
 		22FE3FA821193CB90017303D /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324121193A3B005C13D9 /* SwiftMessages.framework */; };
 		22FE3FA921193CB90017303D /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324121193A3B005C13D9 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22FE3FAC21193CB90017303D /* SwiftMessagesSegueExtras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324321193A3B005C13D9 /* SwiftMessagesSegueExtras.framework */; };
-		22FE3FAD21193CB90017303D /* SwiftMessagesSegueExtras.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324321193A3B005C13D9 /* SwiftMessagesSegueExtras.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8642F4361D5F7F540061BDCD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642F4351D5F7F540061BDCD /* ExploreViewController.swift */; };
 		86AEDCE61D5D1DB70030232E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE51D5D1DB70030232E /* AppDelegate.swift */; };
 		86AEDCE81D5D1DB70030232E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE71D5D1DB70030232E /* ViewController.swift */; };
@@ -54,26 +52,12 @@
 			remoteGlobalIDString = 86B48AEB1D5A41C900063E2B;
 			remoteInfo = SwiftMessages;
 		};
-		22FB324821193A4D005C13D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 224FB6A021163FB90081D4DE;
-			remoteInfo = SwiftMessagesSegueExtras;
-		};
 		22FE3FAA21193CB90017303D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 86B48AEB1D5A41C900063E2B;
 			remoteInfo = SwiftMessages;
-		};
-		22FE3FAE21193CB90017303D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 224FB6A021163FB90081D4DE;
-			remoteInfo = SwiftMessagesSegueExtras;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -95,7 +79,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				22FE3FA921193CB90017303D /* SwiftMessages.framework in Embed Frameworks */,
-				22FE3FAD21193CB90017303D /* SwiftMessagesSegueExtras.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FE3FA821193CB90017303D /* SwiftMessages.framework in Frameworks */,
-				22FE3FAC21193CB90017303D /* SwiftMessagesSegueExtras.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,9 +189,7 @@
 			);
 			dependencies = (
 				22FB324721193A4D005C13D9 /* PBXTargetDependency */,
-				22FB324921193A4D005C13D9 /* PBXTargetDependency */,
 				22FE3FAB21193CB90017303D /* PBXTargetDependency */,
-				22FE3FAF21193CB90017303D /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -319,20 +299,10 @@
 			name = SwiftMessages;
 			targetProxy = 22FB324621193A4D005C13D9 /* PBXContainerItemProxy */;
 		};
-		22FB324921193A4D005C13D9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftMessagesSegueExtras;
-			targetProxy = 22FB324821193A4D005C13D9 /* PBXContainerItemProxy */;
-		};
 		22FE3FAB21193CB90017303D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftMessages;
 			targetProxy = 22FE3FAA21193CB90017303D /* PBXContainerItemProxy */;
-		};
-		22FE3FAF21193CB90017303D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftMessagesSegueExtras;
-			targetProxy = 22FE3FAE21193CB90017303D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

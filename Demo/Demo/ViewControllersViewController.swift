@@ -13,4 +13,61 @@ class ViewControllersViewController: UIViewController {
     @objc @IBAction private func dismissPresented(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segue = segue as? SwiftMessagesSegue {
+            segue.configure(layout: .bottomCard)
+            segue.dimMode = .blur(style: .dark, alpha: 0.9, interactive: true)
+            segue.messageView.configureNoDropShadow()
+        }
+    }
+}
+
+class SwiftMessagesTopSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .topMessage)
+    }
+}
+
+class SwiftMessagesTopCardSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .topCard)
+    }
+}
+
+class SwiftMessagesTopTabSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .topTab)
+    }
+}
+
+class SwiftMessagesBottomSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .bottomMessage)
+    }
+}
+
+class SwiftMessagesBottomCardSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .bottomCard)
+    }
+}
+
+class SwiftMessagesBottomTabSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .bottomTab)
+    }
+}
+
+class SwiftMessagesCenteredSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .centered)
+    }
 }
