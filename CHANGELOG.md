@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 5.0.1
+
+### Fixes
+
+* Remove debug code that broke the view controller's section of the Demo app.
+
 ## 5.0.0
 
 ### Breaking Changes

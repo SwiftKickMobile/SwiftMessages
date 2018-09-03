@@ -13,14 +13,6 @@ class ViewControllersViewController: UIViewController {
     @objc @IBAction private func dismissPresented(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let segue = segue as? SwiftMessagesSegue {
-            segue.configure(layout: .bottomCard)
-            segue.dimMode = .blur(style: .dark, alpha: 0.9, interactive: true)
-            segue.messageView.configureNoDropShadow()
-        }
-    }
 }
 
 class SwiftMessagesTopSegue: SwiftMessagesSegue {
