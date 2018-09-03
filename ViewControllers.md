@@ -35,24 +35,24 @@ It is not necessary to retain `segue` because it retains itself until dismissal.
 
 `SwiftMessagesSegue` generally requires configuration to achieve specific layouts and optional behaviors. There are a few good ways to do this:
 
-  1. __(Recommended)__ Subclass `SwiftMessagesSegue` and apply configurations in `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name. For example, the name for "VeryNiceSegue" would be "very nice".
+1. __(Recommended)__ Subclass `SwiftMessagesSegue` and apply configurations in `init(identifier:source:destination:)`. Subclasses will automatically appear in the segue type dialog using an auto-generated name. For example, the name for "VeryNiceSegue" would be "very nice".
 
 
-	````swift
-	class VeryNiceSegue: SwiftMessagesSegue {
-    	override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        	super.init(identifier: identifier, source: source, destination: destination)
-  	    	configure(layout: .bottomCard)
-  	    	dimMode = .blur(style: .dark, alpha: 0.9, interactive: true)
-			messageView.configureNoDropShadow()
-    	}
-	}
-	````
+    ```swift
+    class VeryNiceSegue: SwiftMessagesSegue {
+        override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+            super.init(identifier: identifier, source: source, destination: destination)
+            configure(layout: .bottomCard)
+            dimMode = .blur(style: .dark, alpha: 0.9, interactive: true)
+            messageView.configureNoDropShadow()
+        }
+    }
+    ```
 
 
-   1. Apply configurations in `prepare(for:sender:)` of the presenting view controller after down-casting the segue to `SwiftMessagesSegue`.
+1. Apply configurations in `prepare(for:sender:)` of the presenting view controller after down-casting the segue to `SwiftMessagesSegue`.
 
-	````swift
+    ````swift
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segue = segue as? SwiftMessagesSegue {
             segue.configure(layout: .bottomCard)
@@ -60,7 +60,7 @@ It is not necessary to retain `segue` because it retains itself until dismissal.
             segue.messageView.configureNoDropShadow()
         }
     }
-	````
+    ````
 
 The `configure(layout:)` method is a shortcut for configuring some basic layout and animation options that roughly mirror the options in `SwiftMessages.Layout`.
 
