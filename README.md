@@ -129,9 +129,9 @@ var config = SwiftMessages.Config()
 // Slide up from the bottom.
 config.presentationStyle = .bottom
 
-// Display in a window at the specified window level: UIWindowLevelStatusBar
-// displays over the status bar while UIWindowLevelNormal displays under.
-config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+// Display in a window at the specified window level: UIWindow.Level.statusBar
+// displays over the status bar while UIWindow.Level.normal displays under.
+config.presentationContext = .window(windowLevel: .statusBar)
 
 // Disable the default auto-hiding behavior.
 config.duration = .forever

@@ -245,7 +245,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
     open override var intrinsicContentSize: CGSize {
         if let preferredHeight = (self as InternalPreferredHeight).preferredHeight {
-            return CGSize(width: UIViewNoIntrinsicMetric, height: preferredHeight)
+            return CGSize(width: UIView.noIntrinsicMetric, height: preferredHeight)
         }
         return super.intrinsicContentSize
     }

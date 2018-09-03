@@ -31,13 +31,6 @@
 			remoteGlobalIDString = 86B48AEC1D5A41C900063E2B;
 			remoteInfo = SwiftMessages;
 		};
-		22FB324221193A3B005C13D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 224FB6A121163FB90081D4DE;
-			remoteInfo = SwiftMessagesSegueExtras;
-		};
 		22FB324421193A3B005C13D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
@@ -120,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				22FB324121193A3B005C13D9 /* SwiftMessages.framework */,
-				22FB324321193A3B005C13D9 /* SwiftMessagesSegueExtras.framework */,
 				22FB324521193A3B005C13D9 /* SwiftMessagesTests.xctest */,
 			);
 			name = Products;
@@ -209,7 +201,7 @@
 					86AEDCE11D5D1DB70030232E = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 38R82CD868;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -243,13 +235,6 @@
 			fileType = wrapper.framework;
 			path = SwiftMessages.framework;
 			remoteRef = 22FB324021193A3B005C13D9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		22FB324321193A3B005C13D9 /* SwiftMessagesSegueExtras.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftMessagesSegueExtras.framework;
-			remoteRef = 22FB324221193A3B005C13D9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		22FB324521193A3B005C13D9 /* SwiftMessagesTests.xctest */ = {
@@ -443,8 +428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -459,8 +443,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
