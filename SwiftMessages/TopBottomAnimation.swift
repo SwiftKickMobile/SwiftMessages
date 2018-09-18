@@ -17,7 +17,7 @@ public class TopBottomAnimation: NSObject, Animator {
 
     public weak var delegate: AnimationDelegate?
 
-    open let style: Style
+    public let style: Style
 
     open var springDamping: CGFloat = 0.8
 
@@ -41,7 +41,7 @@ public class TopBottomAnimation: NSObject, Animator {
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: Notification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
         install(context: context)
         showAnimation(completion: completion)
     }
@@ -144,7 +144,7 @@ public class TopBottomAnimation: NSObject, Animator {
             completion(false)
             return
         }
-        let animationDistance = fabs(view.transform.ty)
+        let animationDistance = abs(view.transform.ty)
         // Cap the initial velocity at zero because the bounceOffset may not be great
         // enough to allow for greater bounce induced by a quick panning motion.
         let initialSpringVelocity = animationDistance == 0.0 ? 0.0 : min(0.0, closeSpeed / animationDistance)
@@ -184,7 +184,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 velocity.y *= -1.0
                 translation.y *= -1.0
             }
-            var translationAmount = translation.y >= 0 ? translation.y : -pow(fabs(translation.y), 0.7)
+            var translationAmount = translation.y >= 0 ? translation.y : -pow(abs(translation.y), 0.7)
             if !closing {
                 // Turn on rubber banding if background view is inset from message view.
                 if let background = (messageView as? BackgroundViewable)?.backgroundView, background != view {

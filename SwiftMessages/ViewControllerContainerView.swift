@@ -19,7 +19,7 @@ open class ViewControllerContainerView: CornerRoundingView {
     open override var intrinsicContentSize: CGSize {
         if let preferredHeight = viewController?.preferredContentSize.height,
             preferredHeight > 0 {
-            return CGSize(width: UIViewNoIntrinsicMetric, height: preferredHeight)
+            return CGSize(width: UIView.noIntrinsicMetric, height: preferredHeight)
         }
         return super.intrinsicContentSize
     }

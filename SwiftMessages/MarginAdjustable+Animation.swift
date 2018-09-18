@@ -30,7 +30,7 @@ public extension MarginAdjustable where Self: UIView {
                     app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
                     let frameInWindow = convert(bounds, to: window)
                     let top = max(0, 20 - frameInWindow.minY)
-                    safeAreaInsets = UIEdgeInsetsMake(top, 0, 0, 0)
+                    safeAreaInsets = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
                 } else {
                     safeAreaInsets = .zero
                 }

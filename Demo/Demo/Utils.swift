@@ -13,21 +13,21 @@ extension UILabel {
     func configureBodyTextStyle() {
         let bodyStyle = NSMutableParagraphStyle()
         bodyStyle.lineSpacing = 5.0
-        attributedText = NSAttributedString(string: text ?? "", attributes: [NSAttributedStringKey.paragraphStyle : bodyStyle])
+        attributedText = NSAttributedString(string: text ?? "", attributes: [NSAttributedString.Key.paragraphStyle : bodyStyle])
     }
 
     func configureCodeStyle(on substring: String?) {
-        var attributes: [NSAttributedStringKey : Any] = [:]
+        var attributes: [NSAttributedString.Key : Any] = [:]
         let codeFont = UIFont(name: "CourierNewPSMT", size: font.pointSize)!
-        attributes[NSAttributedStringKey.font] = codeFont
-        attributes[NSAttributedStringKey.backgroundColor] = UIColor(white: 0.96, alpha: 1)
+        attributes[NSAttributedString.Key.font] = codeFont
+        attributes[NSAttributedString.Key.backgroundColor] = UIColor(white: 0.96, alpha: 1)
         attributedText = attributedText?.setAttributes(attributes: attributes, onSubstring: substring)
     }
 }
 
 extension NSAttributedString {
 
-    public func setAttributes(attributes: [NSAttributedStringKey : Any], onSubstring substring: String?) -> NSAttributedString {
+    public func setAttributes(attributes: [NSAttributedString.Key : Any], onSubstring substring: String?) -> NSAttributedString {
         let mutableSelf = NSMutableAttributedString(attributedString: self)
         if let substring = substring {
             var range = NSRange()
@@ -46,7 +46,7 @@ extension NSAttributedString {
         return mutableSelf
     }
 
-    private static func set(attributes newAttributes: [NSAttributedStringKey : Any], in range: NSRange, of mutableString: NSMutableAttributedString) {
+    private static func set(attributes newAttributes: [NSAttributedString.Key : Any], in range: NSRange, of mutableString: NSMutableAttributedString) {
         if range.length > 0 {
             var attributes = mutableString.attributes(at: range.location, effectiveRange: nil)
             for (key, value) in newAttributes {

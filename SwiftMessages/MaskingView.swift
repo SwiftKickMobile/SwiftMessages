@@ -21,7 +21,7 @@ class MaskingView: PassthroughView {
                 view.frame = bounds
                 view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 addSubview(view)
-                sendSubview(toBack: view)
+                sendSubviewToBack(view)
             }
         }
     }
