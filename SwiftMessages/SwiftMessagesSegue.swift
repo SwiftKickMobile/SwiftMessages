@@ -189,32 +189,32 @@ extension SwiftMessagesSegue {
         messageView.configureDropShadow()
         switch layout {
         case .topMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             messageView.collapseLayoutMarginAdditions = false
             let animation = TopBottomAnimation(style: .top)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             messageView.collapseLayoutMarginAdditions = false
             let animation = TopBottomAnimation(style: .bottom)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .topCard:
             containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .top
         case .bottomCard:
             containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .bottom
         case .topTab:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
@@ -223,7 +223,7 @@ extension SwiftMessagesSegue {
             presentationStyle = .custom(animator: animation)
         case .bottomTab:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
@@ -232,7 +232,7 @@ extension SwiftMessagesSegue {
             presentationStyle = .custom(animator: animation)
         case .centered:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .center
