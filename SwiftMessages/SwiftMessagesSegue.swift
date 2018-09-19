@@ -154,7 +154,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 
     private var messenger = SwiftMessages()
     private var selfRetainer: SwiftMessagesSegue? = nil
-    private lazy var hider = { return Hider(segue: self) }()
+    private lazy var hider = { return TransitioningDismisser(segue: self) }()
 
     private lazy var presenter = {
         return Presenter(config: messenger.defaultConfig, view: messageView, delegate: messenger)
@@ -189,32 +189,32 @@ extension SwiftMessagesSegue {
         messageView.configureDropShadow()
         switch layout {
         case .topMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             messageView.collapseLayoutMarginAdditions = false
             let animation = TopBottomAnimation(style: .top)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 20, 20, 20)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             messageView.collapseLayoutMarginAdditions = false
             let animation = TopBottomAnimation(style: .bottom)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .topCard:
             containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .top
         case .bottomCard:
             containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(10, 10, 10, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .bottom
         case .topTab:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
@@ -223,7 +223,7 @@ extension SwiftMessagesSegue {
             presentationStyle = .custom(animator: animation)
         case .bottomTab:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
@@ -232,7 +232,7 @@ extension SwiftMessagesSegue {
             presentationStyle = .custom(animator: animation)
         case .centered:
             containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsetsMake(20, 10, 20, 10)
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .center
@@ -242,7 +242,7 @@ extension SwiftMessagesSegue {
 
 extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let shower = Shower(segue: self)
+        let shower = TransitioningPresenter(segue: self)
         messenger.defaultConfig.eventListeners.append { [unowned self] in
             switch $0 {
             case .didShow:
@@ -268,7 +268,7 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
 }
 
 extension SwiftMessagesSegue {
-    private class Shower: NSObject, UIViewControllerAnimatedTransitioning {
+    private class TransitioningPresenter: NSObject, UIViewControllerAnimatedTransitioning {
 
         fileprivate private(set) var completeTransition: ((Bool) -> Void)?
         private weak var segue: SwiftMessagesSegue?
@@ -323,7 +323,7 @@ extension SwiftMessagesSegue {
 }
 
 extension SwiftMessagesSegue {
-    private class Hider: NSObject, UIViewControllerAnimatedTransitioning {
+    private class TransitioningDismisser: NSObject, UIViewControllerAnimatedTransitioning {
 
         fileprivate private(set) var completeTransition: ((Bool) -> Void)?
         private weak var segue: SwiftMessagesSegue?

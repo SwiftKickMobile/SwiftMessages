@@ -49,7 +49,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     /*
@@ -71,7 +71,7 @@ class ViewController: UITableViewController {
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.isHidden = true
         var warningConfig = SwiftMessages.defaultConfig
-        warningConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
 
         let success = MessageView.viewFromNib(layout: .cardView)
         success.configureTheme(.success)
@@ -80,7 +80,7 @@ class ViewController: UITableViewController {
         success.button?.isHidden = true
         var successConfig = SwiftMessages.defaultConfig
         successConfig.presentationStyle = .center
-        successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
+        successConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
 
         let info = MessageView.viewFromNib(layout: .messageView)
         info.configureTheme(.info)
@@ -95,14 +95,14 @@ class ViewController: UITableViewController {
         status.bodyLabel?.textColor = UIColor.white
         status.configureContent(body: "A tiny line of text covering the status bar.")
         var statusConfig = SwiftMessages.defaultConfig
-        statusConfig.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        statusConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
 
         let status2 = MessageView.viewFromNib(layout: .statusLine)
         status2.backgroundView.backgroundColor = UIColor.orange
         status2.bodyLabel?.textColor = UIColor.white
         status2.configureContent(body: "Switched to light status bar!")
         var status2Config = SwiftMessages.defaultConfig
-        status2Config.presentationContext = .window(windowLevel: UIWindowLevelNormal)
+        status2Config.presentationContext = .window(windowLevel: UIWindow.Level.normal)
         status2Config.preferredStatusBarStyle = .lightContent
 
         SwiftMessages.show(view: error)
@@ -120,7 +120,7 @@ class ViewController: UITableViewController {
         imageView.clipsToBounds = true
         let messageView = BaseView(frame: .zero)
         messageView.layoutMargins = .zero
-        messageView.preferredHeight = 120.0
+        messageView.backgroundHeight = 120.0
         do {
             let backgroundView = CornerRoundingView()
             backgroundView.cornerRadius = 15
@@ -131,7 +131,7 @@ class ViewController: UITableViewController {
         }
         messageView.configureDropShadow()
         var config = SwiftMessages.defaultConfig
-        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
         SwiftMessages.show(config: config, view: messageView)
     }
 
@@ -141,7 +141,7 @@ class ViewController: UITableViewController {
         view.getTacosAction = { _ in SwiftMessages.hide() }
         view.cancelAction = { SwiftMessages.hide() }
         var config = SwiftMessages.defaultConfig
-        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
         config.duration = .forever
         config.presentationStyle = .bottom
         config.dimMode = .gray(interactive: true)
@@ -160,7 +160,7 @@ class ViewController: UITableViewController {
         config.presentationStyle = .center
         config.duration = .forever
         config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
-        config.presentationContext  = .window(windowLevel: UIWindowLevelStatusBar)
+        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
         SwiftMessages.show(config: config, view: messageView)
     }
 }

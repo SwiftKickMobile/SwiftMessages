@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2272F1F521080DAE00AD190C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2272F1F421080DAE00AD190C /* AppDelegate.swift */; };
-		2272F20D21080DD500AD190C /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2272F20C21080DD500AD190C /* Messages.framework */; };
 		2272F21021080DD500AD190C /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2272F20F21080DD500AD190C /* MessagesViewController.swift */; };
 		2272F21321080DD500AD190C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2272F21121080DD500AD190C /* MainInterface.storyboard */; };
 		2272F21921080DD600AD190C /* iMessageExtensionDemo.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2272F20A21080DD500AD190C /* iMessageExtensionDemo.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2272F21F2108113F00AD190C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2272F21E2108113F00AD190C /* Main.storyboard */; };
 		2272F221210811BE00AD190C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2272F220210811BE00AD190C /* LaunchScreen.storyboard */; };
+		22B96AF4213D94CC00357CB5 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FE3FE9211941FD0017303D /* SwiftMessages.framework */; };
 		22FE3FFD211944040017303D /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FE3FE9211941FD0017303D /* SwiftMessages.framework */; };
 		22FE3FFE211944040017303D /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22FE3FE9211941FD0017303D /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -32,13 +32,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 86B48AEC1D5A41C900063E2B;
 			remoteInfo = SwiftMessages;
-		};
-		22FE3FEA211941FD0017303D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22FE3FE2211941FD0017303D /* SwiftMessages.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 224FB6A121163FB90081D4DE;
-			remoteInfo = SwiftMessagesSegueExtras;
 		};
 		22FE3FEC211941FD0017303D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -115,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2272F20D21080DD500AD190C /* Messages.framework in Frameworks */,
+				22B96AF4213D94CC00357CB5 /* SwiftMessages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				22FE3FE9211941FD0017303D /* SwiftMessages.framework */,
-				22FE3FEB211941FD0017303D /* SwiftMessagesSegueExtras.framework */,
 				22FE3FED211941FD0017303D /* SwiftMessagesTests.xctest */,
 			);
 			name = Products;
@@ -272,13 +264,6 @@
 			fileType = wrapper.framework;
 			path = SwiftMessages.framework;
 			remoteRef = 22FE3FE8211941FD0017303D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		22FE3FEB211941FD0017303D /* SwiftMessagesSegueExtras.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftMessagesSegueExtras.framework;
-			remoteRef = 22FE3FEA211941FD0017303D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		22FE3FED211941FD0017303D /* SwiftMessagesTests.xctest */ = {
@@ -486,7 +471,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo.iMessageDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -504,7 +489,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo.iMessageDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -524,7 +509,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo.iMessageDemo.iMessageExtensionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -544,7 +529,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo.iMessageDemo.iMessageExtensionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -12,23 +12,23 @@ open class WindowViewController: UIViewController
 {
     fileprivate var window: UIWindow?
     
-    let windowLevel: UIWindowLevel
+    let windowLevel: UIWindow.Level
     let config: SwiftMessages.Config
     
     override open var shouldAutorotate: Bool {
         return config.shouldAutorotate
     }
     
-    public init(windowLevel: UIWindowLevel?, config: SwiftMessages.Config)
+    public init(windowLevel: UIWindow.Level?, config: SwiftMessages.Config)
     {
-        self.windowLevel = windowLevel ?? UIWindowLevelNormal
+        self.windowLevel = windowLevel ?? UIWindow.Level.normal
         self.config = config
         let window = PassthroughWindow(frame: UIScreen.main.bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)
         self.view = PassthroughView()
         window.rootViewController = self
-        window.windowLevel = windowLevel ?? UIWindowLevelNormal
+        window.windowLevel = windowLevel ?? UIWindow.Level.normal
     }
     
     func install(becomeKey: Bool) {
@@ -55,7 +55,7 @@ open class WindowViewController: UIViewController
 }
 
 extension WindowViewController {
-    static func newInstance(windowLevel: UIWindowLevel?, config: SwiftMessages.Config) -> WindowViewController {
+    static func newInstance(windowLevel: UIWindow.Level?, config: SwiftMessages.Config) -> WindowViewController {
         return config.windowViewController?(windowLevel, config) ?? WindowViewController(windowLevel: windowLevel, config: config)
     }
 }

@@ -53,7 +53,7 @@ open class SwiftMessages {
         /**
          Displays the message view under navigation bars and tab bars if an
          appropriate one is found. Otherwise, it is displayed in a new window
-         at level `UIWindowLevelNormal`. Use this option to automatically display
+         at level `UIWindow.Level.normal`. Use this option to automatically display
          under bars, where applicable. Because this option involves a top-down
          search, an approrpiate context might not be found when the view controller
          heirarchy incorporates custom containers. If this is the case, the
@@ -63,12 +63,12 @@ open class SwiftMessages {
 
         /**
          Displays the message in a new window at the specified window level. Use
-         `UIWindowLevelNormal` to display under the status bar and `UIWindowLevelStatusBar`
+         `UIWindow.Level.normal` to display under the status bar and `UIWindow.Level.statusBar`
          to display over. When displaying under the status bar, SwiftMessages automatically
          increases the top margins of any message view that adopts the `MarginInsetting`
          protocol (as `MessageView` does) to account for the status bar.
         */
-        case window(windowLevel: UIWindowLevel)
+        case window(windowLevel: UIWindow.Level)
         
         /**
          Displays the message view under navigation bars and tab bars if an
@@ -178,7 +178,7 @@ open class SwiftMessages {
          - `interactive`: Specifies whether or not tapping the
          dimmed area dismisses the message view.
          */
-        case blur(style: UIBlurEffectStyle, alpha: CGFloat, interactive: Bool)
+        case blur(style: UIBlurEffect.Style, alpha: CGFloat, interactive: Bool)
 
         public var interactive: Bool {
             switch self {
@@ -263,7 +263,7 @@ open class SwiftMessages {
         /**
          Specifies the preferred status bar style when the view is displayed
          directly behind the status bar, such as when using `.Window`
-         presentation context with a `UIWindowLevelNormal` window level
+         presentation context with a `UIWindow.Level.normal` window level
          and `.Top` presentation style. This option is useful if the message
          view has a background color that needs a different status bar style than
          the current one. The default is `.Default`.
@@ -315,7 +315,7 @@ open class SwiftMessages {
          `WindowViewController` is needed. Use this if you need to supply a custom subclass
          of `WindowViewController`.
          */
-        public var windowViewController: ((_ windowLevel: UIWindowLevel?, _ config: SwiftMessages.Config) -> WindowViewController)?
+        public var windowViewController: ((_ windowLevel: UIWindow.Level?, _ config: SwiftMessages.Config) -> WindowViewController)?
     }
     
     /**

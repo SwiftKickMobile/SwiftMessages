@@ -97,9 +97,9 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch presentationContext.selectedSegmentIndex {
         case 1:
-            config.presentationContext = .window(windowLevel: UIWindowLevelNormal)
+            config.presentationContext = .window(windowLevel: UIWindow.Level.normal)
         case 2:
-            config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+            config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
         default:
             break
         }
