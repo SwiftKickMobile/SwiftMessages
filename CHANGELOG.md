@@ -1,17 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 5.0.2
-
-### Fixes
-
-* Fix #228 restore shared SwiftMessages scheme
-
-## 5.0.2
+## 6.0.0
 
 ### Changes
 
 * Migrate to Swift 4.2
+
+### Fixes
+
+* Fix #228 restore shared SwiftMessages scheme
 
 ## 5.0.1
 
