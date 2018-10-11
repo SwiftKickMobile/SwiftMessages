@@ -297,15 +297,7 @@ extension SwiftMessagesSegue {
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
-            // Setup the layout of the `toView`
-            do {
-                toView.translatesAutoresizingMaskIntoConstraints = false
-                segue.containerView.addSubview(toView)
-                toView.topAnchor.constraint(equalTo: segue.containerView.topAnchor).isActive = true
-                toView.bottomAnchor.constraint(equalTo: segue.containerView.bottomAnchor).isActive = true
-                toView.leftAnchor.constraint(equalTo: segue.containerView.leftAnchor).isActive = true
-                toView.rightAnchor.constraint(equalTo: segue.containerView.rightAnchor).isActive = true
-            }
+            segue.containerView.addSubview(toView)
             // Install the `toView` into the message view.
             switch segue.containment {
             case .content:
