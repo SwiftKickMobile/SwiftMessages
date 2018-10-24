@@ -253,7 +253,7 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                 } else {
                     // Case where message is interinally hidden by SwiftMessages, such as with a
                     // dismiss gesture, rather than by view controller dismissal.
-                    source.dismiss(animated: false, completion: nil)
+                    self.destination.dismiss(animated: false, completion: nil)
                 }
                 self.selfRetainer = nil
             default: break
