@@ -119,7 +119,7 @@ open class PhysicsPanHandler {
                 let frame = containerView.convert(view.bounds, from: view)
                 if !containerView.bounds.intersects(frame) {
                     strongSelf.isOffScreen = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    DispatchQueue.main.async {
                         animator.delegate?.hide(animator: animator)
                     }
                 }
