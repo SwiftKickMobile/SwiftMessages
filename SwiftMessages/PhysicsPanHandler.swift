@@ -10,6 +10,10 @@ import UIKit
 
 open class PhysicsPanHandler {
 
+    /// During the dismiss gesture, specifies the delay between the view
+    /// going out of the screen's bounds and `SwiftMessages.hide()` being called.
+    public var hideDelay: TimeInterval = 0.2
+
     public struct MotionSnapshot {
         var angle: CGFloat
         var time: CFAbsoluteTime
@@ -114,12 +118,12 @@ open class PhysicsPanHandler {
             let attachmentBehavior = UIAttachmentBehavior(item: messageView, offsetFromCenter: offset, attachedToAnchor: anchorPoint)
             state.attachmentBehavior = attachmentBehavior
             state.itemBehavior.action = { [weak self, weak messageView, weak containerView] in
-                guard let strongSelf = self, !strongSelf.isOffScreen, let messageView = messageView, let containerView = containerView, let animator = strongSelf.animator else { return }
+                guard let self = self, !self.isOffScreen, let messageView = messageView, let containerView = containerView, let animator = self.animator else { return }
                 let view = (messageView as? BackgroundViewable)?.backgroundView ?? messageView
                 let frame = containerView.convert(view.bounds, from: view)
                 if !containerView.bounds.intersects(frame) {
-                    strongSelf.isOffScreen = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    self.isOffScreen = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + self.hideDelay) {
                         animator.delegate?.hide(animator: animator)
                     }
                 }
