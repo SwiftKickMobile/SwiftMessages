@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 ## 6.0.1
 
 ### Features
-* #257 Add the ability to specify the hide delay on `PhysicsPanHandler`. When `PhysicsPanHandler`'s dismissal gesture determines that the view is out of the container view's bounds, it waits `hideDelay` seconds before calling `SwiftMessages.hide()`. The default value is 0.2, which is what you'll get when using `presentationStyle = .center`. To specify a different delay, use `presentationStyle = .custom(animator:)` and supply an instance of `PhysicsPanHandler` configured to your liking.
+* #257 The `.centered` presentation style, which is a shortcut for a specific configuration of the `PhysicsAnimation` animator, provides a physics-based dismissal gesture where the view can be flung off screen. When the view goes out of the container view's bounds, the animator calls `SwiftMessages.hide()`, which animates the dim view away and concludes the message view's lifecycle. There is currently a small delay of 0.2s before calling `hide()`.
+
+This change adds the ability to configure the delay by customizing the animator. For example, to set the delay to zero, one would do:
+
+````swift
+let animation = PhysicsAnimation()
+animation.panHandler.hideDelay = 0
+config.presentationStyle = .custom(animator: animation)
+````
 
 ## 6.0.0
 

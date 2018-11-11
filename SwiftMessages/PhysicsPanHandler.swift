@@ -10,8 +10,6 @@ import UIKit
 
 open class PhysicsPanHandler {
 
-    /// During the dismiss gesture, specifies the delay between the view
-    /// going out of the screen's bounds and `SwiftMessages.hide()` being called.
     public var hideDelay: TimeInterval = 0.2
 
     public struct MotionSnapshot {
@@ -91,17 +89,23 @@ open class PhysicsPanHandler {
     private(set) public var isOffScreen = false
     private var restingCenter: CGPoint?
 
-    public init(context: AnimationContext, animator: Animator) {
-        messageView = context.messageView
-        containerView = context.containerView
-        self.animator = animator
+    public init() {}
+
+    lazy var pan: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer()
         pan.addTarget(self, action: #selector(pan(_:)))
-        if let view = messageView as? BackgroundViewable {
-            view.backgroundView.addGestureRecognizer(pan)
-        } else {
-            context.messageView.addGestureRecognizer(pan)
+        return pan
+    }()
+
+    func configure(context: AnimationContext, animator: Animator) {
+        if let oldView = (messageView as? BackgroundViewable)?.backgroundView ?? messageView {
+            oldView.removeGestureRecognizer(pan)
         }
+        messageView = context.messageView
+        let view = (messageView as? BackgroundViewable)?.backgroundView ?? messageView
+        view?.addGestureRecognizer(pan)
+        containerView = context.containerView
+        self.animator = animator
     }
 
     @objc func pan(_ pan: UIPanGestureRecognizer) {
