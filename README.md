@@ -8,7 +8,9 @@
 
 ## 🔥 SwiftAutoLayout 🔥
 
-Check out our new library, [SwiftAutoLayout](https://github.com/SwiftKickMobile/SwiftAutoLayout)! SwiftAutoLayout helps you write AutoLayout constraints as consisely, Swiftly, and as natively as possible. Constrain `UIView` and `UILayoutGuide`s interchangeably with a familiar syntax named to match their native properties. This library purposefuly minimizes the repetitive code of defining view hierarchies and building constraints while maximizing constraint flexibility via optional parameters.
+Check out our new repo, [SwiftAutoLayout](https://github.com/SwiftKickMobile/SwiftAutoLayout)!
+
+SwiftAutoLayout helps you write AutoLayout constraints as consisely, Swiftly, and as natively as possible. Constrain `UIView` and `UILayoutGuide`s interchangeably with a familiar syntax named to match their native properties. This library purposefuly minimizes the repetitive code of defining view hierarchies and building constraints while maximizing constraint flexibility via optional parameters.
 
 <p align="center">
   <img src="https://github.com/SwiftKickMobile/SwiftAutoLayout/blob/master/Design/SwiftAutoLayoutBanner.gif" />
