@@ -6,30 +6,6 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat)](http://cocoadocs.org/docsets/SwiftMessages)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-## 🔥 SwiftAutoLayout 🔥
-
-Check out our new repo, [SwiftAutoLayout](https://github.com/SwiftKickMobile/SwiftAutoLayout)!
-
-SwiftAutoLayout helps you write AutoLayout constraints as consisely, Swiftly, and as natively as possible. Constrain `UIView` and `UILayoutGuide`s interchangeably with a familiar syntax named to match their native properties. This library purposefuly minimizes the repetitive code of defining view hierarchies and building constraints while maximizing constraint flexibility via optional parameters.
-
-<p align="center">
-  <img src="https://github.com/SwiftKickMobile/SwiftAutoLayout/blob/master/Design/SwiftAutoLayoutBanner.gif" />
-</p>
-
-## 🔥 View Controllers 🔥
-
-SwiftMessages can now present view controllers using the `SwiftMessagesSegue` custom modal segue!
-
-<p align="center">
-  <img src="./Design/SwiftMessagesSegue.gif" />
-</p>
-
-[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
-
-#### [View Controllers Readme](./ViewControllers.md)
-
-And check out our blog post [Elegant Custom UIViewController Transitioning](http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/) to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
-
 <p align="center">
   <img src="./Design/swiftmessages.png" />
 </p>
@@ -55,6 +31,20 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 <p align="center">
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
+
+## View Controllers
+
+SwiftMessages can present view controllers using the `SwiftMessagesSegue` custom modal segue!
+
+<p align="center">
+  <img src="./Design/SwiftMessagesSegue.gif" />
+</p>
+
+[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
+
+#### [View Controllers Readme](./ViewControllers.md)
+
+And check out our blog post [Elegant Custom UIViewController Transitioning](http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/) to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
 
 ## Installation
 

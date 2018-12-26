@@ -109,6 +109,32 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
         case backgroundVertical
     }
 
+    /// The presentation style to use. See the SwiftMessages.PresentationStyle for details.
+    public var presentationStyle: SwiftMessages.PresentationStyle {
+        get { return messenger.defaultConfig.presentationStyle }
+        set { messenger.defaultConfig.presentationStyle = newValue }
+    }
+
+    /// The dim mode to use. See the SwiftMessages.DimMode for details.
+    public var dimMode: SwiftMessages.DimMode {
+        get { return messenger.defaultConfig.dimMode}
+        set { messenger.defaultConfig.dimMode = newValue }
+    }
+
+    /// Specifies whether or not the interactive pan-to-hide gesture is enabled
+    /// on the message view. The default value is `true`, but may not be appropriate
+    /// for view controllers that use swipe or pan gestures.
+    public var interactiveHide: Bool {
+        get { return messenger.defaultConfig.interactiveHide }
+        set { messenger.defaultConfig.interactiveHide = newValue }
+    }
+
+    /// Specifies an optional array of event listeners.
+    public var eventListeners: [SwiftMessages.EventListener] {
+        get { return messenger.defaultConfig.eventListeners }
+        set { messenger.defaultConfig.eventListeners = newValue }
+    }
+
     /**
      The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
      The view controller's view is installed into `containerView`, which is itself installed
@@ -131,26 +157,6 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
      containing message view. See `Containment` for details.
      */
     public var containment: Containment = .content
-
-    /// The presentation style to use. See the SwiftMessages.PresentationStyle for details.
-    public var presentationStyle: SwiftMessages.PresentationStyle {
-        get { return messenger.defaultConfig.presentationStyle }
-        set { messenger.defaultConfig.presentationStyle = newValue }
-    }
-
-    /// The dim mode to use. See the SwiftMessages.DimMode for details.
-    public var dimMode: SwiftMessages.DimMode {
-        get { return messenger.defaultConfig.dimMode}
-        set { messenger.defaultConfig.dimMode = newValue }
-    }
-
-    /// Specifies whether or not the interactive pan-to-hide gesture is enabled
-    /// on the message view. The default value is `true`, but may not be appropriate
-    /// for view controllers that use swipe or pan gestures.
-    public var interactiveHide: Bool {
-        get { return messenger.defaultConfig.interactiveHide }
-        set { messenger.defaultConfig.interactiveHide = newValue }
-    }
 
     private var messenger = SwiftMessages()
     private var selfRetainer: SwiftMessagesSegue? = nil

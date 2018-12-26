@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 6.0.2
+
+### Features
+
+* #262 Add event listeners to `SwiftMessagesSegue`.
+
 ## 6.0.1
 
 ### Features
