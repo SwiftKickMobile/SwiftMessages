@@ -571,17 +571,16 @@ open class SwiftMessages {
         queue = queue.filter { $0.id != id }
         delays.ids.remove(id)
     }
-
+ 
     fileprivate func hideCurrent() {
         guard let current = _current, !current.isHiding else { return }
         let delay = current.delayHide ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self, weak current] in
-            guard let strongCurrent = current else { return }
-            strongCurrent.hide { (completed) in
-                guard completed, let strongSelf = self, let strongCurrent = current else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            current.hide { (completed) in
+                guard completed, let strongSelf = self else { return }
                 strongSelf.messageQueue.sync {
-                    guard strongSelf._current === strongCurrent else { return }
-                    strongSelf.counts[strongCurrent.id] = nil
+                    guard strongSelf._current === current else { return }
+                    strongSelf.counts[current.id] = nil
                     strongSelf._current = nil
                 }
             }
