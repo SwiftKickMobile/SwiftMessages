@@ -594,13 +594,17 @@ open class SwiftMessages {
         autohideToken = current
         if let pauseDuration = current.pauseDuration {
             let delayTime = DispatchTime.now() + pauseDuration
-            messageQueue.asyncAfter(deadline: delayTime, execute: { [weak self, weak current] in
-                guard let strongSelf = self, let current = current else { return }
+            messageQueue.asyncAfter(deadline: delayTime, execute: {
                 // Make sure we've still got a green light to auto-hide.
-                if strongSelf.autohideToken !== current { return }
-                strongSelf.internalHide(id: current.id)
+                if self.autohideToken !== current { return }
+                self.internalHide(id: current.id)
             })
         }
+    }
+
+    deinit {
+        // Prevent orphaned messages
+        hideCurrent()
     }
 }
 
