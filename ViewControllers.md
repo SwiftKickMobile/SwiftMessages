@@ -107,4 +107,14 @@ The view controller's view is a direct subview of `containerView`, an instance o
 segue.containerView.cornerRadius = 20
 ````
 
+### Height
+
+SwiftMessages relies on Auto Layout to determine the height the view controller's view.
+    However, some view controllers, such as `UINavigationController` have zero Auto Layout height.
+    There are a few ways to specify the height of these view controllers:
+1. Add an explicit height constraint to the view controller's view.
+2. Set the view controller's `preferredContentSize` ("Use Preferred Explicit Size" in Interface Builder's
+   attribute inspector). Note that `preferredContentSize.width` is ignored and can be set to zero.
+3. Set `SwiftMessagesSegue.messageView.backgroundHeight`.
+
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
