@@ -42,12 +42,13 @@ import UIKit
     utilize some SwiftMessages features. This view can be accessed and configured via the
     `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
     shadow by calling `segue.messageView.configureDropShadow()`.
- 2. SwiftMessages relies on a view's `intrinsicContentSize` to determine the height of a message.
-    However, some view controllers' views does not define a good `intrinsicContentSize`
-    (`UINavigationController` is a common example). For these cases, there are a couple of ways
-    to specify the preferred height. First, you may set the `preferredContentSize` on the destination
-    view controller (available as "Use Preferred Explicit Size" in IB's attribute inspector). Second,
-    you may set `SwiftMessagesSegue.messageView.backgroundHeight`.
+ 2. SwiftMessages relies on Auto Layout to determine the height the view controller's view.
+    However, some view controllers, such as `UINavigationController` have zero Auto Layout height.
+    There are a few ways to specify the height these view controllers:
+    1. Add an explicit height constraint to the view controller's view.
+    2. Set the view controller's `preferredContentSize` ("Use Preferred Explicit Size" in Interface Builder's
+       attribute inspector). Note that `preferredContentSize.width` is ignored and can be set to zero.
+    3. Set `SwiftMessagesSegue.messageView.backgroundHeight`.
 
  See the "View Controllers" selection in the Demo app for examples.
  */
