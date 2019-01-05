@@ -121,6 +121,12 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
         get { return messenger.defaultConfig.dimMode}
         set { messenger.defaultConfig.dimMode = newValue }
     }
+    
+    // duration
+    public var duration: SwiftMessages.Duration {
+        get { return messenger.defaultConfig.duration}
+        set { messenger.defaultConfig.duration = newValue }
+    }
 
     /// Specifies whether or not the interactive pan-to-hide gesture is enabled
     /// on the message view. The default value is `true`, but may not be appropriate
