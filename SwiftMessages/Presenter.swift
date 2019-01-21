@@ -175,17 +175,24 @@ class Presenter: NSObject {
 
     var isHiding = false
 
-    func hide(completion: @escaping AnimationCompletion) {
+    func hide(animated: Bool, completion: @escaping AnimationCompletion) {
         isHiding = true
         self.config.eventListeners.forEach { $0(.willHide) }
         let context = animationContext()
-        animator.hide(context: context) { (completed) in
+        let action = {
             if let viewController = self.presentationContext.viewControllerValue() as? WindowViewController {
                 viewController.uninstall()
             }
             self.maskingView.removeFromSuperview()
             completion(true)
             self.config.eventListeners.forEach { $0(.didHide) }
+        }
+        guard animated else {
+            action()
+            return
+        }
+        animator.hide(context: context) { (completed) in
+            action()
         }
 
         func undim() {

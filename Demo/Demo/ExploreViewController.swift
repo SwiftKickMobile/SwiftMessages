@@ -27,7 +27,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             view = try! SwiftMessages.viewFromNib()
         }
         
-        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
+        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide(animated: false) })
 
         let iconStyle: IconStyle
         switch self.iconStyle.selectedSegmentIndex {

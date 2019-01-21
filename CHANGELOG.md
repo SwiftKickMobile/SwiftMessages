@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 6.0.3
+
+### Features
+
+* #276 Add ability to hide message without animation
+* #272 Add duration for `SwiftMessagesSegue`
+
 ## 6.0.2
 
 ### Features

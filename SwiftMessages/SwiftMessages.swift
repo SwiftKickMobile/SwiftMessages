@@ -385,9 +385,9 @@ open class SwiftMessages {
     /**
      Hide the current message being displayed by animating it away.
      */
-    open func hide() {
+    open func hide(animated: Bool = true) {
         messageQueue.sync {
-            hideCurrent()
+            hideCurrent(animated: animated)
         }
     }
 
@@ -572,11 +572,10 @@ open class SwiftMessages {
         delays.ids.remove(id)
     }
  
-    fileprivate func hideCurrent() {
+    fileprivate func hideCurrent(animated: Bool = true) {
         guard let current = _current, !current.isHiding else { return }
-        let delay = current.delayHide ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-            current.hide { (completed) in
+        let action = { [weak self] in
+            current.hide(animated: animated) { (completed) in
                 guard completed, let strongSelf = self else { return }
                 strongSelf.messageQueue.sync {
                     guard strongSelf._current === current else { return }
@@ -584,6 +583,10 @@ open class SwiftMessages {
                     strongSelf._current = nil
                 }
             }
+        }
+        let delay = current.delayHide ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            action()
         }
     }
 
@@ -829,8 +832,8 @@ extension SwiftMessages {
         globalInstance.show(config: config, view: view)
     }
 
-    public static func hide() {
-        globalInstance.hide()
+    public static func hide(animated: Bool = true) {
+        globalInstance.hide(animated: animated)
     }
     
     public static func hideAll() {
