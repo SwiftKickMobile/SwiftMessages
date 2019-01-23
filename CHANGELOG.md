@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 * #276 Add ability to hide message without animation
 * #272 Add duration for `SwiftMessagesSegue`
+* #278 Make pan gesture recognizers public
 
 ## 6.0.2
 

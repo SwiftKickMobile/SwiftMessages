@@ -91,7 +91,7 @@ open class PhysicsPanHandler {
 
     public init() {}
 
-    lazy var pan: UIPanGestureRecognizer = {
+    public private(set) lazy var pan: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer()
         pan.addTarget(self, action: #selector(pan(_:)))
         return pan
