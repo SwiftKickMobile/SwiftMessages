@@ -256,7 +256,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Note that this height is not guaranteed depending on anyt Auto Layout
      constraints used within the message view.
      */
-    @available(*, deprecated:4.2.0, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
+    @available(*, deprecated, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
     open var preferredHeight: CGFloat? {
         didSet {
             setNeedsLayout()
