@@ -10,7 +10,7 @@ import UIKit
 
 public extension MarginAdjustable where Self: UIView {
 
-    public func defaultMarginAdjustment(context: AnimationContext) -> UIEdgeInsets {
+    func defaultMarginAdjustment(context: AnimationContext) -> UIEdgeInsets {
         // Best effort to determine if we should use the new or deprecated margin adjustments.
         if layoutMarginAdditions != .zero
             || (safeAreaTopOffset == 0 && safeAreaBottomOffset == 0 && statusBarOffset == 0) {
