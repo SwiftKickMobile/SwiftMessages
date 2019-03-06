@@ -227,6 +227,13 @@ open class SwiftMessages {
         public init() {}
         
         /**
+         Specifies whether to update the layout of overlapping view,
+         Works for the case if presentationStyle is Top and view is
+         added on Window.
+         */
+        public var shouldNotOverlap = false
+        
+        /**
          Specifies whether the message view is displayed at the top or bottom
          of the selected presentation container. The default is `.Top`.
          */

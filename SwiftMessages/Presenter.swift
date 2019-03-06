@@ -125,6 +125,20 @@ class Presenter: NSObject {
                 self.config.eventListeners.forEach { $0(.didShow) }
             }
         }
+        
+        func updateLayoutForRootView() {
+            if case .top = config.presentationStyle, case .window = config.presentationContext {
+                if let topView = UIApplication.shared.keyWindow?.rootViewController?.view {
+                    let frame = topView.frame
+                    let viewHeight = view.frame.height + view.frame.origin.y
+                    topView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + viewHeight, width: frame.width, height: frame.height - viewHeight)
+                    topView.layoutIfNeeded()
+                }
+            }
+        }
+        if config.shouldNotOverlap {
+            updateLayoutForRootView()
+        }
     }
 
     private func showAnimation(completion: @escaping AnimationCompletion) {
@@ -194,7 +208,20 @@ class Presenter: NSObject {
         animator.hide(context: context) { (completed) in
             action()
         }
-
+        
+        func updateLayoutForRootView() {
+            if case .top = config.presentationStyle, case .window = config.presentationContext {
+                if let topView = UIApplication.shared.keyWindow?.rootViewController?.view {
+                    let frame = topView.frame
+                    let messageView = context.messageView
+                    let viewHeight = abs(messageView.frame.height) - abs(messageView.frame.origin.y) + messageView.frame.height
+                    
+                    topView.frame = CGRect(x: frame.origin.x, y: frame.origin.y - viewHeight, width: frame.width, height: frame.height + viewHeight)
+                    topView.layoutIfNeeded()
+                }
+            }
+        }
+        
         func undim() {
             UIView.animate(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
                 self.maskingView.backgroundColor = UIColor.clear
@@ -217,6 +244,10 @@ class Presenter: NSObject {
             undim()
         case .blur:
             unblur()
+        }
+        
+        if config.shouldNotOverlap {
+            updateLayoutForRootView()
         }
     }
 
@@ -329,6 +360,7 @@ class Presenter: NSObject {
         }
 
         func bottomLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
+            
             if case .bottom = config.presentationStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
                 return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: 0.0)
             }
