@@ -102,7 +102,7 @@ class ViewController: UITableViewController {
         status2.bodyLabel?.textColor = UIColor.white
         status2.configureContent(body: "Switched to light status bar!")
         var status2Config = SwiftMessages.defaultConfig
-        status2Config.shouldNotOverlap = true
+        status2Config.presentationStyle = .top(shouldOverlap: false)
         status2Config.presentationContext = .window(windowLevel: UIWindow.Level.normal)
         status2Config.preferredStatusBarStyle = .lightContent
 

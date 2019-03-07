@@ -14,6 +14,8 @@ public protocol AnimationDelegate: class {
     func hide(animator: Animator)
     func panStarted(animator: Animator)
     func panEnded(animator: Animator)
+    func resetRootViewLayout()
+    func updateLayoutForRootView(animator: AnimationContext?)
 }
 
 /**
@@ -49,12 +51,14 @@ public class AnimationContext {
     public let containerView: UIView
     public let safeZoneConflicts: SafeZoneConflicts
     public let interactiveHide: Bool
-
-    init(messageView: UIView, containerView: UIView, safeZoneConflicts: SafeZoneConflicts, interactiveHide: Bool) {
+    public let presentationContext: SwiftMessages.PresentationContext
+    
+    init(messageView: UIView, containerView: UIView, safeZoneConflicts: SafeZoneConflicts, interactiveHide: Bool, presentationContext: SwiftMessages.PresentationContext) {
         self.messageView = messageView
         self.containerView = containerView
         self.safeZoneConflicts = safeZoneConflicts
         self.interactiveHide = interactiveHide
+        self.presentationContext = presentationContext
     }
 }
 

@@ -85,7 +85,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         // Config setup
         
         var config = SwiftMessages.defaultConfig
-        
+        config.presentationStyle = .top(shouldOverlap: shouldOverlap.isOn)
         switch presentationStyle.selectedSegmentIndex {
         case 1:
             config.presentationStyle = .bottom
@@ -159,6 +159,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var iconStyle: UISegmentedControl!
     @IBOutlet weak var autoRotate: UISwitch!
     @IBOutlet weak var dropShadow: UISwitch!
+    @IBOutlet weak var shouldOverlap: UISwitch!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var bodyText: UITextField!
     @IBOutlet weak var showButton: UISwitch!

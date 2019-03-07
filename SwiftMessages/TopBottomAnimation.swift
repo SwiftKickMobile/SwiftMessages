@@ -11,7 +11,7 @@ import UIKit
 public class TopBottomAnimation: NSObject, Animator {
 
     public enum Style {
-        case top
+        case top(overlapping: Bool)
         case bottom
     }
 
@@ -58,8 +58,11 @@ public class TopBottomAnimation: NSObject, Animator {
         self.context = context
         UIView.animate(withDuration: hideDuration!, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             switch self.style {
-            case .top:
+            case .top(let shouldOverlap):
                 view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
+                if !shouldOverlap {
+                    self.delegate?.resetRootViewLayout()
+                }
             case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: view.frame.maxY + view.frame.height)
             }
@@ -141,6 +144,13 @@ public class TopBottomAnimation: NSObject, Animator {
             layoutMargins.bottom += bounceOffset
         }
         adjustable.layoutMargins = layoutMargins
+        containerView?.layoutIfNeeded()
+        
+        if case .top(let shouldOverlap) = style {
+            if !shouldOverlap {
+                delegate?.updateLayoutForRootView(animator: context)
+            }
+        }
     }
 
     func showAnimation(completion: @escaping AnimationCompletion) {

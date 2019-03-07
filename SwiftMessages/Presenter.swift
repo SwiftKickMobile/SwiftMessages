@@ -60,8 +60,8 @@ class Presenter: NSObject {
 
     private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate) -> Animator {
         switch style {
-        case .top:
-            return TopBottomAnimation(style: .top, delegate: delegate)
+        case .top(let shouldOverlap):
+            return TopBottomAnimation(style: .top(overlapping: shouldOverlap), delegate: delegate)
         case .bottom:
             return TopBottomAnimation(style: .bottom, delegate: delegate)
         case .center:
@@ -124,20 +124,6 @@ class Presenter: NSObject {
                 }
                 self.config.eventListeners.forEach { $0(.didShow) }
             }
-        }
-        
-        func updateLayoutForRootView() {
-            if case .top = config.presentationStyle, case .window = config.presentationContext {
-                if let topView = UIApplication.shared.keyWindow?.rootViewController?.view {
-                    let frame = topView.frame
-                    let viewHeight = view.frame.height + view.frame.origin.y
-                    topView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + viewHeight, width: frame.width, height: frame.height - viewHeight)
-                    topView.layoutIfNeeded()
-                }
-            }
-        }
-        if config.shouldNotOverlap {
-            updateLayoutForRootView()
         }
     }
 
@@ -209,19 +195,6 @@ class Presenter: NSObject {
             action()
         }
         
-        func updateLayoutForRootView() {
-            if case .top = config.presentationStyle, case .window = config.presentationContext {
-                if let topView = UIApplication.shared.keyWindow?.rootViewController?.view {
-                    let frame = topView.frame
-                    let messageView = context.messageView
-                    let viewHeight = abs(messageView.frame.height) - abs(messageView.frame.origin.y) + messageView.frame.height
-                    
-                    topView.frame = CGRect(x: frame.origin.x, y: frame.origin.y - viewHeight, width: frame.width, height: frame.height + viewHeight)
-                    topView.layoutIfNeeded()
-                }
-            }
-        }
-        
         func undim() {
             UIView.animate(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
                 self.maskingView.backgroundColor = UIColor.clear
@@ -245,14 +218,10 @@ class Presenter: NSObject {
         case .blur:
             unblur()
         }
-        
-        if config.shouldNotOverlap {
-            updateLayoutForRootView()
-        }
     }
-
+    
     private func animationContext() -> AnimationContext {
-        return AnimationContext(messageView: view, containerView: maskingView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
+        return AnimationContext(messageView: view, containerView: maskingView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide, presentationContext: config.presentationContext)
     }
 
     private func safeZoneConflicts() -> SafeZoneConflicts {

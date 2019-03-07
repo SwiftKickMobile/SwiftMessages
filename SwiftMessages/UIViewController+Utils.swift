@@ -101,7 +101,7 @@ extension SwiftMessages.PresentationStyle {
     /// presentation context logic to work with safe area insets.
     var topBottomStyle: TopBottomAnimation.Style? {
         switch self {
-        case .top: return .top
+        case .top(let shouldOverlap): return .top(overlapping: shouldOverlap)
         case .bottom: return .bottom
         case .custom(let animator): return (animator as? TopBottomAnimation)?.style
         case .center: return nil

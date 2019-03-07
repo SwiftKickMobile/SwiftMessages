@@ -204,7 +204,7 @@ extension SwiftMessagesSegue {
         case .topMessage:
             messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             messageView.collapseLayoutMarginAdditions = false
-            let animation = TopBottomAnimation(style: .top)
+            let animation = TopBottomAnimation(style: .top(overlapping: true))
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomMessage:
@@ -218,7 +218,7 @@ extension SwiftMessagesSegue {
             messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
-            presentationStyle = .top
+            presentationStyle = .top(shouldOverlap: true)
         case .bottomCard:
             containment = .background
             messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -231,7 +231,7 @@ extension SwiftMessagesSegue {
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
-            let animation = TopBottomAnimation(style: .top)
+            let animation = TopBottomAnimation(style: .top(overlapping: true))
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomTab:

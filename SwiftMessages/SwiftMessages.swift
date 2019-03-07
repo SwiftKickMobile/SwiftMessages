@@ -26,7 +26,7 @@ open class SwiftMessages {
         /**
          Message view slides down from the top.
         */
-        case top
+        case top(shouldOverlap: Bool)
 
         /**
          Message view slides up from the bottom.
@@ -231,13 +231,13 @@ open class SwiftMessages {
          Works for the case if presentationStyle is Top and view is
          added on Window.
          */
-        public var shouldNotOverlap = false
+        public var shouldOverlap = true
         
         /**
          Specifies whether the message view is displayed at the top or bottom
          of the selected presentation container. The default is `.Top`.
          */
-        public var presentationStyle = PresentationStyle.top
+        public var presentationStyle = PresentationStyle.top(shouldOverlap: true)
 
         /**
          Specifies how the container for presenting the message view
@@ -686,7 +686,7 @@ extension SwiftMessages {
  */
 
 extension SwiftMessages: PresenterDelegate {
-
+    
     func hide(presenter: Presenter) {
         messageQueue.sync {
             self.internalHide(id: presenter.id)
@@ -714,6 +714,27 @@ extension SwiftMessages: PresenterDelegate {
         }
         let queued = queue.filter { $0.animator === animator }
         return queued.first
+    }
+    
+    public func resetRootViewLayout() {
+        if let topView = UIApplication.shared.keyWindow?.rootViewController?.view {
+            let frame = topView.frame
+            topView.frame = CGRect(x: frame.origin.x, y: 0, width: frame.width, height: UIScreen.main.bounds.height)
+            topView.layoutIfNeeded()
+        }
+    }
+    
+    public func updateLayoutForRootView(animator: AnimationContext?) {
+        if let topView = UIApplication.shared.keyWindow?.rootViewController?.view,
+            let messageView = animator?.messageView,
+            case .window(let level)? = animator?.presentationContext,
+            level != .alert{
+            
+            let frame = topView.frame
+            let viewHeight = messageView.frame.height + messageView.frame.origin.y
+            topView.frame = CGRect(x: frame.origin.x, y: viewHeight, width: frame.width, height: UIScreen.main.bounds.height - viewHeight)
+            topView.layoutIfNeeded()
+        }
     }
 }
 
