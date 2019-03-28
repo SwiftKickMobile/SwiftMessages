@@ -15,8 +15,6 @@ public class CustomAnimation: NSObject, Animator {
         case down
     }
     
-    private var arrowDirection: ArrowDirection = .up
-    
     weak public var delegate: AnimationDelegate?
     weak var messageView: UIView?
     weak var containerView: UIView?
@@ -29,12 +27,11 @@ public class CustomAnimation: NSObject, Animator {
         let layer = CAShapeLayer()
         return layer
     }()
-    
+    private var arrowDirection: ArrowDirection = .up
     var containerSize: CGSize {
         return containerView?.frame.size ?? .zero
     }
     var cornerRadius: CGFloat = 15.0
-    
     var popoverFrame: CGRect?
     var popoverView: UIView?
     var fillColor: CGColor? = UIColor.white.cgColor
