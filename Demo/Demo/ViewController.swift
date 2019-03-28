@@ -7,7 +7,11 @@
 //
 
 import UIKit
+#if os(iOS)
 import SwiftMessages
+#else
+import SwiftMessagesTvOS
+#endif
 
 class ViewController: UITableViewController {
 
@@ -71,7 +75,11 @@ class ViewController: UITableViewController {
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.isHidden = true
         var warningConfig = SwiftMessages.defaultConfig
+        #if os(iOS)
         warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        #else
+        warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.alert)
+        #endif
 
         let success = MessageView.viewFromNib(layout: .cardView)
         success.configureTheme(.success)
@@ -95,7 +103,11 @@ class ViewController: UITableViewController {
         status.bodyLabel?.textColor = UIColor.white
         status.configureContent(body: "A tiny line of text covering the status bar.")
         var statusConfig = SwiftMessages.defaultConfig
+        #if os(iOS)
         statusConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        #else
+        statusConfig.presentationContext = .window(windowLevel: UIWindow.Level.alert)
+        #endif
 
         let status2 = MessageView.viewFromNib(layout: .statusLine)
         status2.backgroundView.backgroundColor = UIColor.orange
@@ -103,7 +115,9 @@ class ViewController: UITableViewController {
         status2.configureContent(body: "Switched to light status bar!")
         var status2Config = SwiftMessages.defaultConfig
         status2Config.presentationContext = .window(windowLevel: UIWindow.Level.normal)
+        #if os(iOS)
         status2Config.preferredStatusBarStyle = .lightContent
+        #endif
 
         SwiftMessages.show(view: error)
         SwiftMessages.show(config: warningConfig, view: warning)
@@ -131,7 +145,11 @@ class ViewController: UITableViewController {
         }
         messageView.configureDropShadow()
         var config = SwiftMessages.defaultConfig
+        #if os(iOS)
         config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        #else
+        config.presentationContext = .window(windowLevel: UIWindow.Level.alert)
+        #endif
         SwiftMessages.show(config: config, view: messageView)
     }
 
@@ -141,7 +159,11 @@ class ViewController: UITableViewController {
         view.getTacosAction = { _ in SwiftMessages.hide() }
         view.cancelAction = { SwiftMessages.hide() }
         var config = SwiftMessages.defaultConfig
+        #if os(iOS)
         config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        #else
+        config.presentationContext = .window(windowLevel: UIWindow.Level.alert)
+        #endif
         config.duration = .forever
         config.presentationStyle = .bottom
         config.dimMode = .gray(interactive: true)
@@ -160,7 +182,11 @@ class ViewController: UITableViewController {
         config.presentationStyle = .center
         config.duration = .forever
         config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
-        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
+        #if os(iOS)
+        config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        #else
+        config.presentationContext = .window(windowLevel: UIWindow.Level.alert)
+        #endif
         SwiftMessages.show(config: config, view: messageView)
     }
 }

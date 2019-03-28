@@ -47,7 +47,9 @@ public class TopBottomAnimation: NSObject, Animator {
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
+        #if os(iOS)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
+        #endif
         install(context: context)
         showAnimation(completion: completion)
     }
@@ -130,7 +132,7 @@ public class TopBottomAnimation: NSObject, Animator {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
-        if #available(iOS 11, *) {
+        if #available(iOS 11, tvOS 11, *) {
             adjustable.insetsLayoutMarginsFromSafeArea = false
         }
         var layoutMargins = adjustable.defaultMarginAdjustment(context: context)

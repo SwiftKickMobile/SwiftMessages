@@ -7,7 +7,11 @@
 //
 
 import UIKit
+#if os(iOS)
 import SwiftMessages
+#else
+import SwiftMessagesTvOS
+#endif
 
 class TacoDialogView: MessageView {
 
@@ -29,13 +33,18 @@ class TacoDialogView: MessageView {
     }
     
     @IBAction func getTacos() {
+        #if os(iOS)
         getTacosAction?(Int(tacoSlider.value))
+        #else
+        getTacosAction?(1)
+        #endif
     }
 
     @IBAction func cancel() {
         cancelAction?()
     }
     
+    #if os(iOS)
     @IBOutlet weak var tacoSlider: UISlider!
     
     @IBAction func tacoSliderSlid(_ slider: UISlider) {
@@ -45,4 +54,5 @@ class TacoDialogView: MessageView {
     @IBAction func tacoSliderFinished(_ slider: UISlider) {
         slider.setValue(Float(count), animated: true)
     }
+    #endif
 }

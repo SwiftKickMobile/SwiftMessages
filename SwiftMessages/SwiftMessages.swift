@@ -260,6 +260,7 @@ open class SwiftMessages {
         */
         public var interactiveHide = true
         
+        #if os(iOS)
         /**
          Specifies the preferred status bar style when the view is displayed
          directly behind the status bar, such as when using `.Window`
@@ -269,6 +270,7 @@ open class SwiftMessages {
          the current one. The default is `.Default`.
          */
         public var preferredStatusBarStyle: UIStatusBarStyle?
+        #endif
         
         /**
          If a view controller is created to host the message view, should the view 

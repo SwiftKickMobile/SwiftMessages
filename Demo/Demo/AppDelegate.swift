@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         window?.tintColor = brandColor
+        #if os(iOS)
         UISwitch.appearance().onTintColor = brandColor
+        #endif
         return true
     }
 }

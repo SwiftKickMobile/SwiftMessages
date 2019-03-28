@@ -15,9 +15,11 @@ open class WindowViewController: UIViewController
     let windowLevel: UIWindow.Level
     let config: SwiftMessages.Config
     
+    #if os(iOS)
     override open var shouldAutorotate: Bool {
         return config.shouldAutorotate
     }
+    #endif
     
     public init(windowLevel: UIWindow.Level?, config: SwiftMessages.Config)
     {
@@ -49,9 +51,11 @@ open class WindowViewController: UIViewController
         fatalError("init(coder:) has not been implemented")
     }
     
+    #if os(iOS)
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return config.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }
+    #endif
 }
 
 extension WindowViewController {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,18 @@
 		22F27953210D0FDE00273E7F /* ViewControllersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27952210D0FDE00273E7F /* ViewControllersViewController.swift */; };
 		22FE3FA821193CB90017303D /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324121193A3B005C13D9 /* SwiftMessages.framework */; };
 		22FE3FA921193CB90017303D /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22FB324121193A3B005C13D9 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37FA7403224C8101005E32FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37FA7401224C8101005E32FC /* Main.storyboard */; };
+		37FA740E224C81B1005E32FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE51D5D1DB70030232E /* AppDelegate.swift */; };
+		37FA740F224C8213005E32FC /* SwiftMessagesTvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FA740C224C8103005E32FC /* SwiftMessagesTvOS.framework */; };
+		37FA7410224C8213005E32FC /* SwiftMessagesTvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37FA740C224C8103005E32FC /* SwiftMessagesTvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37FA7414224C82E9005E32FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE71D5D1DB70030232E /* ViewController.swift */; };
+		37FA7416224C8312005E32FC /* CountedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E51F506993004CB2BC /* CountedViewController.swift */; };
+		37FA7417224C8312005E32FC /* ViewControllersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F27952210D0FDE00273E7F /* ViewControllersViewController.swift */; };
+		37FA7418224C831B005E32FC /* TacoDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */; };
+		37FA7419224C831E005E32FC /* CountedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */; };
+		37FA741A224C8320005E32FC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E91F507586004CB2BC /* Utils.swift */; };
+		37FA741B224C832D005E32FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86AEDCEC1D5D1DB70030232E /* Assets.xcassets */; };
+		37FA741F224C9024005E32FC /* TacoDialogViewTvOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37FA741D224C9024005E32FC /* TacoDialogViewTvOS.xib */; };
 		8642F4361D5F7F540061BDCD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642F4351D5F7F540061BDCD /* ExploreViewController.swift */; };
 		86AEDCE61D5D1DB70030232E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE51D5D1DB70030232E /* AppDelegate.swift */; };
 		86AEDCE81D5D1DB70030232E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AEDCE71D5D1DB70030232E /* ViewController.swift */; };
@@ -52,6 +64,20 @@
 			remoteGlobalIDString = 86B48AEB1D5A41C900063E2B;
 			remoteInfo = SwiftMessages;
 		};
+		37FA740B224C8103005E32FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37FA739C224C6654005E32FC;
+			remoteInfo = SwiftMessagesTvOS;
+		};
+		37FA7411224C8213005E32FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 37FA739B224C6654005E32FC;
+			remoteInfo = SwiftMessagesTvOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +102,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37FA7413224C8214005E32FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				37FA7410224C8213005E32FC /* SwiftMessagesTvOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +122,10 @@
 		22774C1420B8461900813732 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		22F27952210D0FDE00273E7F /* ViewControllersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersViewController.swift; sourceTree = "<group>"; };
 		22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMessages.xcodeproj; path = ../SwiftMessages.xcodeproj; sourceTree = "<group>"; };
+		37FA73FB224C8101005E32FC /* DemoTvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoTvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37FA7402224C8101005E32FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37FA7406224C8103005E32FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37FA741D224C9024005E32FC /* TacoDialogViewTvOS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TacoDialogViewTvOS.xib; sourceTree = "<group>"; };
 		8642F4351D5F7F540061BDCD /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		86AEDCE21D5D1DB70030232E /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86AEDCE51D5D1DB70030232E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +139,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		37FA73F8224C8101005E32FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37FA740F224C8213005E32FC /* SwiftMessagesTvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86AEDCDF1D5D1DB70030232E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,9 +162,19 @@
 			isa = PBXGroup;
 			children = (
 				22FB324121193A3B005C13D9 /* SwiftMessages.framework */,
+				37FA740C224C8103005E32FC /* SwiftMessagesTvOS.framework */,
 				22FB324521193A3B005C13D9 /* SwiftMessagesTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		37FA73FC224C8101005E32FC /* DemoTvOS */ = {
+			isa = PBXGroup;
+			children = (
+				37FA7401224C8101005E32FC /* Main.storyboard */,
+				37FA7406224C8103005E32FC /* Info.plist */,
+			);
+			path = DemoTvOS;
 			sourceTree = "<group>";
 		};
 		6AB98897E817EE976DD72852 /* Frameworks */ = {
@@ -130,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				86AEDCE41D5D1DB70030232E /* Demo */,
+				37FA73FC224C8101005E32FC /* DemoTvOS */,
 				86AEDCE31D5D1DB70030232E /* Products */,
 				6AB98897E817EE976DD72852 /* Frameworks */,
 				22FB323A21193A3B005C13D9 /* SwiftMessages.xcodeproj */,
@@ -140,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				86AEDCE21D5D1DB70030232E /* Demo.app */,
+				37FA73FB224C8101005E32FC /* DemoTvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +219,7 @@
 				86AEDCF11D5D1DB70030232E /* Info.plist */,
 				86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */,
 				86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */,
+				37FA741D224C9024005E32FC /* TacoDialogViewTvOS.xib */,
 				226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */,
 				226FA5E91F507586004CB2BC /* Utils.swift */,
 			);
@@ -167,6 +229,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		37FA73FA224C8101005E32FC /* DemoTvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37FA740D224C8103005E32FC /* Build configuration list for PBXNativeTarget "DemoTvOS" */;
+			buildPhases = (
+				37FA73F7224C8101005E32FC /* Sources */,
+				37FA73F8224C8101005E32FC /* Frameworks */,
+				37FA73F9224C8101005E32FC /* Resources */,
+				37FA7413224C8214005E32FC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37FA7412224C8213005E32FC /* PBXTargetDependency */,
+			);
+			name = DemoTvOS;
+			productName = DemoTvOS;
+			productReference = 37FA73FB224C8101005E32FC /* DemoTvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		86AEDCE11D5D1DB70030232E /* Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86AEDCF41D5D1DB70030232E /* Build configuration list for PBXNativeTarget "Demo" */;
@@ -194,10 +275,13 @@
 		86AEDCDA1D5D1DB70030232E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "SwiftKick Mobile";
 				TargetAttributes = {
+					37FA73FA224C8101005E32FC = {
+						CreatedOnToolsVersion = 10.2;
+					};
 					86AEDCE11D5D1DB70030232E = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 38R82CD868;
@@ -206,10 +290,11 @@
 				};
 			};
 			buildConfigurationList = 86AEDCDD1D5D1DB70030232E /* Build configuration list for PBXProject "Demo" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -225,6 +310,7 @@
 			projectRoot = "";
 			targets = (
 				86AEDCE11D5D1DB70030232E /* Demo */,
+				37FA73FA224C8101005E32FC /* DemoTvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -244,9 +330,26 @@
 			remoteRef = 22FB324421193A3B005C13D9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		37FA740C224C8103005E32FC /* SwiftMessagesTvOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftMessagesTvOS.framework;
+			remoteRef = 37FA740B224C8103005E32FC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		37FA73F9224C8101005E32FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37FA741B224C832D005E32FC /* Assets.xcassets in Resources */,
+				37FA741F224C9024005E32FC /* TacoDialogViewTvOS.xib in Resources */,
+				37FA7403224C8101005E32FC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86AEDCE01D5D1DB70030232E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,6 +364,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		37FA73F7224C8101005E32FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37FA7414224C82E9005E32FC /* ViewController.swift in Sources */,
+				37FA740E224C81B1005E32FC /* AppDelegate.swift in Sources */,
+				37FA7419224C831E005E32FC /* CountedMessageView.swift in Sources */,
+				37FA7416224C8312005E32FC /* CountedViewController.swift in Sources */,
+				37FA7417224C8312005E32FC /* ViewControllersViewController.swift in Sources */,
+				37FA7418224C831B005E32FC /* TacoDialogView.swift in Sources */,
+				37FA741A224C8320005E32FC /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86AEDCDE1D5D1DB70030232E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,9 +406,22 @@
 			name = SwiftMessages;
 			targetProxy = 22FE3FAA21193CB90017303D /* PBXContainerItemProxy */;
 		};
+		37FA7412224C8213005E32FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMessagesTvOS;
+			targetProxy = 37FA7411224C8213005E32FC /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		37FA7401224C8101005E32FC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37FA7402224C8101005E32FC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		86AEDCE91D5D1DB70030232E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -311,6 +441,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		37FA7407224C8103005E32FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = DemoTvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.DemoTvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		37FA7408224C8103005E32FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = DemoTvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.DemoTvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
 		86AEDCF21D5D1DB70030232E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -363,7 +551,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -411,8 +599,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -425,7 +614,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 38R82CD868;
 				INFOPLIST_FILE = Demo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -440,7 +632,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 38R82CD868;
 				INFOPLIST_FILE = Demo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -450,6 +645,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		37FA740D224C8103005E32FC /* Build configuration list for PBXNativeTarget "DemoTvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37FA7407224C8103005E32FC /* Debug */,
+				37FA7408224C8103005E32FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		86AEDCDD1D5D1DB70030232E /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

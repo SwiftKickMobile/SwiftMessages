@@ -7,7 +7,11 @@
 //
 
 import UIKit
+#if os(iOS)
 import SwiftMessages
+#else
+import SwiftMessagesTvOS
+#endif
 
 class ViewControllersViewController: UIViewController {
     @objc @IBAction private func dismissPresented(segue: UIStoryboardSegue) {

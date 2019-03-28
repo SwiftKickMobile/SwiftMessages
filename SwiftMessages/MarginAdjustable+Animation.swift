@@ -8,6 +8,16 @@
 
 import UIKit
 
+private extension UIApplication {
+    var isPortrait: Bool {
+        #if os(iOS)
+        return statusBarOrientation == .portrait || statusBarOrientation == .portraitUpsideDown
+        #else
+        return false
+        #endif
+    }
+}
+
 public extension MarginAdjustable where Self: UIView {
 
     public func defaultMarginAdjustment(context: AnimationContext) -> UIEdgeInsets {
@@ -16,7 +26,7 @@ public extension MarginAdjustable where Self: UIView {
             || (safeAreaTopOffset == 0 && safeAreaBottomOffset == 0 && statusBarOffset == 0) {
             var layoutMargins: UIEdgeInsets = layoutMarginAdditions
             var safeAreaInsets: UIEdgeInsets
-            if #available(iOS 11, *) {
+            if #available(iOS 11, tvOS 11, *) {
                 insetsLayoutMarginsFromSafeArea = false
                 safeAreaInsets = self.safeAreaInsets
             } else {
@@ -25,15 +35,19 @@ public extension MarginAdjustable where Self: UIView {
                 #else
                 let application: UIApplication? = UIApplication.shared
                 #endif
+                #if os(iOS)
                 if !context.safeZoneConflicts.isDisjoint(with: [.statusBar]),
                     let app = application,
-                    app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
+                    app.isPortrait {
                     let frameInWindow = convert(bounds, to: window)
                     let top = max(0, 20 - frameInWindow.minY)
                     safeAreaInsets = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
                 } else {
                     safeAreaInsets = .zero
                 }
+                #else
+                safeAreaInsets = .zero
+                #endif
             }
             if !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
                 safeAreaInsets.top = 0
@@ -44,7 +58,7 @@ public extension MarginAdjustable where Self: UIView {
             return layoutMargins
         } else {
             var insets: UIEdgeInsets
-            if #available(iOS 11, *) {
+            if #available(iOS 11, tvOS 11, *) {
                 insets = safeAreaInsets
             } else {
                 insets = .zero
@@ -63,7 +77,7 @@ public extension MarginAdjustable where Self: UIView {
             #else
             let application: UIApplication? = UIApplication.shared
             #endif
-            if #available(iOS 11, *), safeAreaInsets.top > 0  {
+            if #available(iOS 11, tvOS 11, *), safeAreaInsets.top > 0  {
                 do {
                     // To accommodate future safe areas, using a linear formula based on
                     // two data points:
@@ -72,13 +86,13 @@ public extension MarginAdjustable where Self: UIView {
                     top -= 6 * (safeAreaInsets.top - 20) / (44 - 20)
                 }
                 top += safeAreaTopOffset
-            } else if let app = application, app.statusBarOrientation == .portrait || app.statusBarOrientation == .portraitUpsideDown {
+            } else if let app = application, app.isPortrait {
                 let frameInWindow = convert(bounds, to: window)
                 if frameInWindow.minY == -bounceAnimationOffset {
                     top += statusBarOffset
                 }
             }
-        } else if #available(iOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
+        } else if #available(iOS 11, tvOS 11, *), !context.safeZoneConflicts.isDisjoint(with: .overStatusBar) {
             top -= safeAreaInsets.top
         }
         return top
@@ -87,7 +101,7 @@ public extension MarginAdjustable where Self: UIView {
     private func bottomAdjustment(context: AnimationContext) -> CGFloat {
         var bottom: CGFloat = 0
         if !context.safeZoneConflicts.isDisjoint(with: [.homeIndicator]) {
-            if #available(iOS 11, *), safeAreaInsets.bottom > 0  {
+            if #available(iOS 11, tvOS 11, *), safeAreaInsets.bottom > 0  {
                 do {
                     // This adjustment was added to fix a layout issue with iPhone X in
                     // landscape mode. Using a linear formula based on two data points to help

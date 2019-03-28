@@ -242,7 +242,7 @@ class Presenter: NSObject {
             if let vc = presentationContext.viewControllerValue() as? UITabBarController { return vc.sm_isVisible(view: vc.tabBar) }
             return false
         }()
-        if #available(iOS 11, *) {
+        if #available(iOS 11, tvOS 11, *) {
             if windowLevel > UIWindow.Level.normal {
                 // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
                 // iPhone 8 with status bar window level. This seems like an iOS bug since
@@ -274,13 +274,15 @@ class Presenter: NSObject {
         } else {
             #if SWIFTMESSAGES_APP_EXTENSIONS
             return []
-            #else
+            #elseif os(iOS)
             if UIApplication.shared.isStatusBarHidden { return [] }
             if (windowLevel > UIWindow.Level.normal) || underNavigationBar { return [] }
             let statusBarFrame = UIApplication.shared.statusBarFrame
             let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
             let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
             return statusBarViewFrame.intersects(maskingView.bounds) ? SafeZoneConflicts.statusBar : []
+            #else
+            return []
             #endif
         }
     }

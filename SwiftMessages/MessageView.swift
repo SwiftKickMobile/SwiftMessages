@@ -184,7 +184,11 @@ extension MessageView {
      - Returns: An instance of generic view type `T: MessageView`.
      */
     public static func viewFromNib<T: MessageView>(layout: Layout, filesOwner: AnyObject = NSNull.init()) -> T {
+        #if os(iOS)
         return try! SwiftMessages.viewFromNib(named: layout.rawValue)
+        #else
+        return try! SwiftMessages.viewFromNib(named: layout.rawValue + "TvOS")
+        #endif
     }
     
     /**
@@ -199,7 +203,11 @@ extension MessageView {
      - Returns: An instance of generic view type `T: MessageView`.
      */
     public static func viewFromNib<T: MessageView>(layout: Layout, bundle: Bundle, filesOwner: AnyObject = NSNull.init()) -> T {
+        #if os(iOS)
         return try! SwiftMessages.viewFromNib(named: layout.rawValue, bundle: bundle, filesOwner: filesOwner)
+        #else
+        return try! SwiftMessages.viewFromNib(named: layout.rawValue + "TvOS", bundle: bundle, filesOwner: filesOwner)
+        #endif
     }
 }
 
@@ -254,7 +262,11 @@ extension MessageView {
         switch theme {
         case .info:
             let backgroundColor = UIColor(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+            #if os(iOS)
             let foregroundColor = UIColor.darkText
+            #else
+            let foregroundColor = UIColor.black
+            #endif
             configureTheme(backgroundColor: backgroundColor, foregroundColor: foregroundColor, iconImage: iconImage)
         case .success:
             let backgroundColor = UIColor(red: 97.0/255.0, green: 161.0/255.0, blue: 23.0/255.0, alpha: 1.0)
