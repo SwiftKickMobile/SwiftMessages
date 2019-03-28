@@ -11,6 +11,22 @@ import SwiftMessages
 
 class ViewController: UITableViewController {
 
+    @IBAction func showPopover(_ sender: UIBarButtonItem, event: UIEvent) {
+        let view: AView = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        config.duration = .forever
+        let animator = CustomAnimation()
+        animator.popoverView = event.allTouches?.first?.view
+//        animator.placement = .center
+        config.presentationStyle = .custom(animator: animator)
+        config.interactiveHide = false
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
+    }
+    
     var items: [Item] = [
         .titleBody(title: "MESSAGE VIEW", body: "SwiftMessages provides a standard message view along with a number of layouts, themes and presentation options.", function: ViewController.demoBasics),
         .titleBody(title: "ANY VIEW", body: "Any view, no matter how cute, can be displayed as a message.", function: ViewController.demoAnyView),
@@ -21,6 +37,10 @@ class ViewController: UITableViewController {
         //.counted,
     ]
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.setToolbarHidden(false, animated: true)
+    }
     /*
      MARK: - UITableViewDataSource
      */
@@ -136,14 +156,22 @@ class ViewController: UITableViewController {
     }
 
     static func demoCustomNib() {
-        let view: TacoDialogView = try! SwiftMessages.viewFromNib()
+//        let view: TacoDialogView = try! SwiftMessages.viewFromNib()
+//        view.configureDropShadow()
+//        view.getTacosAction = { _ in SwiftMessages.hide() }
+//        view.cancelAction = { SwiftMessages.hide() }
+        
+        let view: AView = try! SwiftMessages.viewFromNib()
+        view.position = CGPoint(x: 20, y: 100)
         view.configureDropShadow()
-        view.getTacosAction = { _ in SwiftMessages.hide() }
-        view.cancelAction = { SwiftMessages.hide() }
+        
         var config = SwiftMessages.defaultConfig
         config.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
         config.duration = .forever
-        config.presentationStyle = .bottom
+        let animator = CustomAnimation()
+//        animator.placement = .center
+        config.presentationStyle = .custom(animator: animator)
+        config.interactiveHide = false
         config.dimMode = .gray(interactive: true)
         SwiftMessages.show(config: config, view: view)
     }

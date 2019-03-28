@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022658412238FCD600991DA2 /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022658402238FCD600991DA2 /* TestView.xib */; };
+		022658432238FD4500991DA2 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022658422238FD4500991DA2 /* TestView.swift */; };
+		022658452238FE0C00991DA2 /* AView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022658442238FE0C00991DA2 /* AView.xib */; };
+		022658472238FEC000991DA2 /* AView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022658462238FEC000991DA2 /* AView.swift */; };
+		029050DF2191737E00B9681F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029050DE2191737E00B9681F /* TestViewController.swift */; };
+		02F4F97C224C6766009CC649 /* CustomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F97B224C6766009CC649 /* CustomAnimation.swift */; };
+		02F4F97F224C6890009CC649 /* CustomPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F97E224C6890009CC649 /* CustomPanHandler.swift */; };
+		02F4F996224C727A009CC649 /* Stevia+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F981224C7279009CC649 /* Stevia+Style.swift */; };
+		02F4F997224C727A009CC649 /* Stevia+DoubleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F982224C7279009CC649 /* Stevia+DoubleDash.swift */; };
+		02F4F998224C727A009CC649 /* Stevia+GetConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F983224C7279009CC649 /* Stevia+GetConstraint.swift */; };
+		02F4F999224C727A009CC649 /* Stevia+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F984224C7279009CC649 /* Stevia+Operators.swift */; };
+		02F4F99A224C727A009CC649 /* Stevia+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F985224C7279009CC649 /* Stevia+Center.swift */; };
+		02F4F99B224C727A009CC649 /* Stevia+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F986224C7279009CC649 /* Stevia+Fill.swift */; };
+		02F4F99C224C727A009CC649 /* Stevia+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F987224C7279009CC649 /* Stevia+Position.swift */; };
+		02F4F99D224C727A009CC649 /* Stevia+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F988224C7279009CC649 /* Stevia+Notifications.swift */; };
+		02F4F99E224C727A009CC649 /* Stevia+FlexibleMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F989224C7279009CC649 /* Stevia+FlexibleMargin.swift */; };
+		02F4F99F224C727A009CC649 /* Stevia+Baselines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F98A224C7279009CC649 /* Stevia+Baselines.swift */; };
+		02F4F9A0224C727A009CC649 /* Stevia+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F98B224C7279009CC649 /* Stevia+Hierarchy.swift */; };
+		02F4F9A1224C727A009CC649 /* Stevia+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F98C224C7279009CC649 /* Stevia+Constraints.swift */; };
+		02F4F9A2224C727A009CC649 /* Stevia+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F98E224C7279009CC649 /* Stevia+Size.swift */; };
+		02F4F9A3224C727A009CC649 /* Stevia+Stacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F98F224C7279009CC649 /* Stevia+Stacks.swift */; };
+		02F4F9A4224C727A009CC649 /* Stevia+Percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F990224C7279009CC649 /* Stevia+Percentage.swift */; };
+		02F4F9A5224C727A009CC649 /* Stevia+Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F991224C7279009CC649 /* Stevia+Equation.swift */; };
+		02F4F9A6224C727A009CC649 /* Stevia+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F992224C7279009CC649 /* Stevia+Alignment.swift */; };
+		02F4F9A7224C727A009CC649 /* Stevia+LayoutAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F993224C7279009CC649 /* Stevia+LayoutAnchors.swift */; };
+		02F4F9A9224C727A009CC649 /* Stevia+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4F995224C7279009CC649 /* Stevia+Content.swift */; };
 		22652712210F698600310344 /* TacoDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */; };
 		226FA5E61F506993004CB2BC /* CountedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E51F506993004CB2BC /* CountedViewController.swift */; };
 		226FA5E81F5071D0004CB2BC /* CountedMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */; };
@@ -79,6 +105,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		022658402238FCD600991DA2 /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TestView.xib; path = ../../SwiftMessages/Resources/TestView.xib; sourceTree = "<group>"; };
+		022658422238FD4500991DA2 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		022658442238FE0C00991DA2 /* AView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AView.xib; sourceTree = "<group>"; };
+		022658462238FEC000991DA2 /* AView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AView.swift; sourceTree = "<group>"; };
+		029050DE2191737E00B9681F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		02F4F97B224C6766009CC649 /* CustomAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimation.swift; sourceTree = "<group>"; };
+		02F4F97E224C6890009CC649 /* CustomPanHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPanHandler.swift; sourceTree = "<group>"; };
+		02F4F981224C7279009CC649 /* Stevia+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Style.swift"; sourceTree = "<group>"; };
+		02F4F982224C7279009CC649 /* Stevia+DoubleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+DoubleDash.swift"; sourceTree = "<group>"; };
+		02F4F983224C7279009CC649 /* Stevia+GetConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+GetConstraint.swift"; sourceTree = "<group>"; };
+		02F4F984224C7279009CC649 /* Stevia+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Operators.swift"; sourceTree = "<group>"; };
+		02F4F985224C7279009CC649 /* Stevia+Center.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Center.swift"; sourceTree = "<group>"; };
+		02F4F986224C7279009CC649 /* Stevia+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Fill.swift"; sourceTree = "<group>"; };
+		02F4F987224C7279009CC649 /* Stevia+Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Position.swift"; sourceTree = "<group>"; };
+		02F4F988224C7279009CC649 /* Stevia+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Notifications.swift"; sourceTree = "<group>"; };
+		02F4F989224C7279009CC649 /* Stevia+FlexibleMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+FlexibleMargin.swift"; sourceTree = "<group>"; };
+		02F4F98A224C7279009CC649 /* Stevia+Baselines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Baselines.swift"; sourceTree = "<group>"; };
+		02F4F98B224C7279009CC649 /* Stevia+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Hierarchy.swift"; sourceTree = "<group>"; };
+		02F4F98C224C7279009CC649 /* Stevia+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Constraints.swift"; sourceTree = "<group>"; };
+		02F4F98E224C7279009CC649 /* Stevia+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Size.swift"; sourceTree = "<group>"; };
+		02F4F98F224C7279009CC649 /* Stevia+Stacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Stacks.swift"; sourceTree = "<group>"; };
+		02F4F990224C7279009CC649 /* Stevia+Percentage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Percentage.swift"; sourceTree = "<group>"; };
+		02F4F991224C7279009CC649 /* Stevia+Equation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Equation.swift"; sourceTree = "<group>"; };
+		02F4F992224C7279009CC649 /* Stevia+Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Alignment.swift"; sourceTree = "<group>"; };
+		02F4F993224C7279009CC649 /* Stevia+LayoutAnchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+LayoutAnchors.swift"; sourceTree = "<group>"; };
+		02F4F995224C7279009CC649 /* Stevia+Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stevia+Content.swift"; sourceTree = "<group>"; };
 		226FA5E51F506993004CB2BC /* CountedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountedViewController.swift; sourceTree = "<group>"; };
 		226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountedMessageView.swift; sourceTree = "<group>"; };
 		226FA5E91F507586004CB2BC /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -109,6 +161,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02F4F980224C7279009CC649 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				02F4F981224C7279009CC649 /* Stevia+Style.swift */,
+				02F4F982224C7279009CC649 /* Stevia+DoubleDash.swift */,
+				02F4F983224C7279009CC649 /* Stevia+GetConstraint.swift */,
+				02F4F984224C7279009CC649 /* Stevia+Operators.swift */,
+				02F4F985224C7279009CC649 /* Stevia+Center.swift */,
+				02F4F986224C7279009CC649 /* Stevia+Fill.swift */,
+				02F4F987224C7279009CC649 /* Stevia+Position.swift */,
+				02F4F988224C7279009CC649 /* Stevia+Notifications.swift */,
+				02F4F989224C7279009CC649 /* Stevia+FlexibleMargin.swift */,
+				02F4F98A224C7279009CC649 /* Stevia+Baselines.swift */,
+				02F4F98B224C7279009CC649 /* Stevia+Hierarchy.swift */,
+				02F4F98C224C7279009CC649 /* Stevia+Constraints.swift */,
+				02F4F98E224C7279009CC649 /* Stevia+Size.swift */,
+				02F4F98F224C7279009CC649 /* Stevia+Stacks.swift */,
+				02F4F990224C7279009CC649 /* Stevia+Percentage.swift */,
+				02F4F991224C7279009CC649 /* Stevia+Equation.swift */,
+				02F4F992224C7279009CC649 /* Stevia+Alignment.swift */,
+				02F4F993224C7279009CC649 /* Stevia+LayoutAnchors.swift */,
+				02F4F995224C7279009CC649 /* Stevia+Content.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		22FB323B21193A3B005C13D9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +207,7 @@
 		86AEDCD91D5D1DB70030232E = {
 			isa = PBXGroup;
 			children = (
+				02F4F980224C7279009CC649 /* Source */,
 				86AEDCE41D5D1DB70030232E /* Demo */,
 				86AEDCE31D5D1DB70030232E /* Products */,
 				6AB98897E817EE976DD72852 /* Frameworks */,
@@ -150,6 +229,8 @@
 				86AEDCE51D5D1DB70030232E /* AppDelegate.swift */,
 				86AEDCE91D5D1DB70030232E /* Main.storyboard */,
 				86AEDCE71D5D1DB70030232E /* ViewController.swift */,
+				02F4F97B224C6766009CC649 /* CustomAnimation.swift */,
+				02F4F97E224C6890009CC649 /* CustomPanHandler.swift */,
 				8642F4351D5F7F540061BDCD /* ExploreViewController.swift */,
 				226FA5E51F506993004CB2BC /* CountedViewController.swift */,
 				22F27952210D0FDE00273E7F /* ViewControllersViewController.swift */,
@@ -158,8 +239,13 @@
 				86AEDCF11D5D1DB70030232E /* Info.plist */,
 				86C0ABA11D5E816600F76BD6 /* TacoDialogView.swift */,
 				86C0AB9F1D5E814600F76BD6 /* TacoDialogView.xib */,
+				022658402238FCD600991DA2 /* TestView.xib */,
+				022658422238FD4500991DA2 /* TestView.swift */,
+				022658442238FE0C00991DA2 /* AView.xib */,
+				022658462238FEC000991DA2 /* AView.swift */,
 				226FA5E71F5071D0004CB2BC /* CountedMessageView.swift */,
 				226FA5E91F507586004CB2BC /* Utils.swift */,
+				029050DE2191737E00B9681F /* TestViewController.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -200,7 +286,7 @@
 				TargetAttributes = {
 					86AEDCE11D5D1DB70030232E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 38R82CD868;
+						DevelopmentTeam = 89YHB42JY7;
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -210,6 +296,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -251,8 +338,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				022658452238FE0C00991DA2 /* AView.xib in Resources */,
 				86AEDCF01D5D1DB70030232E /* LaunchScreen.storyboard in Resources */,
 				22652712210F698600310344 /* TacoDialogView.xib in Resources */,
+				022658412238FCD600991DA2 /* TestView.xib in Resources */,
 				86AEDCED1D5D1DB70030232E /* Assets.xcassets in Resources */,
 				86AEDCEB1D5D1DB70030232E /* Main.storyboard in Resources */,
 			);
@@ -265,14 +354,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F4F9A7224C727A009CC649 /* Stevia+LayoutAnchors.swift in Sources */,
+				02F4F9A9224C727A009CC649 /* Stevia+Content.swift in Sources */,
+				02F4F99A224C727A009CC649 /* Stevia+Center.swift in Sources */,
+				02F4F99D224C727A009CC649 /* Stevia+Notifications.swift in Sources */,
 				8642F4361D5F7F540061BDCD /* ExploreViewController.swift in Sources */,
+				02F4F9A6224C727A009CC649 /* Stevia+Alignment.swift in Sources */,
+				02F4F998224C727A009CC649 /* Stevia+GetConstraint.swift in Sources */,
+				02F4F997224C727A009CC649 /* Stevia+DoubleDash.swift in Sources */,
+				022658472238FEC000991DA2 /* AView.swift in Sources */,
+				02F4F99B224C727A009CC649 /* Stevia+Fill.swift in Sources */,
 				226FA5E81F5071D0004CB2BC /* CountedMessageView.swift in Sources */,
+				02F4F996224C727A009CC649 /* Stevia+Style.swift in Sources */,
 				86AEDCE81D5D1DB70030232E /* ViewController.swift in Sources */,
+				02F4F9A2224C727A009CC649 /* Stevia+Size.swift in Sources */,
+				02F4F9A4224C727A009CC649 /* Stevia+Percentage.swift in Sources */,
+				02F4F999224C727A009CC649 /* Stevia+Operators.swift in Sources */,
+				02F4F9A5224C727A009CC649 /* Stevia+Equation.swift in Sources */,
 				226FA5EA1F507586004CB2BC /* Utils.swift in Sources */,
+				02F4F99E224C727A009CC649 /* Stevia+FlexibleMargin.swift in Sources */,
+				02F4F99F224C727A009CC649 /* Stevia+Baselines.swift in Sources */,
+				02F4F97F224C6890009CC649 /* CustomPanHandler.swift in Sources */,
+				02F4F9A0224C727A009CC649 /* Stevia+Hierarchy.swift in Sources */,
+				02F4F99C224C727A009CC649 /* Stevia+Position.swift in Sources */,
 				86AEDCE61D5D1DB70030232E /* AppDelegate.swift in Sources */,
+				02F4F9A3224C727A009CC649 /* Stevia+Stacks.swift in Sources */,
 				226FA5E61F506993004CB2BC /* CountedViewController.swift in Sources */,
+				022658432238FD4500991DA2 /* TestView.swift in Sources */,
+				02F4F9A1224C727A009CC649 /* Stevia+Constraints.swift in Sources */,
 				86C0ABA21D5E816600F76BD6 /* TacoDialogView.swift in Sources */,
+				029050DF2191737E00B9681F /* TestViewController.swift in Sources */,
 				22F27953210D0FDE00273E7F /* ViewControllersViewController.swift in Sources */,
+				02F4F97C224C6766009CC649 /* CustomAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +536,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 38R82CD868;
+				DEVELOPMENT_TEAM = 89YHB42JY7;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
@@ -438,7 +551,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 38R82CD868;
+				DEVELOPMENT_TEAM = 89YHB42JY7;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.Demo;
