@@ -53,7 +53,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             view.configureTheme(.error, iconStyle: iconStyle)
             view.accessibilityPrefix = "error"
         default:
-            let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
+            let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].randomElement()
             view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
             view.button?.setImage(Icon.errorSubtle.image, for: .normal)
             view.button?.setTitle(nil, for: .normal)
