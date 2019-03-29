@@ -86,7 +86,7 @@ public class CustomAnimation: NSObject, Animator {
         }
         
         menuView.bounds = view.bounds
-        messageView = menuView
+        messageView = context.messageView
         containerView = container
         self.context = context
         
@@ -129,7 +129,7 @@ public class CustomAnimation: NSObject, Animator {
     }
     
     @objc public func adjustMargins() {
-        guard let adjustable = messageView as? MarginAdjustable & UIView,
+        guard let adjustable = menuView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
         if #available(iOS 11, *) {
@@ -266,6 +266,18 @@ extension CustomAnimation {
         backgroundLayer.fillColor = fillColor
         backgroundLayer.strokeColor = strokeColor
         backgroundLayer.lineWidth = lineWidth
+        
+        // read shadow from message view
+        if let messageView = messageView as? MessageView {
+            backgroundLayer.shadowColor = messageView.layer.shadowColor
+            backgroundLayer.shadowOffset = messageView.layer.shadowOffset
+            backgroundLayer.shadowOpacity = messageView.layer.shadowOpacity
+            backgroundLayer.masksToBounds = messageView.layer.masksToBounds
+            backgroundLayer.shouldRasterize = true
+            backgroundLayer.rasterizationScale = UIScreen.main.scale
+            messageView.layer.shadowOpacity = 0.0
+        }
+        
         view.layer.insertSublayer(backgroundLayer, at: 0)
     }
     
