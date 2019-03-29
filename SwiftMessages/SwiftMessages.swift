@@ -540,7 +540,7 @@ open class SwiftMessages {
         // the dismiss gesture begins before we've queued the autohide
         // block on animation completion.
         self.autohideToken = current
-        current.showDate = Date()
+        current.showDate = CACurrentMediaTime()
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             do {
