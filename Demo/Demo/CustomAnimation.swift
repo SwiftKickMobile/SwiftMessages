@@ -15,6 +15,10 @@ public class CustomAnimation: NSObject, Animator {
         case down
     }
     
+    public var margin: CGFloat = 4
+    public var arrowWidth: CGFloat = 8
+    public var arrowHeight: CGFloat = 10
+    
     weak public var delegate: AnimationDelegate?
     weak var messageView: UIView?
     weak var containerView: UIView?
@@ -112,10 +116,10 @@ public class CustomAnimation: NSObject, Animator {
         menuView.height(values.menuFrame.height)
         view.fillHorizontally()
         if arrowDirection == .up {
-            view.top(FT.DefaultMenuArrowHeight)
+            view.top(arrowHeight)
             view.bottom(0)
         } else {
-            view.bottom(FT.DefaultMenuArrowHeight)
+            view.bottom(arrowHeight)
             view.top(0)
         }
         
@@ -181,21 +185,21 @@ extension CustomAnimation {
             // arrow point
             arrowPoint = CGPoint(x: senderRect.midX, y: 0)
             let menuSize = menuView.frame.size
-            let menuCenterX = menuSize.width/2 + FT.DefaultMargin
+            let menuCenterX = menuSize.width/2 + margin
             if senderRect.midY < containerSize.height/2 {
                 arrowPoint.y = 0
             } else {
-                arrowPoint.y = menuSize.height+FT.DefaultMenuArrowHeight
+                arrowPoint.y = menuSize.height+arrowHeight
             }
             if arrowPoint.x+menuCenterX > containerSize.width {
                 arrowPoint.x = min(
-                    arrowPoint.x-(containerSize.width-menuSize.width-FT.DefaultMargin),
-                    menuSize.width-FT.DefaultMenuArrowWidth-FT.DefaultMargin
+                    arrowPoint.x-(containerSize.width-menuSize.width-margin),
+                    menuSize.width-arrowWidth-margin
                 )
             } else if arrowPoint.x-menuCenterX < 0 {
                 arrowPoint.x = max(
-                    cornerRadius+FT.DefaultMenuArrowWidth,
-                    arrowPoint.x-FT.DefaultMargin
+                    cornerRadius+arrowWidth,
+                    arrowPoint.x-margin
                 )
             } else {
                 arrowPoint.x = menuSize.width/2
@@ -205,16 +209,16 @@ extension CustomAnimation {
             var senderCenterX = senderRect.midX
             if senderRect.midX+menuCenterX > containerSize.width {
                 senderCenterX = min(
-                    senderCenterX-(containerSize.width-menuSize.width-FT.DefaultMargin),
-                    menuSize.width-FT.DefaultMenuArrowWidth-FT.DefaultMargin
+                    senderCenterX-(containerSize.width-menuSize.width-margin),
+                    menuSize.width-arrowWidth-margin
                 )
-                menuOffsetX = containerSize.width-menuSize.width-FT.DefaultMargin
+                menuOffsetX = containerSize.width-menuSize.width-margin
             } else if senderCenterX-menuCenterX < 0 {
                 senderCenterX = max(
-                    cornerRadius+FT.DefaultMenuArrowWidth,
-                    senderCenterX-FT.DefaultMargin
+                    cornerRadius+arrowWidth,
+                    senderCenterX-margin
                 )
-                menuOffsetX = FT.DefaultMargin
+                menuOffsetX = margin
             } else {
                 senderCenterX = menuSize.width/2
                 menuOffsetX = senderRect.midX - menuSize.width/2
@@ -226,29 +230,29 @@ extension CustomAnimation {
                     x: menuOffsetX,
                     y: senderRect.maxY,
                     width: menuSize.width,
-                    height: menuSize.height+FT.DefaultMenuArrowHeight
+                    height: menuSize.height+arrowHeight
                 )
                 if (menuFrame.maxY > containerSize.height) {
                     menuFrame = CGRect(
                         x: menuOffsetX,
                         y: senderRect.maxY,
                         width: menuSize.width,
-                        height: containerSize.height-menuFrame.origin.y-FT.DefaultMargin
+                        height: containerSize.height-menuFrame.origin.y-margin
                     )
                 }
             } else {
                 menuFrame = CGRect(
                     x: menuOffsetX,
-                    y: senderRect.origin.y-menuSize.height-FT.DefaultMenuArrowHeight,
+                    y: senderRect.origin.y-menuSize.height-arrowHeight,
                     width: menuSize.width,
-                    height: menuSize.height+FT.DefaultMenuArrowHeight
+                    height: menuSize.height+arrowHeight
                 )
                 if menuFrame.origin.y < 0 {
                     menuFrame = CGRect(
                         x: menuOffsetX,
-                        y: FT.DefaultMargin,
+                        y: margin,
                         width: menuSize.width,
-                        height: senderRect.origin.y-FT.DefaultMargin
+                        height: senderRect.origin.y-margin
                     )
                 }
             }
@@ -276,22 +280,22 @@ extension CustomAnimation {
         
         if arrowDirection == .up {
             path.move(to: CGPoint(
-                x: arrowPoint.x-FT.DefaultMenuArrowWidth,
-                y: FT.DefaultMenuArrowHeight)
+                x: arrowPoint.x-arrowWidth,
+                y: arrowHeight)
             )
             path.addLine(to: CGPoint(x: arrowPoint.x, y: 0))
             path.addLine(to: CGPoint(
-                x: arrowPoint.x+FT.DefaultMenuArrowWidth,
-                y: FT.DefaultMenuArrowHeight)
+                x: arrowPoint.x+arrowWidth,
+                y: arrowHeight)
             )
             path.addLine(to: CGPoint(
                 x: viewWidth-radius,
-                y: FT.DefaultMenuArrowHeight)
+                y: arrowHeight)
             )
             path.addArc(
                 withCenter: CGPoint(
                     x: viewWidth-radius,
-                    y: FT.DefaultMenuArrowHeight+radius
+                    y: arrowHeight+radius
                 ),
                 radius: radius,
                 startAngle: .pi/2*3,
@@ -318,9 +322,9 @@ extension CustomAnimation {
                 endAngle: .pi,
                 clockwise: true
             )
-            path.addLine(to: CGPoint(x: 0, y: FT.DefaultMenuArrowHeight+radius))
+            path.addLine(to: CGPoint(x: 0, y: arrowHeight+radius))
             path.addArc(
-                withCenter: CGPoint(x: radius, y: FT.DefaultMenuArrowHeight+radius),
+                withCenter: CGPoint(x: radius, y: arrowHeight+radius),
                 radius: radius,
                 startAngle: .pi,
                 endAngle: .pi/2*3,
@@ -329,22 +333,22 @@ extension CustomAnimation {
             path.close()
         } else {
             path.move(to: CGPoint(
-                x: arrowPoint.x-FT.DefaultMenuArrowWidth,
-                y: viewHeight-FT.DefaultMenuArrowHeight)
+                x: arrowPoint.x-arrowWidth,
+                y: viewHeight-arrowHeight)
             )
             path.addLine(to: CGPoint(x: arrowPoint.x, y: viewHeight))
             path.addLine(to: CGPoint(
-                x: arrowPoint.x+FT.DefaultMenuArrowWidth,
-                y: viewHeight-FT.DefaultMenuArrowHeight)
+                x: arrowPoint.x+arrowWidth,
+                y: viewHeight-arrowHeight)
             )
             path.addLine(to: CGPoint(
                 x: viewWidth-radius,
-                y: viewHeight-FT.DefaultMenuArrowHeight)
+                y: viewHeight-arrowHeight)
             )
             path.addArc(
                 withCenter: CGPoint(
                     x: viewWidth-radius,
-                    y: viewHeight-FT.DefaultMenuArrowHeight-radius),
+                    y: viewHeight-arrowHeight-radius),
                 radius: radius,
                 startAngle: .pi/2,
                 endAngle: 0,
@@ -368,12 +372,12 @@ extension CustomAnimation {
             )
             path.addLine(to: CGPoint(
                 x: 0,
-                y: viewHeight-FT.DefaultMenuArrowHeight-radius)
+                y: viewHeight-arrowHeight-radius)
             )
             path.addArc(
                 withCenter: CGPoint(
                     x: radius,
-                    y: viewHeight-FT.DefaultMenuArrowHeight-radius),
+                    y: viewHeight-arrowHeight-radius),
                 radius: radius,
                 startAngle: .pi,
                 endAngle: .pi/2,
@@ -411,20 +415,4 @@ extension CustomAnimation {
         view.layer.anchorPoint = anchorPoint
         return CGPoint(x: newOffsetX, y: newOffsetY)
     }
-}
-
-struct FT {
-    internal static let DefaultMargin = CGFloat(4)
-    internal static let DefaultCellMargin = CGFloat(6)
-    internal static let DefaultMenuIconSize = CGFloat(24)
-    internal static let DefaultMenuCornerRadius = CGFloat(4)
-    internal static let DefaultMenuArrowWidth = CGFloat(8)
-    internal static let DefaultMenuArrowHeight = CGFloat(10)
-    internal static let DefaultAnimationDuration = TimeInterval(0.2)
-    internal static let DefaultBorderWidth = CGFloat(0.5)
-    internal static let DefaultCornerRadius = CGFloat(6)
-    internal static let DefaultMenuRowHeight = CGFloat(40)
-    internal static let DefaultMenuWidth = CGFloat(120)
-    internal static let DefaultTintColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
-    internal static let PopOverMenuTableViewCellIndentifier = "FTPopOverMenuTableViewCellIndentifier"
 }
