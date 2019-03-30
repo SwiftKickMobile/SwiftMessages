@@ -234,7 +234,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
             view.removeConstraint(existing)
             backgroundHeightConstraint = nil
         }
-        if let height = backgroundHeight {
+        if let height = backgroundHeight, let backgroundView = backgroundView {
             let constraint = NSLayoutConstraint(item: backgroundView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
             backgroundView.addConstraint(constraint)
             backgroundHeightConstraint = constraint
@@ -256,7 +256,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
      Note that this height is not guaranteed depending on anyt Auto Layout
      constraints used within the message view.
      */
-    @available(*, deprecated:4.2.0, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
+    @available(*, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
     open var preferredHeight: CGFloat? {
         didSet {
             setNeedsLayout()
