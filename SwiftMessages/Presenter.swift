@@ -87,7 +87,7 @@ class Presenter: NSObject {
         return duration
     }
 
-    var showDate: Date?
+    var showDate: CFTimeInterval?
 
     private var interactivelyHidden = false;
 
@@ -100,7 +100,7 @@ class Presenter: NSObject {
     var delayHide: TimeInterval? {
         if interactivelyHidden { return 0 }
         if case .indefinite(let opts) = config.duration, let showDate = showDate {
-            let timeIntervalShown = -showDate.timeIntervalSinceNow
+            let timeIntervalShown = CACurrentMediaTime() - showDate
             return max(0, opts.minimum - timeIntervalShown)
         }
         return nil
