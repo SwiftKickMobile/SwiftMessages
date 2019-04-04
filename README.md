@@ -65,6 +65,27 @@ Add the following line to your Cartfile:
 github "SwiftKickMobile/SwiftMessages"
 ````
 
+### Accio
+
+Add the following to your Package.swift:
+
+```swift
+.package(url: "https://github.com/SwiftKickMobile/SwiftMessages.git", .upToNextMajor(from: "6.0.2")),
+```
+
+Next, add `SwiftMessages` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "SwiftMessages",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ### Manual
 
 1. Put SwiftMessages repo somewhere in your project directory.
