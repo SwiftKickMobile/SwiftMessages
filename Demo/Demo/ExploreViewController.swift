@@ -27,7 +27,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             view = try! SwiftMessages.viewFromNib()
         }
         
-        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide(animated: false) })
+        view.configureContent(title: titleText.text, body: bodyText.text, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "Hide", buttonTapHandler: { _ in SwiftMessages.hide() })
 
         let iconStyle: IconStyle
         switch self.iconStyle.selectedSegmentIndex {
@@ -53,7 +53,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
             view.configureTheme(.error, iconStyle: iconStyle)
             view.accessibilityPrefix = "error"
         default:
-            let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].sm_random()
+            let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].randomElement()
             view.configureTheme(backgroundColor: UIColor.purple, foregroundColor: UIColor.white, iconImage: nil, iconText: iconText)
             view.button?.setImage(Icon.errorSubtle.image, for: .normal)
             view.button?.setTitle(nil, for: .normal)

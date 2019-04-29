@@ -40,13 +40,13 @@ public protocol MarginAdjustable {
      */
 
     /// Top margin adjustment for status bar avoidance in pre-iOS 11+
-    @available(iOS, deprecated, message: "Now handled by `collapseLayoutMarginAdditions`")
+    @available(*, deprecated, message: "Now handled by `collapseLayoutMarginAdditions`")
     var statusBarOffset: CGFloat { get set }
     /// Safe area top adjustment in iOS 11+
-    @available(iOS, deprecated, message: "Use the `topLayoutMarginAddition` instead.")
+    @available(*, deprecated, message: "Use the `topLayoutMarginAddition` instead.")
     var safeAreaTopOffset: CGFloat { get set }
     /// Safe area bottom adjustment in iOS 11+
-    @available(iOS, deprecated, message: "Use the `bottomLayoutMarginAddition` instead.")
+    @available(*, deprecated, message: "Use the `bottomLayoutMarginAddition` instead.")
     var safeAreaBottomOffset: CGFloat { get set }
 }
 

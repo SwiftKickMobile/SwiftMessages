@@ -67,7 +67,7 @@ class ViewController: UITableViewController {
         warning.configureTheme(.warning)
         warning.configureDropShadow()
         
-        let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.isHidden = true
         var warningConfig = SwiftMessages.defaultConfig
