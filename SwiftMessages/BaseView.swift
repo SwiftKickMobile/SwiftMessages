@@ -204,15 +204,6 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     @IBInspectable open var collapseLayoutMarginAdditions: Bool = true
 
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5
-     
-    /// Deprecated
-    @objc open var statusBarOffset: CGFloat = 0
-    
-    /// Deprecated
-    @objc  open var safeAreaTopOffset: CGFloat = 0
-
-    /// Deprecated
-    @objc  open var safeAreaBottomOffset: CGFloat = 0
 
     /*
      MARK: - Setting the height
@@ -242,33 +233,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     }
 
     private var backgroundHeightConstraint: NSLayoutConstraint?
-
-    open override var intrinsicContentSize: CGSize {
-        if let preferredHeight = (self as InternalPreferredHeight).preferredHeight {
-            return CGSize(width: UIView.noIntrinsicMetric, height: preferredHeight)
-        }
-        return super.intrinsicContentSize
-    }
-
-    /**
-     An optional value that sets the message view's intrinsic content height.
-     This can be used as a way to specify a fixed height for the message view.
-     Note that this height is not guaranteed depending on anyt Auto Layout
-     constraints used within the message view.
-     */
-    @available(*, deprecated, message:"Use `backgroundHeight` instead to specify preferred height of the visible region of the message.")
-    open var preferredHeight: CGFloat? {
-        didSet {
-            setNeedsLayout()
-        }
-    }
 }
-
-// A workaround to prevent warning on deprecated property.
-private protocol InternalPreferredHeight {
-    var preferredHeight: CGFloat? { get }
-}
-extension BaseView: InternalPreferredHeight {}
 
 /*
  MARK: - Theming

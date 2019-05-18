@@ -193,9 +193,6 @@ extension SwiftMessagesSegue {
     /// A convenience method for configuring some pre-defined layouts that mirror a subset of `MessageView.Layout`.
     public func configure(layout: Layout) {
         messageView.bounceAnimationOffset = 0
-        messageView.statusBarOffset = 0
-        messageView.safeAreaTopOffset = 0
-        messageView.safeAreaBottomOffset = 0
         containment = .content
         containerView.cornerRadius = 0
         containerView.roundsLeadingCorners = false
