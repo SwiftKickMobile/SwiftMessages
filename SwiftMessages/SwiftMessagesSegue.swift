@@ -51,7 +51,9 @@ import UIKit
        affects the height.
     3. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.
     Note that `Layout.topMessage` and `Layout.bottomMessage` are always full screen width.
-
+    For other layouts, the there is a maximum 500pt width on iPad (regular horizontal size class)
+    at 950 priority, which can be overridden by adding higher-priority constraints.
+ 
  See the "View Controllers" selection in the Demo app for examples.
  */
 

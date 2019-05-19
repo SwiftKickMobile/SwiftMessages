@@ -114,8 +114,8 @@ However, it is recommended that you specify sizing appropriate for your content 
 one of the following methods.
   1. Define sufficient width and height constraints in your view controller.
   1. Set `preferredContentSize` (a.k.a "Use Preferred Explicit Size" in Interface Builder's attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only affects the height.
-  1. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.
+  1. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.  
 
-Note that `Layout.topMessage` and `Layout.bottomMessage` are always full screen width.
+Note that `Layout.topMessage` and `Layout.bottomMessage` are always full screen width. For other layouts, the there is a maximum 500pt width on iPad (regular horizontal size class) at 950 priority, which can be overridden by adding higher-priority constraints.
 
 See [`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) for additional documentation and technical details.
