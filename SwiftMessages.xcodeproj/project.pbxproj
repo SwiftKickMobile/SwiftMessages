@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Utils.swift */; };
-		224FB69B211636D30081D4DE /* ViewControllerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69A211636D30081D4DE /* ViewControllerContainerView.swift */; };
+		225304622290C76E00A03ACF /* NSLayoutConstraint+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */; };
 		2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */; };
 		22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */; };
 		227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */; };
@@ -93,7 +93,7 @@
 /* Begin PBXFileReference section */
 		220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Animation.swift"; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Utils.swift"; sourceTree = "<group>"; };
-		224FB69A211636D30081D4DE /* ViewControllerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerView.swift; sourceTree = "<group>"; };
+		225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Utils.swift"; sourceTree = "<group>"; };
 		2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsAnimation.swift; sourceTree = "<group>"; };
 		22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Utils.swift"; sourceTree = "<group>"; };
 		227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesSegue.swift; sourceTree = "<group>"; };
@@ -209,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */,
-				224FB69A211636D30081D4DE /* ViewControllerContainerView.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -311,6 +310,7 @@
 				86AAF81B1D551FE60031EE32 /* UIViewController+Utils.swift */,
 				224FB69821153B440081D4DE /* CALayer+Utils.swift */,
 				862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */,
+				225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -513,7 +513,6 @@
 				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
 				22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */,
-				224FB69B211636D30081D4DE /* ViewControllerContainerView.swift in Sources */,
 				227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */,
 				220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */,
 				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
@@ -526,6 +525,7 @@
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
 				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
+				225304622290C76E00A03ACF /* NSLayoutConstraint+Utils.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
 			);

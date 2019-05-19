@@ -42,13 +42,15 @@ import UIKit
     utilize some SwiftMessages features. This view can be accessed and configured via the
     `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
     shadow by calling `segue.messageView.configureDropShadow()`.
- 2. SwiftMessages relies on Auto Layout to determine the height the view controller's view.
-    However, some view controllers, such as `UINavigationController` have zero Auto Layout height.
-    There are a few ways to specify the height these view controllers:
-    1. Add an explicit height constraint to the view controller's view.
-    2. Set the view controller's `preferredContentSize` ("Use Preferred Explicit Size" in Interface Builder's
-       attribute inspector). Note that `preferredContentSize.width` is ignored and can be set to zero.
-    3. Set `SwiftMessagesSegue.messageView.backgroundHeight`.
+ 2. SwiftMessagesSegue provides static default view controller sizing based on device.
+    However, it is recommended that you specify sizing appropriate for your content using
+    one of the following methods.
+    1. Define sufficient width and height constraints in your view controller.
+    2. Set `preferredContentSize` (a.k.a "Use Preferred Explicit Size" in Interface Builder's
+       attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only
+       affects the height.
+    3. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.
+    Note that `Layout.topMessage` and `Layout.bottomMessage` are always full screen width.
 
  See the "View Controllers" selection in the Demo app for examples.
  */
@@ -157,7 +159,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
      `messageView`. This view provides configurable squircle (round) corners (see the parent
      class `CornerRoundingView`).
     */
-    public var containerView = ViewControllerContainerView()
+    public var containerView = CornerRoundingView()
 
     /**
      Specifies how the view controller's view is installed into the
@@ -307,7 +309,12 @@ extension SwiftMessagesSegue {
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
+            toView.translatesAutoresizingMaskIntoConstraints = false
             segue.containerView.addSubview(toView)
+            segue.containerView.topAnchor.constraint(equalTo: toView.topAnchor).isActive = true
+            segue.containerView.bottomAnchor.constraint(equalTo: toView.bottomAnchor).isActive = true
+            segue.containerView.leadingAnchor.constraint(equalTo: toView.leadingAnchor).isActive = true
+            segue.containerView.trailingAnchor.constraint(equalTo: toView.trailingAnchor).isActive = true
             // Install the `toView` into the message view.
             switch segue.containment {
             case .content:
@@ -317,7 +324,15 @@ extension SwiftMessagesSegue {
             case .backgroundVertical:
                 segue.messageView.installBackgroundVerticalView(segue.containerView)
             }
-            segue.containerView.viewController = transitionContext.viewController(forKey: .to)
+            let toVC = transitionContext.viewController(forKey: .to)
+            if let preferredHeight = toVC?.preferredContentSize.height,
+                preferredHeight > 0 {
+                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+            }
+            if let preferredWidth = toVC?.preferredContentSize.width,
+                preferredWidth > 0 {
+                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+            }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)
         }

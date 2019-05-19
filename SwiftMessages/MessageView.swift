@@ -389,36 +389,4 @@ extension MessageView {
     }
 }
 
-/*
- MARK: - Configuring the width
- 
- This extension provides a few convenience functions for configuring the
- background view's width. You are encouraged to write your own such functions
- if these don't exactly meet your needs.
- */
-
-extension MessageView {
-
-    /**
-     A shortcut for configuring the left and right layout margins. For views that
-     have `backgroundView` as a subview of `MessageView`, the background view should
-     be pinned to the left and right `layoutMargins` in order for this configuration to work.
-    */
-    public func configureBackgroundView(sideMargin: CGFloat) {
-        layoutMargins.left = sideMargin
-        layoutMargins.right = sideMargin
-    }
-
-    /**
-     A shortcut for adding a width constraint to the `backgroundView`. When calling this
-     method, it is important to ensure that the width constraint doesn't conflict with
-     other constraints. The CardView.nib and TabView.nib layouts are compatible with
-     this method.
-     */
-    public func configureBackgroundView(width: CGFloat) {
-        guard let backgroundView = backgroundView else { return }
-        let constraint = NSLayoutConstraint(item: backgroundView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)
-        backgroundView.addConstraint(constraint)
-    }
-}
 
