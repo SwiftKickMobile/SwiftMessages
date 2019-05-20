@@ -11,6 +11,29 @@ import UIKit
 
 class MaskingView: PassthroughView {
 
+    private(set) var containerView: UIView!
+
+    func install(keyboardTrackingView: KeyboardTrackingView) {
+        // Pin keybaord tracking view to the bottom
+        do {
+            keyboardTrackingView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(keyboardTrackingView)
+            keyboardTrackingView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            keyboardTrackingView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            keyboardTrackingView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        }
+        // Container view
+        do {
+            containerView = PassthroughView()
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(containerView)
+            containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            containerView.bottomAnchor.constraint(equalTo: keyboardTrackingView.topAnchor).isActive = true
+        }
+    }
+
     var accessibleElements: [NSObject] = []
 
     weak var backgroundView: UIView? {
@@ -41,11 +64,13 @@ class MaskingView: PassthroughView {
 
     init() {
         super.init(frame: CGRect.zero)
+        containerView = self
         clipsToBounds = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        containerView = self
         clipsToBounds = true
     }
 }

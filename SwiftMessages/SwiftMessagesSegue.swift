@@ -169,6 +169,18 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
      */
     public var containment: Containment = .content
 
+    /**
+     Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.
+     */
+    public var keyboardTrackingView: KeyboardTrackingView? {
+        get {
+            return messenger.defaultConfig.keyboardTrackingView
+        }
+        set {
+            messenger.defaultConfig.keyboardTrackingView = newValue
+        }
+    }
+
     private var messenger = SwiftMessages()
     private var selfRetainer: SwiftMessagesSegue? = nil
     private lazy var hider = { return TransitioningDismisser(segue: self) }()

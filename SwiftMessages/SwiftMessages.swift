@@ -316,6 +316,11 @@ open class SwiftMessages {
          of `WindowViewController`.
          */
         public var windowViewController: ((_ windowLevel: UIWindow.Level?, _ config: SwiftMessages.Config) -> WindowViewController)?
+
+        /**
+         Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.
+         */
+        public var keyboardTrackingView: KeyboardTrackingView?
     }
     
     /**

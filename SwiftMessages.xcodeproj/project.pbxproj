@@ -10,6 +10,7 @@
 		220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Utils.swift */; };
 		225304622290C76E00A03ACF /* NSLayoutConstraint+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */; };
+		225304662293000C00A03ACF /* KeyboardTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304652293000C00A03ACF /* KeyboardTrackingView.swift */; };
 		2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */; };
 		22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */; };
 		227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */; };
@@ -94,6 +95,7 @@
 		220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Animation.swift"; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Utils.swift"; sourceTree = "<group>"; };
 		225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Utils.swift"; sourceTree = "<group>"; };
+		225304652293000C00A03ACF /* KeyboardTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTrackingView.swift; sourceTree = "<group>"; };
 		2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsAnimation.swift; sourceTree = "<group>"; };
 		22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Utils.swift"; sourceTree = "<group>"; };
 		227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesSegue.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 				22774B9F20B5EF2A00813732 /* UIEdgeInsets+Utils.swift */,
 				22F27950210CE25900273E7F /* CornerRoundingView.swift */,
+				225304652293000C00A03ACF /* KeyboardTrackingView.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225304662293000C00A03ACF /* KeyboardTrackingView.swift in Sources */,
 				22774BA020B5EF2A00813732 /* UIEdgeInsets+Utils.swift in Sources */,
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,

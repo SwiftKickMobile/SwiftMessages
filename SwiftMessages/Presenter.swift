@@ -40,7 +40,7 @@ class Presenter: NSObject {
     var config: SwiftMessages.Config
     let view: UIView
     weak var delegate: PresenterDelegate?
-    lazy var maskingView: MaskingView = { return MaskingView() }()
+    let maskingView = MaskingView()
     var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let animator: Animator
 
@@ -55,6 +55,7 @@ class Presenter: NSObject {
             var mutableView = view
             id = withUnsafePointer(to: &mutableView) { "\($0)" }
         }
+
         super.init()
     }
 
@@ -221,7 +222,7 @@ class Presenter: NSObject {
     }
 
     private func animationContext() -> AnimationContext {
-        return AnimationContext(messageView: view, containerView: maskingView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
+        return AnimationContext(messageView: view, containerView: maskingView.containerView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
     }
 
     private func safeZoneConflicts() -> SafeZoneConflicts {
@@ -348,6 +349,9 @@ class Presenter: NSObject {
             maskingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
             topLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
             bottomLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
+            if let keyboardTrackingView = config.keyboardTrackingView {
+                maskingView.install(keyboardTrackingView: keyboardTrackingView)
+            }
             // Update the container view's layout in order to know the masking view's frame
             containerView.layoutIfNeeded()
         }
