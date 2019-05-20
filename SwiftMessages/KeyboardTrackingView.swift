@@ -14,6 +14,10 @@ public protocol KeyboardTrackingViewDelegate: class {
 }
 
 /// A view that adjusts it's height based on keyboard hide and show notifications.
+/// Pin it to the bottom of the screen using Auto Layout and then pin views that
+/// should avoid the keyboard to the top of it. Supply an instance of this class
+/// on `SwiftMessages.Config.keyboardTrackingView` or `SwiftMessagesSegue.keyboardTrackingView`
+/// for automatic keyboard avoidance for the entire SwiftMessages view or view controller.
 open class KeyboardTrackingView: UIView {
 
     public enum Change {
