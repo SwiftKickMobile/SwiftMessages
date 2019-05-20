@@ -222,7 +222,7 @@ class Presenter: NSObject {
     }
 
     private func animationContext() -> AnimationContext {
-        return AnimationContext(messageView: view, containerView: maskingView.containerView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
+        return AnimationContext(messageView: view, containerView: maskingView, safeZoneConflicts: safeZoneConflicts(), interactiveHide: config.interactiveHide)
     }
 
     private func safeZoneConflicts() -> SafeZoneConflicts {

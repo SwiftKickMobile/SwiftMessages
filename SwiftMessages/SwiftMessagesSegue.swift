@@ -257,8 +257,8 @@ extension SwiftMessagesSegue {
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .centered:
-            containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+            containment = .background
+            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             messageView.collapseLayoutMarginAdditions = true
             containerView.cornerRadius = 15
             presentationStyle = .center
