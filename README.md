@@ -179,6 +179,17 @@ SwiftMessages provides excellent VoiceOver support out-of-the-box.
 
 See the `AccessibleMessage` protocol for implementing proper accessibility support in custom views.
 
+### Keyboard Avoidance
+
+The `KeyboardTrackingView` class can be used to cause the message view to avoid the keyboard by sliding up when the keyboard gets too close.
+
+````swift
+var config = SwiftMessages.defaultConfig
+config.keyboardTrackingView = KeyboardTrackingView()
+````
+
+You can incorporate `KeyboardTrackingView` into your app even when you're not using SwiftMessages. Install into your view hierarchy by pinning `KeyboardTrackingView` to the bottom, leading, and trailing edges of the screen. Then pin the bottom of your content that should avoid the keyboard to the top `KeyboardTrackingView`. Use an equality constraint to strictly track the keyboard or an inequality constraint to only move when the keyboard gets too close. `KeyboardTrackingView` works by observing keyboard notifications and adjusting its height to maintain its top edge above the keyboard, thereby pushing your content up. See the comments in `KeyboardTrackingView` for configuration options.
+
 ### Message Queueing
 
 You can call `SwiftMessages.show()` as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the `Identifiable` protocol (like `MessageView`), duplicate messages will be removed automatically. The pause between messages can be adjusted:
