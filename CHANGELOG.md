@@ -13,25 +13,24 @@ All notable changes to this project will be documented in this file.
 * #313 Improved sizing on iPad
   
 >`SwiftMessagesSegue` provides default view controller sizing based on device, with width on iPad being limited to 500pt max. However, it is recommended that you explicitly specify size appropriate for your content using one of the following methods.
-  1. Define sufficient width and height constraints in your view controller such that it sizes itself.
-  1. Set the `preferredContentSize` property (a.k.a "Use Preferred Explicit Size" in Interface Builder's attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only affects the height.
-  1. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.  
-
+>  1. Define sufficient width and height constraints in your view controller such that it sizes itself.
+>  1. Set the `preferredContentSize` property (a.k.a "Use Preferred Explicit Size" in Interface Builder's attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only affects the height.
+>  1. Add explicit width and/or height constraints to `segue.messageView.backgroundView`.  
+>
 >Note that `Layout.topMessage` and `Layout.bottomMessage` are always full screen width. For other layouts, the there is a maximum 500pt width on for regular horizontal size class (iPad) at 950 priority. This limit can be overridden by adding higher-priority constraints.
 
 * #275 Add ability to avoid the keyboard.
 
 >The `KeyboardTrackingView` class can be used to cause the message view to avoid the keyboard by sliding up when the keyboard gets too close.
-
+>
 >````swift
-// Message view
-var config = SwiftMessages.defaultConfig
-config.keyboardTrackingView = KeyboardTrackingView()
-
+>// Message view
+>var config = SwiftMessages.defaultConfig
+>config.keyboardTrackingView = KeyboardTrackingView()
+>
 >// Or view controller
-segue.keyboardTrackingView = KeyboardTrackingView()
-````
-
+>segue.keyboardTrackingView = KeyboardTrackingView()
+>````
 >You can incorporate `KeyboardTrackingView` into your app even when you're not using SwiftMessages. Install into your view hierarchy by pinning `KeyboardTrackingView` to the bottom, leading, and trailing edges of the screen. Then pin the bottom of your content that should avoid the keyboard to the top `KeyboardTrackingView`. Use an equality constraint to strictly track the keyboard or an inequality constraint to only move when the keyboard gets too close. `KeyboardTrackingView` works by observing keyboard notifications and adjusting its height to maintain its top edge above the keyboard, thereby pushing your content up. See the comments in `KeyboardTrackingView` for configuration options.
 
 
