@@ -13,6 +13,8 @@ import UIKit
  The `BaseView` class is a reusable message view base class that implements some
  of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
+ 
+ Don't use extensions here as they can't be overriden by subclasses.
  */
 open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
@@ -277,14 +279,11 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
     private var layoutConstraints: [NSLayoutConstraint] = []
     private var regularWidthLayoutConstraints: [NSLayoutConstraint] = []
-}
-
-/*
- MARK: - Theming
- */
-
-extension BaseView {
-
+    
+    /*
+     MARK: - Theming
+     */
+    
     /// A convenience function to configure a default drop shadow effect.
     /// The shadow is to this view's layer instead of that of the background view
     /// because the background view may be masked. So, when modifying the drop shadow,
@@ -298,12 +297,12 @@ extension BaseView {
         layer.masksToBounds = false
         updateShadowPath()
     }
-
+    
     /// A convenience function to turn off drop shadow
     open func configureNoDropShadow() {
         layer.shadowOpacity = 0
     }
-
+    
     private func updateShadowPath() {
         backgroundView?.layoutIfNeeded()
         let shadowLayer = backgroundView?.layer ?? layer
@@ -331,40 +330,37 @@ extension BaseView {
             // Update the layer's `shadowPath` without animation
             layer.shadowPath = shadowPath        }
     }
-
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
         updateShadowPath()
     }
-}
-
-/*
- MARK: - Configuring the width
-
- This extension provides a few convenience functions for configuring the
- background view's width. You are encouraged to write your own such functions
- if these don't exactly meet your needs.
- */
-
-extension BaseView {
-
+    
+    /*
+     MARK: - Configuring the width
+     
+     This extension provides a few convenience functions for configuring the
+     background view's width. You are encouraged to write your own such functions
+     if these don't exactly meet your needs.
+     */
+    
     /**
      A shortcut for configuring the left and right layout margins. For views that
      have `backgroundView` as a subview of `MessageView`, the background view should
      be pinned to the left and right `layoutMargins` in order for this configuration to work.
      */
-    public func configureBackgroundView(sideMargin: CGFloat) {
+    open func configureBackgroundView(sideMargin: CGFloat) {
         layoutMargins.left = sideMargin
         layoutMargins.right = sideMargin
     }
-
+    
     /**
      A shortcut for adding a width constraint to the `backgroundView`. When calling this
      method, it is important to ensure that the width constraint doesn't conflict with
      other constraints. The CardView.nib and TabView.nib layouts are compatible with
      this method.
      */
-    public func configureBackgroundView(width: CGFloat) {
+    open func configureBackgroundView(width: CGFloat) {
         guard let backgroundView = backgroundView else { return }
         let constraint = NSLayoutConstraint(item: backgroundView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)
         backgroundView.addConstraint(constraint)
