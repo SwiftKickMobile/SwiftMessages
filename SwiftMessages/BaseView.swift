@@ -289,6 +289,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
     /// because the background view may be masked. So, when modifying the drop shadow,
     /// be sure to set the shadow properties of this view's layer. The shadow path is
     /// updated for you automatically.
+    /// If you're overriding this, you have to call updateShadowPath before the function returns.
     open func configureDropShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -303,7 +304,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         layer.shadowOpacity = 0
     }
     
-    private func updateShadowPath() {
+    func updateShadowPath() {
         backgroundView?.layoutIfNeeded()
         let shadowLayer = backgroundView?.layer ?? layer
         let shadowRect = layer.convert(shadowLayer.bounds, from: shadowLayer)
