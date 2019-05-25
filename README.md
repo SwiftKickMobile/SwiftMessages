@@ -96,7 +96,7 @@ view.configureDropShadow()
 
 // Set message title, body, and icon. Here, we're overriding the default warning
 // image with an emoji character.
-let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
 
 // Increase the external margin around the card. In general, the effect of this setting
