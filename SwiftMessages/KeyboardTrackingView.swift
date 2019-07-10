@@ -30,8 +30,8 @@ open class KeyboardTrackingView: UIView {
 
     /// Typically, when a view controller is not being displayed, keyboard
     /// tracking should be paused to avoid responding to keyboard events
-    /// caused by other view controllers or apps. Setting `isPaused = true` in
-    /// `viewWillAppear` and `isPaused = false` in `viewWillDisappear` usually works. This class
+    /// caused by other view controllers or apps. Setting `isPaused = false` in
+    /// `viewWillAppear` and `isPaused = true` in `viewWillDisappear` usually works. This class
     /// automatically pauses and resumes when the app resigns and becomes active, respectively.
     open var isPaused = false {
         didSet {
