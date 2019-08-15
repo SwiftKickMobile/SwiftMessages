@@ -16,4 +16,12 @@ extension UIEdgeInsets {
         let rightSum = left.right + right.right
         return UIEdgeInsets(top: topSum, left: leftSum, bottom: bottomSum, right: rightSum)
     }
+
+    public static func -(left: UIEdgeInsets, right: UIEdgeInsets) -> UIEdgeInsets {
+        let topSum = left.top - right.top
+        let leftSum = left.left - right.left
+        let bottomSum = left.bottom - right.bottom
+        let rightSum = left.right - right.right
+        return UIEdgeInsets(top: topSum, left: leftSum, bottom: bottomSum, right: rightSum)
+    }
 }

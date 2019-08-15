@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */; };
+		2249D6792304F82F00C3369F /* ViewControllerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2249D6782304F82F00C3369F /* ViewControllerContainerView.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Utils.swift */; };
 		225304622290C76E00A03ACF /* NSLayoutConstraint+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */; };
 		225304662293000C00A03ACF /* KeyboardTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304652293000C00A03ACF /* KeyboardTrackingView.swift */; };
@@ -93,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		220655111FAF82B600F4E00F /* MarginAdjustable+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Animation.swift"; sourceTree = "<group>"; };
+		2249D6782304F82F00C3369F /* ViewControllerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerContainerView.swift; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Utils.swift"; sourceTree = "<group>"; };
 		225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Utils.swift"; sourceTree = "<group>"; };
 		225304652293000C00A03ACF /* KeyboardTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTrackingView.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				224FB69821153B440081D4DE /* CALayer+Utils.swift */,
 				862C0CB01D5911C100D06168 /* NSBundle+Utils.swift */,
 				225304612290C76E00A03ACF /* NSLayoutConstraint+Utils.swift */,
+				2249D6782304F82F00C3369F /* ViewControllerContainerView.swift */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
 				22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */,
+				2249D6792304F82F00C3369F /* ViewControllerContainerView.swift in Sources */,
 				227BA6D920BF224A00E5A843 /* SwiftMessagesSegue.swift in Sources */,
 				220655121FAF82B600F4E00F /* MarginAdjustable+Animation.swift in Sources */,
 				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
