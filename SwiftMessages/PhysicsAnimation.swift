@@ -24,7 +24,7 @@ public class PhysicsAnimation: NSObject, Animator {
     weak var messageView: UIView?
     weak var containerView: UIView?
     var context: AnimationContext?
-
+    var keyboardHeight : CGFloat = 0.0
     public override init() {}
 
     init(delegate: AnimationDelegate) {
@@ -65,6 +65,8 @@ public class PhysicsAnimation: NSObject, Animator {
     public var hideDuration: TimeInterval? { return 0.15  }
 
     func install(context: AnimationContext) {
+        NotificationCenter.default.addObserver(self, selector: .keyboardWillShow, name: UIResponder.keyboardWillShowNotification, object: nil)
+
         let view = context.messageView
         let container = context.containerView
         messageView = view
@@ -74,7 +76,22 @@ public class PhysicsAnimation: NSObject, Animator {
         container.addSubview(view)
         switch placement {
         case .center:
-            view.centerYAnchor.constraint(equalTo: container.centerYAnchor).with(priority: UILayoutPriority(200)).isActive = true
+            let screenSize = UIScreen.main.bounds
+            let screenHeight = screenSize.height
+            if screenHeight <= 568.0 || UIDevice.current.userInterfaceIdiom == .pad {
+                view.centerYAnchor.constraint(equalTo: container.centerYAnchor, constant: screenHeight/2 - (self.keyboardHeight + 125)).with(priority: UILayoutPriority(200)).isActive = true
+            } else{
+                view.centerYAnchor.constraint(equalTo: container.centerYAnchor).with(priority: UILayoutPriority(200)).isActive = true
+            }
+            
+//            print("screenHeight \(screenHeight)")
+//            if screenHeight <= 568.0  {
+//                UIView.animate(withDuration: 0.5) {
+//                    view.frame = CGRect(x: view.frame.origin.x,
+//                                        y: view.frame.origin.y - 100,
+//                                        width: view.frame.width, height: view.frame.height )
+//                }
+//            }
         case .top:
             view.topAnchor.constraint(equalTo: container.topAnchor).with(priority: UILayoutPriority(200)).isActive = true
         case .bottom:
@@ -115,11 +132,18 @@ public class PhysicsAnimation: NSObject, Animator {
         }, completion: nil)
         CATransaction.commit()
     }
-
+    @objc fileprivate func keyboardWillShow(notification:NSNotification) {
+        if let keyboardRectValue = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+             self.keyboardHeight = keyboardRectValue.height
+        }
+    }
+    
     func installInteractive(context: AnimationContext) {
         guard context.interactiveHide else { return }
         panHandler.configure(context: context, animator: self)
     }
 }
 
-
+private extension Selector {
+    static let keyboardWillShow = #selector(PhysicsAnimation.keyboardWillShow(notification:))
+}
