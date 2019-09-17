@@ -34,7 +34,18 @@ open class WindowViewController: UIViewController
     func install(becomeKey: Bool) {
         guard let window = window else { return }
         if becomeKey {
-            window.makeKeyAndVisible()            
+            window.makeKeyAndVisible()
+        } else {
+            window.isHidden = false
+        }
+    }
+
+    @available(iOS 13, *)
+    func install(becomeKey: Bool, scene: UIWindowScene?) {
+        guard let window = window else { return }
+        window.windowScene = scene
+        if becomeKey {
+            window.makeKeyAndVisible()
         } else {
             window.isHidden = false
         }
@@ -51,6 +62,22 @@ open class WindowViewController: UIViewController
     
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return config.preferredStatusBarStyle ?? super.preferredStatusBarStyle
+    }
+
+    open override var prefersStatusBarHidden: Bool {
+        // It is no longer possible to cover the status bar
+        // using `.alert` or `.statusBar` window levels. The workaround suggested
+        // by Apple is to hide the status bar, so we apply this workaround for
+        // backward compatibility.
+        if #available(iOS 13, *) {
+            switch windowLevel {
+            case .normal : return super.prefersStatusBarHidden
+            case .alert, .statusBar: return true
+            default: return false
+            }
+        } else {
+            return super.prefersStatusBarHidden
+        }
     }
 }
 
