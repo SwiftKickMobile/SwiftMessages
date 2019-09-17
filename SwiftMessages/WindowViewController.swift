@@ -65,19 +65,7 @@ open class WindowViewController: UIViewController
     }
 
     open override var prefersStatusBarHidden: Bool {
-        // It is no longer possible to cover the status bar
-        // using `.alert` or `.statusBar` window levels. The workaround suggested
-        // by Apple is to hide the status bar, so we apply this workaround for
-        // backward compatibility.
-        if #available(iOS 13, *) {
-            switch windowLevel {
-            case .normal : return super.prefersStatusBarHidden
-            case .alert, .statusBar: return true
-            default: return false
-            }
-        } else {
-            return super.prefersStatusBarHidden
-        }
+        return config.prefersStatusBarHidden ?? super.prefersStatusBarHidden
     }
 }
 
