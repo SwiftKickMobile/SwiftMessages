@@ -161,7 +161,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
      `messageView`. This view provides configurable squircle (round) corners (see the parent
      class `CornerRoundingView`).
     */
-    public var containerView: CornerRoundingView = ViewControllerContainerView()
+    public var containerView: CornerRoundingView = CornerRoundingView()
 
     /**
      Specifies how the view controller's view is installed into the
@@ -309,8 +309,7 @@ extension SwiftMessagesSegue {
 
         func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
             guard let segue = segue,
-                let toView = transitionContext.view(forKey: .to),
-                let toViewController = transitionContext.viewController(forKey: .to) else {
+                let toView = transitionContext.view(forKey: .to) else {
                 transitionContext.completeTransition(false)
                 return
             }
@@ -322,7 +321,6 @@ extension SwiftMessagesSegue {
                 // of Xcode 10 beta 2.
                 segue.safeAreaWorkaroundViewController.view = segue.presenter.maskingView
             }
-            (segue.containerView as! ViewControllerContainerView).viewController = toViewController
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
             toView.translatesAutoresizingMaskIntoConstraints = false
