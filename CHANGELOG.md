@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 7.0.1
+
+### Changes
+
+* Support iOS 13.
+
+### Features
+* #335 Add option to hide status bar when view is displayed in a window. As of iOS 13, windows can no longer cover the status bar. The only alternative is to set `Config.prefersStatusBarHidden = true` to hide it.
+
 ## 7.0.0
 
 ### Changes

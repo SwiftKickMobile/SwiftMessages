@@ -62,11 +62,12 @@ open class SwiftMessages {
         case automatic
 
         /**
-         Displays the message in a new window at the specified window level. Use
-         `UIWindow.Level.normal` to display under the status bar and `UIWindow.Level.statusBar`
-         to display over. When displaying under the status bar, SwiftMessages automatically
-         increases the top margins of any message view that adopts the `MarginInsetting`
-         protocol (as `MessageView` does) to account for the status bar.
+         Displays the message in a new window at the specified window level.
+         SwiftMessages automatically increases the top margins of any message
+         view that adopts the `MarginInsetting` protocol (as `MessageView` does)
+         to account for the status bar. As of iOS 13, windows can no longer cover the
+         status bar. The only alternative is to set `Config.prefersStatusBarHidden = true`
+         to hide it.
         */
         case window(windowLevel: UIWindow.Level)
         
@@ -261,17 +262,19 @@ open class SwiftMessages {
         public var interactiveHide = true
         
         /**
-         Specifies the preferred status bar style when the view is displayed
-         directly behind the status bar, such as when using `.Window`
-         presentation context with a `UIWindow.Level.normal` window level
-         and `.Top` presentation style. This option is useful if the message
-         view has a background color that needs a different status bar style than
-         the current one. The default is `.Default`.
+         Specifies the preferred status bar style when the view is being
+         displayed in a window. This can be useful when the view is being
+         displayed behind the status bar and the message view has a background
+         color that needs a different status bar style than the current one.
+         The default is `nil`.
          */
         public var preferredStatusBarStyle: UIStatusBarStyle?
 
         /**
-         TODO: update docs
+         Specifies the preferred status bar visibility when the view is being
+         displayed in a window. As of iOS 13, windows can no longer cover the
+         status bar. The only alternative is to hide the status bar by setting
+         this options to `true`. Default is `nil`.
          */
         public var prefersStatusBarHidden: Bool?
 
