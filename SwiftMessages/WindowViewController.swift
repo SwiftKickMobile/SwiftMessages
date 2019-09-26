@@ -40,6 +40,7 @@ open class WindowViewController: UIViewController
         }
     }
 
+    #if swift(>=5.1)
     @available(iOS 13, *)
     func install(becomeKey: Bool, scene: UIWindowScene?) {
         guard let window = window else { return }
@@ -50,6 +51,7 @@ open class WindowViewController: UIViewController
             window.isHidden = false
         }
     }
+    #endif
     
     func uninstall() {
         window?.isHidden = true
