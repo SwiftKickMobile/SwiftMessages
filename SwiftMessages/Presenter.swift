@@ -385,6 +385,8 @@ class Presenter: NSObject {
                 if let additional = accessibleMessage.additonalAccessibilityElements {
                     elements += additional
                 }
+            } else {
+                    elements += [view]
             }
             if config.dimMode.interactive {
                 let dismissView = UIView(frame: maskingView.bounds)
