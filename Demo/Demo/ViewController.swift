@@ -63,16 +63,23 @@ class ViewController: UITableViewController {
         error.configureContent(title: "Error", body: "Something is horribly wrong!")
         error.button?.setTitle("Stop", for: .normal)
         
+        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
+        
         let warning = MessageView.viewFromNib(layout: .cardView)
         warning.configureTheme(.warning)
         warning.configureDropShadow()
-        
-        let iconText = ["🤔", "😳", "🙄", "😶"].randomElement()!
         warning.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)
         warning.button?.isHidden = true
+        
+        let textWarning = MessageView.viewFromNib(layout: .textCardView)
+        textWarning.configureTheme(.warning)
+        textWarning.configureDropShadow()
+        textWarning.configureContent(title: "Warning", body: "A plain text warning.", iconText: iconText)
+        textWarning.button?.isHidden = true
+        
         var warningConfig = SwiftMessages.defaultConfig
         warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
-
+        
         let success = MessageView.viewFromNib(layout: .cardView)
         success.configureTheme(.success)
         success.configureDropShadow()
@@ -111,6 +118,7 @@ class ViewController: UITableViewController {
         SwiftMessages.show(config: infoConfig, view: info)
         SwiftMessages.show(config: statusConfig, view: status)
         SwiftMessages.show(config: status2Config, view: status2)
+        SwiftMessages.show(config: warningConfig, view: textWarning)
     }
     
     static func demoAnyView() -> Void {

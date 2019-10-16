@@ -159,6 +159,11 @@ extension MessageView {
          Like `CardView` with one end attached to the super view.
          */
         case tabView = "TabView"
+        
+        /**
+         A floating card-style view with rounded corners, with only title and text.
+         */
+        case textCardView = "TextCardView"
 
         /**
          A 20pt tall view that can be used to overlay the status bar.
@@ -378,7 +383,9 @@ extension MessageView {
      */
     public func configureContent(title: String?, body: String?, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?) {
         titleLabel?.text = title
+        titleLabel?.isHidden = title == nil
         bodyLabel?.text = body
+        bodyLabel?.isHidden = body == nil
         iconImageView?.image = iconImage
         iconLabel?.text = iconText
         button?.setImage(buttonImage, for: .normal)
@@ -388,5 +395,3 @@ extension MessageView {
         iconLabel?.isHidden = iconLabel?.text == nil
     }
 }
-
-
