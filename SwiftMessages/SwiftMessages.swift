@@ -319,6 +319,25 @@ open class SwiftMessages {
         public var dimModeAccessibilityLabel: String = "dismiss"
 
         /**
+         The user interface style to use when SwiftMessages displays a message its own window.
+         Use with apps that don't support dark mode to prevent messages from adopting the
+         system's interface style.
+        */
+        @available(iOS 13, *)
+        public var overrideUserInterfaceStyle: UIUserInterfaceStyle {
+            // Note that this is modelled as a computed property because
+            // Swift doesn't allow `@available` with stored properties.
+            get {
+                guard let rawValue = overrideUserInterfaceStyleRawValue else { return .unspecified }
+                return UIUserInterfaceStyle(rawValue: rawValue) ?? .unspecified
+            }
+            set {
+                overrideUserInterfaceStyleRawValue = newValue.rawValue
+            }
+        }
+        private var overrideUserInterfaceStyleRawValue: Int?
+
+        /**
          If specified, SwiftMessages calls this closure when an instance of
          `WindowViewController` is needed. Use this if you need to supply a custom subclass
          of `WindowViewController`.
@@ -604,7 +623,7 @@ open class SwiftMessages {
     }
 
     fileprivate weak var autohideToken: AnyObject?
-    
+
     fileprivate func queueAutoHide() {
         guard let current = _current else { return }
         autohideToken = current

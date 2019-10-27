@@ -29,6 +29,9 @@ open class WindowViewController: UIViewController
         self.view = PassthroughView()
         window.rootViewController = self
         window.windowLevel = windowLevel ?? UIWindow.Level.normal
+        if #available(iOS 13, *) {
+            window.overrideUserInterfaceStyle = config.overrideUserInterfaceStyle
+        }
     }
     
     func install(becomeKey: Bool) {
