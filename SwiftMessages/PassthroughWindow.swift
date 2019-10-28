@@ -11,7 +11,21 @@ import UIKit
 class PassthroughWindow: UIWindow {
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)
+        // iOS has started inserting it's own views into the window in some
+        // cases, so we need to ignore touches on those view by starting the
+        // hit test on the designated `hitTestView`.
+        let view = hitTestView?.hitTest(point, with: event)
         return view == self ? nil : view
     }
+
+    init(hitTestView: UIView, frame: CGRect) {
+        self.hitTestView = hitTestView
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private weak var hitTestView: UIView?
 }

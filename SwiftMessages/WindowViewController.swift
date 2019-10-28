@@ -19,14 +19,14 @@ open class WindowViewController: UIViewController
         return config.shouldAutorotate
     }
     
-    public init(windowLevel: UIWindow.Level?, config: SwiftMessages.Config)
-    {
+    public init(windowLevel: UIWindow.Level?, config: SwiftMessages.Config) {
         self.windowLevel = windowLevel ?? UIWindow.Level.normal
         self.config = config
-        let window = PassthroughWindow(frame: UIScreen.main.bounds)
+        let view = PassthroughView()
+        let window = PassthroughWindow(hitTestView: view, frame: UIScreen.main.bounds)
         self.window = window
         super.init(nibName: nil, bundle: nil)
-        self.view = PassthroughView()
+        self.view = view
         window.rootViewController = self
         window.windowLevel = windowLevel ?? UIWindow.Level.normal
         if #available(iOS 13, *) {
