@@ -298,8 +298,12 @@ class Presenter: NSObject {
             #if SWIFTMESSAGES_APP_EXTENSIONS
             throw SwiftMessagesError.noRootViewController
             #else
-            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-                let viewController = rootViewController.sm_selectPresentationContextTopDown(config)
+            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                
+                let viewController = topController.sm_selectPresentationContextTopDown(config)
                 return .viewController(Weak(value: viewController))
             } else {
                 throw SwiftMessagesError.noRootViewController
