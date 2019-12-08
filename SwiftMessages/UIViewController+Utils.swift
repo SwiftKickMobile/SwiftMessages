@@ -8,7 +8,13 @@
 
 import UIKit
 
-private let fullScreenStyles: [UIModalPresentationStyle] = [.fullScreen, .overFullScreen]
+private let fullScreenStyles: [UIModalPresentationStyle] = {
+    if #available(iOS 13.0, *) {
+        return [.fullScreen, .overFullScreen, .automatic]
+    } else {
+        return [.fullScreen, .overFullScreen]
+    }
+}()
 
 extension UIViewController {
     
