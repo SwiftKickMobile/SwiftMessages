@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changes
 
+* Add `SwiftMessages.PresentationContext.windowScene` option for targeting a specific window scene.
 * Changed the behavior of the default `presentationContext`, `.automatic`. Previously, if the root view controller was presenting, the message would only be displayed over the presented view controller if the `modalPresentationStyle` was `fullScreen` or `overFullScreen`. Now, messages are always displayed over presented view controllers.
 
 ## 7.0.1

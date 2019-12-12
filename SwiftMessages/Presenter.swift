@@ -14,6 +14,62 @@ protocol PresenterDelegate: AnimationDelegate {
 
 class Presenter: NSObject {
 
+    // MARK: - API
+
+    init(config: SwiftMessages.Config, view: UIView, delegate: PresenterDelegate) {
+        self.config = config
+        self.view = view
+        self.delegate = delegate
+        self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
+        if let identifiable = view as? Identifiable {
+            id = identifiable.id
+        } else {
+            var mutableView = view
+            id = withUnsafePointer(to: &mutableView) { "\($0)" }
+        }
+
+        super.init()
+    }
+    
+    var id: String
+    var config: SwiftMessages.Config
+    let maskingView = MaskingView()
+    let animator: Animator
+    var isHiding = false
+    let view: UIView
+
+    var delayShow: TimeInterval? {
+        if case .indefinite(let opts) = config.duration { return opts.delay }
+        return nil
+    }
+
+    var showDate: CFTimeInterval?
+
+    /// Returns the required delay for hiding based on time shown
+    var delayHide: TimeInterval? {
+        if interactivelyHidden { return 0 }
+        if case .indefinite(let opts) = config.duration, let showDate = showDate {
+            let timeIntervalShown = CACurrentMediaTime() - showDate
+            return max(0, opts.minimum - timeIntervalShown)
+        }
+        return nil
+    }
+
+    var pauseDuration: TimeInterval? {
+        let duration: TimeInterval?
+        switch self.config.duration {
+        case .automatic:
+            duration = 2
+        case .seconds(let seconds):
+            duration = seconds
+        case .forever, .indefinite:
+            duration = nil
+        }
+        return duration
+    }
+
+    // MARK: - Constants
+
     enum PresentationContext {
         case viewController(_: Weak<UIViewController>)
         case view(_: Weak<UIView>)
@@ -36,28 +92,23 @@ class Presenter: NSObject {
             }
         }
     }
-    
-    var config: SwiftMessages.Config
-    let view: UIView
-    weak var delegate: PresenterDelegate?
-    let maskingView = MaskingView()
-    var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
-    let animator: Animator
 
-    init(config: SwiftMessages.Config, view: UIView, delegate: PresenterDelegate) {
-        self.config = config
-        self.view = view
-        self.delegate = delegate
-        self.animator = Presenter.animator(forPresentationStyle: config.presentationStyle, delegate: delegate)
-        if let identifiable = view as? Identifiable {
-            id = identifiable.id
-        } else {
-            var mutableView = view
-            id = withUnsafePointer(to: &mutableView) { "\($0)" }
+    // MARK: - Variables
+
+    private weak var delegate: PresenterDelegate?
+    private var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
+
+    @available (iOS 13.0, *)
+    private var windowScene: UIWindowScene? {
+        switch config.presentationContext {
+        case .windowScene(let scene, _): return scene
+        default: return UIApplication.shared.keyWindow?.windowScene
         }
-
-        super.init()
     }
+
+    private var interactivelyHidden = false;
+
+    // MARK: - Showing and hiding
 
     private static func animator(forPresentationStyle style: SwiftMessages.PresentationStyle, delegate: AnimationDelegate) -> Animator {
         switch style {
@@ -72,44 +123,6 @@ class Presenter: NSObject {
             return animator
         }
     }
-
-    var id: String
-    
-    var pauseDuration: TimeInterval? {
-        let duration: TimeInterval?
-        switch self.config.duration {
-        case .automatic:
-            duration = 2
-        case .seconds(let seconds):
-            duration = seconds
-        case .forever, .indefinite:
-            duration = nil
-        }
-        return duration
-    }
-
-    var showDate: CFTimeInterval?
-
-    private var interactivelyHidden = false;
-
-    var delayShow: TimeInterval? {
-        if case .indefinite(let opts) = config.duration { return opts.delay }
-        return nil
-    }
-
-    /// Returns the required delay for hiding based on time shown
-    var delayHide: TimeInterval? {
-        if interactivelyHidden { return 0 }
-        if case .indefinite(let opts) = config.duration, let showDate = showDate {
-            let timeIntervalShown = CACurrentMediaTime() - showDate
-            return max(0, opts.minimum - timeIntervalShown)
-        }
-        return nil
-    }
-
-    /*
-     MARK: - Showing and hiding
-     */
 
     func show(completion: @escaping AnimationCompletion) throws {
         try presentationContext = getPresentationContext()
@@ -173,8 +186,6 @@ class Presenter: NSObject {
             let focus = accessibleMessage.accessibilityElement ?? accessibleMessage.additonalAccessibilityElements?.first else { return }
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: focus)
     }
-
-    var isHiding = false
 
     func hide(animated: Bool, completion: @escaping AnimationCompletion) {
         isHiding = true
@@ -308,6 +319,9 @@ class Presenter: NSObject {
         case .window(let level):
             let viewController = newWindowViewController(level)
             return .viewController(Weak(value: viewController))
+        case .windowScene(_, let level):
+            let viewController = newWindowViewController(level)
+            return .viewController(Weak(value: viewController))
         case .viewController(let viewController):
             let viewController = viewController.sm_selectPresentationContextBottomUp(config)
             return .viewController(Weak(value: viewController))
@@ -409,8 +423,7 @@ class Presenter: NSObject {
         guard let containerView = presentationContext.viewValue() else { return }
         if let windowViewController = presentationContext.viewControllerValue() as? WindowViewController {
             if #available(iOS 13, *) {
-                let scene = UIApplication.shared.keyWindow?.windowScene
-                windowViewController.install(becomeKey: becomeKeyWindow, scene: scene)
+                windowViewController.install(becomeKey: becomeKeyWindow, scene: windowScene)
             } else {
                 windowViewController.install(becomeKey: becomeKeyWindow)
             }

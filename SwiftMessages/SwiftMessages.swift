@@ -70,7 +70,18 @@ open class SwiftMessages {
          to hide it.
         */
         case window(windowLevel: UIWindow.Level)
-        
+
+        /**
+         Displays the message in a new window, at the specified window level,
+         in the specified window scene. SwiftMessages automatically increases the top margins
+         of any message view that adopts the `MarginInsetting` protocol (as `MessageView` does)
+         to account for the status bar. As of iOS 13, windows can no longer cover the
+         status bar. The only alternative is to set `Config.prefersStatusBarHidden = true`
+         to hide it.
+        */
+        @available(iOS 13.0, *)
+        case windowScene(_: UIWindowScene, windowLevel: UIWindow.Level)
+
         /**
          Displays the message view under navigation bars and tab bars if an
          appropriate one is found using the given view controller as a starting
@@ -79,7 +90,7 @@ open class SwiftMessages {
          for targeted placement in a view controller heirarchy.
         */
         case viewController(_: UIViewController)
-        
+
         /**
          Displays the message view in the given container view.
          */
