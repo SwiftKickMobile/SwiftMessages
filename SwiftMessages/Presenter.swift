@@ -337,14 +337,14 @@ class Presenter: NSObject {
     func install() {
 
         func topLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
-            if case .top = config.presentationStyle, let nav = viewController as? UINavigationController, nav.sm_isVisible(view: nav.navigationBar) {
+            if case .top = config.presentationStyle.topBottomStyle, let nav = viewController as? UINavigationController, nav.sm_isVisible(view: nav.navigationBar) {
                 return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: nav.navigationBar, attribute: .bottom, multiplier: 1.00, constant: 0.0)
             }
             return NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1.00, constant: 0.0)
         }
 
         func bottomLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
-            if case .bottom = config.presentationStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
+            if case .bottom = config.presentationStyle.topBottomStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
                 return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: 0.0)
             }
             return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.00, constant: 0.0)

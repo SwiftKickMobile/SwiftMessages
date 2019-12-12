@@ -16,7 +16,11 @@ public class PhysicsAnimation: NSObject, Animator {
         case bottom
     }
 
-    public var placement: Placement = .center
+    open var placement: Placement = .center
+
+    open var showDuration: TimeInterval = 0.5
+
+    open var hideDuration: TimeInterval = 0.15
 
     public var panHandler = PhysicsPanHandler()
 
@@ -51,18 +55,14 @@ public class PhysicsAnimation: NSObject, Animator {
             view.transform = CGAffineTransform.identity
             completion(true)
         }
-        UIView.animate(withDuration: hideDuration!, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
             view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }, completion: nil)
-        UIView.animate(withDuration: hideDuration!, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
             view.alpha = 0
         }, completion: nil)
         CATransaction.commit()
     }
-
-    public var showDuration: TimeInterval? { return 0.5  }
-
-    public var hideDuration: TimeInterval? { return 0.15  }
 
     func install(context: AnimationContext) {
         let view = context.messageView
@@ -107,10 +107,10 @@ public class PhysicsAnimation: NSObject, Animator {
         CATransaction.setCompletionBlock {
             completion(true)
         }
-        UIView.animate(withDuration: showDuration!, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: showDuration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
             view.transform = CGAffineTransform.identity
         }, completion: nil)
-        UIView.animate(withDuration: 0.3 * showDuration!, delay: 0, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
+        UIView.animate(withDuration: 0.3 * showDuration, delay: 0, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
             view.alpha = 1
         }, completion: nil)
         CATransaction.commit()
