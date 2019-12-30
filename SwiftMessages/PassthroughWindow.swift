@@ -18,9 +18,9 @@ class PassthroughWindow: UIWindow {
         return view == self ? nil : view
     }
 
-    init(hitTestView: UIView, frame: CGRect) {
+    init(hitTestView: UIView) {
         self.hitTestView = hitTestView
-        super.init(frame: frame)
+        super.init(frame: .zero)
     }
     
     required init?(coder: NSCoder) {
