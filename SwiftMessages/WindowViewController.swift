@@ -23,7 +23,7 @@ open class WindowViewController: UIViewController
         self.windowLevel = windowLevel ?? UIWindow.Level.normal
         self.config = config
         let view = PassthroughView()
-        let window = PassthroughWindow(hitTestView: view, frame: UIScreen.main.bounds)
+        let window = PassthroughWindow(hitTestView: view)
         self.window = window
         super.init(nibName: nil, bundle: nil)
         self.view = view
@@ -35,18 +35,18 @@ open class WindowViewController: UIViewController
     }
     
     func install(becomeKey: Bool) {
-        guard let window = window else { return }
-        if becomeKey {
-            window.makeKeyAndVisible()
-        } else {
-            window.isHidden = false
-        }
+        show(becomeKey: becomeKey)
     }
 
     @available(iOS 13, *)
     func install(becomeKey: Bool, scene: UIWindowScene?) {
+        window?.windowScene = scene
+        show(becomeKey: becomeKey, frame: scene?.coordinateSpace.bounds)
+    }
+    
+    private func show(becomeKey: Bool, frame: CGRect? = nil) {
         guard let window = window else { return }
-        window.windowScene = scene
+        window.frame = frame ?? UIScreen.main.bounds
         if becomeKey {
             window.makeKeyAndVisible()
         } else {
