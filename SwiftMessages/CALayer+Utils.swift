@@ -6,6 +6,7 @@
 //  Copyright © 2018 SwiftKick Mobile. All rights reserved.
 //
 
+import CoreAnimation
 import CoreGraphics
 
 extension CALayer {
