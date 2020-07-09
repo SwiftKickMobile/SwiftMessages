@@ -13,6 +13,11 @@ All notable changes to this project will be documented in this file.
 ### Fixes
 
 * #365 Fix an issue with customized `TopBottomAnimation` where messages weren't properly displayed under navigation and tab bars.
+* #352 Fix accessibility for view controllers presented with `SwiftMessagesSegue`.
+* #355 Update card view layout to support centering of pure textual content 
+* #354 Support `overrideUserInterfaceStyle` when view presented in its own window
+* #360 Fix touch handing issue in iOS 13.1.3
+* #382 Fix warnings in Xcode 11.4
 
 ## 7.0.1
 
