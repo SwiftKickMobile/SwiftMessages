@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 8.0.1
+
+### Fixes
+* #401 UIAlertController pops up but SwiftMessage layer absorbs all touches.
+
 ## 8.0.0
 
 ### Changes
