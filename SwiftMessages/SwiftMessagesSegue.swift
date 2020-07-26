@@ -147,6 +147,13 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     /**
+     Normally, the destination view controller's `modalPresentationStyle` is changed
+     to `.custom` in the `perform()` function. Set this property to `false` to prevent it from
+     being overridden.
+    */
+    public var overrideModalPresentationStyle: Bool = true
+
+    /**
      The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
      The view controller's view is installed into `containerView`, which is itself installed
      into `messageView`. `SwiftMessagesSegue` does this installation automatically based on the
@@ -191,7 +198,9 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 
     override open func perform() {
         selfRetainer = self
-        destination.modalPresentationStyle = .custom
+        if overrideModalPresentationStyle {
+            destination.modalPresentationStyle = .custom
+        }
         destination.transitioningDelegate = self
         source.present(destination, animated: true, completion: nil)
     }
