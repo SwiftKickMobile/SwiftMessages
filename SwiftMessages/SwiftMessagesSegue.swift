@@ -147,6 +147,11 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     /**
+     Display the view over another view controller’s content.
+    */
+    public var presentOverCurrentContext: Bool = false
+
+    /**
      The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
      The view controller's view is installed into `containerView`, which is itself installed
      into `messageView`. `SwiftMessagesSegue` does this installation automatically based on the
@@ -191,7 +196,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 
     override open func perform() {
         selfRetainer = self
-        destination.modalPresentationStyle = .custom
+        destination.modalPresentationStyle = presentOverCurrentContext ? .overCurrentContext : .custom
         destination.transitioningDelegate = self
         source.present(destination, animated: true, completion: nil)
     }
