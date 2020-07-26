@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## 8.0.1
 
+### Changes
+
+* #403 Add the ability to customize the modal presentation style used with `SwiftMessagesSegue` by setting `SwiftMessagesSegue.overrideModalPresentationStyle = false`.
+
 ### Fixes
 * #401 UIAlertController pops up but SwiftMessage layer absorbs all touches.
 
