@@ -147,9 +147,11 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     /**
-     Display the view over another view controller’s content.
+     Normally, the destination view controller's `modalPresentationStyle` is changed
+     to `.custom` in the `perform()` function. Set this property to `false` to prevent it from
+     being overridden.
     */
-    public var presentOverCurrentContext: Bool = false
+    public var overrideModalPresentationStyle: Bool = true
 
     /**
      The view that is passed to `SwiftMessages.show(config:view:)` during presentation.
@@ -196,7 +198,9 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 
     override open func perform() {
         selfRetainer = self
-        destination.modalPresentationStyle = presentOverCurrentContext ? .overCurrentContext : .custom
+        if overrideModalPresentationStyle {
+            destination.modalPresentationStyle = .custom
+        }
         destination.transitioningDelegate = self
         source.present(destination, animated: true, completion: nil)
     }
