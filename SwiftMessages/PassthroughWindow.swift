@@ -11,11 +11,16 @@ import UIKit
 class PassthroughWindow: UIWindow {
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        // iOS has started inserting it's own views into the window in some
-        // cases, so we need to ignore touches on those view by starting the
-        // hit test on the designated `hitTestView`.
-        let view = hitTestView?.hitTest(point, with: event)
-        return view == self ? nil : view
+        // iOS has started embedding the SwiftMessages view in private views that block
+        // interaction with views underneath, essentially making the window behave like a modal.
+        // To work around this, we'll ignore hit test results on these views.
+        let view = super.hitTest(point, with: event)
+        if let view = view,
+            let hitTestView = hitTestView,
+            hitTestView.isDescendant(of: view) && hitTestView != view {
+            return nil
+        }
+        return view
     }
 
     init(hitTestView: UIView) {
@@ -26,6 +31,6 @@ class PassthroughWindow: UIWindow {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private weak var hitTestView: UIView?
 }
