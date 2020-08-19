@@ -11,9 +11,15 @@ import Foundation
 extension Bundle {
     static func sm_frameworkBundle() -> Bundle {
         let bundle = Bundle(for: MessageView.self)
-        if let path = bundle.path(forResource: "SwiftMessages", ofType: "bundle") {
+        // Check for Swift Package Manager bundle name
+        if let path = bundle.path(forResource: "SwiftMessages_SwiftMessages", ofType: "bundle") {
             return Bundle(path: path)!
         }
+        // Check for CocoaPods or Carthage bundle name
+        else if let path = bundle.path(forResource: "SwiftMessages", ofType: "bundle") {
+            return Bundle(path: path)!
+        }
+        // Just return the app bundle
         else {
             return bundle
         }
