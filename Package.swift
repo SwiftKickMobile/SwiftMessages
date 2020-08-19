@@ -12,7 +12,10 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftMessages",
-            path: "SwiftMessages"
+            path: "SwiftMessages",
+            exclude: [
+                "Info.plist",
+            ]
         )
     ]
 )
