@@ -34,6 +34,12 @@ open class WindowViewController: UIViewController
         }
     }
     
+    @available(iOS 13.0, *)
+    public convenience init(windowLevel: UIWindow.Level?, config: SwiftMessages.Config, windowScense: UIWindowScene) {
+        self.init(windowLevel: windowLevel, config: config)
+        window?.windowScene = windowScense
+    }
+    
     func install(becomeKey: Bool) {
         show(becomeKey: becomeKey)
     }
