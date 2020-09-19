@@ -350,11 +350,11 @@ extension SwiftMessagesSegue {
             let toVC = transitionContext.viewController(forKey: .to)
             if let preferredHeight = toVC?.preferredContentSize.height,
                 preferredHeight > 0 {
-                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
             }
             if let preferredWidth = toVC?.preferredContentSize.width,
                 preferredWidth > 0 {
-                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 950)).isActive = true
+                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
             }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)
