@@ -15,6 +15,10 @@ let package = Package(
             path: "SwiftMessages",
             exclude: [
                 "Info.plist",
+            ],
+            resources: [
+                .process("SwiftMessages/Resources"),
+                .process("SwiftMessages/Assets.xcassets")
             ]
         )
     ]
