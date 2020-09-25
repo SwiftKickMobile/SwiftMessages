@@ -47,3 +47,4 @@ playground.xcworkspace
 *.pkey
 screenshots
 rvm.env
+.build

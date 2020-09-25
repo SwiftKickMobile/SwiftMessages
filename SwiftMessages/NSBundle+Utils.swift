@@ -8,20 +8,41 @@
 
 import Foundation
 
+private class BundleToken {}
+
 extension Bundle {
+    // This is copied method from SPM generated Bundle.module for CocoaPods support
     static func sm_frameworkBundle() -> Bundle {
-        let bundle = Bundle(for: MessageView.self)
-        // Check for Swift Package Manager bundle name
-        if let path = bundle.path(forResource: "SwiftMessages_SwiftMessages", ofType: "bundle") {
-            return Bundle(path: path)!
+
+        let candidates = [
+            // Bundle should be present here when the package is linked into an App.
+            Bundle.main.resourceURL,
+
+            // Bundle should be present here when the package is linked into a framework.
+            Bundle(for: BundleToken.self).resourceURL,
+
+            // For command-line tools.
+            Bundle.main.bundleURL,
+        ]
+
+        let bundleNames = [
+            // For Swift Package Manager
+            "SwiftMessages_SwiftMessages",
+
+            // For Carthage
+            "SwiftMessages",
+        ]
+
+        for bundleName in bundleNames {
+            for candidate in candidates {
+                let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
+                if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
+                    return bundle
+                }
+            }
         }
-        // Check for CocoaPods or Carthage bundle name
-        else if let path = bundle.path(forResource: "SwiftMessages", ofType: "bundle") {
-            return Bundle(path: path)!
-        }
-        // Just return the app bundle
-        else {
-            return bundle
-        }
+
+        // Return whatever bundle this code is in as a last resort.
+        return Bundle(for: BundleToken.self)
     }
 }
