@@ -25,23 +25,24 @@ extension Bundle {
             Bundle.main.bundleURL,
         ]
 
-        // Search for SPM bundle
-        let bundleName = "SwiftMessages_SwiftMessages"
-        for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
-            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
-                return bundle
+        let bundleNames = [
+            // For Swift Package Manager
+            "SwiftMessages_SwiftMessages",
+
+            // For Carthage
+            "SwiftMessages",
+        ]
+
+        for bundleName in bundleNames {
+            for candidate in candidates {
+                let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
+                if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
+                    return bundle
+                }
             }
         }
 
-        // Search for CocoaPods/Carthage bundle
-        let cocoaPodsBundleName = "SwiftMessages"
-        for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(cocoaPodsBundleName + ".bundle")
-            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
-                return bundle
-            }
-        }
-        fatalError("unable to find bundle named SwiftMessages_SwiftMessages or SwiftMessages")
+        // Return whatever bundle this code is in as a last resort.
+        return Bundle(for: BundleToken.self)
     }
 }
