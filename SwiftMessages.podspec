@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
 
     spec.subspec 'App' do |app|
         app.source_files = 'SwiftMessages/**/*.swift'
-        app.resource_bundles = {'SwiftMessages_SwiftMessages' => ['SwiftMessages/Resources/*.{xib,xcassets}']}
+        app.resource_bundles = {'SwiftMessages' => ['SwiftMessages/Resources/*.*']}
     end
 
     spec.subspec 'AppExtension' do |ext|
