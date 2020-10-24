@@ -64,6 +64,8 @@ Add the following line to your Cartfile:
 github "SwiftKickMobile/SwiftMessages"
 ````
 
+If the Carthage build fails, [try using the script](https://github.com/Carthage/Carthage/issues/3019).
+
 ### Manual
 
 1. Put SwiftMessages repo somewhere in your project directory.
