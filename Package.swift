@@ -15,7 +15,8 @@ let package = Package(
             path: "SwiftMessages",
             exclude: [
                 "Info.plist",
-            ]
+            ],
+            resources: [.process("Resources")]
         )
     ]
 )

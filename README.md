@@ -48,6 +48,10 @@ And check out our blog post [Elegant Custom UIViewController Transitioning](http
 
 ## Installation
 
+### Swift Package Manager
+
+Go to `File | Swift Packages | Add Package Dependency...` in Xcode and search for "SwiftMessages". If multiple results are found, select the one owned by SwiftKick Mobile.
+
 ### CocoaPods
 
 Add the following line to your Podfile:
