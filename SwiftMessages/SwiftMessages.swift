@@ -441,7 +441,7 @@ open class SwiftMessages {
     open func hideAll() {
         messageQueue.sync {
             queue.removeAll()
-            delays.ids.removeAll()
+            delays.removeAll()
             counts.removeAll()
             hideCurrent()
         }
@@ -459,7 +459,7 @@ open class SwiftMessages {
                 hideCurrent()
             }
             queue = queue.filter { $0.id != id }
-            delays.ids.remove(id)
+            delays.remove(id: id)
             counts[id] = nil
         }
     }
@@ -483,7 +483,7 @@ open class SwiftMessages {
                 hideCurrent()
             }
             queue = queue.filter { $0.id != id }
-            delays.ids.remove(id)
+            delays.remove(id: id)
         }
     }
 
@@ -518,18 +518,26 @@ open class SwiftMessages {
     /// Type for keeping track of delayed presentations
     fileprivate class Delays {
 
-        fileprivate var ids = Set<String>()
-
         fileprivate func add(presenter: Presenter) {
-            ids.insert(presenter.id)
+            presenters.insert(presenter)
         }
 
         @discardableResult
         fileprivate func remove(presenter: Presenter) -> Bool {
-            guard ids.contains(presenter.id) else { return false }
-            ids.remove(presenter.id)
+            guard presenters.contains(presenter) else { return false }
+            presenters.remove(presenter)
             return true
         }
+
+        fileprivate func remove(id: String) {
+            presenters = presenters.filter { $0.id != id }
+        }
+
+        fileprivate func removeAll() {
+            presenters.removeAll()
+        }
+
+        private var presenters = Set<Presenter>()
     }
 
     func show(presenter: Presenter) {
@@ -591,7 +599,7 @@ open class SwiftMessages {
                     guard let strongSelf = self else { return }
                     guard completed else {
                         strongSelf.messageQueue.sync {
-                            strongSelf.internalHide(id: current.id)
+                            strongSelf.internalHide(presenter: current)
                         }
                         return
                     }
@@ -607,12 +615,13 @@ open class SwiftMessages {
         }
     }
 
-    fileprivate func internalHide(id: String) {
-        if id == _current?.id {
+    fileprivate func internalHide(presenter: Presenter) {
+        if presenter == _current {
             hideCurrent()
+        } else {
+            queue = queue.filter { $0 != presenter }
+            delays.remove(presenter: presenter)
         }
-        queue = queue.filter { $0.id != id }
-        delays.ids.remove(id)
     }
  
     fileprivate func hideCurrent(animated: Bool = true) {
@@ -643,7 +652,7 @@ open class SwiftMessages {
             messageQueue.asyncAfter(deadline: delayTime, execute: {
                 // Make sure we've still got a green light to auto-hide.
                 if self.autohideToken !== current { return }
-                self.internalHide(id: current.id)
+                self.internalHide(presenter: current)
             })
         }
     }
@@ -725,14 +734,14 @@ extension SwiftMessages: PresenterDelegate {
 
     func hide(presenter: Presenter) {
         messageQueue.sync {
-            self.internalHide(id: presenter.id)
+            self.internalHide(presenter: presenter)
         }
     }
 
     public func hide(animator: Animator) {
         messageQueue.sync {
             guard let presenter = self.presenter(forAnimator: animator) else { return }
-            self.internalHide(id: presenter.id)
+            self.internalHide(presenter: presenter)
         }
     }
 
