@@ -176,10 +176,10 @@ enum Item {
 
     func dequeueCell(_ tableView: UITableView) -> UITableViewCell {
         switch self {
-        case .titleBody(let data):
+        case .titleBody(let title, let body, _):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitleBody") as! TitleBodyCell
-            cell.titleLabel.text = data.title
-            cell.bodyLabel.text = data.body
+            cell.titleLabel.text = title
+            cell.bodyLabel.text = body
             cell.configureBodyTextStyle()
             return cell
         case .explore:
@@ -201,8 +201,8 @@ enum Item {
     
     func performDemo() {
         switch self {
-        case .titleBody(let data):
-            data.function()
+        case .titleBody(_, _, let function):
+            function()
         default:
             break
         }

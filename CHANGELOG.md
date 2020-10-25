@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 8.0.3
+
+### Features
+
+* Full support for Swift Package Manager
+
+### Fixes
+
+* #328 ignoreDuplicates is not working
+* #412 Fix deployment target on nib files to match target
+
 ## 8.0.2
 
 ### Changes
