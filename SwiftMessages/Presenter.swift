@@ -434,7 +434,7 @@ class Presenter: NSObject {
     }
 
     private var becomeKeyWindow: Bool {
-        if config.becomeKeyWindow == .some(true) { return true }
+        if let becomeKeyWindow = config.becomeKeyWindow { return becomeKeyWindow }
         switch config.dimMode {
         case .gray, .color, .blur:
             // Should become key window in modal presentation style
