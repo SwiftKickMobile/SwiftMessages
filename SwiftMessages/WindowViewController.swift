@@ -55,9 +55,6 @@ open class WindowViewController: UIViewController
     }
     
     func uninstall() {
-        if #available(iOS 13, *) {
-            window?.windowScene = nil
-        }
         window?.isHidden = true
         window = nil
     }
