@@ -102,7 +102,12 @@ class Presenter: NSObject {
     private var windowScene: UIWindowScene? {
         switch config.presentationContext {
         case .windowScene(let scene, _): return scene
-        default: return UIApplication.shared.keyWindow?.windowScene
+        default:
+            #if SWIFTMESSAGES_APP_EXTENSIONS
+            return nil
+            #else
+            return UIApplication.shared.keyWindow?.windowScene
+            #endif
         }
     }
 
