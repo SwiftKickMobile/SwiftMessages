@@ -33,6 +33,10 @@ public protocol MarginAdjustable {
     /// the additional margin is not added.
     var collapseLayoutMarginAdditions: Bool { get set }
 
+
+    /// Start margins from the safe area.
+    var respectSafeArea: Bool { get set }
+
     var bounceAnimationOffset: CGFloat { get set }
 }
 
