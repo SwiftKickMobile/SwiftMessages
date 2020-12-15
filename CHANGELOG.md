@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 8.0.4
+
+### Features
+
+* #442 Added `MarginAdjustable.respectSafeArea` option to exclude safe area from layout margins.
+* #430 Support disable `becomeKeyWindow` from SwiftMessages.Config. This is a workaround for potential issues with apps that display additional windows.
+
+### Fixes
+
+* #437 Revert to explicitly specifying "SwiftMessages" as the module in nib files.
+* #440 Fix crash when using SwiftMessages in app extension
+
 ## 8.0.3
 
 ### Features
