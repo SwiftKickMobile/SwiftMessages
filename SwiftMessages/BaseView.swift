@@ -210,6 +210,9 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
         }
     }
 
+    /// Start margins from the safe area.
+    open var respectSafeArea: Bool = true
+
     /// IBInspectable access to layoutMarginAdditions.top
     @IBInspectable open var topLayoutMarginAddition: CGFloat = 0
 
