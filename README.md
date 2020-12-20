@@ -14,7 +14,7 @@
 
 SwiftMessages is a very flexible view and view controller presentation library for iOS.
 
-Message views and view controllers can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
+Message views and view controllers can be displayed at the top, bottom, or center of the screen, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
 
 In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
@@ -135,9 +135,12 @@ var config = SwiftMessages.Config()
 // Slide up from the bottom.
 config.presentationStyle = .bottom
 
-// Display in a window at the specified window level: UIWindow.Level.statusBar
-// displays over the status bar while UIWindow.Level.normal displays under.
+// Display in a window at the specified window level.
 config.presentationContext = .window(windowLevel: .statusBar)
+
+Note that, as of iOS 13, it is no longer possible to cover the status bar
+regardless of the window level. A workaround is to hide the status bar instead.
+config.prefersStatusBarHidden = true
 
 // Disable the default auto-hiding behavior.
 config.duration = .forever

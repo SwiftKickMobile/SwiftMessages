@@ -10,11 +10,6 @@ import UIKit
 
 open class WindowViewController: UIViewController
 {
-    fileprivate var window: UIWindow?
-    
-    let windowLevel: UIWindow.Level
-    let config: SwiftMessages.Config
-    
     override open var shouldAutorotate: Bool {
         return config.shouldAutorotate
     }
@@ -41,6 +36,9 @@ open class WindowViewController: UIViewController
     @available(iOS 13, *)
     func install(becomeKey: Bool, scene: UIWindowScene?) {
         window?.windowScene = scene
+        if becomeKey {
+            previousKeyWindow = UIApplication.shared.keyWindow
+        }
         show(becomeKey: becomeKey, frame: scene?.coordinateSpace.bounds)
     }
     
@@ -60,6 +58,7 @@ open class WindowViewController: UIViewController
         }
         window?.isHidden = true
         window = nil
+        previousKeyWindow?.makeKeyAndVisible()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -73,6 +72,15 @@ open class WindowViewController: UIViewController
     open override var prefersStatusBarHidden: Bool {
         return config.prefersStatusBarHidden ?? super.prefersStatusBarHidden
     }
+
+    // MARK: - Variables
+
+    let windowLevel: UIWindow.Level
+
+    private var window: UIWindow?
+    private weak var previousKeyWindow: UIWindow?
+
+    private let config: SwiftMessages.Config
 }
 
 extension WindowViewController {

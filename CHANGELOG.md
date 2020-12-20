@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 8.0.5
+
+### FeaturesFixes
+
+* #446 Restore previous key window on dismissal if the message assumed key window status.
+
 ## 8.0.4
 
 ### Features
