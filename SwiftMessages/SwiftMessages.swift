@@ -353,7 +353,7 @@ open class SwiftMessages {
          `WindowViewController` is needed. Use this if you need to supply a custom subclass
          of `WindowViewController`.
          */
-        public var windowViewController: ((_ windowLevel: UIWindow.Level?, _ config: SwiftMessages.Config) -> WindowViewController)?
+        public var windowViewController: ((_ config: SwiftMessages.Config) -> WindowViewController)?
 
         /**
          Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.

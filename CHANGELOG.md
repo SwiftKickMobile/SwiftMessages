@@ -1,9 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.0
+
+### Features
+
+* #447 Add the ability to show view controller in a new window with `SwiftMessagesSegue`.
+This capability is available when using `SwiftMessagesSegue` programmatically by supplying
+an instance of `WindowViewController` as the segue's source view controller.
+
+### Changes
+
+* This release has minor breaking changes in the `WindowViewController` initializers.
+The `windowLevel` is no longer accepted as an argument because the `config` parameter
+should specify the window level in the `presentationContext` property.
+
 ## 8.0.5
 
-### FeaturesFixes
+### Fixes
 
 * #446 Restore previous key window on dismissal if the message assumed key window status.
 
@@ -11,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* #442 Added `MarginAdjustable.respectSafeArea` option to exclude safe area from layout margins.
+* #442 Add `MarginAdjustable.respectSafeArea` option to exclude safe area from layout margins.
 * #430 Support disable `becomeKeyWindow` from SwiftMessages.Config. This is a workaround for potential issues with apps that display additional windows.
 
 ### Fixes

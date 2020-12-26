@@ -1,5 +1,5 @@
 //
-//  NSBundle+Utils.swift
+//  NSBundle+Extensions.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 8/8/16.

@@ -1,5 +1,5 @@
 //
-//  MarginAdjustable+Animation.swift
+//  MarginAdjustable+Extensions.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 11/5/17.

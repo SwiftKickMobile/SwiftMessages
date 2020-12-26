@@ -1,5 +1,5 @@
 //
-//  NSLayoutConstraint+Utils.swift
+//  NSLayoutConstraint+Extensions.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 5/18/19.

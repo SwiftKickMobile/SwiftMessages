@@ -34,17 +34,19 @@ import UIKit
 
      dismiss(animated: true, completion: nil)
 
+ To display the view controller in a new window, supply an instance of `WindowViewController` as the `source`.
+
  It is not necessary to retain `segue` because it retains itself until dismissal. However, you can
  retain it if you plan to `perform()` more than once.
 
  + note: Some additional details:
  1. Your view controller's view will be embedded in a `SwiftMessages.BaseView` in order to
-    utilize some SwiftMessages features. This view can be accessed and configured via the
-    `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
-    shadow by calling `segue.messageView.configureDropShadow()`.
+ utilize some SwiftMessages features. This view can be accessed and configured via the
+ `SwiftMessagesSegue.messageView` property. For example, you may configure a default drop
+ shadow by calling `segue.messageView.configureDropShadow()`.
  2. SwiftMessagesSegue provides static default view controller sizing based on device.
-    However, it is recommended that you specify sizing appropriate for your content using
-    one of the following methods.
+ However, it is recommended that you specify sizing appropriate for your content using
+ one of the following methods.
     1. Define sufficient width and height constraints in your view controller.
     2. Set `preferredContentSize` (a.k.a "Use Preferred Explicit Size" in Interface Builder's
        attribute inspector). Zeros are ignored, e.g. `CGSize(width: 0, height: 350)` only
@@ -197,6 +199,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }()
 
     override open func perform() {
+        (source as? WindowViewController)?.install()
         selfRetainer = self
         if overrideModalPresentationStyle {
             destination.modalPresentationStyle = .custom
@@ -286,10 +289,11 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                 if let completeTransition = self.hider.completeTransition {
                     completeTransition(true)
                 } else {
-                    // Case where message is interinally hidden by SwiftMessages, such as with a
+                    // Case where message is internally hidden by SwiftMessages, such as with a
                     // dismiss gesture, rather than by view controller dismissal.
                     source.dismiss(animated: false, completion: nil)
                 }
+                (source as? WindowViewController)?.uninstall()
                 self.selfRetainer = nil
             default: break
             }

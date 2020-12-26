@@ -1,5 +1,5 @@
 //
-//  CALayer+Utils.swift
+//  CALayer+Extensions.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 8/3/18.

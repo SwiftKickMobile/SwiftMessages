@@ -1,5 +1,5 @@
 //
-//  UIEdgeInsets+Utils.swift
+//  UIEdgeInsets+Extensions.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 5/23/18.

@@ -98,19 +98,6 @@ class Presenter: NSObject {
     private weak var delegate: PresenterDelegate?
     private var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
 
-    @available (iOS 13.0, *)
-    private var windowScene: UIWindowScene? {
-        switch config.presentationContext {
-        case .windowScene(let scene, _): return scene
-        default:
-            #if SWIFTMESSAGES_APP_EXTENSIONS
-            return nil
-            #else
-            return UIApplication.shared.keyWindow?.windowScene
-            #endif
-        }
-    }
-
     private var interactivelyHidden = false;
 
     // MARK: - Showing and hiding
@@ -245,9 +232,9 @@ class Presenter: NSObject {
         guard let window = maskingView.window else { return [] }
         let windowLevel: UIWindow.Level = {
             if let vc = presentationContext.viewControllerValue() as? WindowViewController {
-                return vc.windowLevel
+                return vc.config.windowLevel ?? .normal
             }
-            return UIWindow.Level.normal
+            return .normal
         }()
         // TODO `underNavigationBar` and `underTabBar` should look up the presentation context's hierarchy
         // TODO for cases where both should be true (probably not an issue for typical height messages, though).
@@ -260,7 +247,7 @@ class Presenter: NSObject {
             return false
         }()
         if #available(iOS 11, *) {
-            if windowLevel > UIWindow.Level.normal {
+            if windowLevel > .normal {
                 // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
                 // iPhone 8 with status bar window level. This seems like an iOS bug since
                 // the message view's window is above the status bar. Applying a special rule
@@ -304,8 +291,8 @@ class Presenter: NSObject {
 
     private func getPresentationContext() throws -> PresentationContext {
 
-        func newWindowViewController(_ windowLevel: UIWindow.Level) -> UIViewController {
-            let viewController = WindowViewController.newInstance(windowLevel: windowLevel, config: config)
+        func newWindowViewController() -> UIViewController {
+            let viewController = WindowViewController.newInstance(config: config)
             return viewController
         }
 
@@ -321,11 +308,11 @@ class Presenter: NSObject {
                 throw SwiftMessagesError.noRootViewController
             }
             #endif
-        case .window(let level):
-            let viewController = newWindowViewController(level)
+        case .window:
+            let viewController = newWindowViewController()
             return .viewController(Weak(value: viewController))
-        case .windowScene(_, let level):
-            let viewController = newWindowViewController(level)
+        case .windowScene:
+            let viewController = newWindowViewController()
             return .viewController(Weak(value: viewController))
         case .viewController(let viewController):
             let viewController = viewController.sm_selectPresentationContextBottomUp(config)
@@ -426,28 +413,10 @@ class Presenter: NSObject {
         }
 
         guard let containerView = presentationContext.viewValue() else { return }
-        if let windowViewController = presentationContext.viewControllerValue() as? WindowViewController {
-            if #available(iOS 13, *) {
-                windowViewController.install(becomeKey: becomeKeyWindow, scene: windowScene)
-            } else {
-                windowViewController.install(becomeKey: becomeKeyWindow)
-            }
-        }
+        (presentationContext.viewControllerValue() as? WindowViewController)?.install()
         installMaskingView(containerView: containerView)
         installInteractive()
         installAccessibility()
-    }
-
-    private var becomeKeyWindow: Bool {
-        if let becomeKeyWindow = config.becomeKeyWindow { return becomeKeyWindow }
-        switch config.dimMode {
-        case .gray, .color, .blur:
-            // Should become key window in modal presentation style
-            // for proper VoiceOver handling.
-            return true
-        case .none:
-            return false
-        }
     }
 }
 
