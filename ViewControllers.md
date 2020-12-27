@@ -23,6 +23,18 @@ let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: desti
 segue.perform()
 ````
 
+#### Present the controller on top of all controllers
+
+If you don't know the presenter or you don't want to pass it as a source like when you have a completely separated message controller, you can pass a `WindowViewController` as the **source** argument of the segue. Also, You can set  the `windowLevel` and other configurations by passing a config: `SwiftMessages.Config` instance as the argument of the `WindowViewController`:
+
+```swift
+let destinationVC = ... // make a reference to a destination view controller
+let sourceVC = WindowViewController(config: SwiftMessages.defaultConfig) // The `config` can be any custom `SwiftMessages.Config` instance
+let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
+... // do any configuration here
+segue.perform()
+```
+
 To dismiss, call the UIKit API on the presenting view controller:
 
 ````swift
