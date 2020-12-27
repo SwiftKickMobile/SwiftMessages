@@ -23,18 +23,6 @@ let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: desti
 segue.perform()
 ````
 
-#### Present the controller on top of all controllers
-
-If you don't know the presenter or you don't want to pass it as a source like when you have a completely separated message controller, you can pass a `WindowViewController` as the **source** argument of the segue. Also, You can set  the `windowLevel` and other configurations by passing a config: `SwiftMessages.Config` instance as the argument of the `WindowViewController`:
-
-```swift
-let destinationVC = ... // make a reference to a destination view controller
-let sourceVC = WindowViewController(config: SwiftMessages.defaultConfig) // The `config` can be any custom `SwiftMessages.Config` instance
-let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
-... // do any configuration here
-segue.perform()
-```
-
 To dismiss, call the UIKit API on the presenting view controller:
 
 ````swift
@@ -42,6 +30,24 @@ dismiss(animated: true, completion: nil)
 ````
 
 It is not necessary to retain `segue` because it retains itself until dismissal. However, you can retain it if you plan to `perform()` more than once.
+
+#### Present the controller on top of all controllers
+
+If you don't know the presenter or you don't want to pass it as a source, like when you
+have a completely separated message controller, you can pass a `WindowViewController`
+as the `source` argument of the segue's initializer.
+
+By default, the window will be shown in the current window scene at `.normal` window level.
+However, these parameters can be customized by initializing the view controller with a `SwiftMessages.Config` that has the `SwiftMessages.Config.presentationContext` set to either `.window` or `.windowScene`:
+
+```swift
+let destinationVC = ... // make a reference to a destination view controller
+var config = SwiftMessages.defaultConfig
+config.presentationContext = .windowScene(...) // specify the window properties
+let sourceVC = WindowViewController(config: config)
+let segue = SwiftMessagesSegue(identifier: nil, source: self, destination: destinationVC)
+segue.perform()
+```
 
 ### Configuration
 

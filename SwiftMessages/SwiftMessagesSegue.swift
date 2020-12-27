@@ -34,10 +34,17 @@ import UIKit
 
      dismiss(animated: true, completion: nil)
 
- To display the view controller in a new window, supply an instance of `WindowViewController` as the `source`.
-
  It is not necessary to retain `segue` because it retains itself until dismissal. However, you can
  retain it if you plan to `perform()` more than once.
+
+ #### Present the controller on top of all controllers
+
+ If you don't know the presenter or you don't want to pass it as a source, like when you
+ have a completely separated message controller, you can pass a `WindowViewController`
+ as the `source` argument of the segue's initializer.
+
+ By default, the window will be shown in the current window scene at `.normal` window level.
+ However, these parameters can be customized by initializing the view controller with a `SwiftMessages.Config` that has the `SwiftMessages.Config.presentationContext` set to either `.window` or `.windowScene`:
 
  + note: Some additional details:
  1. Your view controller's view will be embedded in a `SwiftMessages.BaseView` in order to
