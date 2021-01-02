@@ -6,7 +6,7 @@
 //  Copyright © 2020 SwiftKick Mobile. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension SwiftMessages.Config {
     var windowLevel: UIWindow.Level? {
