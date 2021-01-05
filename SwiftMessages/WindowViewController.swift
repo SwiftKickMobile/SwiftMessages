@@ -37,7 +37,9 @@ open class WindowViewController: UIViewController
     func install(becomeKey: Bool, scene: UIWindowScene?) {
         window?.windowScene = scene
         if becomeKey {
+            #if !SWIFTMESSAGES_APP_EXTENSIONS
             previousKeyWindow = UIApplication.shared.keyWindow
+            #endif
         }
         show(becomeKey: becomeKey, frame: scene?.coordinateSpace.bounds)
     }
