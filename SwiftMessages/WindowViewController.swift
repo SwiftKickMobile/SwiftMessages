@@ -36,7 +36,9 @@ open class WindowViewController: UIViewController
         if #available(iOS 13, *) {
             window?.windowScene = config.windowScene
             if config.shouldBecomeKeyWindow {
+                #if !SWIFTMESSAGES_APP_EXTENSIONS
                 previousKeyWindow = UIApplication.shared.keyWindow
+                #endif
             }
             show(
                 becomeKey: config.shouldBecomeKeyWindow,
@@ -45,7 +47,6 @@ open class WindowViewController: UIViewController
         } else {
             show(becomeKey: config.shouldBecomeKeyWindow)
         }
-
     }
 
     private func show(becomeKey: Bool, frame: CGRect? = nil) {
