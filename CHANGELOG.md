@@ -15,6 +15,10 @@ an instance of `WindowViewController` as the segue's source view controller.
 The `windowLevel` is no longer accepted as an argument because the `config` parameter
 should specify the window level in the `presentationContext` property.
 
+### Fixes
+
+* #451 Fix app extension crash
+
 ## 8.0.5
 
 ### Fixes
