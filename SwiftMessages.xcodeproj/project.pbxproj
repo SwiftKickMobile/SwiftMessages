@@ -51,6 +51,7 @@
 		228DF5681FAD0806004F8A39 /* infoIconSubtle.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5471FAD0805004F8A39 /* infoIconSubtle.png */; };
 		228DF5691FAD0806004F8A39 /* successIconLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5481FAD0805004F8A39 /* successIconLight.png */; };
 		228DF56A1FAD0806004F8A39 /* infoIconSubtle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */; };
+		2290944825D88A05002E8111 /* BoundaryInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290944725D88A05002E8111 /* BoundaryInsets.swift */; };
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
@@ -137,6 +138,7 @@
 		228DF5471FAD0805004F8A39 /* infoIconSubtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = infoIconSubtle.png; path = Resources/infoIconSubtle.png; sourceTree = "<group>"; };
 		228DF5481FAD0805004F8A39 /* successIconLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = successIconLight.png; path = Resources/successIconLight.png; sourceTree = "<group>"; };
 		228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "infoIconSubtle@3x.png"; path = "Resources/infoIconSubtle@3x.png"; sourceTree = "<group>"; };
+		2290944725D88A05002E8111 /* BoundaryInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryInsets.swift; sourceTree = "<group>"; };
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
 				2298C2061EE480D000E2DDC1 /* Animator.swift */,
+				2290944725D88A05002E8111 /* BoundaryInsets.swift */,
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 				22F27950210CE25900273E7F /* CornerRoundingView.swift */,
 				225304652293000C00A03ACF /* KeyboardTrackingView.swift */,
@@ -530,6 +533,7 @@
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
 				22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */,
+				2290944825D88A05002E8111 /* BoundaryInsets.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Extensions.swift in Sources */,
@@ -625,7 +629,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -677,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -699,7 +703,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.SwiftMessages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -727,7 +731,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.swiftkick.SwiftMessages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
