@@ -369,11 +369,15 @@ extension SwiftMessagesSegue {
 
             if let preferredHeight = toVC?.preferredContentSize.height,
                 preferredHeight - navInset > 0 {
-                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
+                segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight)
+                    .with(priority: .belowMessageSizeable - 1)
+                    .isActive = true
             }
             if let preferredWidth = toVC?.preferredContentSize.width,
                 preferredWidth > 0 {
-                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
+                segue.containerView.widthAnchor.constraint(equalToConstant: preferredWidth)
+                    .with(priority: .belowMessageSizeable - 1)
+                    .isActive = true
             }
             segue.presenter.config.presentationContext = .view(transitionContainer)
             segue.messenger.show(presenter: segue.presenter)

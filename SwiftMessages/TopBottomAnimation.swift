@@ -88,92 +88,30 @@ public class TopBottomAnimation: NSObject, Animator {
         if let adjustable = context.messageView as? MarginAdjustable {
             bounceOffset = adjustable.bounceAnimationOffset
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(view)
-        view.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        let boundaryInsets = (view as? HasBoundaryInsets)?.boundaryInsets ?? BoundaryInsets()
+        if let sizeableView = view as? MessageSizeable & UIView {
+            container.install(sizeableView: sizeableView)
+        } else {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(view)
+        }
+        // Horizontal constraints
+        do {
+            view.leadingAnchor.constraint(equalTo: container.leadingAnchor)
+                .with(priority: .belowMessageSizeable - 1)
+                .isActive = true
+            view.centerXAnchor.constraint(equalTo: container.centerXAnchor)
+                .with(priority: .belowMessageSizeable)
+                .isActive = true
+        }
         switch style {
         case .top:
-            view.topAnchor.constraint(
-                equalTo: container.topAnchor,
-                constant: -bounceOffset
-            ).with(priority: .defaultHigh).isActive = true
-            switch boundaryInsets.bottom {
-            case .automatic:
-                break
-            case .absoluteMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutYAxisAnchor
-                switch boundary {
-                case .superview: otherAnchor = container.bottomAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.bottomAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.bottomAnchor
-                    }
-                case .margin: otherAnchor = container.layoutMarginsGuide.bottomAnchor
-                }
-                view.bottomAnchor.constraint(equalTo: otherAnchor, constant: -dimension)
-                    .with(priority: .defaultHigh)
-                    .isActive = true
-            case .relativeMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutDimension!
-                switch boundary {
-                case .superview: otherAnchor = container.heightAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.heightAnchor
-                    }
-                case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
-                }
-                view.heightAnchor.constraint(
-                    equalTo: otherAnchor,
-                    multiplier: 1 - dimension
-                ).with(priority: .defaultHigh).isActive = true
-            }
+            view.topAnchor.constraint(equalTo: container.topAnchor, constant: -bounceOffset)
+                .with(priority: .belowMessageSizeable)
+                .isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(
-                equalTo: container.bottomAnchor,
-                constant: bounceOffset
-            ).with(priority: .defaultHigh).isActive = true
-            switch boundaryInsets.top {
-            case .automatic:
-                break
-            case .absoluteMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutYAxisAnchor
-                switch boundary {
-                case .superview: otherAnchor = container.topAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.topAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.topAnchor
-                    }
-                case .margin: otherAnchor = container.layoutMarginsGuide.topAnchor
-                }
-                view.topAnchor.constraint(equalTo: otherAnchor, constant: dimension)
-                    .with(priority: .defaultHigh)
-                    .isActive = true
-            case .relativeMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutDimension!
-                switch boundary {
-                case .superview: otherAnchor = container.heightAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.heightAnchor
-                    }
-                case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
-                }
-                view.heightAnchor.constraint(
-                    equalTo: otherAnchor,
-                    multiplier: 1 - dimension
-                ).with(priority: .defaultHigh).isActive = true
-            }
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: bounceOffset)
+                .with(priority: .belowMessageSizeable)
+                .isActive = true
         }
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()

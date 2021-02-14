@@ -45,13 +45,13 @@ public struct SafeZoneConflicts: OptionSet {
 
 public class AnimationContext {
     public let messageView: UIView
-    public let containerView: UIView
+    public let containerView: UIView & MessageSizing
     public let safeZoneConflicts: SafeZoneConflicts
     public let interactiveHide: Bool
 
     internal init(
         messageView: UIView,
-        containerView: UIView,
+        containerView: UIView & MessageSizing,
         safeZoneConflicts: SafeZoneConflicts,
         interactiveHide: Bool
     ) {
