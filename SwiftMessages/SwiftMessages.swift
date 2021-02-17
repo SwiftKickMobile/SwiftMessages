@@ -55,8 +55,8 @@ open class SwiftMessages {
          appropriate one is found. Otherwise, it is displayed in a new window
          at level `UIWindow.Level.normal`. Use this option to automatically display
          under bars, where applicable. Because this option involves a top-down
-         search, an approrpiate context might not be found when the view controller
-         heirarchy incorporates custom containers. If this is the case, the
+         search, an appropriate context might not be found when the view controller
+         hierarchy incorporates custom containers. If this is the case, the
          .ViewController option can provide a more targeted context.
         */
         case automatic
@@ -87,7 +87,7 @@ open class SwiftMessages {
          appropriate one is found using the given view controller as a starting
          point and searching up the parent view controller chain. Otherwise, it
          is displayed in the given view controller's view. This option can be used
-         for targeted placement in a view controller heirarchy.
+         for targeted placement in a view controller hierarchy.
         */
         case viewController(_: UIViewController)
 

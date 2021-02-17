@@ -88,7 +88,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
 
     /**
      An optional prefix for the `accessibilityMessage` that can
-     be used to futher clarify the message for VoiceOver. For example, 
+     be used to further clarify the message for VoiceOver. For example,
      the view's background color or icon might convey that a message is
      a warning, in which case one may specify the value "warning".
      */
@@ -206,7 +206,7 @@ extension MessageView {
 /*
  MARK: - Layout adjustments
 
- This extention provides a few convenience functions for adjusting the layout.
+ This extension provides a few convenience functions for adjusting the layout.
  */
 
 extension MessageView {
@@ -236,7 +236,7 @@ extension MessageView {
 /*
  MARK: - Theming
  
- This extention provides a few convenience functions for setting styles,
+ This extension provides a few convenience functions for setting styles,
  colors and icons. You are encouraged to write your own such functions
  if these don't exactly meet your needs.
  */
