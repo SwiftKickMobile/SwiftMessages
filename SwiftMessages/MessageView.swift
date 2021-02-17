@@ -108,7 +108,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
         return backgroundView
     }
 
-    open var additonalAccessibilityElements: [NSObject]? {
+    open var additionalAccessibilityElements: [NSObject]? {
         var elements: [NSObject] = []
         func getAccessibleSubviews(view: UIView) {
             for subview in view.subviews {

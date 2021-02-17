@@ -175,7 +175,7 @@ class Presenter: NSObject {
 
     private func showAccessibilityFocus() {
         guard let accessibleMessage = view as? AccessibleMessage,
-            let focus = accessibleMessage.accessibilityElement ?? accessibleMessage.additonalAccessibilityElements?.first else { return }
+            let focus = accessibleMessage.accessibilityElement ?? accessibleMessage.additionalAccessibilityElements?.first else { return }
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: focus)
     }
 
@@ -388,7 +388,7 @@ class Presenter: NSObject {
                     }
                     elements.append(element)
                 }
-                if let additional = accessibleMessage.additonalAccessibilityElements {
+                if let additional = accessibleMessage.additionalAccessibilityElements {
                     elements += additional
                 }
             } else {
