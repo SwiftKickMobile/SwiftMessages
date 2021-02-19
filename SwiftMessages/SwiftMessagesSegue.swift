@@ -69,58 +69,48 @@ import UIKit
 open class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
-     Specifies one of the pre-defined layouts, mirroring a subset of `MessageView.Layout`.
+     Specifies one of the pre-defined layout configurations.
      */
     public enum Layout {
 
-        /// The standard message view layout on top.
+        /// The standard message view layout that slides down from the top edge.
         case topMessage
 
-        /// The standard message view layout on bottom.
+        /// The standard message view layout that slides up from the bottom edge.
         case bottomMessage
 
-        /// A floating card-style view with rounded corners on top
+        /// The standard message view layout that slides in from the leading edge.
+        case leadingMessage
+
+        /// The standard message view layout that slides in from the trailing edge.
+        case trailingMessage
+
+        /// A floating card-style view with rounded corners that slides down from the top edge.
         case topCard
 
-        /// A floating tab-style view with rounded corners on bottom
-        case topTab
-
-        /// A floating card-style view with rounded corners on bottom
+        /// A floating card-style view with rounded corners that slides up from the bottom edge.
         case bottomCard
 
-        /// A floating tab-style view with rounded corners on top
+        /// A floating card-style view with rounded corners that slides in from the leading edge.
+        case leadingCard
+
+        /// A floating card-style view with rounded corners that slides in from the trailing edge.
+        case trailingCard
+
+        /// A floating tab-style view with rounded leading corners that slides down from the top edge.
+        case topTab
+
+        /// A floating tab-style view with rounded leading corners that slides up from the bottom edge.
         case bottomTab
+
+        /// A floating tab-style view with rounded leading corners that slides in from the leading edge.
+        case leadingTab
+
+        /// A floating tab-style view with rounded leading corners that slides in from the traling edge.
+        case trailingTab
 
         /// A floating card-style view typically used with `.center` presentation style.
         case centered
-    }
-
-    /**
-     Specifies how the view controller's view is installed into the
-     containing message view.
-     */
-    public enum Containment {
-
-        /**
-         The view controller's view is installed for edge-to-edge display, extending into the safe areas
-         to the device edges. This is done by calling `messageView.installContentView(:insets:)`
-         See that method's documentation for additional details.
-        */
-        case content
-
-        /**
-         The view controller's view is installed for card-style layouts, inset from the margins
-         and avoiding safe areas. This is done by calling `messageView.installBackgroundView(:insets:)`.
-         See that method's documentation for details.
-        */
-        case background
-
-        /**
-         The view controller's view is installed for tab-style layouts, inset from the side margins, but extending
-         to the device edge on the top or bottom. This is done by calling `messageView.installBackgroundVerticalView(:insets:)`.
-         See that method's documentation for details.
-         */
-        case backgroundVertical
     }
 
     /// The presentation style to use. See the SwiftMessages.PresentationStyle for details.
@@ -174,16 +164,10 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
 
     /**
      The view controller's view is embedded in `containerView` before being installed into
-     `messageView`. This view provides configurable squircle (round) corners (see the parent
+     `messageView`. This view provides configurable continuous rounded corners (see the parent
      class `CornerRoundingView`).
     */
     public var containerView: CornerRoundingView = CornerRoundingView()
-
-    /**
-     Specifies how the view controller's view is installed into the
-     containing message view. See `Containment` for details.
-     */
-    public var containment: Containment = .content
 
     /**
      Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.
@@ -228,57 +212,130 @@ extension SwiftMessagesSegue {
     /// A convenience method for configuring some pre-defined layouts that mirror a subset of `MessageView.Layout`.
     public func configure(layout: Layout) {
         messageView.bounceAnimationOffset = 0
-        containment = .content
         containerView.cornerRadius = 0
         containerView.roundsLeadingCorners = false
         messageView.configureDropShadow()
         switch layout {
         case .topMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            messageView.collapseLayoutMarginAdditions = false
-            let animation = TopBottomAnimation(style: .top)
+// TODO SIZE are these layout margin settings still relevant?
+//            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            messageView.collapseLayoutMarginAdditions = false
+            let animation = EdgeAnimation(style: .top)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomMessage:
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            messageView.collapseLayoutMarginAdditions = false
-            let animation = TopBottomAnimation(style: .bottom)
+//            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            messageView.collapseLayoutMarginAdditions = false
+            let animation = EdgeAnimation(style: .bottom)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .leadingMessage:
+//            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            messageView.collapseLayoutMarginAdditions = false
+            let animation = EdgeAnimation(style: .leading)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .trailingMessage:
+//            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            messageView.collapseLayoutMarginAdditions = false
+            let animation = EdgeAnimation(style: .trailing)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .topCard:
-            containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            messageView.collapseLayoutMarginAdditions = true
+            messageView.layout.insets.top = .absolute(0, from: .safeArea)
+            messageView.layout.insets.leading = .absolute(0, from: .safeArea)
+            messageView.layout.insets.trailing = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.top = .absolute(10, from: .superview)
+            messageView.layout.min.insets.leading = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .safeArea)
             containerView.cornerRadius = 15
             presentationStyle = .top
         case .bottomCard:
-            containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            messageView.collapseLayoutMarginAdditions = true
+            messageView.layout.insets.bottom = .absolute(0, from: .safeArea)
+            messageView.layout.insets.leading = .absolute(0, from: .safeArea)
+            messageView.layout.insets.trailing = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .superview)
+            messageView.layout.min.insets.leading = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .superview)
+            messageView.layout.min.insets.top = .absolute(10, from: .safeArea)
             containerView.cornerRadius = 15
             presentationStyle = .bottom
+        case .leadingCard:
+            messageView.layout.insets.leading = .absolute(0, from: .safeArea)
+            messageView.layout.insets.top = .absolute(0, from: .safeArea)
+            messageView.layout.insets.bottom = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.leading = .absolute(10, from: .superview)
+            messageView.layout.min.insets.top = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .safeArea)
+            containerView.cornerRadius = 15
+            let animation = EdgeAnimation(style: .leading)
+            presentationStyle = .custom(animator: animation)
+        case .trailingCard:
+            messageView.layout.insets.trailing = .absolute(0, from: .safeArea)
+            messageView.layout.insets.top = .absolute(0, from: .safeArea)
+            messageView.layout.insets.bottom = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .superview)
+            messageView.layout.min.insets.top = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .superview)
+            messageView.layout.min.insets.leading = .absolute(10, from: .safeArea)
+            containerView.cornerRadius = 15
+            let animation = EdgeAnimation(style: .trailing)
+            presentationStyle = .custom(animator: animation)
         case .topTab:
-            containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
-            messageView.collapseLayoutMarginAdditions = true
+            messageView.layout.insets.top = .absolute(0, from: .superview)
+            messageView.layout.insets.leading = .absolute(0, from: .safeArea)
+            messageView.layout.insets.trailing = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.leading = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .safeArea)
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
-            let animation = TopBottomAnimation(style: .top)
+            let animation = EdgeAnimation(style: .top)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .bottomTab:
-            containment = .backgroundVertical
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
-            messageView.collapseLayoutMarginAdditions = true
+            messageView.layout.insets.bottom = .absolute(0, from: .superview)
+            messageView.layout.insets.leading = .absolute(0, from: .safeArea)
+            messageView.layout.insets.trailing = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.leading = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .superview)
+            messageView.layout.min.insets.top = .absolute(10, from: .safeArea)
             containerView.cornerRadius = 15
             containerView.roundsLeadingCorners = true
-            let animation = TopBottomAnimation(style: .bottom)
+            let animation = EdgeAnimation(style: .bottom)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .leadingTab:
+            messageView.layout.insets.leading = .absolute(0, from: .superview)
+            messageView.layout.insets.top = .absolute(0, from: .safeArea)
+            messageView.layout.insets.bottom = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.top = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .superview)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .safeArea)
+            containerView.cornerRadius = 15
+            containerView.roundsLeadingCorners = true
+            let animation = EdgeAnimation(style: .leading)
+            animation.springDamping = 1
+            presentationStyle = .custom(animator: animation)
+        case .trailingTab:
+            messageView.layout.insets.trailing = .absolute(0, from: .superview)
+            messageView.layout.insets.top = .absolute(0, from: .safeArea)
+            messageView.layout.insets.bottom = .absolute(0, from: .safeArea)
+            messageView.layout.min.insets.top = .absolute(10, from: .superview)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .superview)
+            messageView.layout.min.insets.leading = .absolute(10, from: .safeArea)
+            containerView.cornerRadius = 15
+            containerView.roundsLeadingCorners = true
+            let animation = EdgeAnimation(style: .trailing)
             animation.springDamping = 1
             presentationStyle = .custom(animator: animation)
         case .centered:
-            containment = .background
-            messageView.layoutMarginAdditions = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            messageView.collapseLayoutMarginAdditions = true
+            messageView.layout.min.insets.top = .absolute(10, from: .safeArea)
+            messageView.layout.min.insets.bottom = .absolute(10, from: .safeArea)
+            messageView.layout.min.insets.leading = .absolute(10, from: .safeArea)
+            messageView.layout.min.insets.trailing = .absolute(10, from: .safeArea)
             containerView.cornerRadius = 15
             presentationStyle = .center
         }
@@ -343,21 +400,12 @@ extension SwiftMessagesSegue {
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
-            toView.translatesAutoresizingMaskIntoConstraints = false
-            segue.containerView.addSubview(toView)
-            segue.containerView.topAnchor.constraint(equalTo: toView.topAnchor).isActive = true
-            segue.containerView.bottomAnchor.constraint(equalTo: toView.bottomAnchor).isActive = true
-            segue.containerView.leadingAnchor.constraint(equalTo: toView.leadingAnchor).isActive = true
-            segue.containerView.trailingAnchor.constraint(equalTo: toView.trailingAnchor).isActive = true
-            // Install the `toView` into the message view.
-            switch segue.containment {
-            case .content:
-                segue.messageView.installContentView(segue.containerView)
-            case .background:
+            // Install the background and content views
+            do {
                 segue.messageView.installBackgroundView(segue.containerView)
-            case .backgroundVertical:
-                segue.messageView.installBackgroundVerticalView(segue.containerView)
+                segue.messageView.installContentView(toView)
             }
+
             let toVC = transitionContext.viewController(forKey: .to)
 
             // Nav controller automatically includes height of nav bar in,

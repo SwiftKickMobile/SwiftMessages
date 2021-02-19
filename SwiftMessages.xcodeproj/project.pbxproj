@@ -51,8 +51,7 @@
 		228DF5681FAD0806004F8A39 /* infoIconSubtle.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5471FAD0805004F8A39 /* infoIconSubtle.png */; };
 		228DF5691FAD0806004F8A39 /* successIconLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5481FAD0805004F8A39 /* successIconLight.png */; };
 		228DF56A1FAD0806004F8A39 /* infoIconSubtle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */; };
-		2290944825D88A05002E8111 /* MessageSizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290944725D88A05002E8111 /* MessageSizeable.swift */; };
-		2290957825D9BC9F002E8111 /* MessageSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290957725D9BC9F002E8111 /* MessageSizing.swift */; };
+		2290944825D88A05002E8111 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290944725D88A05002E8111 /* Layout.swift */; };
 		2290958125D9D407002E8111 /* UILayoutPriority+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290958025D9D407002E8111 /* UILayoutPriority+Extensions.swift */; };
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
@@ -140,8 +139,7 @@
 		228DF5471FAD0805004F8A39 /* infoIconSubtle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = infoIconSubtle.png; path = Resources/infoIconSubtle.png; sourceTree = "<group>"; };
 		228DF5481FAD0805004F8A39 /* successIconLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = successIconLight.png; path = Resources/successIconLight.png; sourceTree = "<group>"; };
 		228DF5491FAD0805004F8A39 /* infoIconSubtle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "infoIconSubtle@3x.png"; path = "Resources/infoIconSubtle@3x.png"; sourceTree = "<group>"; };
-		2290944725D88A05002E8111 /* MessageSizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSizeable.swift; sourceTree = "<group>"; };
-		2290957725D9BC9F002E8111 /* MessageSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSizing.swift; sourceTree = "<group>"; };
+		2290944725D88A05002E8111 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		2290958025D9D407002E8111 /* UILayoutPriority+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+Extensions.swift"; sourceTree = "<group>"; };
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -301,8 +299,7 @@
 				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
 				867BED201D622793005212E3 /* BackgroundViewable.swift */,
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
-				2290944725D88A05002E8111 /* MessageSizeable.swift */,
-				2290957725D9BC9F002E8111 /* MessageSizing.swift */,
+				2290944725D88A05002E8111 /* Layout.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
@@ -539,7 +536,7 @@
 				86BBA8FC1D5E03F100FE8F16 /* MessageView.swift in Sources */,
 				86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */,
 				22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */,
-				2290944825D88A05002E8111 /* MessageSizeable.swift in Sources */,
+				2290944825D88A05002E8111 /* Layout.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Extensions.swift in Sources */,
@@ -562,7 +559,6 @@
 				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
 				225304622290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift in Sources */,
-				2290957825D9BC9F002E8111 /* MessageSizing.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
 				2290958125D9D407002E8111 /* UILayoutPriority+Extensions.swift in Sources */,

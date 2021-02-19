@@ -14,7 +14,7 @@ import UIKit
  of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
  */
-open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeable {
+open class BaseView: UIView, BackgroundViewable, MarginAdjustable, LayoutDefining {
 
     /*
      MARK: - IB outlets
@@ -63,6 +63,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeab
      */
 
     /**
+     TODO SIZE - update documentation
      A convenience function for installing a content view as a subview of `backgroundView`
      and pinning the edges to `backgroundView` with the specified `insets`.
 
@@ -82,6 +83,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeab
     }
 
     /**
+     TODO SIZE - update documentation - insets removed
      A convenience function for installing a background view and pinning to the layout margins.
      This is useful for creating programatic layouts where the background view needs to be
      inset from the message view's edges (like a card-style layout).
@@ -90,7 +92,7 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeab
        assigned to the `backgroundView` property.
      - Parameter insets: The amount to inset the content view from the margins. Default is zero inset.
      */
-    open func installBackgroundView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+    open func installBackgroundView(_ backgroundView: UIView) {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         if backgroundView != self {
             backgroundView.removeFromSuperview()
@@ -100,64 +102,56 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeab
         NSLayoutConstraint.activate([
             backgroundView.centerXAnchor.constraint(equalTo: centerXAnchor)
                 .with(priority: .belowMessageSizeable),
-            backgroundView.topAnchor.constraint(
-                equalTo: layoutMarginsGuide.topAnchor,
-                constant: insets.top
-            ).with(priority: .belowMessageSizeable),
-            backgroundView.bottomAnchor.constraint(
-                equalTo: layoutMarginsGuide.bottomAnchor,
-                constant: -insets.bottom
-            ).with(priority: .belowMessageSizeable),
-            backgroundView.heightAnchor.constraint(equalToConstant: 350)
-                .with(priority: UILayoutPriority(rawValue: 200)),
-            backgroundView.leftAnchor.constraint(
-                equalTo: layoutMarginsGuide.leftAnchor,
-                constant: insets.left
-            ).with(priority: .belowMessageSizeable),
-            backgroundView.rightAnchor.constraint(
-                equalTo: layoutMarginsGuide.rightAnchor,
-                constant: -insets.right
-            ).with(priority: .belowMessageSizeable),
-        ])
-        installTapRecognizer()
-    }
-
-    /**
-     A convenience function for installing a background view and pinning to the horizontal
-     layout margins and to the vertical edges. This is useful for creating programatic layouts where
-     the background view needs to be inset from the message view's horizontal edges (like a tab-style layout).
-
-     - Parameter backgroundView: The view to be installed as a subview and
-       assigned to the `backgroundView` property.
-     - Parameter insets: The amount to inset the content view from the horizontal margins and vertical edges.
-       Default is zero inset.
-     */
-    open func installBackgroundVerticalView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        if backgroundView != self {
-            backgroundView.removeFromSuperview()
-        }
-        addSubview(backgroundView)
-        self.backgroundView = backgroundView
-        NSLayoutConstraint.activate([
-            backgroundView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            backgroundView.topAnchor.constraint(equalTo: topAnchor)
                 .with(priority: .belowMessageSizeable),
-            backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
-                .with(priority: .required),
-            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom)
-                .with(priority: .required),
+            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
+                .with(priority: .belowMessageSizeable),
             backgroundView.heightAnchor.constraint(equalToConstant: 350)
                 .with(priority: UILayoutPriority(rawValue: 200)),
-            backgroundView.leftAnchor.constraint(
-                equalTo: layoutMarginsGuide.leftAnchor, constant: insets.left
-            ).with(priority: .belowMessageSizeable),
-            backgroundView.rightAnchor.constraint(
-                equalTo: layoutMarginsGuide.rightAnchor,
-                constant: -insets.right
-            ).with(priority: .belowMessageSizeable),
+            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor)
+                .with(priority: .belowMessageSizeable),
+            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                .with(priority: .belowMessageSizeable),
         ])
         installTapRecognizer()
     }
+
+//    /**
+//     A convenience function for installing a background view and pinning to the horizontal
+//     layout margins and to the vertical edges. This is useful for creating programatic layouts where
+//     the background view needs to be inset from the message view's horizontal edges (like a tab-style layout).
+//
+//     - Parameter backgroundView: The view to be installed as a subview and
+//       assigned to the `backgroundView` property.
+//     - Parameter insets: The amount to inset the content view from the horizontal margins and vertical edges.
+//       Default is zero inset.
+//     */
+//    open func installBackgroundVerticalView(_ backgroundView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
+//        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+//        if backgroundView != self {
+//            backgroundView.removeFromSuperview()
+//        }
+//        addSubview(backgroundView)
+//        self.backgroundView = backgroundView
+//        NSLayoutConstraint.activate([
+//            backgroundView.centerXAnchor.constraint(equalTo: centerXAnchor)
+//                .with(priority: .belowMessageSizeable),
+//            backgroundView.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
+//                .with(priority: .required),
+//            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom)
+//                .with(priority: .required),
+//            backgroundView.heightAnchor.constraint(equalToConstant: 350)
+//                .with(priority: UILayoutPriority(rawValue: 200)),
+//            backgroundView.leftAnchor.constraint(
+//                equalTo: layoutMarginsGuide.leftAnchor, constant: insets.left
+//            ).with(priority: .belowMessageSizeable),
+//            backgroundView.rightAnchor.constraint(
+//                equalTo: layoutMarginsGuide.rightAnchor,
+//                constant: -insets.right
+//            ).with(priority: .belowMessageSizeable),
+//        ])
+//        installTapRecognizer()
+//    }
 
     /*
      MARK: - Tap handler
@@ -203,11 +197,8 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, MessageSizeab
 
     // MARK: - MessageSizeable
 
-    /// Configure the view's size
-    public var messageSize = MessageSize()
-
-    /// Configure the view's insets from the container
-    public var messageInsets = MessageInsets()
+    /// Configure the view's layout
+    public var layout = Layout()
 
     /*
      MARK: - MarginAdjustable

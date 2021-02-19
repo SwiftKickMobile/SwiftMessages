@@ -8,18 +8,21 @@
 
 import UIKit
 
-public class TopBottomAnimation: NSObject, Animator {
+@available(*, deprecated, message: "Class renamed to `EdgeAnimation` to reflect new ability to do leading and trailing animations.")
+public typealias TopBottomAnimation = EdgeAnimation
+
+public class EdgeAnimation: NSObject, Animator {
 
     public enum Style {
         case top
         case bottom
+        case leading
+        case trailing
     }
 
     public weak var delegate: AnimationDelegate?
 
     public let style: Style
-
-    open var heightDimension: Dimension?
 
     open var showDuration: TimeInterval = 0.4
 
@@ -68,6 +71,10 @@ public class TopBottomAnimation: NSObject, Animator {
                 view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
             case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: view.frame.maxY + view.frame.height)
+            case .leading: // TODO SIZE do proper leading and trailing
+                view.transform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+            case .trailing:
+                view.transform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
             }
         }, completion: { completed in
             #if SWIFTMESSAGES_APP_EXTENSIONS
@@ -88,41 +95,66 @@ public class TopBottomAnimation: NSObject, Animator {
         if let adjustable = context.messageView as? MarginAdjustable {
             bounceOffset = adjustable.bounceAnimationOffset
         }
-        if let sizeableView = view as? MessageSizeable & UIView {
-            container.install(sizeableView: sizeableView)
+        if let layoutDefiningView = view as? LayoutDefining & UIView {
+            container.install(layoutDefiningView: layoutDefiningView)
         } else {
             view.translatesAutoresizingMaskIntoConstraints = false
             container.addSubview(view)
         }
         // Horizontal constraints
         do {
-            view.leadingAnchor.constraint(equalTo: container.leadingAnchor)
-                .with(priority: .belowMessageSizeable - 1)
-                .isActive = true
-            view.centerXAnchor.constraint(equalTo: container.centerXAnchor)
-                .with(priority: .belowMessageSizeable)
-                .isActive = true
         }
         switch style {
         case .top:
-            view.topAnchor.constraint(equalTo: container.topAnchor, constant: -bounceOffset)
-                .with(priority: .belowMessageSizeable)
-                .isActive = true
+            NSLayoutConstraint.activate([
+                view.leadingAnchor.constraint(equalTo: container.leadingAnchor)
+                    .with(priority: .belowMessageSizeable - 1),
+                view.centerXAnchor.constraint(equalTo: container.centerXAnchor)
+                    .with(priority: .belowMessageSizeable),
+                view.topAnchor.constraint(equalTo: container.topAnchor, constant: -bounceOffset)
+                    .with(priority: .belowMessageSizeable)
+            ])
         case .bottom:
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: bounceOffset)
-                .with(priority: .belowMessageSizeable)
-                .isActive = true
+            NSLayoutConstraint.activate([
+                view.leadingAnchor.constraint(equalTo: container.leadingAnchor)
+                    .with(priority: .belowMessageSizeable - 1),
+                view.centerXAnchor.constraint(equalTo: container.centerXAnchor)
+                    .with(priority: .belowMessageSizeable),
+                view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: bounceOffset)
+                    .with(priority: .belowMessageSizeable)
+            ])
+        case .leading:
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: container.topAnchor)
+                    .with(priority: .belowMessageSizeable - 1),
+                view.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+                    .with(priority: .belowMessageSizeable),
+                view.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: -bounceOffset)
+                    .with(priority: .belowMessageSizeable)
+            ])
+        case .trailing:
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: container.topAnchor)
+                    .with(priority: .belowMessageSizeable - 1),
+                view.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+                    .with(priority: .belowMessageSizeable),
+                view.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: bounceOffset)
+                    .with(priority: .belowMessageSizeable)
+            ])
         }
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
         container.layoutIfNeeded()
-        let animationDistance = view.frame.height
         switch style {
         case .top:
-            view.transform = CGAffineTransform(translationX: 0, y: -animationDistance)
+            view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
         case .bottom:
-            view.transform = CGAffineTransform(translationX: 0, y: animationDistance)
+            view.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
+        case .leading:
+            view.transform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+        case .trailing:
+            view.transform = CGAffineTransform(translationX: view.frame.width, y: 0)
         }
         if context.interactiveHide {
             if let view = view as? BackgroundViewable {
@@ -139,6 +171,10 @@ public class TopBottomAnimation: NSObject, Animator {
                 cornerRoundingView.roundedCorners = [.bottomLeft, .bottomRight]
             case .bottom:
                 cornerRoundingView.roundedCorners = [.topLeft, .topRight]
+            case .leading:
+                cornerRoundingView.roundedCorners = [.topRight, .bottomRight]
+            case .trailing:
+                cornerRoundingView.roundedCorners = [.topLeft, .bottomLeft]
             }
         }
     }
@@ -156,6 +192,10 @@ public class TopBottomAnimation: NSObject, Animator {
             layoutMargins.top += bounceOffset
         case .bottom:
             layoutMargins.bottom += bounceOffset
+        case .leading:
+            layoutMargins.left += bounceOffset
+        case .trailing:
+            layoutMargins.right += bounceOffset
         }
         adjustable.layoutMargins = layoutMargins
     }
@@ -191,21 +231,39 @@ public class TopBottomAnimation: NSObject, Animator {
     fileprivate var rubberBanding = false
     fileprivate var closeSpeed: CGFloat = 0.0
     fileprivate var closePercent: CGFloat = 0.0
-    fileprivate var panTranslationY: CGFloat = 0.0
+    fileprivate var panTranslation: CGFloat = 0.0
 
     @objc func pan(_ pan: UIPanGestureRecognizer) {
         switch pan.state {
         case .changed:
             guard let view = messageView else { return }
-            let height = view.bounds.height - bounceOffset
-            if height <= 0 { return }
+            let length: CGFloat
+            switch style {
+            case .top, .bottom:
+                length = view.bounds.height - bounceOffset
+            case .leading, .trailing:
+                length = view.bounds.width - bounceOffset
+            }
+            if length <= 0 { return }
             var velocity = pan.velocity(in: view)
             var translation = pan.translation(in: view)
-            if case .top = style {
+            switch style {
+            case .top:
                 velocity.y *= -1.0
                 translation.y *= -1.0
+            case .leading:
+                velocity.x *= -1.0
+                translation.x *= -1.0
+            case .bottom, .trailing:
+                break
             }
-            var translationAmount = translation.y >= 0 ? translation.y : -pow(abs(translation.y), 0.7)
+            var translationAmount: CGFloat
+            switch style {
+            case .top, .bottom:
+                translationAmount = translation.y >= 0 ? translation.y : -pow(abs(translation.y), 0.7)
+            case .leading, .trailing:
+                translationAmount = translation.x >= 0 ? translation.x : -pow(abs(translation.x), 0.7)
+            }
             if !closing {
                 // Turn on rubber banding if background view is inset from message view.
                 if let background = (messageView as? BackgroundViewable)?.backgroundView, background != view {
@@ -214,6 +272,10 @@ public class TopBottomAnimation: NSObject, Animator {
                         rubberBanding = background.frame.minY > 0
                     case .bottom:
                         rubberBanding = background.frame.maxY < view.bounds.height
+                    case .leading:
+                        rubberBanding = background.frame.minX > 0
+                    case .trailing:
+                        rubberBanding = background.frame.maxX < view.bounds.width
                     }
                 }
                 if !rubberBanding && translationAmount < 0 { return }
@@ -226,19 +288,30 @@ public class TopBottomAnimation: NSObject, Animator {
                 view.transform = CGAffineTransform(translationX: 0, y: -translationAmount)
             case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: translationAmount)
+            case .leading:
+                view.transform = CGAffineTransform(translationX: -translationAmount, y: 0)
+            case .trailing:
+                view.transform = CGAffineTransform(translationX: translationAmount, y: 0)
             }
-            closeSpeed = velocity.y
-            closePercent = translation.y / height
-            panTranslationY = translation.y
+            switch style {
+            case .top, .bottom:
+                closeSpeed = velocity.y
+                closePercent = translation.y / length
+                panTranslation = translation.y
+            case .leading, .trailing:
+                closeSpeed = velocity.x
+                closePercent = translation.x / length
+                panTranslation = translation.x
+            }
         case .ended, .cancelled:
-            if closeSpeed > closeSpeedThreshold || closePercent > closePercentThreshold || panTranslationY > closeAbsoluteThreshold {
+            if closeSpeed > closeSpeedThreshold || closePercent > closePercentThreshold || panTranslation > closeAbsoluteThreshold {
                 delegate?.hide(animator: self)
             } else {
                 closing = false
                 rubberBanding = false
                 closeSpeed = 0.0
                 closePercent = 0.0
-                panTranslationY = 0.0
+                panTranslation = 0.0
                 showAnimation(completion: { (completed) in
                     self.delegate?.panEnded(animator: self)
                 })
