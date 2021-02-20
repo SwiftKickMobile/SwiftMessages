@@ -1,5 +1,5 @@
 //
-//  TopBottomAnimation.swift
+//  EdgeAnimation.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 6/4/17.
@@ -24,9 +24,9 @@ public class EdgeAnimation: NSObject, Animator {
 
     public let style: Style
 
-    open var showDuration: TimeInterval = 0.4
+    open var showDuration: TimeInterval = 0.35
 
-    open var hideDuration: TimeInterval = 0.2
+    open var hideDuration: TimeInterval = 0.25
 
     open var springDamping: CGFloat = 0.8
 
@@ -65,7 +65,7 @@ public class EdgeAnimation: NSObject, Animator {
         NotificationCenter.default.removeObserver(self)
         let view = context.messageView
         self.context = context
-        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
+        UIView.animate(withDuration: hideDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState]) {
             switch self.style {
             case .top:
                 view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
@@ -76,14 +76,14 @@ public class EdgeAnimation: NSObject, Animator {
             case .trailing:
                 view.transform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
             }
-        }, completion: { completed in
+        } completion: { completed in
             #if SWIFTMESSAGES_APP_EXTENSIONS
             completion(completed)
             #else
             // Fix #131 by always completing if application isn't active.
             completion(completed || UIApplication.shared.applicationState != .active)
             #endif
-        })
+        }
     }
 
     func install(context: AnimationContext) {
