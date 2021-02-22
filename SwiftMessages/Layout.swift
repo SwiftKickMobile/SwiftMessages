@@ -35,6 +35,7 @@ public struct Layout {
         public enum Dimension {
             case absolute(CGFloat)
             case relative(CGFloat, to: Boundary)
+            case absoluteInsets(CGFloat, to: Boundary)
         }
 
         public var width: Dimension?
@@ -77,6 +78,16 @@ extension Layout.Insets.Dimension {
         switch self {
         case .absolute(_, let boundary): return boundary
         case .relative(_, let boundary): return boundary
+        }
+    }
+}
+
+extension Layout.Size.Dimension {
+    var boundary: Layout.Boundary? {
+        switch self {
+        case .absolute(_): return nil
+        case .relative(_, let boundary): return boundary
+        case .absoluteInsets(_, let boundary): return boundary
         }
     }
 }
