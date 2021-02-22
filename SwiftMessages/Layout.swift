@@ -35,7 +35,7 @@ public struct Layout {
         public enum Dimension {
             case absolute(CGFloat)
             case relative(CGFloat, to: Boundary)
-            case absoluteInsets(CGFloat, to: Boundary)
+            case absoluteInsets(CGFloat, from: Boundary)
         }
 
         public var width: Dimension?
