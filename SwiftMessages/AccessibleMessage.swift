@@ -16,5 +16,5 @@ import Foundation
 public protocol AccessibleMessage {
     var accessibilityMessage: String? { get }
     var accessibilityElement: NSObject? { get }
-    var additonalAccessibilityElements: [NSObject]? { get }
+    var additionalAccessibilityElements: [NSObject]? { get }
 }

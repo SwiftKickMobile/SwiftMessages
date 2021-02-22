@@ -14,7 +14,7 @@ import Foundation
  representation of the content of the message view. For example, `MessageView`, combines
  the title and message body text.
  
- This protocol is optional. Messave views that don't adopt `Identifiable` will not
+ This protocol is optional. Message views that don't adopt `Identifiable` will not
  have duplicates removed.
  */
 public protocol Identifiable {
