@@ -35,11 +35,9 @@ open class WindowViewController: UIViewController
     func install() {
         if #available(iOS 13, *) {
             window?.windowScene = config.windowScene
-            if config.shouldBecomeKeyWindow {
-                #if !SWIFTMESSAGES_APP_EXTENSIONS
-                previousKeyWindow = UIApplication.shared.keyWindow
-                #endif
-            }
+            #if !SWIFTMESSAGES_APP_EXTENSIONS
+            previousKeyWindow = UIWindow.keyWindow
+            #endif
             show(
                 becomeKey: config.shouldBecomeKeyWindow,
                 frame: config.windowScene?.coordinateSpace.bounds
@@ -60,12 +58,14 @@ open class WindowViewController: UIViewController
     }
     
     func uninstall() {
+        if window?.isKeyWindow == true {
+            previousKeyWindow?.makeKeyAndVisible()
+        }
         if #available(iOS 13, *) {
             window?.windowScene = nil
         }
         window?.isHidden = true
         window = nil
-        previousKeyWindow?.makeKeyAndVisible()
     }
     
     required public init?(coder aDecoder: NSCoder) {

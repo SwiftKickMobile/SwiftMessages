@@ -25,7 +25,7 @@ extension SwiftMessages.Config {
             #if SWIFTMESSAGES_APP_EXTENSIONS
             return nil
             #else
-            return UIApplication.shared.keyWindow?.windowScene
+            return UIWindow.keyWindow?.windowScene
             #endif
         }
     }
