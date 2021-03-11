@@ -301,7 +301,7 @@ class Presenter: NSObject {
             #if SWIFTMESSAGES_APP_EXTENSIONS
             throw SwiftMessagesError.noRootViewController
             #else
-            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            if let rootViewController = UIWindow.keyWindow?.rootViewController {
                 let viewController = rootViewController.sm_selectPresentationContextTopDown(config)
                 return .viewController(Weak(value: viewController))
             } else {

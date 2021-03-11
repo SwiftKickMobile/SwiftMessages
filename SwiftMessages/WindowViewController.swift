@@ -37,7 +37,7 @@ open class WindowViewController: UIViewController
             window?.windowScene = config.windowScene
             if config.shouldBecomeKeyWindow {
                 #if !SWIFTMESSAGES_APP_EXTENSIONS
-                previousKeyWindow = UIApplication.shared.keyWindow
+                previousKeyWindow = UIWindow.keyWindow
                 #endif
             }
             show(
