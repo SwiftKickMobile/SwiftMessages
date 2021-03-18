@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.1
+
+### Fixes
+
+* #455 #458 Restore key window after message is interacted with. When a message becomes the key window, such as if the user interacts with the message, iOS does not automatically restore the previous key window when the message is dismissed. SwiftMessages has some logic in `WindowViewController` to restore the key window. This change makes that logic more robust.
+
 ## 9.0.0
 
 ### Features
