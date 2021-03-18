@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIWindow {
+    #if !SWIFTMESSAGES_APP_EXTENSIONS
     static var keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
             return UIApplication.shared.connectedScenes
@@ -21,4 +22,5 @@ extension UIWindow {
             return UIApplication.shared.keyWindow
         }
     }
+    #endif
 }
