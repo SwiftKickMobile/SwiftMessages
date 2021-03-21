@@ -55,7 +55,7 @@ open class MessageView: BaseView, Identifiable, AccessibleMessage {
     
     /// An optional button. This buttons' `.TouchUpInside` event will automatically
     /// invoke the optional `buttonTapHandler`, but its fine to add other target
-    /// action handlers can be added.
+    /// action handlers.
     @IBOutlet open var button: UIButton? {
         didSet {
             if let old = oldValue {
