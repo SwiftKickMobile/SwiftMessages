@@ -19,8 +19,6 @@ public class TopBottomAnimation: NSObject, Animator {
 
     public let style: Style
 
-    open var heightDimension: Dimension?
-
     open var showDuration: TimeInterval = 0.4
 
     open var hideDuration: TimeInterval = 0.2
@@ -92,68 +90,11 @@ public class TopBottomAnimation: NSObject, Animator {
         container.addSubview(view)
         view.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        let boundaryInsets = (view as? HasBoundaryInsets)?.boundaryInsets ?? BoundaryInsets()
         switch style {
         case .top:
-            view.topAnchor.constraint(
-                equalTo: container.topAnchor,
-                constant: -bounceOffset
-            ).with(priority: .defaultHigh).isActive = true
-            switch boundaryInsets.bottom {
-            case .automatic:
-                break
-            case .absoluteMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutYAxisAnchor
-                switch boundary {
-                case .superview: otherAnchor = container.bottomAnchor
-                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.bottomAnchor
-                case .margin: otherAnchor = container.layoutMarginsGuide.bottomAnchor
-                }
-                view.bottomAnchor.constraint(equalTo: otherAnchor, constant: -dimension)
-                    .with(priority: .defaultHigh)
-                    .isActive = true
-            case .relativeMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutDimension!
-                switch boundary {
-                case .superview: otherAnchor = container.heightAnchor
-                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
-                }
-                view.heightAnchor.constraint(
-                    equalTo: otherAnchor,
-                    multiplier: 1 - dimension
-                ).with(priority: .defaultHigh).isActive = true
-            }
+            view.topAnchor.constraint(equalTo: container.topAnchor, constant: -bounceOffset).with(priority: UILayoutPriority(200)).isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(
-                equalTo: container.bottomAnchor,
-                constant: bounceOffset
-            ).with(priority: .defaultHigh).isActive = true
-            switch boundaryInsets.top {
-            case .automatic:
-                break
-            case .absoluteMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutYAxisAnchor
-                switch boundary {
-                case .superview: otherAnchor = container.topAnchor
-                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.topAnchor
-                case .margin: otherAnchor = container.layoutMarginsGuide.topAnchor
-                }
-                view.topAnchor.constraint(equalTo: otherAnchor, constant: dimension)
-                    .with(priority: .defaultHigh)
-                    .isActive = true
-            case .relativeMargin(let dimension, let boundary):
-                let otherAnchor: NSLayoutDimension!
-                switch boundary {
-                case .superview: otherAnchor = container.heightAnchor
-                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
-                }
-                view.heightAnchor.constraint(
-                    equalTo: otherAnchor,
-                    multiplier: 1 - dimension
-                ).with(priority: .defaultHigh).isActive = true
-            }
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: bounceOffset).with(priority: UILayoutPriority(200)).isActive = true
         }
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()

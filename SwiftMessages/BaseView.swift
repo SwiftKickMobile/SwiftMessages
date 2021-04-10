@@ -14,7 +14,7 @@ import UIKit
  of the optional SwiftMessages protocols and provides some convenience functions
  and a configurable tap handler. Message views do not need to inherit from `BaseVew`.
  */
-open class BaseView: UIView, BackgroundViewable, MarginAdjustable, HasBoundaryInsets {
+open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
     /*
      MARK: - IB outlets
@@ -228,13 +228,6 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, HasBoundaryIn
     @IBInspectable open var collapseLayoutMarginAdditions: Bool = true
 
     @IBInspectable open var bounceAnimationOffset: CGFloat = 5
-
-    /*
-     MARK: - HasBoundaryInsets
-     */
-
-    /// Configure the view's inset from the superview or save area
-    public var boundaryInsets = BoundaryInsets()
 
     /*
      MARK: - Setting the height
