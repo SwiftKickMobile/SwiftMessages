@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JQZ-C5-7mw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JQZ-C5-7mw">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,7 +30,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="j4a-wU-637">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TitleBody" rowHeight="80" id="2n5-7h-3B5" userLabel="TitleBody Cell" customClass="TitleBodyCell" customModule="Demo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
@@ -48,7 +47,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpd-DA-5jT">
                                             <rect key="frame" x="26" y="45" width="323" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -82,7 +81,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore many of the SwiftMessages configuration options." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Siq-Fh-MNa">
                                             <rect key="frame" x="26" y="45" width="304" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -117,7 +116,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Present modal view controllers with SwiftMessages animations." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-K7-URy">
                                             <rect key="frame" x="26" y="45" width="304" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -152,7 +151,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Present modal view controllers with SwiftMessages animations." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5Q-9f-KQC">
                                             <rect key="frame" x="26" y="45" width="304" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -186,7 +185,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide a message based on equal number of show() and hideCounted(id:) calls." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ie4-WM-pe4">
                                             <rect key="frame" x="26" y="45" width="304" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -224,7 +223,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="XwA-eF-0LG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
                             <tableViewSection headerTitle="Presentation" id="ifN-uy-lWX">
                                 <cells>
@@ -642,7 +641,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Button" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRM-c4-ORW">
                                                                             <rect key="frame" x="69" y="0.0" width="72.5" height="4.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -656,7 +655,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-eZ-O0L">
                                                                             <rect key="frame" x="69" y="0.0" width="72.5" height="4.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -675,7 +674,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKN-W4-1jq">
                                                                             <rect key="frame" x="69" y="0.0" width="72.5" height="4.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -689,7 +688,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGg-y8-Ln9">
                                                                             <rect key="frame" x="69" y="0.0" width="72.5" height="4.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -811,255 +810,115 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mGe-El-haJ">
-                                <rect key="frame" x="31" y="59" width="313" height="284"/>
+                                <rect key="frame" x="46" y="84" width="283" height="494"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="duT-dC-cRi">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="32"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrN-Ei-Pg7">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.16470588235294117" green="0.6588235294117647" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Top"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopSegue" customModule="Demo" customModuleProvider="target" id="7xS-Ca-mnb"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-SP-rSC">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Bottom"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomSegue" customModule="Demo" customModuleProvider="target" id="6Yg-dE-eXA"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="edP-BU-APQ">
-                                        <rect key="frame" x="0.0" y="42" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khy-PR-9ic">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Leading"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesLeadingSegue" customModule="Demo" customModuleProvider="target" id="vqC-mA-oKl"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYU-GH-7Bu">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Trailing"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTrailingSegue" customModule="Demo" customModuleProvider="target" id="Htu-Pa-8Bb"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="RIf-X4-6Nf">
-                                        <rect key="frame" x="0.0" y="84" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGn-eY-EEX">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Top Card"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopCardSegue" customModule="Demo" customModuleProvider="target" id="qLf-js-3Ls"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-MK-vK3">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Bottom Card"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomCardSegue" customModule="Demo" customModuleProvider="target" id="TBl-s0-9vL"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="4Lv-io-Ckq">
-                                        <rect key="frame" x="0.0" y="126" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLv-JB-1Kv">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Leading Card"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesLeadingCardSegue" customModule="Demo" customModuleProvider="target" id="ijQ-PY-fOg"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoG-71-V86">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Trailing Card"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTrailingCardSegue" customModule="Demo" customModuleProvider="target" id="eyV-wa-br5"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="cco-7a-QYG">
-                                        <rect key="frame" x="0.0" y="168" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kux-aE-Bdv" userLabel="Top Tab">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000067" blue="0.62082127703967116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Top Tab"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopTabSegue" customModule="Demo" customModuleProvider="target" id="p7Y-6q-gfK"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-xF-RwV" userLabel="Bottom Tab">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Bottom Tab"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomTabSegue" customModule="Demo" customModuleProvider="target" id="EaG-Ea-U3j"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="p3M-fI-UAT">
-                                        <rect key="frame" x="0.0" y="210" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPG-Jy-nyC">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Leading Tab"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesLeadingTabSegue" customModule="Demo" customModuleProvider="target" id="IIr-OL-eMR"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR9-3n-RLT">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Trailing Tab"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTrailingTabSegue" customModule="Demo" customModuleProvider="target" id="LC0-Bk-8Ad"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="Cqr-gB-ufD">
-                                        <rect key="frame" x="0.0" y="252" width="313" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDi-Gu-bE2" userLabel="Centered">
-                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="32"/>
-                                                <color key="backgroundColor" red="1" green="0.46653546191345963" blue="0.015686274510000042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Centered"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesCenteredSegue" customModule="Demo" customModuleProvider="target" id="had-cE-9YN"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WGh-db-dXZ" userLabel="Centered">
-                                                <rect key="frame" x="161.5" y="0.0" width="151.5" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="1" green="0.4665354619" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="Off-Centered"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesOffCenteredSegue" customModule="Demo" customModuleProvider="target" id="abD-oU-7qa"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrN-Ei-Pg7">
+                                        <rect key="frame" x="0.0" y="0.0" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.16470588235294117" green="0.6588235294117647" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Top Message"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopSegue" customModule="Demo" customModuleProvider="target" id="7xS-Ca-mnb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeC-SP-rSC">
+                                        <rect key="frame" x="0.0" y="72" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.1647058824" green="0.6588235294" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Bottom Message"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomSegue" customModule="Demo" customModuleProvider="target" id="6Yg-dE-eXA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGn-eY-EEX">
+                                        <rect key="frame" x="0.0" y="144" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Top Card"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopCardSegue" customModule="Demo" customModuleProvider="target" id="qLf-js-3Ls"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-MK-vK3">
+                                        <rect key="frame" x="0.0" y="216" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.26627604170000002" green="0.76907009550000005" blue="0.32259114579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Bottom Card"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomCardSegue" customModule="Demo" customModuleProvider="target" id="TBl-s0-9vL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kux-aE-Bdv" userLabel="Top Tab">
+                                        <rect key="frame" x="0.0" y="288" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000067" blue="0.62082127703967116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Top Tab"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesTopTabSegue" customModule="Demo" customModuleProvider="target" id="p7Y-6q-gfK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-xF-RwV" userLabel="Bottom Tab">
+                                        <rect key="frame" x="0.0" y="360" width="283" height="62"/>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.015686274510000001" blue="0.620821277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Bottom Tab"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesBottomTabSegue" customModule="Demo" customModuleProvider="target" id="EaG-Ea-U3j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDi-Gu-bE2" userLabel="Centered">
+                                        <rect key="frame" x="0.0" y="432" width="283" height="62"/>
+                                        <color key="backgroundColor" red="1" green="0.46653546191345963" blue="0.015686274510000042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Centered"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="dHK-y5-h16" kind="custom" customClass="SwiftMessagesCenteredSegue" customModule="Demo" customModuleProvider="target" id="had-cE-9YN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="mGe-El-haJ" firstAttribute="top" secondItem="WeL-Zn-0tj" secondAttribute="bottom" constant="15" id="6TI-R1-eMQ"/>
-                            <constraint firstItem="mGe-El-haJ" firstAttribute="leading" secondItem="YlT-hO-kIK" secondAttribute="leadingMargin" constant="15" id="LqT-Kn-3v7"/>
-                            <constraint firstItem="LAn-az-eMU" firstAttribute="top" secondItem="mGe-El-haJ" secondAttribute="bottom" constant="15" id="jWn-cy-X7E"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mGe-El-haJ" secondAttribute="trailing" constant="15" id="xEo-4G-PBe"/>
+                            <constraint firstItem="mGe-El-haJ" firstAttribute="top" secondItem="WeL-Zn-0tj" secondAttribute="bottom" constant="40" id="6TI-R1-eMQ"/>
+                            <constraint firstItem="mGe-El-haJ" firstAttribute="leading" secondItem="YlT-hO-kIK" secondAttribute="leadingMargin" constant="30" id="LqT-Kn-3v7"/>
+                            <constraint firstItem="LAn-az-eMU" firstAttribute="top" secondItem="mGe-El-haJ" secondAttribute="bottom" constant="40" id="jWn-cy-X7E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mGe-El-haJ" secondAttribute="trailing" constant="30" id="xEo-4G-PBe"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -1072,7 +931,7 @@
             <objects>
                 <navigationController id="dHK-y5-h16" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="lRD-YW-2WT"/>
-                    <navigationItem key="navigationItem" id="kWv-kG-kDP"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="0.0" height="250"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eD6-og-rzJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1092,7 +951,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="veg-5v-Pex">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
                             <tableViewSection id="CqX-XV-4eD">
                                 <cells>
@@ -1190,19 +1049,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to see here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bv-DK-h4b">
-                                <rect key="frame" x="110.5" y="345" width="154.5" height="21"/>
+                                <rect key="frame" x="109.5" y="345" width="156" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2bv-DK-h4b" firstAttribute="centerX" secondItem="0Cn-7n-ODp" secondAttribute="centerX" id="1aC-Jw-Zyl"/>
                             <constraint firstItem="2bv-DK-h4b" firstAttribute="centerY" secondItem="0Cn-7n-ODp" secondAttribute="centerYWithinMargins" id="93w-dz-NPV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rP6-sY-fmZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mU1-MA-hwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1226,17 +1084,11 @@
             <point key="canvasLocation" x="473" y="305"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="h5n-Vv-Q3y"/>
-        <segue reference="abD-oU-7qa"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="iconSwiftMessages" width="38" height="31"/>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="h5n-Vv-Q3y"/>
+        <segue reference="EaG-Ea-U3j"/>
+    </inferredMetricsTieBreakers>
 </document>

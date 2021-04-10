@@ -70,41 +70,18 @@ public class PhysicsAnimation: NSObject, Animator {
         messageView = view
         containerView = container
         self.context = context
-        if let layoutDefiningView = view as? LayoutDefining & UIView {
-            container.install(layoutDefiningView: layoutDefiningView)
-        } else {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            container.addSubview(view)
-        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(view)
         switch placement {
         case .center:
-            view.centerYAnchor.constraint(equalTo: container.centerYAnchor)
-                .with(priority: UILayoutPriority(200)).isActive = true
+            view.centerYAnchor.constraint(equalTo: container.centerYAnchor).with(priority: UILayoutPriority(200)).isActive = true
         case .top:
-            view.topAnchor.constraint(equalTo: container.topAnchor)
-                .with(priority: UILayoutPriority(200)).isActive = true
+            view.topAnchor.constraint(equalTo: container.topAnchor).with(priority: UILayoutPriority(200)).isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor)
-                .with(priority: UILayoutPriority(200)).isActive = true
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).with(priority: UILayoutPriority(200)).isActive = true
         }
-        NSLayoutConstraint(
-            item: view,
-            attribute: .leading,
-            relatedBy: .equal,
-            toItem: container,
-            attribute: .leading,
-            multiplier: 1,
-            constant: 0
-        ).with(priority: .belowMessageSizeable).isActive = true
-        NSLayoutConstraint(
-            item: view,
-            attribute: .trailing,
-            relatedBy: .equal,
-            toItem: container,
-            attribute: .trailing,
-            multiplier: 1,
-            constant: 0
-        ).with(priority: .belowMessageSizeable).isActive = true
+        NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()

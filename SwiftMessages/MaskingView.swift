@@ -24,13 +24,13 @@ import UIKit
 //                .with(priority: UILayoutPriority(rawValue: 200)),
 //        ]
 
-class MaskingView: PassthroughView, LayoutInstalling {
+class MaskingView: PassthroughView, MessageSizing {
 
-    func install(layoutDefiningView: UIView & LayoutDefining) {
-        self.layoutDefiningView?.removeFromSuperview()
-        self.layoutDefiningView = layoutDefiningView
-        layoutDefiningView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(layoutDefiningView)
+    func install(sizeableView: MessageSizeable & UIView) {
+        self.sizeableView?.removeFromSuperview()
+        self.sizeableView = sizeableView
+        sizeableView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(sizeableView)
         setNeedsUpdateConstraints()
     }
 
@@ -96,7 +96,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
     private var keyboardTrackingView: KeyboardTrackingView?
     private var cachedConstraints: [NSLayoutConstraint] = []
     private let messageInsetsGuide = UILayoutGuide()
-    private var layoutDefiningView: (LayoutDefining & UIView)?
+    private var sizeableView: (MessageSizeable & UIView)?
 
     override func addSubview(_ view: UIView) {
         super.addSubview(view)
@@ -110,35 +110,20 @@ class MaskingView: PassthroughView, LayoutInstalling {
         super.updateConstraints()
         NSLayoutConstraint.deactivate(cachedConstraints)
         cachedConstraints = []
-        if let layoutDefiningView = layoutDefiningView {
-            let layout = layoutDefiningView.layout
-            add(insets: layout.insets, relation: .equal)
-            add(insets: layout.min.insets, relation: .min)
-            add(insets: layout.max.insets, relation: .max)
-            add(layoutDefiningView: layoutDefiningView)
-        }
+        if let top = sizeableView?.messageInsets.top { update(top: top) }
+        if let bottom = sizeableView?.messageInsets.bottom { update(bottom: bottom) }
+        if let leading = sizeableView?.messageInsets.leading { update(leading: leading) }
+        if let trailing = sizeableView?.messageInsets.trailing { update(trailing: trailing) }
+        if let sizeableView = sizeableView { update(sizeableView: sizeableView) }
         NSLayoutConstraint.activate(cachedConstraints)
     }
 
-    private enum ConstraintRelation {
-        case equal
-        case min
-        case max
-    }
-
-    private func add(insets: Layout.Insets, relation: ConstraintRelation) {
-        if let top = insets.top { add(top: top, relation: relation) }
-        if let bottom = insets.bottom { add(bottom: bottom, relation: relation) }
-        if let leading = insets.leading { add(leading: leading, relation: relation) }
-        if let trailing = insets.trailing { add(trailing: trailing, relation: relation) }
-    }
-
-    private func add(top: Layout.Insets.Dimension, relation: ConstraintRelation) {
+    private func update(top: MessageInsets.Dimension) {
         let length: CGFloat
         switch top {
-        case .absolute(let dimension, _):
+        case .absoluteMargin(let dimension, _):
             length = dimension
-        case .relative(let percentage, _):
+        case .relativeMargin(let percentage, _):
             length = bounds.height * percentage
         }
         let otherAnchor: NSLayoutYAxisAnchor
@@ -152,20 +137,18 @@ class MaskingView: PassthroughView, LayoutInstalling {
                 otherAnchor = layoutMarginsGuide.topAnchor
             }
         }
-        add(
-            anchor: messageInsetsGuide.topAnchor,
-            otherAnchor: otherAnchor,
-            constant: length,
-            relation: relation
+        cachedConstraints.append(
+            messageInsetsGuide.topAnchor.constraint(equalTo: otherAnchor, constant: length)
+                .with(priority: .messageInset)
         )
     }
 
-    private func add(bottom: Layout.Insets.Dimension, relation: ConstraintRelation) {
+    private func update(bottom: MessageInsets.Dimension) {
         let length: CGFloat
         switch bottom {
-        case .absolute(let dimension, _):
+        case .absoluteMargin(let dimension, _):
             length = dimension
-        case .relative(let percentage, _):
+        case .relativeMargin(let percentage, _):
             length = bounds.height * percentage
         }
         let otherAnchor: NSLayoutYAxisAnchor
@@ -179,20 +162,18 @@ class MaskingView: PassthroughView, LayoutInstalling {
                 otherAnchor = layoutMarginsGuide.bottomAnchor
             }
         }
-        add(
-            anchor: otherAnchor,
-            otherAnchor: messageInsetsGuide.bottomAnchor,
-            constant: length,
-            relation: relation
+        cachedConstraints.append(
+            messageInsetsGuide.bottomAnchor.constraint(equalTo: otherAnchor, constant: -length)
+                .with(priority: .messageInset)
         )
     }
 
-    private func add(leading: Layout.Insets.Dimension, relation: ConstraintRelation) {
+    private func update(leading: MessageInsets.Dimension) {
         let length: CGFloat
         switch leading {
-        case .absolute(let dimension, _):
+        case .absoluteMargin(let dimension, _):
             length = dimension
-        case .relative(let percentage, _):
+        case .relativeMargin(let percentage, _):
             length = bounds.width * percentage
         }
         let otherAnchor: NSLayoutXAxisAnchor
@@ -206,20 +187,18 @@ class MaskingView: PassthroughView, LayoutInstalling {
                 otherAnchor = layoutMarginsGuide.leadingAnchor
             }
         }
-        add(
-            anchor: messageInsetsGuide.leadingAnchor,
-            otherAnchor: otherAnchor,
-            constant: length,
-            relation: relation
+        cachedConstraints.append(
+            messageInsetsGuide.leadingAnchor.constraint(equalTo: otherAnchor, constant: length)
+                .with(priority: .messageInset)
         )
     }
 
-    private func add(trailing: Layout.Insets.Dimension, relation: ConstraintRelation) {
+    private func update(trailing: MessageInsets.Dimension) {
         let length: CGFloat
         switch trailing {
-        case .absolute(let dimension, _):
+        case .absoluteMargin(let dimension, _):
             length = dimension
-        case .relative(let percentage, _):
+        case .relativeMargin(let percentage, _):
             length = bounds.width * percentage
         }
         let otherAnchor: NSLayoutXAxisAnchor
@@ -233,193 +212,55 @@ class MaskingView: PassthroughView, LayoutInstalling {
                 otherAnchor = layoutMarginsGuide.trailingAnchor
             }
         }
-        add(
-            anchor: otherAnchor,
-            otherAnchor: messageInsetsGuide.trailingAnchor,
-            constant: length,
-            relation: relation
+        cachedConstraints.append(
+            messageInsetsGuide.trailingAnchor.constraint(equalTo: otherAnchor, constant: -length)
+                .with(priority: .messageInset)
         )
     }
 
-    private func add(
-        anchor: NSLayoutXAxisAnchor,
-        otherAnchor: NSLayoutXAxisAnchor,
-        constant: CGFloat,
-        relation: ConstraintRelation
-    ) {
-        let constraint: NSLayoutConstraint
-        switch relation {
-        case .equal:
-            constraint = anchor
-                .constraint(equalTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsets)
-        case .min:
-            constraint = anchor
-                .constraint(greaterThanOrEqualTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsetsBounds)
-        case .max:
-            constraint = anchor
-                .constraint(lessThanOrEqualTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsetsBounds)
-        }
-        cachedConstraints.append(constraint)
-    }
-
-    private func add(
-        anchor: NSLayoutYAxisAnchor,
-        otherAnchor: NSLayoutYAxisAnchor,
-        constant: CGFloat,
-        relation: ConstraintRelation
-    ) {
-        let constraint: NSLayoutConstraint
-        switch relation {
-        case .equal:
-            constraint = anchor
-                .constraint(equalTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsets)
-        case .min:
-            constraint = anchor
-                .constraint(greaterThanOrEqualTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsetsBounds)
-        case .max:
-            constraint = anchor
-                .constraint(lessThanOrEqualTo: otherAnchor, constant: constant)
-                .with(priority: .messageInsetsBounds)
-        }
-        cachedConstraints.append(constraint)
-    }
-
-    private func add(layoutDefiningView view: LayoutDefining & UIView) {
+    private func update(sizeableView view: MessageSizeable & UIView) {
         cachedConstraints += [
             messageInsetsGuide.topAnchor.constraint(equalTo: view.topAnchor),
             messageInsetsGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             messageInsetsGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messageInsetsGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ]
-        add(layoutDefiningView: view, size: view.layout.size, relation: .equal)
-        add(layoutDefiningView: view, size: view.layout.min.size, relation: .min)
-        add(layoutDefiningView: view, size: view.layout.max.size, relation: .max)
-        add(layoutDefiningView: view, center: view.layout.center, relation: .equal)
-        add(layoutDefiningView: view, center: view.layout.min.center, relation: .min)
-        add(layoutDefiningView: view, center: view.layout.max.center, relation: .max)
-    }
-
-    private func add(
-        layoutDefiningView view: LayoutDefining & UIView,
-        size: Layout.Size,
-        relation: ConstraintRelation
-    ) {
-        if let width = size.width {
-            let length = self.length(for: width) { $0.width }
-            let constraint: NSLayoutConstraint
-            switch relation {
-            case .equal:
-                constraint = view.widthAnchor.constraint(equalToConstant: length)
+        if let width = view.messageSize.width {
+            let length = self.length(for: width, extractor: { $0.width })
+            cachedConstraints.append(
+                view.widthAnchor.constraint(equalToConstant: length)
                     .with(priority: .messageSize)
-            case .min:
-                constraint = view.widthAnchor.constraint(greaterThanOrEqualToConstant: length)
-                    .with(priority: .messageSizeBounds)
-            case .max:
-                constraint = view.widthAnchor.constraint(lessThanOrEqualToConstant: length)
-                    .with(priority: .messageSizeBounds)
-            }
-            cachedConstraints.append(constraint)
+            )
         }
-        if let height = size.height {
-            let length = self.length(for: height) { $0.height }
-            let constraint: NSLayoutConstraint
-            switch relation {
-            case .equal:
-                constraint = view.heightAnchor.constraint(equalToConstant: length)
+        if let height = view.messageSize.height {
+            let length = self.length(for: height, extractor: { $0.height })
+            cachedConstraints.append(
+                view.heightAnchor.constraint(equalToConstant: length)
                     .with(priority: .messageSize)
-            case .min:
-                constraint = view.heightAnchor.constraint(greaterThanOrEqualToConstant: length)
-                    .with(priority: .messageSizeBounds)
-            case .max:
-                constraint = view.heightAnchor.constraint(lessThanOrEqualToConstant: length)
-                    .with(priority: .messageSizeBounds)
-            }
-            cachedConstraints.append(constraint)
-        }
-    }
-
-
-    private func add(
-        layoutDefiningView view: LayoutDefining & UIView,
-        center: Layout.Center,
-        relation: ConstraintRelation
-    ) {
-        if let x = center.x {
-            let length = self.length(for: x) { ($0.minX, $0.maxX) }
-            let otherAnchor: NSLayoutXAxisAnchor
-            switch x.boundary {
-            case .superview: otherAnchor = leadingAnchor
-            case .margin: otherAnchor = layoutMarginsGuide.leadingAnchor
-            case .safeArea:
-                if #available(iOS 11.0, *) {
-                    otherAnchor = safeAreaLayoutGuide.leadingAnchor
-                } else {
-                    otherAnchor = layoutMarginsGuide.leadingAnchor
-                }
-            }
-            let constraint: NSLayoutConstraint
-            switch relation {
-            case .equal:
-                constraint = view.centerXAnchor.constraint(equalTo: otherAnchor, constant: length)
-                    .with(priority: .messageCenter)
-            case .min:
-                constraint = view.centerXAnchor.constraint(
-                    greaterThanOrEqualTo: otherAnchor,
-                    constant: length
-                ).with(priority: .messageSizeBounds)
-            case .max:
-                constraint = view.centerXAnchor.constraint(
-                    lessThanOrEqualTo: otherAnchor,
-                    constant: length
-                ).with(priority: .messageSizeBounds)
-            }
-            cachedConstraints.append(constraint)
-        }
-        if let y = center.y {
-            let length = self.length(for: y) { ($0.minY, $0.maxY) }
-            let otherAnchor: NSLayoutYAxisAnchor
-            switch y.boundary {
-            case .superview: otherAnchor = topAnchor
-            case .margin: otherAnchor = layoutMarginsGuide.topAnchor
-            case .safeArea:
-                if #available(iOS 11.0, *) {
-                    otherAnchor = safeAreaLayoutGuide.topAnchor
-                } else {
-                    otherAnchor = layoutMarginsGuide.topAnchor
-                }
-            }
-            let constraint: NSLayoutConstraint
-            switch relation {
-            case .equal:
-                constraint = view.centerYAnchor.constraint(equalTo: otherAnchor, constant: length)
-                    .with(priority: .messageCenter)
-            case .min:
-                constraint = view.centerYAnchor.constraint(
-                    greaterThanOrEqualTo: otherAnchor,
-                    constant: length
-                ).with(priority: .messageSizeBounds)
-            case .max:
-                constraint = view.centerYAnchor.constraint(
-                    lessThanOrEqualTo: otherAnchor,
-                    constant: length
-                ).with(priority: .messageSizeBounds)
-            }
-            cachedConstraints.append(constraint)
+            )
         }
     }
 
     private func length(
-        for dimension: Layout.Size.Dimension,
+        for dimension: MessageSize.Dimension,
         extractor: (CGRect) -> CGFloat
     ) -> CGFloat {
         switch dimension {
         case .absolute(let dimension):
             return dimension
+        case .absoluteMargin(let margin, let boundary):
+            let insets: UIEdgeInsets
+            switch boundary {
+            case .superview: insets = .zero
+            case .margin: insets = layoutMargins
+            case .safeArea:
+                if #available(iOS 11.0, *) {
+                    insets = safeAreaInsets
+                } else {
+                    insets = layoutMargins
+                }
+            }
+            return extractor(bounds.inset(by: insets)) - margin * 2
         case .relative(let percentage, let boundary):
             let insets: UIEdgeInsets
             switch boundary {
@@ -433,32 +274,6 @@ class MaskingView: PassthroughView, LayoutInstalling {
                 }
             }
             return extractor(bounds.inset(by: insets)) * percentage
-        }
-    }
-
-    private func length(
-        for dimension: Layout.Center.Dimension,
-        extractor: (CGRect) -> (CGFloat, CGFloat)
-    ) -> CGFloat {
-        let insets: UIEdgeInsets
-        switch dimension.boundary {
-        case .superview: insets = .zero
-        case .margin: insets = layoutMargins
-        case .safeArea:
-            if #available(iOS 11.0, *) {
-                insets = safeAreaInsets
-            } else {
-                insets = layoutMargins
-            }
-        }
-        let insetBounds = bounds.inset(by: insets)
-        switch dimension {
-        case .absolute(let dimension, _):
-            let (min, _) = extractor(insetBounds)
-            return min + dimension
-        case .relative(let percentage, _):
-            let (min, max) = extractor(insetBounds)
-            return min + (max - min) * percentage
         }
     }
 }
