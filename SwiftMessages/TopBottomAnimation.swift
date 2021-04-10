@@ -106,12 +106,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 let otherAnchor: NSLayoutYAxisAnchor
                 switch boundary {
                 case .superview: otherAnchor = container.bottomAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.bottomAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.bottomAnchor
-                    }
+                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.bottomAnchor
                 case .margin: otherAnchor = container.layoutMarginsGuide.bottomAnchor
                 }
                 view.bottomAnchor.constraint(equalTo: otherAnchor, constant: -dimension)
@@ -121,12 +116,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 let otherAnchor: NSLayoutDimension!
                 switch boundary {
                 case .superview: otherAnchor = container.heightAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.heightAnchor
-                    }
+                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.heightAnchor
                 case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
                 }
                 view.heightAnchor.constraint(
@@ -146,12 +136,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 let otherAnchor: NSLayoutYAxisAnchor
                 switch boundary {
                 case .superview: otherAnchor = container.topAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.topAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.topAnchor
-                    }
+                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.topAnchor
                 case .margin: otherAnchor = container.layoutMarginsGuide.topAnchor
                 }
                 view.topAnchor.constraint(equalTo: otherAnchor, constant: dimension)
@@ -161,12 +146,7 @@ public class TopBottomAnimation: NSObject, Animator {
                 let otherAnchor: NSLayoutDimension!
                 switch boundary {
                 case .superview: otherAnchor = container.heightAnchor
-                case .safeArea:
-                    if #available(iOS 11.0, *) {
-                        otherAnchor = container.safeAreaLayoutGuide.heightAnchor
-                    } else {
-                        otherAnchor = container.layoutMarginsGuide.heightAnchor
-                    }
+                case .safeArea: otherAnchor = container.safeAreaLayoutGuide.heightAnchor
                 case .margin: otherAnchor = container.layoutMarginsGuide.heightAnchor
                 }
                 view.heightAnchor.constraint(
