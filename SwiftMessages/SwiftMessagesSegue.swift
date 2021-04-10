@@ -359,16 +359,8 @@ extension SwiftMessagesSegue {
                 segue.messageView.installBackgroundVerticalView(segue.containerView)
             }
             let toVC = transitionContext.viewController(forKey: .to)
-
-            // Nav controller automatically includes height of nav bar in,
-            // the `preferredContentSize` and our logic needs to consider this.
-            var navInset: CGFloat = 0
-            if let nav = toVC as? UINavigationController {
-                navInset = nav.navigationBar.frame.height
-            }
-
             if let preferredHeight = toVC?.preferredContentSize.height,
-                preferredHeight - navInset > 0 {
+                preferredHeight > 0 {
                 segue.containerView.heightAnchor.constraint(equalToConstant: preferredHeight).with(priority: UILayoutPriority(rawValue: 951)).isActive = true
             }
             if let preferredWidth = toVC?.preferredContentSize.width,
