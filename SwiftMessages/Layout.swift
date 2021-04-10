@@ -24,8 +24,6 @@ public struct Layout {
     public var min = Layout()
     public var max = Layout()
 
-    public init() {}
-
     public enum Boundary {
         case superview
         case safeArea
