@@ -47,7 +47,6 @@ class SwiftMessagesBottomCardSegue: SwiftMessagesSegue {
     override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .bottomCard)
-        messageView.messageSize.width = .relative(0.75, from: .superview)
     }
 }
 
