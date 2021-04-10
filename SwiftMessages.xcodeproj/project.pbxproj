@@ -55,8 +55,7 @@
 		2290958125D9D407002E8111 /* UILayoutPriority+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290958025D9D407002E8111 /* UILayoutPriority+Extensions.swift */; };
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
-		2298C2091EE486E300E2DDC1 /* EdgeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* EdgeAnimation.swift */; };
-        229F778125FAB1E9008C2ACB /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */; };
+		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
 		22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */; };
 		22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */; };
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
@@ -144,8 +143,7 @@
 		2290958025D9D407002E8111 /* UILayoutPriority+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+Extensions.swift"; sourceTree = "<group>"; };
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
-		2298C2081EE486E300E2DDC1 /* EdgeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeAnimation.swift; sourceTree = "<group>"; };
-		229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
 		22A2EA6E24EC6CFA00BB2540 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CenteredView.xib; path = Resources/CenteredView.xib; sourceTree = "<group>"; };
 		22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsPanHandler.swift; sourceTree = "<group>"; };
@@ -224,7 +222,7 @@
 		2244656C1EF1D62700C50413 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				2298C2081EE486E300E2DDC1 /* EdgeAnimation.swift */,
+				2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */,
 				2270044A1FAFA6DD0045DDC3 /* PhysicsAnimation.swift */,
 				22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */,
 			);
@@ -560,7 +558,7 @@
 				86BBA8FF1D5E040600FE8F16 /* Presenter.swift in Sources */,
 				86BBA9051D5E040C00FE8F16 /* Theme.swift in Sources */,
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
-				2298C2091EE486E300E2DDC1 /* EdgeAnimation.swift in Sources */,
+				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
 				225304622290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
