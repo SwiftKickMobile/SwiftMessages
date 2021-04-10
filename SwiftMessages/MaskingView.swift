@@ -417,8 +417,10 @@ class MaskingView: PassthroughView, LayoutInstalling {
         for dimension: Layout.Size.Dimension,
         extractor: (CGRect) -> CGFloat
     ) -> CGFloat {
-        let insetBounds: CGRect = {
-            guard let boundary = dimension.boundary else { return .zero }
+        switch dimension {
+        case .absolute(let dimension):
+            return dimension
+        case .relative(let percentage, let boundary):
             let insets: UIEdgeInsets
             switch boundary {
             case .superview: insets = .zero
@@ -430,15 +432,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
                     insets = layoutMargins
                 }
             }
-            return bounds.inset(by: insets)
-        }()
-        switch dimension {
-        case .absolute(let dimension):
-            return dimension
-        case .relative(let percentage, _):
-            return extractor(insetBounds) * percentage
-        case .absoluteInsets(let dimension, _):
-            return extractor(insetBounds) - dimension * 2
+            return extractor(bounds.inset(by: insets)) * percentage
         }
     }
 
