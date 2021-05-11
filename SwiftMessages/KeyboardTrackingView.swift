@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol KeyboardTrackingViewDelegate: class {
+public protocol KeyboardTrackingViewDelegate: AnyObject {
     func keyboardTrackingViewWillChange(change: KeyboardTrackingView.Change, userInfo: [AnyHashable : Any])
     func keyboardTrackingViewDidChange(change: KeyboardTrackingView.Change, userInfo: [AnyHashable : Any])
 }

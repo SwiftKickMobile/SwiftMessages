@@ -10,7 +10,7 @@ import UIKit
 
 public typealias AnimationCompletion = (_ completed: Bool) -> Void
 
-public protocol AnimationDelegate: class {
+public protocol AnimationDelegate: AnyObject {
     func hide(animator: Animator)
     func panStarted(animator: Animator)
     func panEnded(animator: Animator)
@@ -58,7 +58,7 @@ public class AnimationContext {
     }
 }
 
-public protocol Animator: class {
+public protocol Animator: AnyObject {
 
     /// Adopting classes should declare as `weak`.
     var delegate: AnimationDelegate? { get set }
