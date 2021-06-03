@@ -1,6 +1,9 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+install! 'cocoapods',
+    :share_schemes_for_development_pods => false
+
 target 'iMessageDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
@@ -16,4 +19,20 @@ target 'iMessageExtensionDemo' do
   # Pods for iMessageExtensionDemo
   pod 'SwiftMessages/AppExtension', :path => "../"
 
+end
+
+post_install do |installer|
+  # Blow away schemes – the schemes created by CocoaPods break Carthage builds
+  # because they incluede a SwiftMessages framework that Carthage picks
+  # over the main SwiftMessages framework. The SwiftMessages framework that gets
+  # picked is configured for an app extension and doesn't work correctly in an app.
+  File.directory?(path)
+  [
+    "#{installer.sandbox.root}/Pods.xcodeproj/xcuserdata",
+    "#{installer.sandbox.root}/Pods.xcodeproj/xcshareddata"
+  ].each { |path|
+    if File.directory?(path)
+      FileUtils.remove_dir(path)
+    end
+  }
 end
