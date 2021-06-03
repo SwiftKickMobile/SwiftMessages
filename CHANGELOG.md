@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.3
+
+### Fixes
+
+* #465 - Fix broken Carthage build. The Carthage build was broken due to the `iMessageDemo` project's use of CocoaPods and the automatically generated `SwiftMessages` framework scheme created by CocoaPods. The podfile was modified to delete this scheme, but Carthage users may need to run `pod install` on the `iMessagesDemo` project, if they have CocoaPods installed, or manually delete the `iMessageDemo/Pods/Pods.xcodeproj/xcuserdata` folder.
+
 ## 9.0.2
 
 ### Fixes
