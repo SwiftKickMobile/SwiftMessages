@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixes
 
+* #467 Lower or equal level window's views disappear upon hide
 * #466 Alert not shown after Biometry check
 * #465 Fix broken Carthage build. The Carthage build was broken due to the `iMessageDemo` project's use of CocoaPods and the automatically generated `SwiftMessages` framework scheme created by CocoaPods. The podfile was modified to delete this scheme, but Carthage users may need to run `pod install` on the `iMessagesDemo` project, if they have CocoaPods installed, or manually delete the `iMessageDemo/Pods/Pods.xcodeproj/xcuserdata` folder.
 
