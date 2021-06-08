@@ -93,16 +93,16 @@ class Presenter: NSObject {
     private var interactivelyHidden = false;
 
     var delayShow: TimeInterval? {
-        if case .indefinite(let opts) = config.duration { return opts.delay }
+        if case .indefinite(let delay, _) = config.duration { return delay }
         return nil
     }
 
     /// Returns the required delay for hiding based on time shown
     var delayHide: TimeInterval? {
         if interactivelyHidden { return 0 }
-        if case .indefinite(let opts) = config.duration, let showDate = showDate {
+        if case .indefinite(_, let minimum) = config.duration, let showDate = showDate {
             let timeIntervalShown = CACurrentMediaTime() - showDate
-            return max(0, opts.minimum - timeIntervalShown)
+            return max(0, minimum - timeIntervalShown)
         }
         return nil
     }
