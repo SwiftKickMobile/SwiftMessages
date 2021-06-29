@@ -19,17 +19,17 @@ public class TopBottomAnimation: NSObject, Animator {
 
     public let style: Style
 
-    open var showDuration: TimeInterval = 0.4
+    public var showDuration: TimeInterval = 0.4
 
-    open var hideDuration: TimeInterval = 0.2
+    public var hideDuration: TimeInterval = 0.2
 
-    open var springDamping: CGFloat = 0.8
+    public var springDamping: CGFloat = 0.8
 
-    open var closeSpeedThreshold: CGFloat = 750.0;
+    public var closeSpeedThreshold: CGFloat = 750.0;
 
-    open var closePercentThreshold: CGFloat = 0.33;
+    public var closePercentThreshold: CGFloat = 0.33;
 
-    open var closeAbsoluteThreshold: CGFloat = 75.0;
+    public var closeAbsoluteThreshold: CGFloat = 75.0;
 
     public private(set) lazy var panGestureRecognizer: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer()
