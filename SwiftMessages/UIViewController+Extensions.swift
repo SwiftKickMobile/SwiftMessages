@@ -87,14 +87,14 @@ extension UIViewController {
 }
 
 extension SwiftMessages.PresentationStyle {
-    /// A temporary workaround to allow custom presentation contexts using `EdgeAnimation`
+    /// A temporary workaround to allow custom presentation contexts using `TopBottomAnimation`
     /// to display properly behind bars. THe long term solution is to refactor all of the
     /// presentation context logic to work with safe area insets.
-    var topBottomStyle: EdgeAnimation.Style? {
+    var topBottomStyle: TopBottomAnimation.Style? {
         switch self {
         case .top: return .top
         case .bottom: return .bottom
-        case .custom(let animator): return (animator as? EdgeAnimation)?.style
+        case .custom(let animator): return (animator as? TopBottomAnimation)?.style
         case .center: return nil
         }
     }

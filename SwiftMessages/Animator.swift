@@ -10,7 +10,7 @@ import UIKit
 
 public typealias AnimationCompletion = (_ completed: Bool) -> Void
 
-public protocol AnimationDelegate: class {
+public protocol AnimationDelegate: AnyObject {
     func hide(animator: Animator)
     func panStarted(animator: Animator)
     func panEnded(animator: Animator)
@@ -44,17 +44,13 @@ public struct SafeZoneConflicts: OptionSet {
 }
 
 public class AnimationContext {
+
     public let messageView: UIView
-    public let containerView: UIView & LayoutInstalling
+    public let containerView: UIView
     public let safeZoneConflicts: SafeZoneConflicts
     public let interactiveHide: Bool
 
-    internal init(
-        messageView: UIView,
-        containerView: UIView & LayoutInstalling,
-        safeZoneConflicts: SafeZoneConflicts,
-        interactiveHide: Bool
-    ) {
+    init(messageView: UIView, containerView: UIView, safeZoneConflicts: SafeZoneConflicts, interactiveHide: Bool) {
         self.messageView = messageView
         self.containerView = containerView
         self.safeZoneConflicts = safeZoneConflicts
@@ -62,7 +58,7 @@ public class AnimationContext {
     }
 }
 
-public protocol Animator: class {
+public protocol Animator: AnyObject {
 
     /// Adopting classes should declare as `weak`.
     var delegate: AnimationDelegate? { get set }

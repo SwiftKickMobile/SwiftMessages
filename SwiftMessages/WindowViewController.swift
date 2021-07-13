@@ -59,7 +59,7 @@ open class WindowViewController: UIViewController
     
     func uninstall() {
         if window?.isKeyWindow == true {
-            previousKeyWindow?.makeKeyAndVisible()
+            previousKeyWindow?.makeKey()
         }
         if #available(iOS 13, *) {
             window?.windowScene = nil

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -70,6 +70,7 @@
                         <constraint firstAttribute="trailing" secondItem="SU0-uJ-4pP" secondAttribute="trailing" constant="20" id="QN2-NH-rWA"/>
                         <constraint firstItem="SU0-uJ-4pP" firstAttribute="top" secondItem="A7b-0a-fJG" secondAttribute="top" constant="20" id="S9l-zM-0wc"/>
                         <constraint firstAttribute="bottom" secondItem="SU0-uJ-4pP" secondAttribute="bottom" constant="20" id="YMg-LN-n7f"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="500" id="lOa-jP-2uX"/>
                         <constraint firstItem="SU0-uJ-4pP" firstAttribute="leading" secondItem="A7b-0a-fJG" secondAttribute="leading" constant="20" id="nYJ-Ok-uhC"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -77,13 +78,25 @@
                             <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="lOa-jP-2uX"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="lOa-jP-2uX"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="A7b-0a-fJG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uEa-1P-F1Y" secondAttribute="leadingMargin" priority="900" id="LWV-wo-Jec"/>
                 <constraint firstAttribute="trailingMargin" secondItem="A7b-0a-fJG" secondAttribute="trailing" priority="900" id="O6e-Yz-cwK"/>
                 <constraint firstItem="A7b-0a-fJG" firstAttribute="leading" secondItem="uEa-1P-F1Y" secondAttribute="leadingMargin" priority="900" id="RiR-2q-ZY5"/>
                 <constraint firstItem="A7b-0a-fJG" firstAttribute="centerX" secondItem="uEa-1P-F1Y" secondAttribute="centerX" priority="950" id="jLv-ud-1WD"/>
+                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="A7b-0a-fJG" secondAttribute="trailing" priority="900" id="lGg-Ey-I5f"/>
                 <constraint firstItem="A7b-0a-fJG" firstAttribute="top" secondItem="uEa-1P-F1Y" secondAttribute="topMargin" id="yAH-C4-oUg"/>
                 <constraint firstAttribute="bottomMargin" secondItem="A7b-0a-fJG" secondAttribute="bottom" id="ygs-aa-zj3"/>
             </constraints>
@@ -106,10 +119,18 @@
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="collapseLayoutMarginAdditions" value="YES"/>
             </userDefinedRuntimeAttributes>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="LWV-wo-Jec"/>
+                    <exclude reference="lGg-Ey-I5f"/>
+                </mask>
+            </variation>
             <variation key="widthClass=regular">
                 <mask key="constraints">
+                    <include reference="LWV-wo-Jec"/>
                     <exclude reference="O6e-Yz-cwK"/>
                     <exclude reference="RiR-2q-ZY5"/>
+                    <include reference="lGg-Ey-I5f"/>
                 </mask>
             </variation>
             <connections>

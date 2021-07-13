@@ -24,12 +24,12 @@ open class CornerRoundingView: UIView {
     /// rounded. For example, the layout in TabView.xib rounds the bottom corners
     /// when displayed from the top and the top corners when displayed from the bottom.
     /// When this property is `true`, the `roundedCorners` property will be overwritten
-    /// by relevant animators (e.g. `EdgeAnimation`).
+    /// by relevant animators (e.g. `TopBottomAnimation`).
     @IBInspectable
     open var roundsLeadingCorners: Bool = false
 
     /// Specifies which corners should be rounded. When `roundsLeadingCorners = true`, relevant
-    /// relevant animators (e.g. `EdgeAnimation`) will overwrite the value of this property.
+    /// relevant animators (e.g. `TopBottomAnimation`) will overwrite the value of this property.
     open var roundedCorners: UIRectCorner = [.allCorners] {
         didSet {
             updateMaskPath()

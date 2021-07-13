@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -32,7 +32,7 @@
                                     <rect key="frame" x="160.5" y="55.5" width="33" height="0.0"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="700" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="[Title]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggW-gB-SWF">
-                                    <rect key="frame" x="153" y="65.5" width="48" height="20.5"/>
+                                    <rect key="frame" x="153" y="65.5" width="48.5" height="20.5"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -69,6 +69,7 @@
                         <constraint firstAttribute="bottom" secondItem="YST-yc-0HK" secondAttribute="bottom" constant="20" id="Vsy-Y9-qzf">
                             <variation key="widthClass=regular" constant="30"/>
                         </constraint>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="500" id="Y89-EE-TtG"/>
                         <constraint firstItem="YST-yc-0HK" firstAttribute="top" secondItem="0Mj-jC-BX6" secondAttribute="top" constant="20" id="yRl-kK-cQH">
                             <variation key="widthClass=regular" constant="30"/>
                         </constraint>
@@ -78,6 +79,16 @@
                             <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Y89-EE-TtG"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=regular">
+                        <mask key="constraints">
+                            <exclude reference="Y89-EE-TtG"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,8 +96,10 @@
                 <constraint firstItem="0Mj-jC-BX6" firstAttribute="top" secondItem="g5x-hF-D0u" secondAttribute="topMargin" id="GWI-aH-o7P"/>
                 <constraint firstItem="0Mj-jC-BX6" firstAttribute="centerX" secondItem="g5x-hF-D0u" secondAttribute="centerX" priority="950" id="XqM-pB-dF4"/>
                 <constraint firstItem="0Mj-jC-BX6" firstAttribute="leading" secondItem="g5x-hF-D0u" secondAttribute="leadingMargin" priority="900" id="bQ3-k8-0v0"/>
+                <constraint firstItem="0Mj-jC-BX6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g5x-hF-D0u" secondAttribute="leadingMargin" priority="900" id="iGY-na-87c"/>
                 <constraint firstAttribute="trailingMargin" secondItem="0Mj-jC-BX6" secondAttribute="trailing" priority="900" id="rSj-h2-U7z"/>
                 <constraint firstAttribute="bottomMargin" secondItem="0Mj-jC-BX6" secondAttribute="bottom" id="wRH-k8-J8S"/>
+                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="0Mj-jC-BX6" secondAttribute="trailing" priority="900" id="xAq-z5-Gur"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -109,10 +122,18 @@
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="collapseLayoutMarginAdditions" value="YES"/>
             </userDefinedRuntimeAttributes>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="iGY-na-87c"/>
+                    <exclude reference="xAq-z5-Gur"/>
+                </mask>
+            </variation>
             <variation key="widthClass=regular">
                 <mask key="constraints">
                     <exclude reference="bQ3-k8-0v0"/>
+                    <include reference="iGY-na-87c"/>
                     <exclude reference="rSj-h2-U7z"/>
+                    <include reference="xAq-z5-Gur"/>
                 </mask>
             </variation>
             <connections>
