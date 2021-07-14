@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftMessages",
     platforms: [
-        .iOS("9.0")
+        .iOS("13.0")
     ],
     products: [
         .library(name: "SwiftMessages", targets: ["SwiftMessages"])
