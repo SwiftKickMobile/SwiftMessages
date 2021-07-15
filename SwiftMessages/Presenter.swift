@@ -229,7 +229,6 @@ class Presenter: NSObject {
     }
 
     private func safeZoneConflicts() -> SafeZoneConflicts {
-        guard let window = maskingView.window else { return [] }
         let windowLevel: UIWindow.Level = {
             if let vc = presentationContext.viewControllerValue() as? WindowViewController {
                 return vc.config.windowLevel ?? .normal
@@ -246,47 +245,34 @@ class Presenter: NSObject {
             if let vc = presentationContext.viewControllerValue() as? UITabBarController { return vc.sm_isVisible(view: vc.tabBar) }
             return false
         }()
-        if #available(iOS 11, *) {
-            if windowLevel > .normal {
-                // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
-                // iPhone 8 with status bar window level. This seems like an iOS bug since
-                // the message view's window is above the status bar. Applying a special rule
-                // to allow the animator to revove this amount from the layout margins if needed.
-                // This may need to be reworked if any future device has a legitimate 20pt top safe area,
-                // such as with a potentially smaller notch.
-                if maskingView.safeAreaInsets.top == 20 {
-                    return [.overStatusBar]
-                } else {
-                    var conflicts: SafeZoneConflicts = []
-                    if maskingView.safeAreaInsets.top > 0 {
-                        conflicts.formUnion(.sensorNotch)
-                    }
-                    if maskingView.safeAreaInsets.bottom > 0 {
-                        conflicts.formUnion(.homeIndicator)
-                    }
-                    return conflicts
+        if windowLevel > .normal {
+            // TODO seeing `maskingView.safeAreaInsets.top` value of 20 on
+            // iPhone 8 with status bar window level. This seems like an iOS bug since
+            // the message view's window is above the status bar. Applying a special rule
+            // to allow the animator to revove this amount from the layout margins if needed.
+            // This may need to be reworked if any future device has a legitimate 20pt top safe area,
+            // such as with a potentially smaller notch.
+            if maskingView.safeAreaInsets.top == 20 {
+                return [.overStatusBar]
+            } else {
+                var conflicts: SafeZoneConflicts = []
+                if maskingView.safeAreaInsets.top > 0 {
+                    conflicts.formUnion(.sensorNotch)
                 }
+                if maskingView.safeAreaInsets.bottom > 0 {
+                    conflicts.formUnion(.homeIndicator)
+                }
+                return conflicts
             }
-            var conflicts: SafeZoneConflicts = []
-            if !underNavigationBar {
-                conflicts.formUnion(.sensorNotch)
-            }
-            if !underTabBar {
-                conflicts.formUnion(.homeIndicator)
-            }
-            return conflicts
-        } else {
-            #if SWIFTMESSAGES_APP_EXTENSIONS
-            return []
-            #else
-            if UIApplication.shared.isStatusBarHidden { return [] }
-            if (windowLevel > UIWindow.Level.normal) || underNavigationBar { return [] }
-            let statusBarFrame = UIApplication.shared.statusBarFrame
-            let statusBarWindowFrame = window.convert(statusBarFrame, from: nil)
-            let statusBarViewFrame = maskingView.convert(statusBarWindowFrame, from: nil)
-            return statusBarViewFrame.intersects(maskingView.bounds) ? SafeZoneConflicts.statusBar : []
-            #endif
         }
+        var conflicts: SafeZoneConflicts = []
+        if !underNavigationBar {
+            conflicts.formUnion(.sensorNotch)
+        }
+        if !underTabBar {
+            conflicts.formUnion(.homeIndicator)
+        }
+        return conflicts        
     }
 
     private func getPresentationContext() throws -> PresentationContext {

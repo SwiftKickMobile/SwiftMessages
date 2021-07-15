@@ -1,5 +1,5 @@
 //
-//  BoundaryInsets.swift
+//  Layout.swift
 //  SwiftMessages
 //
 //  Created by Timothy Moose on 2/13/21.

@@ -333,19 +333,7 @@ open class SwiftMessages {
          Use with apps that don't support dark mode to prevent messages from adopting the
          system's interface style.
         */
-        @available(iOS 13, *)
-        public var overrideUserInterfaceStyle: UIUserInterfaceStyle {
-            // Note that this is modelled as a computed property because
-            // Swift doesn't allow `@available` with stored properties.
-            get {
-                guard let rawValue = overrideUserInterfaceStyleRawValue else { return .unspecified }
-                return UIUserInterfaceStyle(rawValue: rawValue) ?? .unspecified
-            }
-            set {
-                overrideUserInterfaceStyleRawValue = newValue.rawValue
-            }
-        }
-        private var overrideUserInterfaceStyleRawValue: Int?
+        public var overrideUserInterfaceStyle: UIUserInterfaceStyle = .unspecified
 
         /**
          If specified, SwiftMessages calls this closure when an instance of

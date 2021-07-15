@@ -8,9 +8,6 @@
 
 import UIKit
 
-@available(*, deprecated, message: "Class renamed to `EdgeAnimation` to reflect new ability to do leading and trailing animations.")
-public typealias TopBottomAnimation = EdgeAnimation
-
 public class EdgeAnimation: NSObject, Animator {
 
     public enum Style {
@@ -65,16 +62,26 @@ public class EdgeAnimation: NSObject, Animator {
         NotificationCenter.default.removeObserver(self)
         let view = context.messageView
         self.context = context
+        let leftTransform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+        let rightTransform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
         UIView.animate(withDuration: hideDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState]) {
             switch self.style {
             case .top:
                 view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
             case .bottom:
                 view.transform = CGAffineTransform(translationX: 0, y: view.frame.maxY + view.frame.height)
-            case .leading: // TODO SIZE do proper leading and trailing
-                view.transform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+            case .leading:
+                switch view.traitCollection.layoutDirection {
+                case .leftToRight, .unspecified: view.transform = leftTransform
+                case .rightToLeft: view.transform = rightTransform
+                @unknown default: view.transform = leftTransform
+                }
             case .trailing:
-                view.transform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
+                switch view.traitCollection.layoutDirection {
+                case .leftToRight, .unspecified: view.transform = rightTransform
+                case .rightToLeft: view.transform = leftTransform
+                @unknown default: view.transform = rightTransform
+                }
             }
         } completion: { completed in
             #if SWIFTMESSAGES_APP_EXTENSIONS
@@ -146,15 +153,25 @@ public class EdgeAnimation: NSObject, Animator {
         container.layoutIfNeeded()
         adjustMargins()
         container.layoutIfNeeded()
+        let leftTransform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+        let rightTransform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
         switch style {
         case .top:
             view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
         case .bottom:
             view.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
         case .leading:
-            view.transform = CGAffineTransform(translationX: -view.frame.width, y: 0)
+            switch view.traitCollection.layoutDirection {
+            case .leftToRight, .unspecified: view.transform = leftTransform
+            case .rightToLeft: view.transform = rightTransform
+            @unknown default: view.transform = leftTransform
+            }
         case .trailing:
-            view.transform = CGAffineTransform(translationX: view.frame.width, y: 0)
+            switch view.traitCollection.layoutDirection {
+            case .leftToRight, .unspecified: view.transform = rightTransform
+            case .rightToLeft: view.transform = leftTransform
+            @unknown default: view.transform = rightTransform
+            }
         }
         if context.interactiveHide {
             if let view = view as? BackgroundViewable {
@@ -163,18 +180,28 @@ public class EdgeAnimation: NSObject, Animator {
                 view.addGestureRecognizer(panGestureRecognizer)
             }
         }
-        if let view = view as? BackgroundViewable,
+        if let view = view as? BackgroundViewable & UIView,
             let cornerRoundingView = view.backgroundView as? CornerRoundingView,
             cornerRoundingView.roundsLeadingCorners {
+            let left: UIRectCorner = [.topLeft, .bottomLeft]
+            let right: UIRectCorner = [.topRight, .bottomRight]
             switch style {
             case .top:
                 cornerRoundingView.roundedCorners = [.bottomLeft, .bottomRight]
             case .bottom:
                 cornerRoundingView.roundedCorners = [.topLeft, .topRight]
             case .leading:
-                cornerRoundingView.roundedCorners = [.topRight, .bottomRight]
+                switch view.traitCollection.layoutDirection {
+                case .leftToRight, .unspecified: cornerRoundingView.roundedCorners = right
+                case .rightToLeft: cornerRoundingView.roundedCorners = left
+                @unknown default: cornerRoundingView.roundedCorners = right
+                }
             case .trailing:
-                cornerRoundingView.roundedCorners = [.topLeft, .bottomLeft]
+                switch view.traitCollection.layoutDirection {
+                case .leftToRight, .unspecified: cornerRoundingView.roundedCorners = left
+                case .rightToLeft: cornerRoundingView.roundedCorners = right
+                @unknown default: cornerRoundingView.roundedCorners = left
+                }
             }
         }
     }
@@ -183,9 +210,7 @@ public class EdgeAnimation: NSObject, Animator {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
-        if #available(iOS 11, *) {
-            adjustable.insetsLayoutMarginsFromSafeArea = false
-        }
+        adjustable.insetsLayoutMarginsFromSafeArea = false
         var layoutMargins = adjustable.defaultMarginAdjustment(context: context)
         switch style {
         case .top:

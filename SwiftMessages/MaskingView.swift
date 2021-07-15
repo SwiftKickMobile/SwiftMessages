@@ -136,21 +136,14 @@ class MaskingView: PassthroughView, LayoutInstalling {
     private func add(top: Layout.Insets.Dimension, relation: ConstraintRelation) {
         let length: CGFloat
         switch top {
-        case .absolute(let dimension, _):
-            length = dimension
-        case .relative(let percentage, _):
-            length = bounds.height * percentage
+        case .absolute(let dimension, _): length = dimension
+        case .relative(let percentage, _): length = bounds.height * percentage
         }
         let otherAnchor: NSLayoutYAxisAnchor
         switch top.boundary {
         case .superview: otherAnchor = topAnchor
         case .margin: otherAnchor = layoutMarginsGuide.topAnchor
-        case .safeArea:
-            if #available(iOS 11.0, *) {
-                otherAnchor = safeAreaLayoutGuide.topAnchor
-            } else {
-                otherAnchor = layoutMarginsGuide.topAnchor
-            }
+        case .safeArea: otherAnchor = safeAreaLayoutGuide.topAnchor
         }
         add(
             anchor: messageInsetsGuide.topAnchor,
@@ -163,21 +156,14 @@ class MaskingView: PassthroughView, LayoutInstalling {
     private func add(bottom: Layout.Insets.Dimension, relation: ConstraintRelation) {
         let length: CGFloat
         switch bottom {
-        case .absolute(let dimension, _):
-            length = dimension
-        case .relative(let percentage, _):
-            length = bounds.height * percentage
+        case .absolute(let dimension, _): length = dimension
+        case .relative(let percentage, _): length = bounds.height * percentage
         }
         let otherAnchor: NSLayoutYAxisAnchor
         switch bottom.boundary {
         case .superview: otherAnchor = bottomAnchor
         case .margin: otherAnchor = layoutMarginsGuide.bottomAnchor
-        case .safeArea:
-            if #available(iOS 11.0, *) {
-                otherAnchor = safeAreaLayoutGuide.bottomAnchor
-            } else {
-                otherAnchor = layoutMarginsGuide.bottomAnchor
-            }
+        case .safeArea: otherAnchor = safeAreaLayoutGuide.bottomAnchor
         }
         add(
             anchor: otherAnchor,
@@ -190,21 +176,14 @@ class MaskingView: PassthroughView, LayoutInstalling {
     private func add(leading: Layout.Insets.Dimension, relation: ConstraintRelation) {
         let length: CGFloat
         switch leading {
-        case .absolute(let dimension, _):
-            length = dimension
-        case .relative(let percentage, _):
-            length = bounds.width * percentage
+        case .absolute(let dimension, _): length = dimension
+        case .relative(let percentage, _): length = bounds.width * percentage
         }
         let otherAnchor: NSLayoutXAxisAnchor
         switch leading.boundary {
         case .superview: otherAnchor = leadingAnchor
         case .margin: otherAnchor = layoutMarginsGuide.leadingAnchor
-        case .safeArea:
-            if #available(iOS 11.0, *) {
-                otherAnchor = safeAreaLayoutGuide.leadingAnchor
-            } else {
-                otherAnchor = layoutMarginsGuide.leadingAnchor
-            }
+        case .safeArea: otherAnchor = safeAreaLayoutGuide.leadingAnchor
         }
         add(
             anchor: messageInsetsGuide.leadingAnchor,
@@ -217,21 +196,14 @@ class MaskingView: PassthroughView, LayoutInstalling {
     private func add(trailing: Layout.Insets.Dimension, relation: ConstraintRelation) {
         let length: CGFloat
         switch trailing {
-        case .absolute(let dimension, _):
-            length = dimension
-        case .relative(let percentage, _):
-            length = bounds.width * percentage
+        case .absolute(let dimension, _): length = dimension
+        case .relative(let percentage, _): length = bounds.width * percentage
         }
         let otherAnchor: NSLayoutXAxisAnchor
         switch trailing.boundary {
         case .superview: otherAnchor = trailingAnchor
         case .margin: otherAnchor = layoutMarginsGuide.trailingAnchor
-        case .safeArea:
-            if #available(iOS 11.0, *) {
-                otherAnchor = safeAreaLayoutGuide.trailingAnchor
-            } else {
-                otherAnchor = layoutMarginsGuide.trailingAnchor
-            }
+        case .safeArea: otherAnchor = safeAreaLayoutGuide.trailingAnchor
         }
         add(
             anchor: otherAnchor,
@@ -356,11 +328,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
             case .superview: otherAnchor = leadingAnchor
             case .margin: otherAnchor = layoutMarginsGuide.leadingAnchor
             case .safeArea:
-                if #available(iOS 11.0, *) {
-                    otherAnchor = safeAreaLayoutGuide.leadingAnchor
-                } else {
-                    otherAnchor = layoutMarginsGuide.leadingAnchor
-                }
+                otherAnchor = safeAreaLayoutGuide.leadingAnchor
             }
             let constraint: NSLayoutConstraint
             switch relation {
@@ -387,11 +355,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
             case .superview: otherAnchor = topAnchor
             case .margin: otherAnchor = layoutMarginsGuide.topAnchor
             case .safeArea:
-                if #available(iOS 11.0, *) {
-                    otherAnchor = safeAreaLayoutGuide.topAnchor
-                } else {
-                    otherAnchor = layoutMarginsGuide.topAnchor
-                }
+                otherAnchor = safeAreaLayoutGuide.topAnchor
             }
             let constraint: NSLayoutConstraint
             switch relation {
@@ -424,11 +388,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
             case .superview: insets = .zero
             case .margin: insets = layoutMargins
             case .safeArea:
-                if #available(iOS 11.0, *) {
-                    insets = safeAreaInsets
-                } else {
-                    insets = layoutMargins
-                }
+                insets = safeAreaInsets
             }
             return bounds.inset(by: insets)
         }()
@@ -451,11 +411,7 @@ class MaskingView: PassthroughView, LayoutInstalling {
         case .superview: insets = .zero
         case .margin: insets = layoutMargins
         case .safeArea:
-            if #available(iOS 11.0, *) {
-                insets = safeAreaInsets
-            } else {
-                insets = layoutMargins
-            }
+            insets = safeAreaInsets
         }
         let insetBounds = bounds.inset(by: insets)
         switch dimension {
