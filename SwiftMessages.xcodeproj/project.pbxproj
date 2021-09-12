@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0797E40E26EE12B400691606 /* WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797E40D26EE12B400691606 /* WindowScene.swift */; };
 		220655121FAF82B600F4E00F /* MarginAdjustable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */; };
 		220D386E2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Extensions.swift */; };
@@ -54,7 +55,7 @@
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
-        229F778125FAB1E9008C2ACB /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */; };
+		229F778125FAB1E9008C2ACB /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */; };
 		22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */; };
 		22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */; };
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0797E40D26EE12B400691606 /* WindowScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowScene.swift; sourceTree = "<group>"; };
 		220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Extensions.swift"; sourceTree = "<group>"; };
 		220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages.Config+Extensions.swift"; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
@@ -141,7 +143,7 @@
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
-        229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		22A2EA6E24EC6CFA00BB2540 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CenteredView.xib; path = Resources/CenteredView.xib; sourceTree = "<group>"; };
 		22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsPanHandler.swift; sourceTree = "<group>"; };
@@ -211,7 +213,7 @@
 			children = (
 				220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */,
 				22774B9F20B5EF2A00813732 /* UIEdgeInsets+Extensions.swift */,
-                229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */,
+				229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +306,7 @@
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 				22F27950210CE25900273E7F /* CornerRoundingView.swift */,
 				225304652293000C00A03ACF /* KeyboardTrackingView.swift */,
+				0797E40D26EE12B400691606 /* WindowScene.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */,
 				2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */,
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
+				0797E40E26EE12B400691606 /* WindowScene.swift in Sources */,
 				225304622290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
