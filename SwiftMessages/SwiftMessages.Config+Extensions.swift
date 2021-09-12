@@ -18,7 +18,7 @@ extension SwiftMessages.Config {
     }
 
     @available (iOS 13.0, *)
-    var windowScene: UIWindowScene? {
+    var windowScene: WindowScene? {
         switch presentationContext {
         case .windowScene(let scene, _): return scene
         default:

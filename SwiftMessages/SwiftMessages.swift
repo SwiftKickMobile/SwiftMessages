@@ -79,8 +79,7 @@ open class SwiftMessages {
          status bar. The only alternative is to set `Config.prefersStatusBarHidden = true`
          to hide it.
         */
-        @available(iOS 13.0, *)
-        case windowScene(_: UIWindowScene, windowLevel: UIWindow.Level)
+        case windowScene(_: WindowScene, windowLevel: UIWindow.Level)
 
         /**
          Displays the message view under navigation bars and tab bars if an
@@ -248,7 +247,16 @@ open class SwiftMessages {
          Specifies how the container for presenting the message view
          is selected. The default is `.Automatic`.
          */
-        public var presentationContext = PresentationContext.automatic
+        public var presentationContext = PresentationContext.automatic {
+            didSet {
+                if case .windowScene = presentationContext {
+                    guard #available(iOS 13.0, *) else {
+                        assertionFailure("windowScene is not supported below iOS 13.0.")
+                        return
+                    }
+                }
+            }
+        }
 
         /**
          Specifies the duration of the message view's time on screen before it is

@@ -34,7 +34,7 @@ open class WindowViewController: UIViewController
 
     func install() {
         if #available(iOS 13, *) {
-            window?.windowScene = config.windowScene
+            window?.windowScene = config.windowScene as? UIWindowScene
             #if !SWIFTMESSAGES_APP_EXTENSIONS
             previousKeyWindow = UIWindow.keyWindow
             #endif
