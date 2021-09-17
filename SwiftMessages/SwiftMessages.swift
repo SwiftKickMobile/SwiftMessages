@@ -77,7 +77,8 @@ open class SwiftMessages {
          of any message view that adopts the `MarginInsetting` protocol (as `MessageView` does)
          to account for the status bar. As of iOS 13, windows can no longer cover the
          status bar. The only alternative is to set `Config.prefersStatusBarHidden = true`
-         to hide it.
+         to hide it. The `WindowScene` protocol works around the change in Xcode 13 that prevents
+         using `@availability` attribute with `enum` cases containing associated values.
         */
         case windowScene(_: WindowScene, windowLevel: UIWindow.Level)
 
