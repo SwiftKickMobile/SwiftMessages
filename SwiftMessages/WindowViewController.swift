@@ -28,7 +28,9 @@ open class WindowViewController: UIViewController
         window.rootViewController = self
         window.windowLevel = config.windowLevel ?? UIWindow.Level.normal
         if #available(iOS 13, *) {
-            window.overrideUserInterfaceStyle = config.overrideUserInterfaceStyle
+            if window.responds(to: #selector(setter: UIView.overrideUserInterfaceStyle)) {
+                window.setValue(config.overrideUserInterfaceStyle.rawValue, forKeyPath: #keyPath(UIView.overrideUserInterfaceStyle))
+            }
         }
     }
 
