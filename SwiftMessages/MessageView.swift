@@ -13,6 +13,15 @@ import UIKit
 open class MessageView: BaseView, Identifiable, AccessibleMessage {
     
     /*
+     MARK: - Haptic feedback
+     */
+    
+    /// The default feedback type associated with the instantiated `MessageView`
+    @available (iOS 10, *)
+    internal private(set) lazy var defaultFeedbackType: SwiftMessages.HapticFeedback = .none
+    
+    
+    /*
      MARK: - Button tap handler
      */
     
@@ -268,6 +277,18 @@ extension MessageView {
         case .error:
             defaultBackgroundColor = UIColor(red: 249.0/255.0, green: 66.0/255.0, blue: 47.0/255.0, alpha: 1.0)
             defaultForegroundColor = UIColor.white
+        }
+        if #available(iOS 10, *) {
+            switch theme {
+            case .success:
+                defaultFeedbackType = SwiftMessages.HapticFeedback.success
+            case .warning:
+                defaultFeedbackType = SwiftMessages.HapticFeedback.warning
+            case .error:
+                defaultFeedbackType = SwiftMessages.HapticFeedback.error
+            default:
+                break
+            }
         }
         if #available(iOS 13.0, *) {
             switch theme {

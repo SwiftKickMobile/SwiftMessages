@@ -152,6 +152,36 @@ open class SwiftMessages {
     }
     
     /**
+     Specifies notification's haptic feedback to be used on `MessageView` display
+    */
+    @available(iOS 10, *)
+    public enum HapticFeedback {
+        case none
+        case warning
+        case error
+        case success
+        
+        
+        /**
+         Triggers haptic feedback
+         */
+        public func trigger() {
+            let generator = UINotificationFeedbackGenerator()
+            switch self {
+            case .error:
+                generator.notificationOccurred(.error)
+            case .warning:
+                generator.notificationOccurred(.warning)
+            case .success:
+                generator.notificationOccurred(.success)
+            default:
+                break
+            }
+        }
+    }
+    
+    
+    /**
      Specifies options for dimming the background behind the message view
      similar to a popover view controller.
     */
@@ -271,6 +301,14 @@ open class SwiftMessages {
          */
         public var dimMode = DimMode.none
         
+        
+        /**
+         Specifies notification's haptic feedback to be played on `MessageView` display.
+         No default value is provided.
+         */
+        @available (iOS 10, *)
+        public lazy var notificationFeedback: HapticFeedback? = nil
+        
         /**
          Specifies whether or not the interactive pan-to-hide gesture is enabled
          on the message view. For views that implement the `BackgroundViewable` 
@@ -382,7 +420,9 @@ open class SwiftMessages {
      - Parameter view: The view to be displayed.
      */
     open func show(config: Config, view: UIView) {
-        let presenter = Presenter(config: config, view: view, delegate: self)
+        var updatedConfig = config
+        configure(config: &updatedConfig, view: view)
+        let presenter = Presenter(config: updatedConfig, view: view, delegate: self)
         messageQueue.sync {
             enqueue(presenter: presenter)
         }
@@ -396,7 +436,9 @@ open class SwiftMessages {
      - Parameter view: The view to be displayed.
      */
     public func show(view: UIView) {
-        show(config: defaultConfig, view: view)
+        var updatedConfig = defaultConfig
+        configure(config: &updatedConfig, view: view)
+        show(config: updatedConfig, view: view)
     }
     
     /// A block that returns an arbitrary view.
@@ -416,7 +458,9 @@ open class SwiftMessages {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let view = viewProvider()
-            strongSelf.show(config: config, view: view)
+            var updatedConfig = config
+            strongSelf.configure(config: &updatedConfig, view: view)
+            strongSelf.show(config: updatedConfig, view: view)
         }
     }
     
@@ -431,7 +475,22 @@ open class SwiftMessages {
      - Parameter viewProvider: A block that returns the view to be displayed.
      */
     public func show(viewProvider: @escaping ViewProvider) {
-        show(config: defaultConfig, viewProvider: viewProvider)
+        let view = viewProvider()
+        var updatedConfig = defaultConfig
+        configure(config: &updatedConfig, view: view)
+        show(config: updatedConfig, viewProvider: viewProvider)
+    }
+    
+    /**
+     Configures haptic feedback for the given `Config` and `UIView` objects. `MessageView`s can in fact implement default haptic feedback values.
+     If the given `Config` provides an explictly set notificationFeedback value (config.notificationFeedback not nil),
+     the set value is not overridden with the `MessageView`'s one
+     */
+    private func configure(config: inout Config, view: UIView) {
+        guard #available(iOS 10, *) else {return}
+        if config.notificationFeedback == nil, let hapticFeedback = (view as? MessageView)?.defaultFeedbackType {
+            config.notificationFeedback = hapticFeedback
+        }
     }
     
     /**

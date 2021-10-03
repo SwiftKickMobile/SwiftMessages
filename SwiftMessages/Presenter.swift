@@ -120,6 +120,9 @@ class Presenter: NSObject {
         try presentationContext = getPresentationContext()
         install()
         self.config.eventListeners.forEach { $0(.willShow) }
+        if #available(iOS 10, *) {
+            self.config.notificationFeedback?.trigger()
+        }
         showAnimation() { completed in
             completion(completed)
             if completed {
