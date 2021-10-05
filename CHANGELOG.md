@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.5
+
+### Fixes
+
+* #482 Fix timing of `KeyboardTrackingView` callbacks.
+* #483 KeyboardTrackingView causes a small space under bottom-style view
+
 ## 9.0.4
 
 * #471 Xcode 13 issue - Enum cases with associated values cannot be marked potentially unavailable with '@available'
