@@ -44,6 +44,18 @@ open class KeyboardTrackingView: UIView {
     /// The margin to maintain between the keyboard and the top of the view.
     @IBInspectable open var topMargin: CGFloat = 0
 
+    /// Subclasses can override this to do something before the change.
+    open func willChange(
+        change: KeyboardTrackingView.Change,
+        userInfo: [AnyHashable : Any]
+    ) {}
+
+    /// Subclasses can override this to do something after the change.
+    open func didChange(
+        change: KeyboardTrackingView.Change,
+        userInfo: [AnyHashable : Any]
+    ) {}
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         postInit()
@@ -101,11 +113,12 @@ open class KeyboardTrackingView: UIView {
         guard !(isPaused || isAutomaticallyPaused),
             let userInfo = (notification as NSNotification).userInfo,
             let value = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        willChange(change: change, userInfo: userInfo)
+        delegate?.keyboardTrackingViewWillChange(change: change, userInfo: userInfo)
         let keyboardRect = value.cgRectValue
         let thisRect = convert(bounds, to: nil)
         let newHeight = max(0, thisRect.maxY - keyboardRect.minY) + topMargin
         guard heightConstraint.constant != newHeight else { return }
-        delegate?.keyboardTrackingViewWillChange(change: change, userInfo: userInfo)
         animateKeyboardChange(change: change, height: newHeight, userInfo: userInfo)
     }
 
@@ -115,6 +128,7 @@ open class KeyboardTrackingView: UIView {
             let curveNumber = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber {
             CATransaction.begin()
             CATransaction.setCompletionBlock {
+                self.didChange(change: change, userInfo: userInfo)
                 self.delegate?.keyboardTrackingViewDidChange(change: change, userInfo: userInfo)
             }
             UIView.beginAnimations(nil, context: nil)
