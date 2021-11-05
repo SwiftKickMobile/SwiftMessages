@@ -49,6 +49,15 @@ open class WindowViewController: UIViewController
 
     private func show(becomeKey: Bool, frame: CGRect? = nil) {
         guard let window = window else { return }
+        if #available(iOS 13.0, *),
+           config.preserveStatusBarSpace,
+           let previousKeyWindowSafeAreaInsets = previousKeyWindow?.safeAreaInsets,
+           window.safeAreaInsets.top != previousKeyWindowSafeAreaInsets.top
+        {
+            initialAdditionalSafeAreaInsets = previousKeyWindow?.rootViewController?.additionalSafeAreaInsets
+            previousKeyWindow?.rootViewController?.additionalSafeAreaInsets.top += previousKeyWindowSafeAreaInsets.top
+        }
+
         window.frame = frame ?? UIScreen.main.bounds
         if becomeKey {
             window.makeKeyAndVisible()
@@ -63,6 +72,9 @@ open class WindowViewController: UIViewController
         }
         if #available(iOS 13, *) {
             window?.windowScene = nil
+            if let initialAdditionalSafeAreaInsets = initialAdditionalSafeAreaInsets {
+                previousKeyWindow?.rootViewController?.additionalSafeAreaInsets = initialAdditionalSafeAreaInsets
+            }
         }
         window?.isHidden = true
         window = nil
@@ -84,6 +96,7 @@ open class WindowViewController: UIViewController
 
     private var window: UIWindow?
     private weak var previousKeyWindow: UIWindow?
+    private var initialAdditionalSafeAreaInsets: UIEdgeInsets?
 
     let config: SwiftMessages.Config
 }

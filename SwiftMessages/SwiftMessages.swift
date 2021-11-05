@@ -299,6 +299,14 @@ open class SwiftMessages {
         public var prefersStatusBarHidden: Bool?
 
         /**
+         Specifies whether or not the space used by the status bar should be preserved
+         after hiding the status bar for devices without a notch. This can be useful in
+         combination with `prefersStatusBarHidden` to show the view on the space
+         used by the status bar. The default is `false`
+         */
+        public var preserveStatusBarSpace: Bool = false
+
+        /**
          If a view controller is created to host the message view, should the view 
          controller auto rotate?  The default is 'true', meaning it should auto
          rotate.
