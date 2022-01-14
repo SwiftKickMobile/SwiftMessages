@@ -219,10 +219,23 @@ open class SwiftMessages {
      Specifies events in the message lifecycle.
     */
     public enum Event {
-        case willShow
-        case didShow
-        case willHide
-        case didHide
+        case willShow(UIView)
+        case didShow(UIView)
+        case willHide(UIView)
+        case didHide(UIView)
+
+        public var view: UIView {
+            switch self {
+            case .willShow(let view): return view
+            case .didShow(let view): return view
+            case .willHide(let view): return view
+            case .didHide(let view): return view
+            }
+        }
+
+        public var id: String? {
+            return (view as? Identifiable)?.id
+        }
     }
     
     /**
