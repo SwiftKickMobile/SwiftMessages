@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.6
+
+### Features
+
+* Add `UIView` associated type to `Event`, e.g. `willShow(UIView)` so that event listeners can inspect the view.
+* Add `Event.id: String?` property so that event listeners can reason about the view's ID.
+
 ## 9.0.5
 
 ### Fixes
