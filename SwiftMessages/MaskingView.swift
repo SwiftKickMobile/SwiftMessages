@@ -65,6 +65,15 @@ class MaskingView: PassthroughView {
         guard let keyboardTrackingView = keyboardTrackingView,
             view != keyboardTrackingView,
             view != backgroundView else { return }
-        keyboardTrackingView.topAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor).with(priority: UILayoutPriority(250)).isActive = true
+        let offset: CGFloat
+        if let adjustable = view as? MarginAdjustable {
+            offset = -adjustable.bounceAnimationOffset
+        } else {
+            offset = 0
+        }
+        keyboardTrackingView.topAnchor.constraint(
+            greaterThanOrEqualTo: view.bottomAnchor,
+            constant: offset
+        ).with(priority: UILayoutPriority(250)).isActive = true
     }
 }

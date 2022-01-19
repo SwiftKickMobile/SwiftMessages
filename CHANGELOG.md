@@ -1,6 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.6
+
+### Features
+
+* Add `UIView` associated type to `Event`, e.g. `willShow(UIView)` so that event listeners can inspect the view.
+* Add `Event.id: String?` property so that event listeners can reason about the view's ID.
+
+## 9.0.5
+
+### Fixes
+
+* #482 Fix timing of `KeyboardTrackingView` callbacks.
+* #483 KeyboardTrackingView causes a small space under bottom-style view
+
 ## 9.0.4
 
 * #471 Xcode 13 issue - Enum cases with associated values cannot be marked potentially unavailable with '@available'

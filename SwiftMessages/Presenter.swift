@@ -119,7 +119,7 @@ class Presenter: NSObject {
     func show(completion: @escaping AnimationCompletion) throws {
         try presentationContext = getPresentationContext()
         install()
-        self.config.eventListeners.forEach { $0(.willShow) }
+        self.config.eventListeners.forEach { $0(.willShow(self.view)) }
         if #available(iOS 10, *) {
             self.config.notificationFeedback?.trigger()
         }
@@ -131,7 +131,7 @@ class Presenter: NSObject {
                 } else {
                     self.showAccessibilityAnnouncement()
                 }
-                self.config.eventListeners.forEach { $0(.didShow) }
+                self.config.eventListeners.forEach { $0(.didShow(self.view)) }
             }
         }
     }
@@ -184,7 +184,7 @@ class Presenter: NSObject {
 
     func hide(animated: Bool, completion: @escaping AnimationCompletion) {
         isHiding = true
-        self.config.eventListeners.forEach { $0(.willHide) }
+        self.config.eventListeners.forEach { $0(.willHide(self.view)) }
         let context = animationContext()
         let action = {
             if let viewController = self.presentationContext.viewControllerValue() as? WindowViewController {
@@ -192,7 +192,7 @@ class Presenter: NSObject {
             }
             self.maskingView.removeFromSuperview()
             completion(true)
-            self.config.eventListeners.forEach { $0(.didHide) }
+            self.config.eventListeners.forEach { $0(.didHide(self.view)) }
         }
         guard animated else {
             action()
