@@ -127,7 +127,8 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         }
 
         config.shouldAutorotate = self.autoRotate.isOn
-        
+        config.supportedInterfaceOrientations = self.portraitOrientationOnly.isOn ? .portrait : nil
+
         config.interactiveHide = interactiveHide.isOn
         
         // Set status bar style unless using card view (since it doesn't
@@ -158,6 +159,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var theme: UISegmentedControl!
     @IBOutlet weak var iconStyle: UISegmentedControl!
     @IBOutlet weak var autoRotate: UISwitch!
+    @IBOutlet weak var portraitOrientationOnly: UISwitch!
     @IBOutlet weak var dropShadow: UISwitch!
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var bodyText: UITextField!
