@@ -319,6 +319,13 @@ open class SwiftMessages {
         public var shouldAutorotate = true
 
         /**
+         If a view controller is created to host the message view, which interface
+         orientation should it support? The default is 'nil', meaning it will use the
+         default value for UIViewController in the current environment.
+         */
+        public var supportedInterfaceOrientations: UIInterfaceOrientationMask?
+
+        /**
          Specified whether or not duplicate `Identifiable` messages are ignored.
          The default is `true`.
         */
