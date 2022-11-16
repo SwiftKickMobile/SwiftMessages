@@ -363,7 +363,13 @@ class Presenter: NSObject {
         }
 
         func installInteractive() {
-            guard config.dimMode.modal else { return }
+            guard config.dimMode.modal
+            else {
+                maskingView.backgroundView?.isUserInteractionEnabled = false
+                return
+            }
+            
+            maskingView.backgroundView?.isUserInteractionEnabled = true
             if config.dimMode.interactive {
                 maskingView.tappedHander = { [weak self] in
                     guard let strongSelf = self else { return }
