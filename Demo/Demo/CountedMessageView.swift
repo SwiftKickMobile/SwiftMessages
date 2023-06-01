@@ -14,6 +14,6 @@ class CountedMessageView: UIView, Identifiable {
     @IBOutlet weak var countLabel: UILabel!
 
     var id: String {
-        return "counted"
+        return "Counted"
     }
 }
