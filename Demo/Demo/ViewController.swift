@@ -16,7 +16,7 @@ class ViewController: UITableViewController {
         .titleBody(title: "ANY VIEW", body: "Any view, no matter how cute, can be displayed as a message.", function: ViewController.demoAnyView),
         .titleBody(title: "CUSTOMIZE", body: "Easily customize by copying one of the SwiftMessages nib files into your project as a starting point. Then order some tacos.", function: ViewController.demoCustomNib),
         .explore,
-        .titleBody(title: "CENTERED", body: "Show cenetered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
+        .titleBody(title: "CENTERED", body: "Show centered messages with a fun, physics-based dismissal gesture.", function: ViewController.demoCentered),
         .viewController,
         //.counted,
     ]
