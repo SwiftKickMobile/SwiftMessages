@@ -293,7 +293,7 @@ extension BaseView {
     /// because the background view may be masked. So, when modifying the drop shadow,
     /// be sure to set the shadow properties of this view's layer. The shadow path is
     /// updated for you automatically.
-    open func configureDropShadow() {
+    public func configureDropShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowRadius = 6.0
@@ -303,7 +303,7 @@ extension BaseView {
     }
 
     /// A convenience function to turn off drop shadow
-    open func configureNoDropShadow() {
+    public func configureNoDropShadow() {
         layer.shadowOpacity = 0
     }
 
