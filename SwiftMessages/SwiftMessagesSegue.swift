@@ -359,12 +359,13 @@ extension SwiftMessagesSegue {
 extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let shower = TransitioningPresenter(segue: self)
-        messenger.defaultConfig.eventListeners.append { [unowned self] in
+        let hider = self.hider
+        messenger.defaultConfig.eventListeners.append { [weak self] in
             switch $0 {
             case .didShow:
                 shower.completeTransition?(true)
             case .didHide:
-                if let completeTransition = self.hider.completeTransition {
+                if let completeTransition = hider.completeTransition {
                     completeTransition(true)
                 } else {
                     // Case where message is internally hidden by SwiftMessages, such as with a
@@ -372,7 +373,7 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                     source.dismiss(animated: false, completion: nil)
                 }
                 (source as? WindowViewController)?.uninstall()
-                self.selfRetainer = nil
+                self?.selfRetainer = nil
             default: break
             }
         }
