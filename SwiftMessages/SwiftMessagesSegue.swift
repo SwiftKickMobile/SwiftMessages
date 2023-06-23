@@ -192,6 +192,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     override open func perform() {
         (source as? WindowViewController)?.install()
         selfRetainer = self
+        startReleaseMonitor()
         if overrideModalPresentationStyle {
             destination.modalPresentationStyle = .custom
         }
@@ -206,6 +207,19 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     fileprivate let safeAreaWorkaroundViewController = UIViewController()
+
+    /// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
+    /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
+    /// the presenting view controller is no longer in the heirarchy.
+    private func startReleaseMonitor() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self = self else { return }
+            switch self.source.parent {
+            case .none: self.selfRetainer = nil
+            case .some: self.startReleaseMonitor()
+            }
+        }
+    }
 }
 
 extension SwiftMessagesSegue {
