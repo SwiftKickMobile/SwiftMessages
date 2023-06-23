@@ -214,7 +214,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     private func startReleaseMonitor() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self = self else { return }
-            switch self.source.parent {
+            switch self.source.view.window {
             case .none: self.selfRetainer = nil
             case .some: self.startReleaseMonitor()
             }
