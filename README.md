@@ -120,8 +120,8 @@ config.presentationStyle = .bottom
 // Display in a window at the specified window level.
 config.presentationContext = .window(windowLevel: .statusBar)
 
-Note that, as of iOS 13, it is no longer possible to cover the status bar
-regardless of the window level. A workaround is to hide the status bar instead.
+// Note that, as of iOS 13, it is no longer possible to cover the status bar
+// regardless of the window level. A workaround is to hide the status bar instead.
 config.prefersStatusBarHidden = true
 
 // Disable the default auto-hiding behavior.
