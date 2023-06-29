@@ -139,7 +139,7 @@ config.preferredStatusBarStyle = .lightContent
 // Specify one or more event listeners to respond to show and hide events.
 config.eventListeners.append() { event in
     if case .didHide = event {
-        print("yep id=\(String(describing: event.id)")
+        print("yep id=\(String(describing: event.id))")
     }
 }
 
