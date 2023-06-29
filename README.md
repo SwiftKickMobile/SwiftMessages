@@ -309,7 +309,7 @@ You can call `SwiftMessages.show()` as many times as you like. SwiftMessages mai
 SwiftMessages.pauseBetweenMessages = 1.0
 ````
 
-There are a few ways to hide messages programatically:
+There are a few ways to hide messages programmatically:
 
 ````swift
 // Hide the current message.
