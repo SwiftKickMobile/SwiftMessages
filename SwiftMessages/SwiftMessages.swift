@@ -222,14 +222,14 @@ open class SwiftMessages {
         case willShow(UIView)
         case didShow(UIView)
         case willHide(UIView)
-        case didHide(UIView)
+        case didHide(UIView, isIneractiveGesture: Bool)
 
         public var view: UIView {
             switch self {
             case .willShow(let view): return view
             case .didShow(let view): return view
             case .willHide(let view): return view
-            case .didHide(let view): return view
+            case .didHide(let view, _): return view
             }
         }
 
@@ -452,7 +452,7 @@ open class SwiftMessages {
      */
     open func hide(animated: Bool = true) {
         messageQueue.sync {
-            hideCurrent(animated: animated)
+            hideCurrent(animated: animated, isPanGest: false)
         }
     }
 
@@ -465,7 +465,7 @@ open class SwiftMessages {
             queue.removeAll()
             delays.removeAll()
             counts.removeAll()
-            hideCurrent()
+            hideCurrent(isPanGest: false)
         }
     }
 
@@ -478,7 +478,7 @@ open class SwiftMessages {
     open func hide(id: String) {
         messageQueue.sync {
             if id == _current?.id {
-                hideCurrent()
+                hideCurrent(isPanGest: false)
             }
             queue = queue.filter { $0.id != id }
             delays.remove(id: id)
@@ -502,7 +502,7 @@ open class SwiftMessages {
                 }
             }
             if id == _current?.id {
-                hideCurrent()
+                hideCurrent(isPanGest: false)
             }
             queue = queue.filter { $0.id != id }
             delays.remove(id: id)
@@ -621,7 +621,7 @@ open class SwiftMessages {
                     guard let strongSelf = self else { return }
                     guard completed else {
                         strongSelf.messageQueue.sync {
-                            strongSelf.internalHide(presenter: current)
+                            strongSelf.internalHide(presenter: current, isPanGest: false)
                         }
                         return
                     }
@@ -637,19 +637,19 @@ open class SwiftMessages {
         }
     }
 
-    fileprivate func internalHide(presenter: Presenter) {
+    fileprivate func internalHide(presenter: Presenter, isPanGest: Bool) {
         if presenter == _current {
-            hideCurrent()
+            hideCurrent(isPanGest: isPanGest)
         } else {
             queue = queue.filter { $0 != presenter }
             delays.remove(presenter: presenter)
         }
     }
  
-    fileprivate func hideCurrent(animated: Bool = true) {
+    fileprivate func hideCurrent(animated: Bool = true, isPanGest: Bool) {
         guard let current = _current, !current.isHiding else { return }
         let action = { [weak self] in
-            current.hide(animated: animated) { (completed) in
+            current.hide(animated: animated, isPanGest: isPanGest) { (completed) in
                 guard completed, let strongSelf = self else { return }
                 strongSelf.messageQueue.sync {
                     guard strongSelf._current === current else { return }
@@ -674,14 +674,14 @@ open class SwiftMessages {
             messageQueue.asyncAfter(deadline: delayTime, execute: {
                 // Make sure we've still got a green light to auto-hide.
                 if self.autohideToken !== current { return }
-                self.internalHide(presenter: current)
+                self.internalHide(presenter: current, isPanGest: false)
             })
         }
     }
 
     deinit {
         // Prevent orphaned messages
-        hideCurrent()
+        hideCurrent(isPanGest: false)
     }
 }
 
@@ -756,14 +756,14 @@ extension SwiftMessages: PresenterDelegate {
 
     func hide(presenter: Presenter) {
         messageQueue.sync {
-            self.internalHide(presenter: presenter)
+            self.internalHide(presenter: presenter, isPanGest: false)
         }
     }
 
     public func hide(animator: Animator) {
         messageQueue.sync {
             guard let presenter = self.presenter(forAnimator: animator) else { return }
-            self.internalHide(presenter: presenter)
+            self.internalHide(presenter: presenter, isPanGest: true)
         }
     }
 

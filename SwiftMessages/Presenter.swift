@@ -179,7 +179,7 @@ class Presenter: NSObject {
         UIAccessibility.post(notification: UIAccessibility.Notification.layoutChanged, argument: focus)
     }
 
-    func hide(animated: Bool, completion: @escaping AnimationCompletion) {
+    func hide(animated: Bool, isPanGest: Bool, completion: @escaping AnimationCompletion) {
         isHiding = true
         self.config.eventListeners.forEach { $0(.willHide(self.view)) }
         let context = animationContext()
@@ -189,7 +189,7 @@ class Presenter: NSObject {
             }
             self.maskingView.removeFromSuperview()
             completion(true)
-            self.config.eventListeners.forEach { $0(.didHide(self.view)) }
+            self.config.eventListeners.forEach { $0(.didHide(self.view, isIneractiveGesture: isPanGest)) }
         }
         guard animated else {
             action()
