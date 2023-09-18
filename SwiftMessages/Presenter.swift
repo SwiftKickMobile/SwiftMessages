@@ -68,6 +68,13 @@ class Presenter: NSObject {
         return duration
     }
 
+    /// Detects the scenario where the view was shown, but the containing view heirarchy was removed before the view
+    /// was hidden. This unusual scenario could result in the message queue being blocked because the presented
+    /// view was not properly hidden by SwiftMessages. `isOrphaned` allows the queuing logic to unblock the queue.
+    var isOrphaned: Bool {
+        return installed && view.window == nil
+    }
+
     // MARK: - Constants
 
     enum PresentationContext {
@@ -97,7 +104,7 @@ class Presenter: NSObject {
 
     private weak var delegate: PresenterDelegate?
     private var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
-
+    private var installed = false
     private var interactivelyHidden = false;
 
     // MARK: - Showing and hiding
@@ -412,6 +419,7 @@ class Presenter: NSObject {
             maskingView.accessibleElements = elements
         }
 
+        installed = true
         guard let containerView = presentationContext.viewValue() else { return }
         (presentationContext.viewControllerValue() as? WindowViewController)?.install()
         installMaskingView(containerView: containerView)

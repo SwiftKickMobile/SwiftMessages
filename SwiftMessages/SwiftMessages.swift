@@ -586,7 +586,10 @@ open class SwiftMessages {
     fileprivate func enqueue(presenter: Presenter) {
         if presenter.config.ignoreDuplicates {
             counts[presenter.id] = (counts[presenter.id] ?? 0) + 1
-            if _current?.id == presenter.id && _current?.isHiding == false { return }
+            if let _current,
+                _current.id == presenter.id,
+               !_current.isHiding,
+               !_current.isOrphaned { return }
             if queue.filter({ $0.id == presenter.id }).count > 0 { return }
         }
         func doEnqueue() {
@@ -606,7 +609,8 @@ open class SwiftMessages {
     }
     
     fileprivate func dequeueNext() {
-        guard self._current == nil, queue.count > 0 else { return }
+        guard queue.count > 0 else { return }
+        if let _current, !_current.isOrphaned { return }
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
