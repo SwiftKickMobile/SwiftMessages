@@ -208,6 +208,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     override open func perform() {
         (source as? WindowViewController)?.install()
         selfRetainer = self
+        startReleaseMonitor()
         if overrideModalPresentationStyle {
             destination.modalPresentationStyle = .custom
         }
@@ -222,6 +223,19 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     fileprivate let safeAreaWorkaroundViewController = UIViewController()
+
+    /// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
+    /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
+    /// the presenting view controller is no longer in the heirarchy.
+    private func startReleaseMonitor() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self = self else { return }
+            switch self.source.view.window {
+            case .none: self.selfRetainer = nil
+            case .some: self.startReleaseMonitor()
+            }
+        }
+    }
 }
 
 extension SwiftMessagesSegue {
@@ -288,12 +302,13 @@ extension SwiftMessagesSegue {
 extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let shower = TransitioningPresenter(segue: self)
-        messenger.defaultConfig.eventListeners.append { [unowned self] in
+        let hider = self.hider
+        messenger.defaultConfig.eventListeners.append { [weak self] in
             switch $0 {
             case .didShow:
                 shower.completeTransition?(true)
             case .didHide:
-                if let completeTransition = self.hider.completeTransition {
+                if let completeTransition = hider.completeTransition {
                     completeTransition(true)
                 } else {
                     // Case where message is internally hidden by SwiftMessages, such as with a
@@ -301,7 +316,7 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                     source.dismiss(animated: false, completion: nil)
                 }
                 (source as? WindowViewController)?.uninstall()
-                self.selfRetainer = nil
+                self?.selfRetainer = nil
             default: break
             }
         }
