@@ -16,6 +16,8 @@ SwiftMessages is a very flexible view and view controller presentation library f
 
 Message views and view controllers can be displayed at the top, bottom, or center of the screen, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
 
+🔥 Now supports displaying SwiftUI message views 🔥
+
 In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
 * Copy one of the included nib files into your project and change it.
@@ -32,19 +34,6 @@ Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel
 	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
 </p>
 
-## View Controllers
-
-SwiftMessages can present view controllers using the `SwiftMessagesSegue` custom modal segue!
-
-<p align="center">
-  <img src="./Design/SwiftMessagesSegue.gif" />
-</p>
-
-[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
-
-#### [View Controllers Readme](./ViewControllers.md)
-
-And check out our blog post [Elegant Custom UIViewController Transitioning](http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/) to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
 
 ## Installation
 
@@ -177,6 +166,92 @@ var config = SwiftMessages.defaultConfig
 config.duration = .forever
 SwiftMessages.show(config: config, view: view)
 ````
+
+### View Controllers
+
+SwiftMessages can present view controllers using the `SwiftMessagesSegue` custom modal segue!
+
+<p align="center">
+  <img src="./Design/SwiftMessagesSegue.gif" />
+</p>
+
+[`SwiftMessagesSegue`](./SwiftMessages/SwiftMessagesSegue.swift) is a subclass of `UIStoryboardSegue` that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. `SwiftMessagesSegue` works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.
+
+#### [View Controllers Readme](./ViewControllers.md)
+
+And check out our blog post [Elegant Custom UIViewController Transitioning](http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/) to learn a great technique you can use to build your own custom segues that utilize `UIViewControllerTransitioningDelegate` and `UIViewControllerAnimatedTransitioning`.
+
+### SwiftUI
+
+Any of the built-in SwiftMessages views can be displayed by calling the SwiftMessages APIs from within observable object, a button action closure, etc. However, SwiftMessages can also display your custom SwiftUI views.
+
+First, define a type that conforms to `MessageViewConvertible`. This will typically be a struct containing the message data:
+
+
+````swift
+struct DemoMessage: Identifiable {
+    let title: String
+    let body: String
+
+    var id: String { title + body }
+}
+
+extension DemoMessage: MessageViewConvertible {
+    func asMessageView() -> DemoMessageView {
+        DemoMessageView(message: self)
+    }
+}
+
+struct DemoMessageView: View {
+
+    let message: DemoMessage
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(message.title).font(.system(size: 20, weight: .bold))
+            Text(message.body)
+        }
+        .multilineTextAlignment(.leading)
+        .padding(30)
+        .frame(maxWidth: .infinity)
+        .background(.gray)
+        .cornerRadius(15)
+        .padding(15)
+    }
+}
+````
+
+The SwiftUI message view can be displayed just like any other UIKit message by using `MessageHostingView`:
+
+````swift
+struct DemoView: View {
+    var body: some View {
+        Button("Show message") {
+            let message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
+            let messageView = MessageHostingView(message: message)
+            SwiftMessages.show(view: messageView)
+        }
+    }
+}
+````
+
+But you may also use a state-based approach using the `swiftMessage()` view modifier:
+
+````swift
+struct DemoView: View {
+
+    @State var message: DemoMessage?
+
+    var body: some View {
+        Button("Show message") {
+            message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
+        }
+        .swiftMessage(message: $message)
+    }
+}
+````
+
+This technique may be more SwiftUI-like, but it doesn't offer the full capability of SwiftMessages, such as explicitly hiding messages by their ID. It is totally reasonable to use a combination of both approaches.
 
 ### Accessibility
 

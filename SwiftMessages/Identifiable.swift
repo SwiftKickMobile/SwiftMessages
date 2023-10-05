@@ -17,6 +17,7 @@ import Foundation
  This protocol is optional. Message views that don't adopt `Identifiable` will not
  have duplicates removed.
  */
+
 public protocol Identifiable {
     var id: String { get }
 }
