@@ -253,6 +253,8 @@ struct DemoView: View {
 
 This technique may be more SwiftUI-like, but it doesn't offer the full capability of SwiftMessages, such as explicitly hiding messages by their ID. It is totally reasonable to use a combination of both approaches.
 
+Try it out in the SwiftUI demo app!
+
 ### Accessibility
 
 SwiftMessages provides excellent VoiceOver support out-of-the-box.
