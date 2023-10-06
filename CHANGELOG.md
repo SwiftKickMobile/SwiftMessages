@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## 9.0.7
 
+### Features
+
+* Added support for SwiftUI
+
 ### Fixes
 
 * #527 Crash while clicking two times to hide the presenting controller
