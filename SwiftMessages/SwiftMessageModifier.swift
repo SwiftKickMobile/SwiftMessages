@@ -15,7 +15,7 @@ public extension View {
         config: SwiftMessages.Config? = nil,
         swiftMessages: SwiftMessages? = nil
     ) -> some View where Message: MessageViewConvertible {
-        modifier(SwiftMessageModifier(message: message))
+        modifier(SwiftMessageModifier(message: message, config: config, swiftMessages: swiftMessages))
     }
 }
 
