@@ -12,28 +12,21 @@
 
 ## Overview
 
-SwiftMessages is a very flexible view and view controller presentation library for iOS.
+🔥🔥🔥 **NEW** SwiftUI support added!
+
+SwiftMessages is a very flexible view and view controller presentation library for UIKit and SwiftUI.
 
 Message views and view controllers can be displayed at the top, bottom, or center of the screen, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!
-
-🔥 Now supports displaying SwiftUI message views 🔥
 
 In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:
 
 * Copy one of the included nib files into your project and change it.
 * Subclass `MessageView` and add elements, etc.
-* Or just supply an arbitrary instance of `UIView`.
-
-Try exploring [the demo app via appetize.io](http://goo.gl/KXw4nD) to get a feel for the extensive configurability of SwiftMessages.
+* Or just supply an arbitrary instance of `View` or `UIView`.
 
 <p align="center">
   <img src="./Demo/demo.png" />
 </p>
-
-<p align="center">
-	<a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
-</p>
-
 
 ## Installation
 
@@ -185,7 +178,7 @@ And check out our blog post [Elegant Custom UIViewController Transitioning](http
 
 Any of the built-in SwiftMessages views can be displayed by calling the SwiftMessages APIs from within observable object, a button action closure, etc. However, SwiftMessages can also display your custom SwiftUI views.
 
-First, define a type that conforms to `MessageViewConvertible`. This will typically be a struct containing the message data:
+The first step is to define a type that conforms to `MessageViewConvertible`. This would typically be a struct containing the message data to display:
 
 
 ````swift
