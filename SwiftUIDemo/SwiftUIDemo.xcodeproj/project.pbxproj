@@ -58,6 +58,8 @@
 		228F7DBD2ACF1E1E006C9644 /* SwiftMessages.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMessages.xcodeproj; path = ../SwiftMessages.xcodeproj; sourceTree = "<group>"; };
 		228F7DD42ACF59E4006C9644 /* DemoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMessage.swift; sourceTree = "<group>"; };
 		228F7DD62ACF5C2E006C9644 /* DemoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMessageView.swift; sourceTree = "<group>"; };
+		2291AA492AD1E3EC0084868E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2291AA4C2AD1E4520084868E /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,8 @@
 		228F7DA02ACF17E8006C9644 = {
 			isa = PBXGroup;
 			children = (
+				2291AA4C2AD1E4520084868E /* CHANGELOG.md */,
+				2291AA492AD1E3EC0084868E /* README.md */,
 				228F7DAB2ACF17E8006C9644 /* SwiftUIDemo */,
 				228F7DAA2ACF17E8006C9644 /* Products */,
 				228F7DC72ACF1E63006C9644 /* Frameworks */,

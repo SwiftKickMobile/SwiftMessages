@@ -24,25 +24,3 @@ struct DemoView: View {
 #Preview {
     DemoView()
 }
-
-struct DemoViewx: View {
-    var body: some View {
-        Button("Show message") {
-            let message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
-            let messageView = MessageHostingView(message: message)
-            SwiftMessages.show(view: messageView)
-        }
-    }
-}
-
-struct DemoViewy: View {
-
-    @State var message: DemoMessage?
-
-    var body: some View {
-        Button("Show message") {
-            message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
-        }
-        .swiftMessage(message: $message)
-    }
-}

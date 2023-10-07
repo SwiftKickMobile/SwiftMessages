@@ -208,8 +208,14 @@ struct DemoMessageView: View {
         .padding(30)
         .frame(maxWidth: .infinity)
         .background(.gray)
-        .cornerRadius(15)
-        .padding(15)
+        // This makes a tab-style view where the bottom corners are rounded and the view's background
+        // extends to the top edge.
+        .mask(
+            UnevenRoundedRectangle(
+                cornerRadii: .init(bottomLeading: 15, bottomTrailing: 15)
+            )
+            .edgesIgnoringSafeArea(.top)
+        )
     }
 }
 ````

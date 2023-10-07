@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.8
+
+### Changes
+
+* #529 Update readme and SwiftUI demo to demostrate how to mask edges.
+
 ## 9.0.7
 
 ### Features
