@@ -39,4 +39,12 @@ public class MessageHostingView<Content>: BaseView, Identifiable where Content: 
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, with: event)
+        // The rendered SwiftUI view isn't a direct child of this hosting view. SwiftUI
+        // inserts another intermediate view that should also ignore touches.
+        if view == self || view?.superview == self { return nil }
+        return view
+    }
 }

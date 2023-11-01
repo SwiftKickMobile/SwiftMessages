@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.9
+
+### Fixes
+
+* Fix hit testing on SwiftUI views to allow touches around the view's margins to pass through to the underlying view.
+* Update `KeyboardTrackingView` to continue tracking the keyboard even when not installed in the view hierarchy.
+
 ## 9.0.8
 
 ### Changes

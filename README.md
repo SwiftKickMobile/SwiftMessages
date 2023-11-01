@@ -206,14 +206,14 @@ struct DemoMessageView: View {
         }
         .multilineTextAlignment(.leading)
         .padding(30)
+        // This makes the message width greedy
         .frame(maxWidth: .infinity)
         .background(.gray)
-        // This makes a tab-style view where the bottom corners are rounded and the view's background
-        // extends to the top edge.
+        // This makes a tab-style view where the bottom corners are rounded and
+        // the view's background extends to the top edge.
         .mask(
-            UnevenRoundedRectangle(
-                cornerRadii: .init(bottomLeading: 15, bottomTrailing: 15)
-            )
+	        UnevenRoundedRectangle(bottomLeadingRadius: 15, bottomTrailingRadius: 15)
+            // This causes the background to extend into the safe area to the screen edge.
             .edgesIgnoringSafeArea(.top)
         )
     }

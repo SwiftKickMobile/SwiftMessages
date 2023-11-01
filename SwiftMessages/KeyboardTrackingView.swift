@@ -72,6 +72,7 @@ open class KeyboardTrackingView: UIView {
 
     private var isAutomaticallyPaused = false
     private var heightConstraint: NSLayoutConstraint!
+    private var lastObservedKeyboardRect: CGRect?
 
     private func postInit() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -109,15 +110,19 @@ open class KeyboardTrackingView: UIView {
         isAutomaticallyPaused = false
     }
 
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        heightConstraint.constant = calculateHeightConstant()
+    }
+
     private func show(change: Change, _ notification: Notification) {
         guard !(isPaused || isAutomaticallyPaused),
             let userInfo = (notification as NSNotification).userInfo,
             let value = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         willChange(change: change, userInfo: userInfo)
         delegate?.keyboardTrackingViewWillChange(change: change, userInfo: userInfo)
-        let keyboardRect = value.cgRectValue
-        let thisRect = convert(bounds, to: nil)
-        let newHeight = max(0, thisRect.maxY - keyboardRect.minY) + topMargin
+        lastObservedKeyboardRect = value.cgRectValue
+        let newHeight = calculateHeightConstant()
         guard heightConstraint.constant != newHeight else { return }
         animateKeyboardChange(change: change, height: newHeight, userInfo: userInfo)
     }
@@ -139,5 +144,11 @@ open class KeyboardTrackingView: UIView {
             UIView.commitAnimations()
             CATransaction.commit()
         }
+    }
+
+    private func calculateHeightConstant() -> CGFloat {
+        guard let keyboardRect = lastObservedKeyboardRect else { return 0 }
+        let thisRect = convert(bounds, to: nil)
+        return max(0, thisRect.maxY - keyboardRect.minY) + topMargin
     }
 }
