@@ -154,8 +154,8 @@ should specify the window level in the `presentationContext` property.
 
 * Add `SwiftMessages.PresentationContext.windowScene` option for targeting a specific window scene.
 * Changed the behavior of the default `presentationContext`, `.automatic`. Previously, if the root view controller was presenting, the message would only be displayed over the presented view controller if the `modalPresentationStyle` was `fullScreen` or `overFullScreen`. Now, messages are always displayed over presented view controllers.
-* Made `showDuraton` and `hideDuration` on `Animator` non-optional.
-* Made `showDuraton` and `hideDuration` writable options on `TopBottomAnimation` and `PhysicsAnimation`.
+* Made `showDuration` and `hideDuration` on `Animator` non-optional.
+* Made `showDuration` and `hideDuration` writable options on `TopBottomAnimation` and `PhysicsAnimation`.
 
 ### Fixes
 
