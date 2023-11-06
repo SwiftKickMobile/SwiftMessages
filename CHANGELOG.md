@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
 
 * #527 Crash while clicking two times to hide the presenting controller
 * #517 Prevent orphaned views from blocking the queue
-* Prevent orphaned `SwiftMessagesSeque`s from retaining the presenting view controller
+* Prevent orphaned `SwiftMessagesSegue`s from retaining the presenting view controller
 
 ## 9.0.6
 
