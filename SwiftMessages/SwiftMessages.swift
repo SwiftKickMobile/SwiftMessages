@@ -651,7 +651,7 @@ open class SwiftMessages {
         }
     }
 
-    fileprivate weak var autohideToken: AnyObject?
+    fileprivate weak var autohideToken: Presenter?
 
     fileprivate func queueAutoHide() {
         guard let current = _current else { return }
@@ -660,7 +660,7 @@ open class SwiftMessages {
             Task { [weak self] in
                 try? await Task.sleep(seconds: pauseDuration)
                 // Make sure we've still got a green light to auto-hide.
-                guard let self, self.autohideToken !== current else { return }
+                guard let self, self.autohideToken == current else { return }
                 self.internalHide(presenter: current)
             }
         }
