@@ -47,7 +47,7 @@ private struct SwiftMessageModifier<Message>: ViewModifier where Message: Messag
         content
             .onChange(of: message) { _ in
                 if let message {
-                    let show: (SwiftMessages.Config, UIView) -> Void = swiftMessages?.show(config:view:) ?? SwiftMessages.show(config:view:)
+                    let show: @MainActor (SwiftMessages.Config, UIView) -> Void = swiftMessages?.show(config:view:) ?? SwiftMessages.show(config:view:)
                     let view = MessageHostingView(message: message)
                     var config = config ?? swiftMessages?.defaultConfig ?? SwiftMessages.defaultConfig
                     config.eventListeners.append { event in

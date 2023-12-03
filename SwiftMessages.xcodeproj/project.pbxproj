@@ -59,6 +59,7 @@
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
 		229F778125FAB1E9008C2ACB /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */; };
+		22D3B4562B1CEF76002D8665 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B4552B1CEF76002D8665 /* Task+Extensions.swift */; };
 		22DFC9161EFF30F6001B1CA1 /* CenteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */; };
 		22DFC9181F00674E001B1CA1 /* PhysicsPanHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */; };
 		22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E01F631E74EC8B00ACE19A /* MaskingView.swift */; };
@@ -151,6 +152,7 @@
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
 		229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		22A2EA6E24EC6CFA00BB2540 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		22D3B4552B1CEF76002D8665 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		22DFC9151EFF30F6001B1CA1 /* CenteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CenteredView.xib; path = Resources/CenteredView.xib; sourceTree = "<group>"; };
 		22DFC9171F00674E001B1CA1 /* PhysicsPanHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsPanHandler.swift; sourceTree = "<group>"; };
 		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */,
 				22774B9F20B5EF2A00813732 /* UIEdgeInsets+Extensions.swift */,
 				229F778025FAB1E9008C2ACB /* UIWindow+Extensions.swift */,
+				22D3B4552B1CEF76002D8665 /* Task+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -453,7 +456,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "SwiftKick Mobile";
 				TargetAttributes = {
 					86B48AEB1D5A41C900063E2B = {
@@ -556,6 +559,7 @@
 				22F27951210CE25900273E7F /* CornerRoundingView.swift in Sources */,
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
+				22D3B4562B1CEF76002D8665 /* Task+Extensions.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Extensions.swift in Sources */,
 				228F7DDF2ACF703A006C9644 /* SwiftMessageModifier.swift in Sources */,
 				224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */,
@@ -609,6 +613,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -655,7 +660,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -668,6 +673,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -708,7 +714,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -732,7 +738,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -767,7 +773,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = SwiftMessages/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

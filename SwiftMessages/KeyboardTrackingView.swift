@@ -136,13 +136,12 @@ open class KeyboardTrackingView: UIView {
                 self.didChange(change: change, userInfo: userInfo)
                 self.delegate?.keyboardTrackingViewDidChange(change: change, userInfo: userInfo)
             }
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(durationNumber.doubleValue)
-            UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: curveNumber.intValue)!)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            self.superview?.layoutIfNeeded()
-            UIView.commitAnimations()
-            CATransaction.commit()
+            let curve = UIView.AnimationCurve(rawValue: curveNumber.intValue) ?? .easeInOut
+            let animation = UIViewPropertyAnimator(duration: durationNumber.doubleValue, curve: curve) {
+                self.updateConstraintsIfNeeded()
+                self.superview?.layoutIfNeeded()
+            }
+            animation.startAnimation()
         }
     }
 

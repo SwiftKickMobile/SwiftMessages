@@ -12,6 +12,7 @@ protocol PresenterDelegate: AnimationDelegate {
     func hide(presenter: Presenter)
 }
 
+@MainActor
 class Presenter: NSObject {
 
     // MARK: - API
@@ -77,6 +78,7 @@ class Presenter: NSObject {
 
     // MARK: - Constants
 
+    @MainActor
     enum PresentationContext {
         case viewController(_: Weak<UIViewController>)
         case view(_: Weak<UIView>)
