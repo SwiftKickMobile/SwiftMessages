@@ -280,6 +280,11 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable {
 
     private var layoutConstraints: [NSLayoutConstraint] = []
     private var regularWidthLayoutConstraints: [NSLayoutConstraint] = []
+
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        updateShadowPath()
+    }
 }
 
 /*
@@ -333,11 +338,6 @@ extension BaseView {
         } else {
             // Update the layer's `shadowPath` without animation
             layer.shadowPath = shadowPath        }
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        updateShadowPath()
     }
 }
 
