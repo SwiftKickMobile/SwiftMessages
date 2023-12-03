@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public class PhysicsAnimation: NSObject, Animator {
 
     public enum Placement {

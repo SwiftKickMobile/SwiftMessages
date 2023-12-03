@@ -228,7 +228,8 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
     /// the presenting view controller is no longer in the heirarchy.
     private func startReleaseMonitor() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(seconds: 2)
             guard let self = self else { return }
             switch self.source.view.window {
             case .none: self.selfRetainer = nil
