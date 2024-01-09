@@ -9,7 +9,7 @@
 import UIKit
 
 /// The theme enum specifies the built-in theme options
-public enum Theme {
+public enum SMTheme {
     case info
     case success
     case warning
@@ -47,7 +47,7 @@ public enum IconStyle {
     case none
     
     /// Returns the image for the given theme
-    public func image(theme: Theme) -> UIImage? {
+    public func image(theme: SMTheme) -> UIImage {
         switch (theme, self) {
         case (.info, .default): return Icon.info.image
         case (.info, .light): return Icon.infoLight.image

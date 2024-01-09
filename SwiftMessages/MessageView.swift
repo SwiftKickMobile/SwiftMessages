@@ -249,7 +249,7 @@ extension MessageView {
      - Parameter theme: The theme type to use.
      - Parameter iconStyle: The icon style to use. Defaults to `.Default`.
      */
-    public func configureTheme(_ theme: Theme, iconStyle: IconStyle = .default) {
+    public func configureTheme(_ theme: SMTheme, iconStyle: IconStyle = .default) {
         let iconImage = iconStyle.image(theme: theme)
         let backgroundColor: UIColor
         let foregroundColor: UIColor
