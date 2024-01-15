@@ -1,14 +1,14 @@
 //
-//  DemoMessageView.swift
+//  DemoMessageWithButtonView.swift
 //  SwiftUIDemo
 //
-//  Created by Timothy Moose on 10/5/23.
+//  Created by Timothy Moose on 1/15/24.
 //
 
 import SwiftUI
 
-// A message view with a title and message.
-struct DemoMessageView: View {
+// A message view with a title, message and button.
+struct DemoMessageWithButtonView<Button>: View where Button: View {
 
     // MARK: - API
 
@@ -18,11 +18,17 @@ struct DemoMessageView: View {
         case tab
     }
 
-    let message: DemoMessage
-    let style: Style
-
+    init(message: DemoMessage, style: Style, @ViewBuilder button: @escaping () -> Button) {
+        self.message = message
+        self.style = style
+        self.button = button
+    }
 
     // MARK: - Variables
+
+    let message: DemoMessage
+    let style: Style
+    @ViewBuilder let button: () -> Button
 
     // MARK: - Constants
 
@@ -56,11 +62,12 @@ struct DemoMessageView: View {
     }
 
     @ViewBuilder private func content() -> some View {
-        VStack(alignment: .leading) {
+        VStack() {
             Text(message.title).font(.system(size: 20, weight: .bold))
             Text(message.body)
+            button()
         }
-        .multilineTextAlignment(.leading)
+        .multilineTextAlignment(.center)
         // Internal padding of the card
         .padding(30)
         // Greedy width

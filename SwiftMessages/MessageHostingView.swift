@@ -16,15 +16,18 @@ public class MessageHostingView<Content>: BaseView, Identifiable where Content: 
 
     public let id: String
 
-    public init<Message>(message: Message) where Message: MessageViewConvertible, Message.Content == Content {
-        let messageView: Content = message.asMessageView()
-        hostVC = UIHostingController(rootView: messageView)
-        id = message.id
+    public init(id: String, content: Content) {
+        hostVC = UIHostingController(rootView: content)
+        self.id = id
         super.init(frame: .zero)
         hostVC.loadViewIfNeeded()
         installContentView(hostVC.view)
         backgroundColor = .clear
         hostVC.view.backgroundColor = .clear
+    }
+
+    convenience public init<Message>(message: Message) where Message: MessageViewConvertible, Message.Content == Content {
+        self.init(id: message.id, content: message.asMessageView() )
     }
 
     // MARK: - Constants

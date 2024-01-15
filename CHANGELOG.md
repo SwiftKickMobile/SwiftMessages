@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 9.0.10
+
+### Features
+
+* Add a `.sheet()` like variation to the `.swiftMessage()` modifier that takes a view builder. This provides more flexibility for constructing message views.
+
+### Fixes
+
+* #535 window being accessed from background thread when dequeueNext is called
+* #534 Xcode warnings in two swift files
+* #533 How do I show a message that appears above the keyboard, when the keyboard is already visible?
+
 ## 9.0.9
 
 ### Fixes

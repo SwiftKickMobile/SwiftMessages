@@ -10,7 +10,11 @@ import SwiftMessages
 
 struct DemoView: View {
 
+    /// Demonstrates purely data-driven message presentation.
     @State var message: DemoMessage?
+
+    /// Demonstrates message presentation with a view builder.
+    @State var messageWithButton: DemoMessage?
 
     var body: some View {
         VStack {
@@ -35,9 +39,24 @@ struct DemoView: View {
                     style: .tab
                 )
             }
+            Button("Show message with button") {
+                messageWithButton = DemoMessage(
+                    title: "Demo",
+                    body: "This message view has a button was constructed with a view builder.",
+                    style: .card
+                )
+            }
         }
         .buttonStyle(.bordered)
         .swiftMessage(message: $message)
+        .swiftMessage(message: $messageWithButton) { message in
+            DemoMessageWithButtonView(message: message, style: .card) {
+                Button("Tap Me") {
+                    print("Tap")
+                }
+                .buttonStyle(.bordered)
+            }
+        }
     }
 }
 

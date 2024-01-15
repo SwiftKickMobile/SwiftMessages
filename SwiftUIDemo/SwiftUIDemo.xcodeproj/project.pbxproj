@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22549DC02B55CFE8005E3E21 /* DemoMessageWithButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22549DBF2B55CFE8005E3E21 /* DemoMessageWithButtonView.swift */; };
 		228F7DAD2ACF17E8006C9644 /* SwiftUIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F7DAC2ACF17E8006C9644 /* SwiftUIDemoApp.swift */; };
 		228F7DAF2ACF17E8006C9644 /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F7DAE2ACF17E8006C9644 /* DemoView.swift */; };
 		228F7DB12ACF17E9006C9644 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228F7DB02ACF17E9006C9644 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22549DBF2B55CFE8005E3E21 /* DemoMessageWithButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMessageWithButtonView.swift; sourceTree = "<group>"; };
 		228F7DA92ACF17E8006C9644 /* SwiftUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228F7DAC2ACF17E8006C9644 /* SwiftUIDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDemoApp.swift; sourceTree = "<group>"; };
 		228F7DAE2ACF17E8006C9644 /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				228F7DAE2ACF17E8006C9644 /* DemoView.swift */,
 				228F7DD42ACF59E4006C9644 /* DemoMessage.swift */,
 				228F7DD62ACF5C2E006C9644 /* DemoMessageView.swift */,
+				22549DBF2B55CFE8005E3E21 /* DemoMessageWithButtonView.swift */,
 				228F7DB02ACF17E9006C9644 /* Assets.xcassets */,
 				228F7DB22ACF17E9006C9644 /* Preview Content */,
 			);
@@ -230,6 +233,7 @@
 				228F7DD72ACF5C2E006C9644 /* DemoMessageView.swift in Sources */,
 				228F7DAF2ACF17E8006C9644 /* DemoView.swift in Sources */,
 				228F7DAD2ACF17E8006C9644 /* SwiftUIDemoApp.swift in Sources */,
+				22549DC02B55CFE8005E3E21 /* DemoMessageWithButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
