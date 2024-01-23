@@ -1,11 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 9.0.10
+## 10.0.0
 
 ### Features
 
-* Add a `.sheet()` like variation to the `.swiftMessage()` modifier that takes a view builder. This provides more flexibility for constructing message views.
+* Add a variation on the `.swiftMessage()` modifier that takes a view builder instead of requiring that the bound value conform to `MessageViewConvertible`. This syntax is more similar to the familiar `sheet()` modifier syntax and provides more flexibility for constructing message views.
+
+### Changes
+
+* Use `@MainActor` to ensure that SwiftMessages is not called from a background queue.
+* Bump minimum deployment target to iOS 13.
 
 ### Fixes
 
