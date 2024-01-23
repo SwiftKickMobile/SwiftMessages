@@ -274,14 +274,12 @@ extension MessageView {
         }
         if includeHaptic {
             switch theme {
-            case .success:
+            case .success, .info:
                 defaultHaptic = SwiftMessages.Haptic.success
             case .warning:
                 defaultHaptic = SwiftMessages.Haptic.warning
             case .error:
                 defaultHaptic = SwiftMessages.Haptic.error
-            default:
-                break
             }
         }
         switch theme {

@@ -161,9 +161,9 @@ open class SwiftMessages {
      Specifies an optional haptic feedback to be used on `MessageView` display
     */
     public enum Haptic {
+        case success
         case warning
         case error
-        case success
     }
     
     
