@@ -41,16 +41,16 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
         
         switch theme.selectedSegmentIndex {
         case 0:
-            view.configureTheme(.info, iconStyle: iconStyle)
+            view.configureTheme(.info, iconStyle: iconStyle, includeHaptic: hapticFeedback.isOn)
             view.accessibilityPrefix = "info"
         case 1:
-            view.configureTheme(.success, iconStyle: iconStyle)
+            view.configureTheme(.success, iconStyle: iconStyle, includeHaptic: hapticFeedback.isOn)
             view.accessibilityPrefix = "success"
         case 2:
-            view.configureTheme(.warning, iconStyle: iconStyle)
+            view.configureTheme(.warning, iconStyle: iconStyle, includeHaptic: hapticFeedback.isOn)
             view.accessibilityPrefix = "warning"
         case 3:
-            view.configureTheme(.error, iconStyle: iconStyle)
+            view.configureTheme(.error, iconStyle: iconStyle, includeHaptic: hapticFeedback.isOn)
             view.accessibilityPrefix = "error"
         default:
             let iconText = ["🐸", "🐷", "🐬", "🐠", "🐍", "🐹", "🐼"].randomElement()
@@ -140,7 +140,11 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
                 break
             }
         }
-        
+
+        if view.defaultHaptic == nil && hapticFeedback.isOn {
+            config.haptic = .success
+        }
+
         // Show
         SwiftMessages.show(config: config, view: view)
     }
@@ -154,6 +158,7 @@ class ExploreViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var duration: UISegmentedControl!
     @IBOutlet weak var dimMode: UISegmentedControl!
     @IBOutlet weak var interactiveHide: UISwitch!
+    @IBOutlet weak var hapticFeedback: UISwitch!
     @IBOutlet weak var layout: UISegmentedControl!
     @IBOutlet weak var theme: UISegmentedControl!
     @IBOutlet weak var iconStyle: UISegmentedControl!
