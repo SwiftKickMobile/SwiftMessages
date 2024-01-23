@@ -75,8 +75,10 @@ private struct SwiftMessageModifier<Message, MessageContent>: ViewModifier where
     func body(content: Content) -> some View {
         content
             .onChange(of: message) { message in
-                if let message {
-                    let show: @MainActor (SwiftMessages.Config, UIView) -> Void = swiftMessages?.show(config:view:) ?? SwiftMessages.show(config:view:)
+                let show: @MainActor (SwiftMessages.Config, UIView) -> Void = swiftMessages?.show(config:view:) ?? SwiftMessages.show(config:view:)
+                let hideAll: @MainActor () -> Void = swiftMessages?.hideAll ?? SwiftMessages.hideAll
+                switch message {
+                case let message?:
                     let view = MessageHostingView(id: message.id, content: messageContent(message))
                     var config = config ?? swiftMessages?.defaultConfig ?? SwiftMessages.defaultConfig
                     config.eventListeners.append { event in
@@ -84,7 +86,10 @@ private struct SwiftMessageModifier<Message, MessageContent>: ViewModifier where
                             self.message = nil
                         }
                     }
+                    hideAll()
                     show(config, view)
+                case .none:
+                    hideAll()
                 }
             }
     }
