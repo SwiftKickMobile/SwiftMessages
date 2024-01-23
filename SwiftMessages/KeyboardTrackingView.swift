@@ -72,6 +72,7 @@ open class KeyboardTrackingView: UIView {
 
     private var isAutomaticallyPaused = false
     private var heightConstraint: NSLayoutConstraint!
+    private var lastObservedKeyboardRect: CGRect?
 
     private func postInit() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -109,35 +110,39 @@ open class KeyboardTrackingView: UIView {
         isAutomaticallyPaused = false
     }
 
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        heightConstraint.constant = calculateHeightConstant()
+    }
+
     private func show(change: Change, _ notification: Notification) {
         guard !(isPaused || isAutomaticallyPaused),
             let userInfo = (notification as NSNotification).userInfo,
             let value = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         willChange(change: change, userInfo: userInfo)
         delegate?.keyboardTrackingViewWillChange(change: change, userInfo: userInfo)
-        let keyboardRect = value.cgRectValue
-        let thisRect = convert(bounds, to: nil)
-        let newHeight = max(0, thisRect.maxY - keyboardRect.minY) + topMargin
+        lastObservedKeyboardRect = value.cgRectValue
+        let newHeight = calculateHeightConstant()
         guard heightConstraint.constant != newHeight else { return }
         animateKeyboardChange(change: change, height: newHeight, userInfo: userInfo)
     }
 
     private func animateKeyboardChange(change: Change, height: CGFloat, userInfo: [AnyHashable: Any]) {
-        self.heightConstraint.constant = height
-        if let durationNumber = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber,
-            let curveNumber = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber {
-            CATransaction.begin()
-            CATransaction.setCompletionBlock {
+        if let durationNumber = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
+            UIView.animate(withDuration: durationNumber.doubleValue, delay: 0, options: .curveEaseInOut, animations: {
+                self.heightConstraint.constant = height
+                self.updateConstraintsIfNeeded()
+                self.superview?.layoutIfNeeded()
+            }) { completed in
                 self.didChange(change: change, userInfo: userInfo)
                 self.delegate?.keyboardTrackingViewDidChange(change: change, userInfo: userInfo)
             }
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration(durationNumber.doubleValue)
-            UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: curveNumber.intValue)!)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            self.superview?.layoutIfNeeded()
-            UIView.commitAnimations()
-            CATransaction.commit()
         }
+    }
+
+    private func calculateHeightConstant() -> CGFloat {
+        guard let keyboardRect = lastObservedKeyboardRect else { return 0 }
+        let thisRect = convert(bounds, to: nil)
+        return max(0, thisRect.maxY - keyboardRect.minY) + topMargin
     }
 }

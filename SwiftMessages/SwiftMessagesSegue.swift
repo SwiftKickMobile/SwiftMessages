@@ -208,6 +208,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     override open func perform() {
         (source as? WindowViewController)?.install()
         selfRetainer = self
+        startReleaseMonitor()
         if overrideModalPresentationStyle {
             destination.modalPresentationStyle = .custom
         }
@@ -222,6 +223,20 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     fileprivate let safeAreaWorkaroundViewController = UIViewController()
+
+    /// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
+    /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
+    /// the presenting view controller is no longer in the heirarchy.
+    private func startReleaseMonitor() {
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(seconds: 2)
+            guard let self = self else { return }
+            switch self.source.view.window {
+            case .none: self.selfRetainer = nil
+            case .some: self.startReleaseMonitor()
+            }
+        }
+    }
 }
 
 extension SwiftMessagesSegue {
@@ -288,12 +303,13 @@ extension SwiftMessagesSegue {
 extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let shower = TransitioningPresenter(segue: self)
-        messenger.defaultConfig.eventListeners.append { [unowned self] in
+        let hider = self.hider
+        messenger.defaultConfig.eventListeners.append { [weak self] in
             switch $0 {
             case .didShow:
                 shower.completeTransition?(true)
             case .didHide:
-                if let completeTransition = self.hider.completeTransition {
+                if let completeTransition = hider.completeTransition {
                     completeTransition(true)
                 } else {
                     // Case where message is internally hidden by SwiftMessages, such as with a
@@ -301,7 +317,7 @@ extension SwiftMessagesSegue: UIViewControllerTransitioningDelegate {
                     source.dismiss(animated: false, completion: nil)
                 }
                 (source as? WindowViewController)?.uninstall()
-                self.selfRetainer = nil
+                self?.selfRetainer = nil
             default: break
             }
         }
@@ -332,14 +348,6 @@ extension SwiftMessagesSegue {
                 let toView = transitionContext.view(forKey: .to) else {
                 transitionContext.completeTransition(false)
                 return
-            }
-            if #available(iOS 12, *) {}
-            else if #available(iOS 11.0, *) {
-                // This works around a bug in iOS 11 where the safe area of `messageView` (
-                // and all ancestor views) is not set except on iPhone X. By assigning `messageView`
-                // to a view controller, its safe area is set consistently. This bug has been resolved as
-                // of Xcode 10 beta 2.
-                segue.safeAreaWorkaroundViewController.view = segue.presenter.maskingView
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView
