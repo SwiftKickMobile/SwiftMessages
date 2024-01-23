@@ -154,6 +154,20 @@ open class SwiftMessages {
     }
     
     /**
+     Specifies notification's haptic feedback to be used on `MessageView` display
+    */
+
+    /**
+     Specifies an optional haptic feedback to be used on `MessageView` display
+    */
+    public enum Haptic {
+        case success
+        case warning
+        case error
+    }
+    
+    
+    /**
      Specifies options for dimming the background behind the message view
      similar to a popover view controller.
     */
@@ -263,16 +277,7 @@ open class SwiftMessages {
          Specifies how the container for presenting the message view
          is selected. The default is `.Automatic`.
          */
-        public var presentationContext = PresentationContext.automatic {
-            didSet {
-                if case .windowScene = presentationContext {
-                    guard #available(iOS 13.0, *) else {
-                        assertionFailure("windowScene is not supported below iOS 13.0.")
-                        return
-                    }
-                }
-            }
-        }
+        public var presentationContext = PresentationContext.automatic
 
         /**
          Specifies the duration of the message view's time on screen before it is
@@ -285,6 +290,13 @@ open class SwiftMessages {
          similar to a popover view controller. The default is `.None`.
          */
         public var dimMode = DimMode.none
+        
+        
+        /**
+         Specifies notification's haptic feedback to be played on `MessageView` display.
+         No default value is provided.
+         */
+        public var haptic: Haptic? = nil
         
         /**
          Specifies whether or not the interactive pan-to-hide gesture is enabled

@@ -55,6 +55,7 @@
 		228F7DDE2ACF703A006C9644 /* MessageHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F7DDB2ACF7039006C9644 /* MessageHostingView.swift */; };
 		228F7DDF2ACF703A006C9644 /* SwiftMessageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F7DDC2ACF703A006C9644 /* SwiftMessageModifier.swift */; };
 		228F7DE02ACF703A006C9644 /* MessageViewConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F7DDD2ACF703A006C9644 /* MessageViewConvertible.swift */; };
+		22982C172B6030B000852311 /* HapticMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22982C162B6030B000852311 /* HapticMessage.swift */; };
 		2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2041EE47DC900E2DDC1 /* Weak.swift */; };
 		2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2061EE480D000E2DDC1 /* Animator.swift */; };
 		2298C2091EE486E300E2DDC1 /* TopBottomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */; };
@@ -147,6 +148,7 @@
 		228F7DDB2ACF7039006C9644 /* MessageHostingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHostingView.swift; sourceTree = "<group>"; };
 		228F7DDC2ACF703A006C9644 /* SwiftMessageModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessageModifier.swift; sourceTree = "<group>"; };
 		228F7DDD2ACF703A006C9644 /* MessageViewConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewConvertible.swift; sourceTree = "<group>"; };
+		22982C162B6030B000852311 /* HapticMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMessage.swift; sourceTree = "<group>"; };
 		2298C2041EE47DC900E2DDC1 /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		2298C2061EE480D000E2DDC1 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		2298C2081EE486E300E2DDC1 /* TopBottomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomAnimation.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
+				22982C162B6030B000852311 /* HapticMessage.swift */,
 				86AAF82A1D580DD70031EE32 /* Error.swift */,
 				2298C2061EE480D000E2DDC1 /* Animator.swift */,
 				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
@@ -560,6 +563,7 @@
 				86BBA9011D5E040600FE8F16 /* PassthroughWindow.swift in Sources */,
 				2298C2071EE480D000E2DDC1 /* Animator.swift in Sources */,
 				22D3B4562B1CEF76002D8665 /* Task+Extensions.swift in Sources */,
+				22982C172B6030B000852311 /* HapticMessage.swift in Sources */,
 				86BBA9031D5E040600FE8F16 /* UIViewController+Extensions.swift in Sources */,
 				228F7DDF2ACF703A006C9644 /* SwiftMessageModifier.swift in Sources */,
 				224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */,

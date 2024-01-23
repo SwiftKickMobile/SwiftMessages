@@ -133,6 +133,9 @@ config.dimMode = .gray(interactive: true)
 // Disable the interactive pan-to-hide gesture.
 config.interactiveHide = false
 
+// Specify haptic feedback (see also MessageView/configureTheme)
+config.haptic = .success
+
 // Specify a status bar style to if the message is displayed directly under the status bar.
 config.preferredStatusBarStyle = .lightContent
 
@@ -407,7 +410,7 @@ A common mistake is attempting to remove an element by setting the corresponding
 `MessageView` provides numerous methods that follow the `configure*` naming convention:
 
 ````swift
-view.configureTheme(.warning)
+view.configureTheme(.warning, includeHaptic: true)
 view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")
 ````
 
