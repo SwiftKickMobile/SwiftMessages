@@ -129,8 +129,11 @@ class Presenter: NSObject {
         try presentationContext = getPresentationContext()
         install()
         self.config.eventListeners.forEach { $0(.willShow(self.view)) }
-        if #available(iOS 10, *) {
-            self.config.notificationFeedback?.trigger()
+        switch (self.view as? HapticMessage)?.defaultHaptic ?? config.haptic {
+        case .error?: UINotificationFeedbackGenerator().notificationOccurred(.error)
+        case .warning?: UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        case .success?: UINotificationFeedbackGenerator().notificationOccurred(.success)
+        default: break
         }
         showAnimation() { completed in
             completion(completed)
