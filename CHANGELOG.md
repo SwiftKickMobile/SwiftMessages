@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Add a variation on the `.swiftMessage()` modifier that takes a view builder instead of requiring that the bound value conform to `MessageViewConvertible`. This syntax is more similar to the familiar `sheet()` modifier syntax and provides more flexibility for constructing message views.
+* #207 Add optional haptic feedback
 
 ### Changes
 
