@@ -160,6 +160,7 @@
 		22E01F631E74EC8B00ACE19A /* MaskingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingView.swift; sourceTree = "<group>"; };
 		22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibleMessage.swift; sourceTree = "<group>"; };
 		22F27950210CE25900273E7F /* CornerRoundingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRoundingView.swift; sourceTree = "<group>"; };
+		454757632BB5570A00D996AA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		862C0C6A1D58E93300D06168 /* SwiftMessages.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SwiftMessages.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		862C0CB01D5911C100D06168 /* NSBundle+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Extensions.swift"; sourceTree = "<group>"; };
 		862C0CDA1D5A397F00D06168 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageView.xib; path = Resources/MessageView.xib; sourceTree = "<group>"; };
@@ -261,6 +262,14 @@
 				227BA6D820BF224A00E5A843 /* SwiftMessagesSegue.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		454757622BB556F500D996AA /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				454757632BB5570A00D996AA /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 		862C0CD81D5A396900D06168 /* Resources */ = {
@@ -369,6 +378,7 @@
 		86B48AED1D5A41C900063E2B /* SwiftMessages */ = {
 			isa = PBXGroup;
 			children = (
+				454757622BB556F500D996AA /* Resource */,
 				864495581D4FA0AD0056EB2A /* SwiftMessages.swift */,
 				867E21821D4D025200594A41 /* MessageView.swift */,
 				862C0CD81D5A396900D06168 /* Resources */,
