@@ -9,30 +9,25 @@ import Foundation
 
 // MARK: - TopBottom Presentable Definition
 
+@MainActor
 protocol TopBottomPresentable {
-
-    var topBottomStyle: TopBottomAnimation.Style? { get }
-
+    var topBottomStyle: TopBottomAnimationStyle? { get }
 }
 
 // MARK: - TopBottom Presentable Conformances
 
 extension TopBottomAnimation: TopBottomPresentable {
-
-    var topBottomStyle: Style? { return style }
-
+    var topBottomStyle: TopBottomAnimationStyle? { return style }
 }
 
 extension PhysicsAnimation: TopBottomPresentable {
-
-    var topBottomStyle: TopBottomAnimation.Style? {
+    var topBottomStyle: TopBottomAnimationStyle? {
         switch placement {
         case .top: return .top
         case .bottom: return .bottom
         default: return nil
         }
     }
-
 }
 
 // MARK: - Presentation Style Convenience
@@ -41,7 +36,8 @@ extension SwiftMessages.PresentationStyle {
     /// A temporary workaround to allow custom presentation contexts using `TopBottomAnimation`
     /// to display properly behind bars. THe long term solution is to refactor all of the
     /// presentation context logic to work with safe area insets.
-    var topBottomStyle: TopBottomAnimation.Style? {
+    @MainActor
+    var topBottomStyle: TopBottomAnimationStyle? {
         switch self {
         case .top: return .top
         case .bottom: return .bottom
