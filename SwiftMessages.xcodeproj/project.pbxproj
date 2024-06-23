@@ -10,6 +10,8 @@
 		0797E40E26EE12B400691606 /* WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797E40D26EE12B400691606 /* WindowScene.swift */; };
 		220655121FAF82B600F4E00F /* MarginAdjustable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */; };
 		220D386E2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */; };
+		224C3C902C28A2F900B50B18 /* TopBottomPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C3C8F2C28A2F900B50B18 /* TopBottomPresentable.swift */; };
+		224C3C932C28BC4900B50B18 /* TopBottomAnimationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C3C922C28BC4400B50B18 /* TopBottomAnimationStyle.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Extensions.swift */; };
 		225304622290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304612290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift */; };
 		225304662293000C00A03ACF /* KeyboardTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225304652293000C00A03ACF /* KeyboardTrackingView.swift */; };
@@ -103,6 +105,8 @@
 		0797E40D26EE12B400691606 /* WindowScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowScene.swift; sourceTree = "<group>"; };
 		220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Extensions.swift"; sourceTree = "<group>"; };
 		220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages.Config+Extensions.swift"; sourceTree = "<group>"; };
+		224C3C8F2C28A2F900B50B18 /* TopBottomPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomPresentable.swift; sourceTree = "<group>"; };
+		224C3C922C28BC4400B50B18 /* TopBottomAnimationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomAnimationStyle.swift; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		225304612290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
 		225304652293000C00A03ACF /* KeyboardTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTrackingView.swift; sourceTree = "<group>"; };
@@ -314,20 +318,22 @@
 		864495571D4F7C490056EB2A /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				86589D461D64B6E40041676C /* BaseView.swift */,
-				86AAF82C1D580F410031EE32 /* Theme.swift */,
-				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
-				867BED201D622793005212E3 /* BackgroundViewable.swift */,
-				864495551D4F7C390056EB2A /* Identifiable.swift */,
-				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
 				22E307FE1E74C5B100E35893 /* AccessibleMessage.swift */,
-				22982C162B6030B000852311 /* HapticMessage.swift */,
-				86AAF82A1D580DD70031EE32 /* Error.swift */,
 				2298C2061EE480D000E2DDC1 /* Animator.swift */,
-				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
+				867BED201D622793005212E3 /* BackgroundViewable.swift */,
+				86589D461D64B6E40041676C /* BaseView.swift */,
 				22F27950210CE25900273E7F /* CornerRoundingView.swift */,
+				86AAF82A1D580DD70031EE32 /* Error.swift */,
+				22982C162B6030B000852311 /* HapticMessage.swift */,
+				864495551D4F7C390056EB2A /* Identifiable.swift */,
 				225304652293000C00A03ACF /* KeyboardTrackingView.swift */,
+				86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */,
+				86AAF82C1D580F410031EE32 /* Theme.swift */,
+				224C3C922C28BC4400B50B18 /* TopBottomAnimationStyle.swift */,
+				224C3C8F2C28A2F900B50B18 /* TopBottomPresentable.swift */,
+				2298C2041EE47DC900E2DDC1 /* Weak.swift */,
 				0797E40D26EE12B400691606 /* WindowScene.swift */,
+				8644955C1D4FAF7C0056EB2A /* WindowViewController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				228F7DDF2ACF703A006C9644 /* SwiftMessageModifier.swift in Sources */,
 				224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */,
 				22E01F641E74EC8B00ACE19A /* MaskingView.swift in Sources */,
+				224C3C932C28BC4900B50B18 /* TopBottomAnimationStyle.swift in Sources */,
 				2298C2051EE47DC900E2DDC1 /* Weak.swift in Sources */,
 				228F7DE02ACF703A006C9644 /* MessageViewConvertible.swift in Sources */,
 				86BBA9001D5E040600FE8F16 /* PassthroughView.swift in Sources */,
@@ -578,6 +585,7 @@
 				22E307FF1E74C5B100E35893 /* AccessibleMessage.swift in Sources */,
 				220D386E2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift in Sources */,
 				2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */,
+				224C3C902C28A2F900B50B18 /* TopBottomPresentable.swift in Sources */,
 				86BBA9041D5E040600FE8F16 /* NSBundle+Extensions.swift in Sources */,
 				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
 				86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */,

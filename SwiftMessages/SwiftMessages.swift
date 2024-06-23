@@ -8,7 +8,6 @@
 
 import UIKit
 
-@MainActor
 private let globalInstance = SwiftMessages()
 
 /**
@@ -774,6 +773,7 @@ extension SwiftMessages: PresenterDelegate {
         queueAutoHide()
     }
 
+    @MainActor
     private func presenter(forAnimator animator: Animator) -> Presenter? {
         if let current = _current, animator === current.animator {
             return current
@@ -885,11 +885,12 @@ extension SwiftMessages {
      a set of static APIs that wrap calls to this instance. For example, `SwiftMessages.show()`
      is equivalent to `SwiftMessages.sharedInstance.show()`.
      */
+    @MainActor
     public static var sharedInstance: SwiftMessages {
         return globalInstance
     }
-    
-    public static func show(viewProvider: @escaping ViewProvider) {
+
+    nonisolated public static func show(viewProvider: @escaping ViewProvider) {
         globalInstance.show(viewProvider: viewProvider)
     }
     

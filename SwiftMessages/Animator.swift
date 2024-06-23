@@ -10,6 +10,7 @@ import UIKit
 
 public typealias AnimationCompletion = (_ completed: Bool) -> Void
 
+@MainActor
 public protocol AnimationDelegate: AnyObject {
     func hide(animator: Animator)
     func panStarted(animator: Animator)

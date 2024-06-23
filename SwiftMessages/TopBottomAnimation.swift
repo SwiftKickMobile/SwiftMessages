@@ -8,16 +8,12 @@
 
 import UIKit
 
+@MainActor
 public class TopBottomAnimation: NSObject, Animator {
-
-    public enum Style {
-        case top
-        case bottom
-    }
 
     public weak var delegate: AnimationDelegate?
 
-    public let style: Style
+    public let style: TopBottomAnimationStyle
 
     public var showDuration: TimeInterval = 0.4
 
@@ -41,11 +37,11 @@ public class TopBottomAnimation: NSObject, Animator {
     weak var containerView: UIView?
     var context: AnimationContext?
 
-    public init(style: Style) {
+    public init(style: TopBottomAnimationStyle) {
         self.style = style
     }
 
-    init(style: Style, delegate: AnimationDelegate) {
+    init(style: TopBottomAnimationStyle, delegate: AnimationDelegate) {
         self.style = style
         self.delegate = delegate
     }

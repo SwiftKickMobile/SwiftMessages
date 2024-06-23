@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 protocol PresenterDelegate: AnimationDelegate {
     func hide(presenter: Presenter)
 }

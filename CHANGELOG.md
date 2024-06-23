@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 10.0.1
+
+## Features
+
+* Adds 'TopBottomPresentable' protocol to allow animators implementation to reuse 'top/bottom' integration in presentation
+
 ## 10.0.0
 
 ### Features
