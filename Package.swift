@@ -4,11 +4,12 @@ import PackageDescription
 let package = Package(
     name: "SwiftMessages",
     platforms: [
-        .iOS("13.0")
+        .iOS(.v13)
     ],
     products: [
         .library(name: "SwiftMessages", targets: ["SwiftMessages"]),
-        .library(name: "SwiftMessages-Dynamic", type: .dynamic, targets: ["SwiftMessages"])
+        .library(name: "SwiftMessages-Dynamic", type: .dynamic, targets: ["SwiftMessages"]),
+        .library(name: "SwiftMessages-AppExt", targets: ["SwiftMessages", "SwiftMessages-AppExt"]),
     ],
     targets: [
         .target(
@@ -18,6 +19,14 @@ let package = Package(
                 "Info.plist",
             ],
             resources: [.process("Resources")]
-        )
+        ),
+        .target(
+            name: "SwiftMessages-AppExt",
+            path: "SwiftMessages-AppExt",
+            swiftSettings: [
+                .define("SWIFTMESSAGES_APP_EXTENSIONS")
+            ]
+        ),
     ]
 )
+
