@@ -37,7 +37,12 @@ public class PhysicsAnimation: NSObject, Animator {
     }
 
     public func show(context: AnimationContext, completion: @escaping AnimationCompletion) {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustMargins), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustMargins),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
         install(context: context)
         showAnimation(context: context, completion: completion)
     }
@@ -56,12 +61,24 @@ public class PhysicsAnimation: NSObject, Animator {
             view.transform = CGAffineTransform.identity
             completion(true)
         }
-        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
-            view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }, completion: nil)
-        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], animations: {
-            view.alpha = 0
-        }, completion: nil)
+        UIView.animate(
+            withDuration: hideDuration,
+            delay: 0,
+            options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], 
+            animations: {
+                view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            }, 
+            completion: nil
+        )
+        UIView.animate(
+            withDuration: hideDuration,
+            delay: 0,
+            options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction],
+            animations: {
+                view.alpha = 0
+            },
+            completion: nil
+        )
         CATransaction.commit()
     }
 
@@ -75,14 +92,31 @@ public class PhysicsAnimation: NSObject, Animator {
         container.addSubview(view)
         switch placement {
         case .center:
-            view.centerYAnchor.constraint(equalTo: container.centerYAnchor).with(priority: UILayoutPriority(200)).isActive = true
+            view.centerYAnchor.constraint(
+                equalTo: container.centerYAnchor
+            )
+            .with(priority: UILayoutPriority(200))
+            .isActive = true
         case .top:
-            view.topAnchor.constraint(equalTo: container.topAnchor).with(priority: UILayoutPriority(200)).isActive = true
+            view.topAnchor.constraint(
+                equalTo: container.topAnchor
+            )
+            .with(priority: UILayoutPriority(200))
+            .isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).with(priority: UILayoutPriority(200)).isActive = true
+            view.bottomAnchor.constraint(
+                equalTo: container.bottomAnchor
+            )
+            .with(priority: UILayoutPriority(200))
+            .isActive = true
         }
-        NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            // Don't allow the message to spill outside of the top or bottom of the container.
+            view.topAnchor.constraint(greaterThanOrEqualTo: container.topAnchor),
+            view.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor),
+        ])
         // Important to layout now in order to get the right safe area insets
         container.layoutIfNeeded()
         adjustMargins()
