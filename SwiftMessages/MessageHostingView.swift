@@ -17,13 +17,20 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
     public let id: String
 
     public init(id: String, content: Content) {
-        hostVC = UIHostingController(rootView: content)
         self.id = id
+        self.content = { _ in content }
         super.init(frame: .zero)
-        hostVC.loadViewIfNeeded()
-        installContentView(hostVC.view)
         backgroundColor = .clear
-        hostVC.view.backgroundColor = .clear
+    }
+
+    public init<Message>(
+        message: Message,
+        @ViewBuilder content: @escaping (Message, MessageGeometryProxy) -> Content
+    ) where Message: Identifiable {
+        self.id = message.id
+        self.content = { geom in content(message, geom) }
+        super.init(frame: .zero)
+        backgroundColor = .clear
     }
 
     convenience public init<Message>(message: Message) where Message: MessageViewConvertible, Message.Content == Content {
@@ -34,7 +41,8 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
 
     // MARK: - Variables
 
-    private let hostVC: UIHostingController<Content>
+    private var hostVC: UIHostingController<Content>?
+    private let content: (MessageGeometryProxy) -> Content
 
     // MARK: - Lifecycle
 
@@ -49,6 +57,25 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
         // inserts another intermediate view that should also ignore touches.
         if view == self || view?.superview == self { return nil }
         return view
+    }
+
+    public override func didMoveToSuperview() {
+        guard let superview = self.superview else { return }
+        let proxy = MessageGeometryProxy(
+            size: superview.bounds.size,
+            safeAreaInsets: EdgeInsets(
+                top: superview.safeAreaInsets.top,
+                leading: superview.safeAreaInsets.left,
+                bottom: superview.safeAreaInsets.bottom,
+                trailing: superview.safeAreaInsets.right
+            )
+        )
+        let hostVC = UIHostingController(rootView: content(proxy))
+        self.hostVC = hostVC
+        hostVC.loadViewIfNeeded()
+        installContentView(hostVC.view)
+        hostVC.view.backgroundColor = .clear
+
     }
 
     // MARK: - Configuration
