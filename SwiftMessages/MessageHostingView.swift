@@ -61,13 +61,19 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
 
     public override func didMoveToSuperview() {
         guard let superview = self.superview else { return }
+        let size = superview.bounds.size
+        let insets = superview.safeAreaInsets
+        let ltr = superview.effectiveUserInterfaceLayoutDirection == .leftToRight
         let proxy = MessageGeometryProxy(
-            size: superview.bounds.size,
+            size: CGSize(
+                width: size.width - insets.left - insets.right,
+                height: size.height - insets.top - insets.bottom
+            ),
             safeAreaInsets: EdgeInsets(
-                top: superview.safeAreaInsets.top,
-                leading: superview.safeAreaInsets.left,
-                bottom: superview.safeAreaInsets.bottom,
-                trailing: superview.safeAreaInsets.right
+                top: insets.top,
+                leading: ltr ? insets.left : insets.right,
+                bottom: insets.bottom,
+                trailing: ltr ? insets.right : insets.left
             )
         )
         let hostVC = UIHostingController(rootView: content(proxy))
