@@ -412,6 +412,18 @@ open class SwiftMessages {
         enqueue(presenter: presenter)
     }
     
+    /// Display pop-up (support priority setting)
+    /// - Parameters:
+    /// -config: indicates the configuration
+    /// -view: indicates the view
+    /// -priorityweight: priorityWeight (larger weight - priority display)
+    @MainActor
+    open func show(config: Config, view: UIView, priorityWeight: Int = 0) {
+        let presenter = Presenter(config: config, view: view, delegate: self)
+        presenter.priorityWeight = priorityWeight
+        enqueue(presenter: presenter)
+    }
+    
     /**
      Adds the given view to the message queue to be displayed
      with default configuration options.
@@ -622,6 +634,10 @@ open class SwiftMessages {
     fileprivate func dequeueNext() {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
+        //Weight priority sorting
+        queue = queue.sorted(by: { p1, p2 in
+            return p1.priorityWeight > p2.priorityWeight
+        })
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
@@ -908,6 +924,11 @@ extension SwiftMessages {
         globalInstance.show(config: config, view: view)
     }
 
+    @MainActor
+    public static func show(config: Config, view: UIView, priorityWeight: Int = 0) {
+        globalInstance.show(config: config, view: view, priorityWeight: priorityWeight)
+    }
+    
     @MainActor
     public static func hide(animated: Bool = true) {
         globalInstance.hide(animated: animated)
