@@ -15,9 +15,6 @@ protocol PresenterDelegate: AnimationDelegate {
 
 @MainActor
 class Presenter: NSObject {
-
-    // Priority weight Greater weight priority display (can be accurately controlled)
-    var priorityWeight: Int = 0
     
     // MARK: - API
 

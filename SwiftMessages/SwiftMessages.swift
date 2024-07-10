@@ -393,6 +393,13 @@ open class SwiftMessages {
          Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.
          */
         public var keyboardTrackingView: KeyboardTrackingView?
+        
+        /**
+         Use popupPriority to accurately control the popup display sequence
+
+         popupPriority is of type Int. The larger the value, the more important the popup is, and it is displayed first
+         */
+        public var popupPriority: Int = 0
     }
     
     /**
@@ -409,18 +416,6 @@ open class SwiftMessages {
     @MainActor
     open func show(config: Config, view: UIView) {
         let presenter = Presenter(config: config, view: view, delegate: self)
-        enqueue(presenter: presenter)
-    }
-    
-    /// Display pop-up (support priority setting)
-    /// - Parameters:
-    /// -config: indicates the configuration
-    /// -view: indicates the view
-    /// -priorityweight: priorityWeight (larger weight - priority display)
-    @MainActor
-    open func show(config: Config, view: UIView, priorityWeight: Int = 0) {
-        let presenter = Presenter(config: config, view: view, delegate: self)
-        presenter.priorityWeight = priorityWeight
         enqueue(presenter: presenter)
     }
     
@@ -634,10 +629,8 @@ open class SwiftMessages {
     fileprivate func dequeueNext() {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
-        //Weight priority sorting
-        queue = queue.sorted(by: { p1, p2 in
-            return p1.priorityWeight > p2.priorityWeight
-        })
+        //Priority ordering
+        queue = queue.sorted(by: { $0.config.popupPriority > $1.config.popupPriority })
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
@@ -922,11 +915,6 @@ extension SwiftMessages {
     @MainActor
     public static func show(config: Config, view: UIView) {
         globalInstance.show(config: config, view: view)
-    }
-
-    @MainActor
-    public static func show(config: Config, view: UIView, priorityWeight: Int = 0) {
-        globalInstance.show(config: config, view: view, priorityWeight: priorityWeight)
     }
     
     @MainActor
