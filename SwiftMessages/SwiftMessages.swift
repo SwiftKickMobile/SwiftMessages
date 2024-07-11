@@ -630,7 +630,21 @@ open class SwiftMessages {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
         //Priority ordering
-        queue = queue.sorted(by: { $0.config.popupPriority > $1.config.popupPriority })
+        queue = queue.sorted{ itemLeft, itemRight in
+            // The priority is sorted first
+            if itemLeft.config.popupPriority != itemRight.config.popupPriority {
+                return itemLeft.config.popupPriority > itemRight.config.popupPriority
+            }
+            
+            // The same priority is sorted in queue order
+            if let leftIndex = queue.firstIndex(of: itemLeft),
+                let rightIndex = queue.firstIndex(of: itemRight) {
+                return leftIndex < rightIndex
+            }
+            
+            // Default
+            return true
+        }
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
