@@ -52,10 +52,25 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
     }
 
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)
-        // The rendered SwiftUI view isn't a direct child of this hosting view. SwiftUI
-        // inserts another intermediate view that should also ignore touches.
-        if view == self || view?.superview == self { return nil }
+        guard let view = super.hitTest(point, with: event) else { return nil }
+        // Touches should pass through unless they land on a view that is rendering a SwiftUI element.
+        if view == self { return nil }
+        // In iOS 18 beta, the hit testing behavior changed in a weird way: when a SwiftUI element is tapped,
+        // the first hit test returns the view that renders the SwiftUI element. However, a second identical hit
+        // test is performed(!) and on the second test, the `UIHostingController`'s view is returned. We want touches
+        // to pass through that view. In iOS 17, we would just return `nil` in that case. However, in iOS 18, the
+        // second hit test is actuall essential to touches being delivered to the SwiftUI elements. The new approach
+        // is to iterate overall all of the subviews, which are all presumably rendering SwiftUI elements, and
+        // only return `nil` if the point is not inside any of these subviews.
+        if view.superview == self {
+            for subview in view.subviews {
+                let subviewPoint = self.convert(point, to: subview)
+                if subview.point(inside: subviewPoint, with: event) {
+                    return view
+                }
+            }
+            return nil
+        }
         return view
     }
 

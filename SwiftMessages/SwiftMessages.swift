@@ -15,6 +15,7 @@ private let globalInstance = SwiftMessages()
  It behaves like a queue, only showing one message at a time. Message views that
  adopt the `Identifiable` protocol (as `MessageView` does) will have duplicates removed.
  */
+@MainActor
 open class SwiftMessages {
     
     /**
@@ -163,7 +164,6 @@ open class SwiftMessages {
         case warning
         case error
     }
-    
     
     /**
      Specifies options for dimming the background behind the message view
@@ -398,15 +398,14 @@ open class SwiftMessages {
     /**
      Not much to say here.
      */
-    public init() {}
-    
+    nonisolated public init() {}
+
     /**
      Adds the given configuration and view to the message queue to be displayed.
      
      - Parameter config: The configuration options.
      - Parameter view: The view to be displayed.
      */
-    @MainActor
     open func show(config: Config, view: UIView) {
         let presenter = Presenter(config: config, view: view, delegate: self)
         enqueue(presenter: presenter)
@@ -419,7 +418,6 @@ open class SwiftMessages {
      - Parameter config: The configuration options.
      - Parameter view: The view to be displayed.
      */
-    @MainActor
     public func show(view: UIView) {
         show(config: defaultConfig, view: view)
     }
@@ -462,7 +460,6 @@ open class SwiftMessages {
     /**
      Hide the current message being displayed by animating it away.
      */
-    @MainActor
     open func hide(animated: Bool = true) {
         hideCurrent(animated: animated)
     }
@@ -471,7 +468,6 @@ open class SwiftMessages {
      Hide the current message, if there is one, by animating it away and
      clear the message queue.
      */
-    @MainActor
     open func hideAll() {
         queue.removeAll()
         delays.removeAll()
@@ -485,7 +481,6 @@ open class SwiftMessages {
      views, such as `MessageView`, that adopt the `Identifiable` protocol.
      - Parameter id: The identifier of the message to remove.
      */
-    @MainActor
     open func hide(id: String) {
         if id == _current?.id {
             hideCurrent()
@@ -500,7 +495,6 @@ open class SwiftMessages {
      given message ID are equal. This can be useful for messages that may be
      shown from  multiple code paths to ensure that all paths are ready to hide.
      */
-    @MainActor
     open func hideCounted(id: String) {
         if let count = counts[id] {
             if count < 2 {
@@ -571,19 +565,17 @@ open class SwiftMessages {
         private var presenters = Set<Presenter>()
     }
 
-    @MainActor
     func show(presenter: Presenter) {
         enqueue(presenter: presenter)
     }
 
     fileprivate var queue: [Presenter] = []
-    @MainActor
     fileprivate var delays = Delays()
     fileprivate var counts: [String : Int] = [:]
     fileprivate var _current: Presenter? = nil {
         didSet {
             if oldValue != nil {
-                Task { @MainActor [weak self] in
+                Task { [weak self] in
                     try? await Task.sleep(seconds: self?.pauseBetweenMessages ?? 0)
                     self?.dequeueNext()
                 }
@@ -591,7 +583,6 @@ open class SwiftMessages {
         }
     }
 
-    @MainActor
     fileprivate func enqueue(presenter: Presenter) {
         if presenter.config.ignoreDuplicates {
             counts[presenter.id] = (counts[presenter.id] ?? 0) + 1
@@ -618,7 +609,6 @@ open class SwiftMessages {
         }
     }
     
-    @MainActor
     fileprivate func dequeueNext() {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
@@ -645,7 +635,6 @@ open class SwiftMessages {
         }
     }
 
-    @MainActor
     fileprivate func internalHide(presenter: Presenter) {
         if presenter == _current {
             hideCurrent()
@@ -655,7 +644,6 @@ open class SwiftMessages {
         }
     }
  
-    @MainActor
     fileprivate func hideCurrent(animated: Bool = true) {
         guard let current = _current, !current.isHiding else { return }
         let action = { [weak self] in
@@ -675,7 +663,6 @@ open class SwiftMessages {
 
     fileprivate weak var autohideToken: Presenter?
 
-    @MainActor
     fileprivate func queueAutoHide() {
         guard let current = _current else { return }
         autohideToken = current
@@ -718,7 +705,6 @@ extension SwiftMessages {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently being shown or hidden.
     */
-    @MainActor
     public func current<T: UIView>(id: String) -> T? {
         _current?.id == id ? _current?.view as? T : nil
     }
@@ -729,7 +715,6 @@ extension SwiftMessages {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
-    @MainActor
     public func queued<T: UIView>(id: String) -> T? {
         queue.first { $0.id == id }?.view as? T
     }
@@ -741,7 +726,6 @@ extension SwiftMessages {
      - Parameter id: The id of a message that adopts `Identifiable`.
      - Returns: The view with matching id if currently queued to be shown.
      */
-    @MainActor
     public func currentOrQueued<T: UIView>(id: String) -> T? {
         return current(id: id) ?? queued(id: id)
     }
@@ -753,12 +737,10 @@ extension SwiftMessages {
 
 extension SwiftMessages: PresenterDelegate {
 
-    @MainActor
     func hide(presenter: Presenter) {
         self.internalHide(presenter: presenter)
     }
 
-    @MainActor
     public func hide(animator: Animator) {
         guard let presenter = self.presenter(forAnimator: animator) else { return }
         self.internalHide(presenter: presenter)
@@ -768,7 +750,6 @@ extension SwiftMessages: PresenterDelegate {
         autohideToken = nil
     }
 
-    @MainActor
     public func panEnded(animator: Animator) {
         queueAutoHide()
     }
@@ -885,45 +866,38 @@ extension SwiftMessages {
      a set of static APIs that wrap calls to this instance. For example, `SwiftMessages.show()`
      is equivalent to `SwiftMessages.sharedInstance.show()`.
      */
-    @MainActor
-    public static var sharedInstance: SwiftMessages {
+    nonisolated public static var sharedInstance: SwiftMessages {
         return globalInstance
     }
 
-    nonisolated public static func show(viewProvider: @escaping ViewProvider) {
+    public static func show(viewProvider: @escaping ViewProvider) {
         globalInstance.show(viewProvider: viewProvider)
     }
     
-    nonisolated public static func show(config: Config, viewProvider: @escaping ViewProvider) {
+    public static func show(config: Config, viewProvider: @escaping ViewProvider) {
         globalInstance.show(config: config, viewProvider: viewProvider)
     }
     
-    @MainActor
     public static func show(view: UIView) {
         globalInstance.show(view: view)
     }
 
-    @MainActor
     public static func show(config: Config, view: UIView) {
         globalInstance.show(config: config, view: view)
     }
 
-    @MainActor
     public static func hide(animated: Bool = true) {
         globalInstance.hide(animated: animated)
     }
     
-    @MainActor
     public static func hideAll() {
         globalInstance.hideAll()
     }
     
-    @MainActor
     public static func hide(id: String) {
         globalInstance.hide(id: id)
     }
 
-    @MainActor
     public static func hideCounted(id: String) {
         globalInstance.hideCounted(id: id)
     }
@@ -946,17 +920,14 @@ extension SwiftMessages {
         }
     }
 
-    @MainActor
     public static func current<T: UIView>(id: String) -> T? {
         return globalInstance.current(id: id)
     }
 
-    @MainActor
     public static func queued<T: UIView>(id: String) -> T? {
         return globalInstance.queued(id: id)
     }
 
-    @MainActor
     public static func currentOrQueued<T: UIView>(id: String) -> T? {
         return globalInstance.currentOrQueued(id: id)
     }
