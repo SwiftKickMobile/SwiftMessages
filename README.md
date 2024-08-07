@@ -223,7 +223,7 @@ struct DemoView: View {
     var body: some View {
         Button("Show message") {
             let message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
-            let messageView = MessageHostingView(id: message.id, content: DemoMessageView(message: message)
+            let messageView = MessageHostingView(id: message.id, content: DemoMessageView(message: message))
             SwiftMessages.show(view: messageView)
         }
     }
