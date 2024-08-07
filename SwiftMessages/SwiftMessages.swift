@@ -939,3 +939,24 @@ extension SwiftMessages {
         globalInstance.set(count: count, for: id)
     }
 }
+
+// MARK: - SwiftUI Static APIs
+
+import SwiftUI
+
+/// SwiftUI Static APIs
+@available(iOS 13.0, *)
+extension SwiftMessages {
+
+    @available(iOS 14.0, *)
+    public static func show<T: View>(id: String, view: T) {
+        let view = MessageHostingView(id: id, content: view)
+        globalInstance.show(view: view)
+    }
+
+    @available(iOS 14.0, *)
+    public static func show<T: View>(id: String, @ViewBuilder view: () -> T) {
+        let view = MessageHostingView(id: id, content: view())
+        globalInstance.show(view: view)
+    }
+}
