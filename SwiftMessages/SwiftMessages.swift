@@ -770,7 +770,6 @@ extension SwiftMessages: PresenterDelegate {
         queueAutoHide()
     }
 
-    @MainActor
     private func presenter(forAnimator animator: Animator) -> Presenter? {
         if let current = _current, animator === current.animator {
             return current
