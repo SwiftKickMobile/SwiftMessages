@@ -10,6 +10,7 @@
 		0797E40E26EE12B400691606 /* WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797E40D26EE12B400691606 /* WindowScene.swift */; };
 		220655121FAF82B600F4E00F /* MarginAdjustable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */; };
 		220D386E2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */; };
+		223DE69D2C29E50C000161E5 /* MessageGeometryProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223DE69C2C29E50B000161E5 /* MessageGeometryProxy.swift */; };
 		224C3C902C28A2F900B50B18 /* TopBottomPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C3C8F2C28A2F900B50B18 /* TopBottomPresentable.swift */; };
 		224C3C932C28BC4900B50B18 /* TopBottomAnimationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C3C922C28BC4400B50B18 /* TopBottomAnimationStyle.swift */; };
 		224FB69921153B440081D4DE /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FB69821153B440081D4DE /* CALayer+Extensions.swift */; };
@@ -105,6 +106,7 @@
 		0797E40D26EE12B400691606 /* WindowScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowScene.swift; sourceTree = "<group>"; };
 		220655111FAF82B600F4E00F /* MarginAdjustable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MarginAdjustable+Extensions.swift"; sourceTree = "<group>"; };
 		220D386D2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMessages.Config+Extensions.swift"; sourceTree = "<group>"; };
+		223DE69C2C29E50B000161E5 /* MessageGeometryProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageGeometryProxy.swift; sourceTree = "<group>"; };
 		224C3C8F2C28A2F900B50B18 /* TopBottomPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomPresentable.swift; sourceTree = "<group>"; };
 		224C3C922C28BC4400B50B18 /* TopBottomAnimationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomAnimationStyle.swift; sourceTree = "<group>"; };
 		224FB69821153B440081D4DE /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
@@ -253,8 +255,10 @@
 		228F7DDA2ACF7029006C9644 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				228F7DDC2ACF703A006C9644 /* SwiftMessageModifier.swift */,
+				223DE69C2C29E50B000161E5 /* MessageGeometryProxy.swift */,
+				228F7DDB2ACF7039006C9644 /* MessageHostingView.swift */,
 				228F7DDD2ACF703A006C9644 /* MessageViewConvertible.swift */,
+				228F7DDC2ACF703A006C9644 /* SwiftMessageModifier.swift */,
 			);
 			name = SwiftUI;
 			sourceTree = "<group>";
@@ -366,7 +370,6 @@
 				86AAF8171D54F0650031EE32 /* PassthroughView.swift */,
 				22E01F631E74EC8B00ACE19A /* MaskingView.swift */,
 				86AAF8191D54F0850031EE32 /* PassthroughWindow.swift */,
-				228F7DDB2ACF7039006C9644 /* MessageHostingView.swift */,
 				220D38672597A94C00BB2B88 /* Extensions */,
 			);
 			name = Internal;
@@ -597,6 +600,7 @@
 				86589D471D64B6E40041676C /* BaseView.swift in Sources */,
 				0797E40E26EE12B400691606 /* WindowScene.swift in Sources */,
 				225304622290C76E00A03ACF /* NSLayoutConstraint+Extensions.swift in Sources */,
+				223DE69D2C29E50C000161E5 /* MessageGeometryProxy.swift in Sources */,
 				86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */,
 				867BED211D622793005212E3 /* BackgroundViewable.swift in Sources */,
 			);
