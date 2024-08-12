@@ -395,11 +395,9 @@ open class SwiftMessages {
         public var keyboardTrackingView: KeyboardTrackingView?
         
         /**
-         Use popupPriority to accurately control the popup display sequence
-
-         popupPriority is of type Int. The larger the value, the more important the popup is, and it is displayed first
+         Specify a positive or negative priority to influence the position of a message in the queue based on it's relative priority.
          */
-        public var popupPriority: Int = 0
+        public var priority: Int = 0
     }
     
     /**
@@ -629,22 +627,17 @@ open class SwiftMessages {
     fileprivate func dequeueNext() {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
-        //Priority ordering
-        queue = queue.sorted{ itemLeft, itemRight in
+        // Sort by priority
+        queue = queue.enumerated().sorted { left, right in
             // The priority is sorted first
-            if itemLeft.config.popupPriority != itemRight.config.popupPriority {
-                return itemLeft.config.popupPriority > itemRight.config.popupPriority
+            let leftPriority = left.element.config.priority
+            let rightPriority = right.element.config.priority
+            if leftPriority != rightPriority {
+                return leftPriority > rightPriority
             }
-            
             // The same priority is sorted in queue order
-            if let leftIndex = queue.firstIndex(of: itemLeft),
-                let rightIndex = queue.firstIndex(of: itemRight) {
-                return leftIndex < rightIndex
-            }
-            
-            // Default
-            return true
-        }
+            return left.offset < right.offset
+        }.map { $0.element }
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
