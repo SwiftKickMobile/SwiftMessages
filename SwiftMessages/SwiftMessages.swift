@@ -393,6 +393,11 @@ open class SwiftMessages {
          Supply an instance of `KeyboardTrackingView` to have the message view avoid the keyboard.
          */
         public var keyboardTrackingView: KeyboardTrackingView?
+        
+        /**
+         Specify a positive or negative priority to influence the position of a message in the queue based on it's relative priority.
+         */
+        public var priority: Int = 0
     }
     
     /**
@@ -612,6 +617,17 @@ open class SwiftMessages {
     fileprivate func dequeueNext() {
         guard queue.count > 0 else { return }
         if let _current, !_current.isOrphaned { return }
+        // Sort by priority
+        queue = queue.enumerated().sorted { left, right in
+            // The priority is sorted first
+            let leftPriority = left.element.config.priority
+            let rightPriority = right.element.config.priority
+            if leftPriority != rightPriority {
+                return leftPriority > rightPriority
+            }
+            // The same priority is sorted in queue order
+            return left.offset < right.offset
+        }.map { $0.element }
         let current = queue.removeFirst()
         self._current = current
         // Set `autohideToken` before the animation starts in case
