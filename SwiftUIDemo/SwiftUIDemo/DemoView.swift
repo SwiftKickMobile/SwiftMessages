@@ -55,7 +55,7 @@ struct DemoView: View {
         .swiftMessage(message: $messageWithButton) { message in
             DemoMessageWithButtonView(message: message, style: .card) {
                 Button("Hide") {
-                    hide(true)
+                    hide()
                 }
                 .buttonStyle(.bordered)
             }
