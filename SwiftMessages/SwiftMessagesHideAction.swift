@@ -9,9 +9,6 @@
 import SwiftUI
 
 /// A SwiftUI-style action for dismissing the current SwiftMessage.
-///
-/// - `hide()` → animated hide
-/// - `hide(animated: Bool)` → explicit control
 public struct SwiftMessagesHideAction {
     public init() {}
     
@@ -22,12 +19,19 @@ public struct SwiftMessagesHideAction {
     }
 }
 
-// MARK: ––– Environment Key & Value –––
-
 public extension EnvironmentValues {
-    /// Inject `@Environment(\.swiftMessagesHide)` into your views.
-    /// - Use `hide()` for the default animated dismissal.
-    /// - Use `hide(false)` to bypass animation.
+    /// Inject `@Environment(\.swiftMessagesHide)` into your views to
+    /// access the SwiftUI-style action for dismissing the current SwiftMessage.
+    ///
+    /// Usage:
+    /// ```swift
+    /// @Environment(\.swiftMessagesHide) private var hide
+    /// ```
+    ///
+    /// Then you can call it like this:
+    /// ```swift
+    /// hide(animated: true)
+    /// ```
     var swiftMessagesHide: SwiftMessagesHideAction {
         get { self[SwiftMessagesHideKey.self] }
         set { self[SwiftMessagesHideKey.self] = newValue }
