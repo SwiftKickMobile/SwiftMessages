@@ -15,13 +15,7 @@ import SwiftUI
 public struct SwiftMessagesHideAction {
     public init() {}
     
-    /// Dismiss with animation.
-    @MainActor
-    public func callAsFunction() {
-        SwiftMessages.hide(animated: true)
-    }
-    
-    /// Dismiss, optionally animated.
+    /// Dismiss with option to disable animation.
     @MainActor
     public func callAsFunction(animated: Bool) {
         SwiftMessages.hide(animated: animated)
@@ -29,11 +23,6 @@ public struct SwiftMessagesHideAction {
 }
 
 // MARK: ––– Environment Key & Value –––
-
-private struct SwiftMessagesHideKey: EnvironmentKey {
-    /// Default to our action struct, which itself defaults to animated.
-    static let defaultValue: SwiftMessagesHideAction = SwiftMessagesHideAction()
-}
 
 public extension EnvironmentValues {
     /// Inject `@Environment(\.swiftMessagesHide)` into your views.
@@ -43,4 +32,9 @@ public extension EnvironmentValues {
         get { self[SwiftMessagesHideKey.self] }
         set { self[SwiftMessagesHideKey.self] = newValue }
     }
+}
+
+private struct SwiftMessagesHideKey: EnvironmentKey {
+    /// Default to our action struct, which itself defaults to animated.
+    static let defaultValue: SwiftMessagesHideAction = SwiftMessagesHideAction()
 }
