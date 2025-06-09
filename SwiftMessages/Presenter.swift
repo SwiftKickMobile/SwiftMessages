@@ -368,7 +368,7 @@ class Presenter: NSObject {
         func installInteractive() {
             guard config.dimMode.modal else { return }
             if config.dimMode.interactive {
-                maskingView.tappedHander = { [weak self] in
+                maskingView.tappedHandler = { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.interactivelyHidden = true
                     strongSelf.delegate?.hide(presenter: strongSelf)
@@ -376,7 +376,7 @@ class Presenter: NSObject {
             } else {
                 // There's no action to take, but the presence of
                 // a tap handler prevents interaction with underlying views.
-                maskingView.tappedHander = { }
+                maskingView.tappedHandler = { }
             }
         }
 
