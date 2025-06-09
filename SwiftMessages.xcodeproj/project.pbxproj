@@ -88,6 +88,7 @@
 		86BBA9061D5E040C00FE8F16 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864495551D4F7C390056EB2A /* Identifiable.swift */; };
 		86BBA9071D5E040C00FE8F16 /* MarginAdjustable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF81D1D5549680031EE32 /* MarginAdjustable.swift */; };
 		86BBA9081D5E040C00FE8F16 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAF82A1D580DD70031EE32 /* Error.swift */; };
+		B0E55A662DD110EA003D97B1 /* SwiftMessagesHideAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E55A652DD110DB003D97B1 /* SwiftMessagesHideAction.swift */; };
 		E6E49F911D70A344006CB883 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDA1D5A397F00D06168 /* MessageView.xib */; };
 		E6E49F921D70A349006CB883 /* StatusLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862C0CDB1D5A397F00D06168 /* StatusLine.xib */; };
 /* End PBXBuildFile section */
@@ -191,6 +192,7 @@
 		86B48AFA1D5A41C900063E2B /* SwiftMessagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesTests.swift; sourceTree = "<group>"; };
 		86B48AFC1D5A41C900063E2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86BBA8F81D5E01FC00FE8F16 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardView.xib; path = Resources/CardView.xib; sourceTree = "<group>"; };
+		B0E55A652DD110DB003D97B1 /* SwiftMessagesHideAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesHideAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 		228F7DDA2ACF7029006C9644 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B0E55A652DD110DB003D97B1 /* SwiftMessagesHideAction.swift */,
 				223DE69C2C29E50B000161E5 /* MessageGeometryProxy.swift */,
 				228F7DDB2ACF7039006C9644 /* MessageHostingView.swift */,
 				228F7DDD2ACF703A006C9644 /* MessageViewConvertible.swift */,
@@ -589,6 +592,7 @@
 				220D386E2597AA5B00BB2B88 /* SwiftMessages.Config+Extensions.swift in Sources */,
 				2270044B1FAFA6DD0045DDC3 /* PhysicsAnimation.swift in Sources */,
 				224C3C902C28A2F900B50B18 /* TopBottomPresentable.swift in Sources */,
+				B0E55A662DD110EA003D97B1 /* SwiftMessagesHideAction.swift in Sources */,
 				86BBA9041D5E040600FE8F16 /* NSBundle+Extensions.swift in Sources */,
 				86BBA8FD1D5E03F800FE8F16 /* SwiftMessages.swift in Sources */,
 				86BBA9021D5E040600FE8F16 /* WindowViewController.swift in Sources */,

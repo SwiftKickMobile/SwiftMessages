@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftMessages
 
 struct DemoView: View {
+    
+    /// Use this to manually hide the swift message
+    @Environment(\.swiftMessagesHide) private var hide
 
     /// Demonstrates purely data-driven message presentation.
     @State var message: DemoMessage?
@@ -51,8 +54,8 @@ struct DemoView: View {
         .swiftMessage(message: $message)
         .swiftMessage(message: $messageWithButton) { message in
             DemoMessageWithButtonView(message: message, style: .card) {
-                Button("Tap Me") {
-                    print("Tap")
+                Button("Hide") {
+                    hide(animated: true)
                 }
                 .buttonStyle(.bordered)
             }
