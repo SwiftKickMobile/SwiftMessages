@@ -408,6 +408,16 @@ class Presenter: NSObject {
                 dismissView.accessibilityLabel = config.dimModeAccessibilityLabel
                 dismissView.accessibilityTraits = UIAccessibilityTraits.button
                 elements.append(dismissView)
+            } else if config.dimMode.modal {
+                let scrimView = UIView(frame: maskingView.bounds)
+                scrimView.translatesAutoresizingMaskIntoConstraints = true
+                scrimView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                maskingView.addSubview(scrimView)
+                maskingView.sendSubviewToBack(scrimView)
+                scrimView.isUserInteractionEnabled = false
+                scrimView.isAccessibilityElement = true
+                scrimView.accessibilityTraits = UIAccessibilityTraits.none
+                elements.append(scrimView)
             }
             if config.dimMode.modal {
                 maskingView.accessibilityViewIsModal = true
