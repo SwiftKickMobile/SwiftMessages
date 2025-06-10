@@ -10,7 +10,7 @@ import UIKit
 
 class PassthroughView: UIControl {
 
-    var tappedHander: (() -> Void)?
+    var tappedHandler: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,11 +27,11 @@ class PassthroughView: UIControl {
     }
 
     @objc func tapped() {
-        tappedHander?()
+        tappedHandler?()
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
-        return view == self && tappedHander == nil ? nil : view
+        return view == self && tappedHandler == nil ? nil : view
     }
 }

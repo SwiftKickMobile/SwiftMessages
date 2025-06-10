@@ -368,7 +368,7 @@ class Presenter: NSObject {
         func installInteractive() {
             guard config.dimMode.modal else { return }
             if config.dimMode.interactive {
-                maskingView.tappedHander = { [weak self] in
+                maskingView.tappedHandler = { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.interactivelyHidden = true
                     strongSelf.delegate?.hide(presenter: strongSelf)
@@ -376,7 +376,7 @@ class Presenter: NSObject {
             } else {
                 // There's no action to take, but the presence of
                 // a tap handler prevents interaction with underlying views.
-                maskingView.tappedHander = { }
+                maskingView.tappedHandler = { }
             }
         }
 
@@ -398,21 +398,31 @@ class Presenter: NSObject {
                     elements += [view]
             }
             if config.dimMode.interactive {
-                let dismissView = UIView(frame: maskingView.bounds)
-                dismissView.translatesAutoresizingMaskIntoConstraints = true
-                dismissView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                maskingView.addSubview(dismissView)
-                maskingView.sendSubviewToBack(dismissView)
-                dismissView.isUserInteractionEnabled = false
-                dismissView.isAccessibilityElement = true
+                let dismissView = maskingViewOverlay()
                 dismissView.accessibilityLabel = config.dimModeAccessibilityLabel
                 dismissView.accessibilityTraits = UIAccessibilityTraits.button
                 elements.append(dismissView)
+            } else if config.dimMode.modal {
+                let plainView = maskingViewOverlay()
+                plainView.accessibilityTraits = UIAccessibilityTraits.none
+                elements.append(plainView)
             }
             if config.dimMode.modal {
                 maskingView.accessibilityViewIsModal = true
             }
             maskingView.accessibleElements = elements
+        }
+        
+        func maskingViewOverlay() -> UIView {
+            let overlayView = UIView(frame: maskingView.bounds)
+            overlayView.translatesAutoresizingMaskIntoConstraints = true
+            overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            maskingView.addSubview(overlayView)
+            maskingView.sendSubviewToBack(overlayView)
+            overlayView.isUserInteractionEnabled = false
+            overlayView.isAccessibilityElement = true
+            
+            return overlayView
         }
 
         installed = true
