@@ -339,7 +339,7 @@ class Presenter: NSObject {
         }
 
         func bottomLayoutConstraint(view: UIView, containerView: UIView, viewController: UIViewController?) -> NSLayoutConstraint {
-            if case .bottom = config.presentationStyle.topBottomStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar) {
+            if case .bottom = config.presentationStyle.topBottomStyle, let tab = viewController as? UITabBarController, tab.sm_isVisible(view: tab.tabBar), tab.tabBar.superview != nil, !tab.tabBar.frame.isEmpty {
                 return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: tab.tabBar, attribute: .top, multiplier: 1.00, constant: 0.0)
             }
             return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.00, constant: 0.0)
