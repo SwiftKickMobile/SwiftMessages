@@ -51,26 +51,26 @@ public class MessageHostingView<Content>: UIView, Identifiable where Content: Vi
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Override hit testing so that only SwiftUI-rendered content inside `MessageHostingView` can receive touches.
+    ///
+    /// Background:
+    /// - `MessageHostingView` does not tightly wrap its SwiftUI content, potentially leaving surrounding regions that should not be tappable. There have
+    ///   been some complications with detecting touches on the SwiftUI content over the years that have led to the current approach:
+    /// - On iOS 18, UIKit performs a second hit test that resolves to the `UIHostingController`'s view instead of the actual SwiftUI element.
+    /// - On iOS 26, the `UIHostingController`'s view no longer contains any subviews, but its `CALayer` *layer* hierarchy still reflects the SwiftUI content.
+    ///
+    /// All of these issues can be solved by hit testing the layer hierarchy instead of the view hierarchy:
+    /// - Call `super.hitTest(point, with: event)` to obtain a candidate view `view`. If our heuristic determines that SwiftUI content was tapped,
+    ///   then we return `view` to accept the touch. Otherwise, return `nil` to pass the touch through.
+    /// - If the candidate is `MessageHostingView` return `nil`.
+    /// - If the candidate is directly parented to `MessageHostingView`, this is the `UIHostingController` view containing the SwiftUI content.
+    ///   To determine if SwiftUI content was touched, we iterate over hosting controller's sublayers and return the candidate if the touch intersects a sublayer.
+    ///   Otherwise, return `nil`.
+    /// - For any other case, we return the candidate because we don't know what's going on.
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let view = super.hitTest(point, with: event) else { return nil }
-        // Touches should pass through unless they land on a view that is rendering a SwiftUI element.
         if view == self { return nil }
-        /// Override hit testing so that only SwiftUI-rendered content inside `MessageHostingView` can receive touches.
-        ///
-        /// Background:
-        /// - `MessageHostingView` does not tightly wrap its SwiftUI content, potentially leaving surrounding regions that should not be tappable. There have
-        ///   been some complications with detecting touches on the SwiftUI content over the years that have led to the current approach:
-        /// - On iOS 18, UIKit performs a second hit test that resolves to the `UIHostingController`'s view instead of the actual SwiftUI element.
-        /// - On iOS 26, the `UIHostingController`'s view no longer contains any subviews, but its `CALayer` *layer* hierarchy still reflects the SwiftUI content.
-        ///
-        /// All of these issues can be solved by hit testing the layer hierarchy instead of the view hierarchy:
-        /// - Call `super.hitTest(point, with: event)` to obtain a candidate view `view`. If our heuristic determines that SwiftUI content was tapped,
-        ///   then we return `view` to accept the touch. Otherwise, return `nil` to pass the touch through.
-        /// - If the candidate is `MessageHostingView` return `nil`.
-        /// - If the candidate is directly parented to `MessageHostingView`, this is the `UIHostingController` view containing the SwiftUI content.
-        ///   To determine if SwiftUI content was touched, we iterate over hosting controller's sublayers and return the candidate if the touch intersects a sublayer.
-        ///   Otherwise, return `nil`.
-        /// - For any other case, we return the candidate because we don't know what's going on.
+        
         if view.superview == self {
             for sublayer in view.layer.sublayers ?? [] {
                 let sublayerPoint = self.layer.convert(point, to: sublayer)
