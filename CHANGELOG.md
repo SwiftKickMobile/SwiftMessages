@@ -1,16 +1,26 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 10.0.1
+## 10.0.2
 
-## Features
+### Features
+* #549 Create a formal dismissal mechanism for SwiftUI message. Use `@Environment(\.swiftMessagesHide) private var hide` then call `hide(animated: true)` to dismiss.
+* #571 PhysicsPanHandler.swift make configure public.
+
+### Fixes
+* #581 [BUG]: SwiftUI message views don't respond to touch input on Xcode 26 beta 6 iOS 26 simulator.
+* #581 [BUG]: SwiftUI message views don't respond to touch input on Xcode 26 beta 6 iOS 26 simulator
+* #577 Hide Background Elements from Modal SwiftMessage in VoiceOver mode
+* #578 Fix crash on iPadOS 18+ when presenting bottom SwiftMessage above UITabBarController
+
+### Features
 
 * #523 Add a `priority` configuration option.
 * #548 Adds 'TopBottomPresentable' protocol to allow animators implementation to reuse 'top/bottom' integration in presentation
 * #543 Make the `SwiftMessages` initializer `nonisolated` to improve interoperability with dependency injection frameworks like Factory.
 * #560 Add a new `swiftMessage` modifier variation that provides a ` MessageGeometryProxy` type to the message view builder—this works around an inssue with `GeometryReader` not working in `UIHostingController`.
 
-Fixes
+### Fixes
 * Fix broken touch handling in iOS 18.
 
 ## 10.0.0

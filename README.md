@@ -12,7 +12,7 @@
 
 ## Overview
 
-🔥🔥🔥 **NEW** SwiftUI support added!
+🔥🔥🔥 **UPDATE** SwiftUI support in in Xcode 26 requries 10.0.2!
 
 SwiftMessages is a very flexible view and view controller presentation library for UIKit and SwiftUI.
 
@@ -181,6 +181,8 @@ And check out our blog post [Elegant Custom UIViewController Transitioning](http
 
 Any of the built-in SwiftMessages views can be displayed by calling the SwiftMessages APIs from within observable object, a button action closure, etc. However, SwiftMessages can also display your custom SwiftUI views.
 
+#### Presentation
+
 Take the following message view and companion data model:
 
 ````swift
@@ -273,6 +275,63 @@ struct DemoView: View {
         }
         .swiftMessage(message: $message)
     }
+}
+````
+
+#### Dismissal
+
+SwiftMessages provides several approaches for dismissing messages from within SwiftUI views.
+
+For messages shown using the `swiftMessage()` modifier, you can dismiss by setting the binding to `nil`:
+
+````swift
+struct DemoView: View {
+    @State var message: DemoMessage?
+
+    var body: some View {
+        VStack {
+            Button("Show message") {
+                message = DemoMessage(title: "Demo", body: "SwiftUI forever!")
+            }
+            Button("Hide message") {
+                message = nil  // Dismisses the message
+            }
+        }
+        .swiftMessage(message: $message) { message in
+            DemoMessageView(message: message)
+        }
+    }
+}
+````
+
+For messages that need to dismiss themselves, SwiftMessages provides a SwiftUI-style environment action:
+
+````swift
+struct SelfDismissingMessageView: View {
+    @Environment(\.swiftMessagesHide) private var hide
+    let message: DemoMessage
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(message.title).font(.system(size: 20, weight: .bold))
+            Text(message.body)
+            
+            Button("Dismiss") {
+                hide(animated: true)  // Self-dismiss with animation
+            }
+        }
+        .padding(30)
+        .frame(maxWidth: .infinity)
+        .background(.gray)
+    }
+}
+````
+
+You can also call the SwiftMessages APIs directly from within your SwiftUI views:
+
+````swift
+Button("Hide Current") {
+    SwiftMessages.hide()
 }
 ````
 
