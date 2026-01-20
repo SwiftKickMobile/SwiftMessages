@@ -207,19 +207,19 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     }
 
     fileprivate let safeAreaWorkaroundViewController = UIViewController()
-
-    /// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
-    /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
-    /// the presenting view controller is no longer in the heirarchy.
-    private func startReleaseMonitor() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            guard let self = self else { return }
-            switch self.source.view.window {
-            case .none: self.selfRetainer = nil
-            case .some: self.startReleaseMonitor()
-            }
+/// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
+/// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
+/// the presenting view controller is no longer in the heirarchy.
+private func startReleaseMonitor() {
+    Task { @MainActor [weak self] in
+        try? await Task.sleep(seconds: 2)
+        guard let self = self else { return }
+        switch self.source.view.window {
+        case .none: self.selfRetainer = nil
+        case .some: self.startReleaseMonitor()
         }
     }
+}
 }
 
 extension SwiftMessagesSegue {
@@ -404,14 +404,6 @@ extension SwiftMessagesSegue {
                 let toView = transitionContext.view(forKey: .to) else {
                 transitionContext.completeTransition(false)
                 return
-            }
-            if #available(iOS 12, *) {}
-            else if #available(iOS 11.0, *) {
-                // This works around a bug in iOS 11 where the safe area of `messageView` (
-                // and all ancestor views) is not set except on iPhone X. By assigning `messageView`
-                // to a view controller, its safe area is set consistently. This bug has been resolved as
-                // of Xcode 10 beta 2.
-                segue.safeAreaWorkaroundViewController.view = segue.presenter.maskingView
             }
             completeTransition = transitionContext.completeTransition
             let transitionContainer = transitionContext.containerView

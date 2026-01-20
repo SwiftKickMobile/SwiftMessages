@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 @available(*, deprecated, message: "Class renamed to `EdgeAnimation` to reflect new ability to do leading and trailing animations.")
 public typealias TopBottomAnimation = EdgeAnimation
 
@@ -19,10 +20,9 @@ public class EdgeAnimation: NSObject, Animator {
         case leading
         case trailing
     }
-
     public weak var delegate: AnimationDelegate?
 
-    public let style: Style
+    public let style: TopBottomAnimationStyle
 
     public var showDuration: TimeInterval = 0.35
 
@@ -46,11 +46,11 @@ public class EdgeAnimation: NSObject, Animator {
     weak var containerView: UIView?
     var context: AnimationContext?
 
-    public init(style: Style) {
+    public init(style: TopBottomAnimationStyle) {
         self.style = style
     }
 
-    init(style: Style, delegate: AnimationDelegate) {
+    init(style: TopBottomAnimationStyle, delegate: AnimationDelegate) {
         self.style = style
         self.delegate = delegate
     }
@@ -183,9 +183,7 @@ public class EdgeAnimation: NSObject, Animator {
         guard let adjustable = messageView as? MarginAdjustable & UIView,
             let context = context else { return }
         adjustable.preservesSuperviewLayoutMargins = false
-        if #available(iOS 11, *) {
-            adjustable.insetsLayoutMarginsFromSafeArea = false
-        }
+        adjustable.insetsLayoutMarginsFromSafeArea = false
         var layoutMargins = adjustable.defaultMarginAdjustment(context: context)
         switch style {
         case .top:

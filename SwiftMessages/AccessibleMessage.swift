@@ -9,8 +9,7 @@
 import Foundation
 
 /**
- Message views that `AccessibleMessage`, as `MessageView` does will
- have proper accessibility behavior when displaying messages.
+ Message views that conform to `AccessibleMessage` will have proper accessibility behavior when displaying messages.
  `MessageView` implements this protocol.
  */
 public protocol AccessibleMessage {

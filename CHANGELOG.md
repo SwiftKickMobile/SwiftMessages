@@ -1,6 +1,85 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 10.0.2
+
+### Features
+* #549 Create a formal dismissal mechanism for SwiftUI message. Use `@Environment(\.swiftMessagesHide) private var hide` then call `hide(animated: true)` to dismiss.
+* #571 PhysicsPanHandler.swift make configure public.
+
+### Fixes
+* #581 [BUG]: SwiftUI message views don't respond to touch input on Xcode 26 beta 6 iOS 26 simulator.
+* #581 [BUG]: SwiftUI message views don't respond to touch input on Xcode 26 beta 6 iOS 26 simulator
+* #577 Hide Background Elements from Modal SwiftMessage in VoiceOver mode
+* #578 Fix crash on iPadOS 18+ when presenting bottom SwiftMessage above UITabBarController
+
+### Features
+
+* #523 Add a `priority` configuration option.
+* #548 Adds 'TopBottomPresentable' protocol to allow animators implementation to reuse 'top/bottom' integration in presentation
+* #543 Make the `SwiftMessages` initializer `nonisolated` to improve interoperability with dependency injection frameworks like Factory.
+* #560 Add a new `swiftMessage` modifier variation that provides a ` MessageGeometryProxy` type to the message view builder—this works around an inssue with `GeometryReader` not working in `UIHostingController`.
+
+### Fixes
+* Fix broken touch handling in iOS 18.
+
+## 10.0.0
+
+### Features
+
+* Add a variation on the `.swiftMessage()` modifier that takes a view builder instead of requiring that the bound value conform to `MessageViewConvertible`. This syntax is more similar to the familiar `sheet()` modifier syntax and provides more flexibility for constructing message views.
+* #207 Add optional haptic feedback
+
+### Changes
+
+* Use `@MainActor` to ensure that SwiftMessages is not called from a background queue.
+* Bump minimum deployment target to iOS 13.
+
+### Fixes
+
+* #535 window being accessed from background thread when dequeueNext is called
+* #534 Xcode warnings in two swift files
+* #533 How do I show a message that appears above the keyboard, when the keyboard is already visible?
+
+## 9.0.9
+
+### Fixes
+
+* Fix hit testing on SwiftUI views to allow touches around the view's margins to pass through to the underlying view.
+* Update `KeyboardTrackingView` to continue tracking the keyboard even when not installed in the view hierarchy.
+
+## 9.0.8
+
+### Changes
+
+* #529 Update readme and SwiftUI demo to demostrate how to mask edges.
+
+## 9.0.7
+
+### Features
+
+* Added support for SwiftUI
+
+### Fixes
+
+* #527 Crash while clicking two times to hide the presenting controller
+* #517 Prevent orphaned views from blocking the queue
+* Prevent orphaned `SwiftMessagesSeque`s from retaining the presenting view controller
+
+## 9.0.6
+
+### Features
+
+* Add `UIView` associated type to `Event`, e.g. `willShow(UIView)` so that event listeners can inspect the view.
+* Add `Event.id: String?` property so that event listeners can reason about the view's ID.
+
+## 9.0.5
+
+### Fixes
+
+* #482 Fix timing of `KeyboardTrackingView` callbacks.
+* #483 KeyboardTrackingView causes a small space under bottom-style view
+
 ## 9.0.4
 
 * #471 Xcode 13 issue - Enum cases with associated values cannot be marked potentially unavailable with '@available'

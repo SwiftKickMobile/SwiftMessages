@@ -267,6 +267,33 @@ open class BaseView: UIView, BackgroundViewable, MarginAdjustable, LayoutDefinin
     }
 
     private var backgroundHeightConstraint: NSLayoutConstraint?
+    /*
+     Mark: - Layout
+    */
+
+    open override func updateConstraints() {
+        super.updateConstraints()
+        let on: [NSLayoutConstraint]
+        let off: [NSLayoutConstraint]
+        switch traitCollection.horizontalSizeClass {
+        case .regular:
+            on = regularWidthLayoutConstraints
+            off = layoutConstraints
+        default:
+            on = layoutConstraints
+            off = regularWidthLayoutConstraints
+        }
+        on.forEach { $0.isActive = true }
+        off.forEach { $0.isActive = false }
+    }
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
+    private var regularWidthLayoutConstraints: [NSLayoutConstraint] = []
+
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        updateShadowPath()
+    }
 }
 
 /*
@@ -280,7 +307,7 @@ extension BaseView {
     /// because the background view may be masked. So, when modifying the drop shadow,
     /// be sure to set the shadow properties of this view's layer. The shadow path is
     /// updated for you automatically.
-    open func configureDropShadow() {
+    public func configureDropShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         layer.shadowRadius = 6.0
@@ -290,7 +317,7 @@ extension BaseView {
     }
 
     /// A convenience function to turn off drop shadow
-    open func configureNoDropShadow() {
+    public func configureNoDropShadow() {
         layer.shadowOpacity = 0
     }
 
@@ -320,11 +347,6 @@ extension BaseView {
         } else {
             // Update the layer's `shadowPath` without animation
             layer.shadowPath = shadowPath        }
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        updateShadowPath()
     }
 }
 
