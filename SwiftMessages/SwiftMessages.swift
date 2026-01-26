@@ -35,6 +35,16 @@ open class SwiftMessages {
         case bottom
 
         /**
+         Message view slides in from the leading edge.
+         */
+        case leading
+
+        /**
+         Message view slides in from the trailing edge.
+         */
+        case trailing
+
+        /**
          Message view fades into the center.
          */
         case center

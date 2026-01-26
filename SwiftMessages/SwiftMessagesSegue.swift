@@ -106,7 +106,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
         /// A floating tab-style view with rounded leading corners that slides in from the leading edge.
         case leadingTab
 
-        /// A floating tab-style view with rounded leading corners that slides in from the traling edge.
+        /// A floating tab-style view with rounded leading corners that slides in from the trailing edge.
         case trailingTab
 
         /// A floating card-style view typically used with `.center` presentation style.
@@ -209,7 +209,7 @@ open class SwiftMessagesSegue: UIStoryboardSegue {
     fileprivate let safeAreaWorkaroundViewController = UIViewController()
 /// The self-retainer will not allow the segue, presenting and presented view controllers to be released if the presenting view controller
 /// is removed without first dismissing. This monitor handles that scenario by setting `self.selfRetainer = nil` if
-/// the presenting view controller is no longer in the heirarchy.
+/// the presenting view controller is no longer in the hierarchy.
 private func startReleaseMonitor() {
     Task { @MainActor [weak self] in
         try? await Task.sleep(seconds: 2)

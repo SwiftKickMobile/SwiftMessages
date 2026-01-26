@@ -8,10 +8,10 @@
 
 import UIKit
 
-@MainActor
 @available(*, deprecated, message: "Class renamed to `EdgeAnimation` to reflect new ability to do leading and trailing animations.")
 public typealias TopBottomAnimation = EdgeAnimation
 
+@MainActor
 public class EdgeAnimation: NSObject, Animator {
 
     public enum Style {
@@ -22,7 +22,7 @@ public class EdgeAnimation: NSObject, Animator {
     }
     public weak var delegate: AnimationDelegate?
 
-    public let style: TopBottomAnimationStyle
+    public let style: Style
 
     public var showDuration: TimeInterval = 0.35
 
@@ -46,11 +46,11 @@ public class EdgeAnimation: NSObject, Animator {
     weak var containerView: UIView?
     var context: AnimationContext?
 
-    public init(style: TopBottomAnimationStyle) {
+    public init(style: Style) {
         self.style = style
     }
 
-    init(style: TopBottomAnimationStyle, delegate: AnimationDelegate) {
+    init(style: Style, delegate: AnimationDelegate) {
         self.style = style
         self.delegate = delegate
     }

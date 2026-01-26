@@ -17,7 +17,13 @@ protocol TopBottomPresentable {
 // MARK: - TopBottom Presentable Conformances
 
 extension TopBottomAnimation: TopBottomPresentable {
-    var topBottomStyle: TopBottomAnimationStyle? { return style }
+    var topBottomStyle: TopBottomAnimationStyle? {
+        switch style {
+        case .top: return .top
+        case .bottom: return .bottom
+        case .leading, .trailing: return nil
+        }
+    }
 }
 
 extension PhysicsAnimation: TopBottomPresentable {

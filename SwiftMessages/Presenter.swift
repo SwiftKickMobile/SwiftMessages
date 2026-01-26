@@ -70,7 +70,7 @@ class Presenter: NSObject {
         return duration
     }
 
-    /// Detects the scenario where the view was shown, but the containing view heirarchy was removed before the view
+    /// Detects the scenario where the view was shown, but the containing view hierarchy was removed before the view
     /// was hidden. This unusual scenario could result in the message queue being blocked because the presented
     /// view was not properly hidden by SwiftMessages. `isOrphaned` allows the queuing logic to unblock the queue.
     var isOrphaned: Bool {
@@ -118,6 +118,10 @@ class Presenter: NSObject {
             return EdgeAnimation(style: .top, delegate: delegate)
         case .bottom:
             return EdgeAnimation(style: .bottom, delegate: delegate)
+        case .leading:
+            return EdgeAnimation(style: .leading, delegate: delegate)
+        case .trailing:
+            return EdgeAnimation(style: .trailing, delegate: delegate)
         case .center:
             return PhysicsAnimation(delegate: delegate)
         case .custom(let animator):
