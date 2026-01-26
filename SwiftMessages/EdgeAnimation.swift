@@ -65,7 +65,7 @@ public class EdgeAnimation: NSObject, Animator {
         NotificationCenter.default.removeObserver(self)
         let view = context.messageView
         self.context = context
-        UIView.animate(withDuration: hideDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState]) {
+        UIView.animate(withDuration: hideDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             switch self.style {
             case .top:
                 view.transform = CGAffineTransform(translationX: 0, y: -view.frame.height)
@@ -76,14 +76,14 @@ public class EdgeAnimation: NSObject, Animator {
             case .trailing:
                 view.transform = CGAffineTransform(translationX: view.frame.maxX + view.frame.width, y: 0)
             }
-        } completion: { completed in
+        }, completion: { completed in
             #if SWIFTMESSAGES_APP_EXTENSIONS
             completion(completed)
             #else
             // Fix #131 by always completing if application isn't active.
             completion(completed || UIApplication.shared.applicationState != .active)
             #endif
-        }
+        })
     }
 
     func install(context: AnimationContext) {
