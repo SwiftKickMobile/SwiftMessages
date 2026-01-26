@@ -64,10 +64,10 @@ public class PhysicsAnimation: NSObject, Animator {
         UIView.animate(
             withDuration: hideDuration,
             delay: 0,
-            options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction], 
+            options: [.beginFromCurrentState, .curveEaseIn, .allowUserInteraction],
             animations: {
                 view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            }, 
+            },
             completion: nil
         )
         UIView.animate(
@@ -88,27 +88,22 @@ public class PhysicsAnimation: NSObject, Animator {
         messageView = view
         containerView = container
         self.context = context
-        view.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(view)
+        if let layoutDefiningView = view as? LayoutDefining & UIView {
+            container.install(layoutDefiningView: layoutDefiningView)
+        } else {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(view)
+        }
         switch placement {
         case .center:
-            view.centerYAnchor.constraint(
-                equalTo: container.centerYAnchor
-            )
-            .with(priority: UILayoutPriority(200))
-            .isActive = true
+            view.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+                .with(priority: UILayoutPriority(200)).isActive = true
         case .top:
-            view.topAnchor.constraint(
-                equalTo: container.topAnchor
-            )
-            .with(priority: UILayoutPriority(200))
-            .isActive = true
+            view.topAnchor.constraint(equalTo: container.topAnchor)
+                .with(priority: UILayoutPriority(200)).isActive = true
         case .bottom:
-            view.bottomAnchor.constraint(
-                equalTo: container.bottomAnchor
-            )
-            .with(priority: UILayoutPriority(200))
-            .isActive = true
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+                .with(priority: UILayoutPriority(200)).isActive = true
         }
         NSLayoutConstraint.activate([
             view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
